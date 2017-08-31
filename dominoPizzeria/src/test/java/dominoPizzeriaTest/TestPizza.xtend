@@ -23,12 +23,13 @@ class TestPizza {
 	}
 
 	@Test
-	def seTieneUnaPizzaMozzarellaConUnIngrediente() {
-
+	def dadaUnaPizzaSeLeAgregaUnIngrediente()
+	{
+		
 		muzza.agregarIngrediente(ingredienteMuzza)
 
 		assertTrue(muzza.ingredientes.isEmpty())
-
+		
 	}
 
 }
