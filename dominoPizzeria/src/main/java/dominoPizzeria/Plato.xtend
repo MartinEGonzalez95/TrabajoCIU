@@ -8,36 +8,29 @@ class Plato {
 
 	Pizza pizza
 
-	String tamaño
+	Tamanio tamanio
 
 	List<Ingrediente> ingredientesAgregados
 
-	new(Pizza pizza, String tamaño) {
+	new(Pizza pizza, Tamanio tamanio) {
 		ingredientesAgregados = newArrayList()
 		this.pizza = pizza
-		this.tamaño = tamaño
+		this.tamanio = tamanio
 	}
 
 	/*Precio plato = Precio base * Tamaño + Recargo por ingredientes extras */
 	def float precio() {
 
-		(calcularPrecioDePizzaPorTamaño()) + recargoPorIngredientes();
+		(calcularPrecioDePizzaPorTamaño()) + recargoPorIngredientes()
 	}
 
-	private def float calcularPrecioDePizzaPorTamaño() {
-		pizza.precio * this.calcularPrecioPorTamaño()
+	def float calcularPrecioDePizzaPorTamaño() {
+		pizza.precio * tamanio.valor
 	}
 
 	def float recargoPorIngredientes() {
-		var recargo = 0 as float
+		 ingredientesAgregados.stream.mapToInt([ingrediente|ingrediente.precio]).sum
 
-		recargo = ingredientesAgregados.stream.mapToInt([ingrediente|ingrediente.precio]).sum
-
-	}
-
-	def float calcularPrecioPorTamaño() {
-
-		return 1 // no debe ser así  debe calcular el tamaño segun un objeto "Conversor Tamaño/Numero" u otra solucion
 	}
 
 }

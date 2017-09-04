@@ -6,6 +6,7 @@ import dominoPizzeria.Pizza
 import org.junit.*
 import dominoPizzeria.Plato
 import static org.mockito.Mockito.*;
+import dominoPizzeria.Tamanio
 
 class TestPlato {
 
@@ -16,9 +17,13 @@ class TestPlato {
 	Plato platoDeMuzzaPorcion
 
 	Pizza pizzaPepita
+	
+	Tamanio grande
 
 	@Before
 	def void setUp() {
+		grande = new Tamanio("Grande",1)
+		
 	}
 
 	@Test
@@ -28,21 +33,14 @@ class TestPlato {
 		pizzaMock = mock(Pizza);
 		when(pizzaMock.precio).thenReturn(valorDePizzaMock);
 
-		platoDeMuzzaPorcion = new Plato(pizzaMock, "Grande") // una pizza, tamaño
+		
+
+		platoDeMuzzaPorcion = new Plato(pizzaMock, grande) // una pizza, tamaño
 
 		assertEquals(25, platoDeMuzzaPorcion.precio, 0)
 
 	}
 
-	@Test
-	def void seTieneUnPlatoDePizzaMuzzarellaConTamañoGrandeYSinIngredientesExtras2() {
 
-		var pizzaPepita = new Pizza("Muzzarella", 25)
-
-		platoDeMuzzaPorcion = new Plato(pizzaPepita, "Grande")
-
-		assertEquals(25, platoDeMuzzaPorcion.precio, 0)
-
-	}
 
 }
