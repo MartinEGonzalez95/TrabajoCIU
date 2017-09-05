@@ -11,6 +11,6 @@ class Cliente
 	String contraseña
 	String email
 	String direccion
-	// ArrayList<Pedido> historialDePedidos
+	//ArrayList<Pedido> historialDePedidos
 
 }

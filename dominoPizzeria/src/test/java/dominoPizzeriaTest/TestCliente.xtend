@@ -1,7 +1,6 @@
 package dominoPizzeriaTest
 
-class TestCliente
-{
+class TestCliente{
 
 
 }
