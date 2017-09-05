@@ -4,10 +4,7 @@ import static org.junit.Assert.*
 import org.junit.*
 import static org.mockito.Mockito.*;
 import dominoPizzeria.*
-import tamanio.Porcion
-import tamanio.Familiar
-import tamanio.Chica
-import tamanio.Grande
+import tamanio.Tamanio
 
 class TestPlato {
 
@@ -30,10 +27,10 @@ class TestPlato {
 	@Before
 	def void setUp() {
 
-		val porcion = new Porcion(0.125 as float)
-		val familiar = new Familiar(1.25 as float)
-		val chica = new Chica(0.5 as float)
-		val grande = new Grande(1 as float)
+		porcion = new Tamanio("Porcion", 0.125 as float)
+		familiar = new Tamanio("Familiar", 1.25 as float)
+		chica = new Tamanio("Chica", 0.5 as float)
+		grande = new Tamanio("Grande", 1 as float)
 	}
 
 	@Test
@@ -44,6 +41,7 @@ class TestPlato {
 		when(pizzaMock.precio).thenReturn(valorDePizzaMock)
 
 		platoDeMuzzaPorcion = new Plato(pizzaMock, grande, newArrayList)
+
 		assertEquals(25, platoDeMuzzaPorcion.monto, 0)
 
 	}
@@ -55,7 +53,7 @@ class TestPlato {
 		when(tomate.precio).thenReturn(15)
 
 		pizzaMock = mock(Pizza)
-		when(pizzaMock.precio).thenReturn(valorDePizzaMock)
+		when(pizzaMock.precio).thenReturn(25 as float)
 
 		platoDeMuzzaPorcion = new Plato(pizzaMock, grande, newArrayList)
 		val porcionMuzzaConTomate = new Plato(pizzaMock, porcion, newArrayList)
