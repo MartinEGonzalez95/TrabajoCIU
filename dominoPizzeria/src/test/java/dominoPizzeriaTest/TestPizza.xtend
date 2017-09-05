@@ -1,9 +1,11 @@
 package dominoPizzeriaTest
 
 import dominoPizzeria.Ingrediente
-import static org.junit.Assert.*
 import dominoPizzeria.Pizza
-import org.junit.*
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class TestPizza {
 	/**
