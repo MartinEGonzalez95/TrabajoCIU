@@ -14,14 +14,9 @@ class TestPlato {
 
 	Plato platoDeMuzzaPorcion
 
-	Pizza pizzaPepita
-
 	Tamanio grande
-
 	Tamanio porcion
-
 	Tamanio familiar
-
 	Tamanio chica
 
 	@Before
@@ -55,12 +50,19 @@ class TestPlato {
 		pizzaMock = mock(Pizza)
 		when(pizzaMock.precio).thenReturn(25 as float)
 
-		platoDeMuzzaPorcion = new Plato(pizzaMock, grande, newArrayList)
 		val porcionMuzzaConTomate = new Plato(pizzaMock, porcion, newArrayList)
 
 		porcionMuzzaConTomate.agregarAdicional(tomate)
 
-		assertEquals(18.125, porcionMuzzaConTomate.monto, 1)
+		assertEquals(18.125, porcionMuzzaConTomate.monto, 0)
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
