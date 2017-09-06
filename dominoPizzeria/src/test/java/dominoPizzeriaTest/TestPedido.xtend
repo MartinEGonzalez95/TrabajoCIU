@@ -11,6 +11,8 @@ import org.junit.Before
 import static org.junit.Assert.*
 import dominoPizzeria.Plato
 import java.util.ArrayList
+import dominoPizzeria.RetiroPorLocal
+import dominoPizzeria.Delivery
 
 class TestPedido {
 	
@@ -50,7 +52,7 @@ class TestPedido {
 		pedidoMonto100 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",porLocal)
 
 		assertEquals(100 , pedidoMonto100.montoFinal,0)	
-		
+	
 	}
 
 	@Test
@@ -66,6 +68,8 @@ class TestPedido {
 		pedidoMonto115 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",delivery)
 
 		assertEquals(115 , pedidoMonto115.montoFinal,0)	
+		
+		System.out.println(fechaCreacion)
 		
 	}
 	
