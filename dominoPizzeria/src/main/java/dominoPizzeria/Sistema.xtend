@@ -1,7 +1,7 @@
 package dominoPizzeria
 
+import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.*
 
 @Accessors
 class Sistema
