@@ -1,4 +1,6 @@
-package dominoPizzeria
+package estadosDePedido
+
+import dominoPizzeria.Pedido
 
 interface EstadoDePedido {
 	

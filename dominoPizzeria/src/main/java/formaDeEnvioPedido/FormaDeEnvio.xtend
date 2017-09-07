@@ -1,4 +1,6 @@
-package dominoPizzeria
+package formaDeEnvioPedido
+
+import dominoPizzeria.Pedido
 
 abstract class FormaDeEnvio {
 

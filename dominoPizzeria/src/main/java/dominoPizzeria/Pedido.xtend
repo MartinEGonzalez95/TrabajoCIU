@@ -3,6 +3,9 @@ package dominoPizzeria
 import java.util.List
 import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
+import estadosDePedido.EstadoDePedido
+import formaDeEnvioPedido.FormaDeEnvio
+import estadosDePedido.Preparando
 
 @Accessors
 class Pedido {

@@ -1,13 +1,19 @@
-package dominoPizzeria
+package formaDeEnvioPedido
 
-import dominoPizzeria.FormaDeEnvio
 import org.eclipse.xtend.lib.annotations.Accessors
+import estadosDePedido.ListoParaEnviar
+import dominoPizzeria.Pedido
 
 @Accessors
 class Delivery extends FormaDeEnvio {
 	
-	int costo = 15
+	int costo 
 	
+	new(){
+		
+		this.costo = 15
+		
+	}
 	
 	
 	override int costo(){

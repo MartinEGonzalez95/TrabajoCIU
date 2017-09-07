@@ -1,6 +1,7 @@
-package dominoPizzeria
+package formaDeEnvioPedido
 
-import dominoPizzeria.FormaDeEnvio
+import estadosDePedido.ListoParaRetirar
+import dominoPizzeria.Pedido
 
 class RetiroPorLocal extends FormaDeEnvio {
 

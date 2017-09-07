@@ -11,8 +11,8 @@ import org.junit.Before
 import static org.junit.Assert.*
 import dominoPizzeria.Plato
 import java.util.ArrayList
-import dominoPizzeria.RetiroPorLocal
-import dominoPizzeria.Delivery
+import formaDeEnvioPedido.RetiroPorLocal
+import formaDeEnvioPedido.Delivery
 
 class TestPedido {
 	
@@ -33,7 +33,6 @@ class TestPedido {
 		fechaCreacion = new Date
 		fechaCreacion = sdf.parse("2017-05-15")
 		platos = new ArrayList
-		//pedidoMonto100 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte")
 		porLocal = new RetiroPorLocal
 		delivery = new Delivery
 	}

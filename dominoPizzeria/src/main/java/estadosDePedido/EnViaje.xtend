@@ -1,6 +1,6 @@
-package dominoPizzeria
+package estadosDePedido
 
-import dominoPizzeria.EstadoDePedido
+import dominoPizzeria.Pedido
 
 class EnViaje implements EstadoDePedido {
 	
