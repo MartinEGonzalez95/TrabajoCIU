@@ -3,7 +3,7 @@ package dominoPizzeria
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
-import tamanio.Tamanio
+import dominoPizzeria.Tamanio
 
 @Accessors
 class Plato {

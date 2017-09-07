@@ -1,4 +1,4 @@
-package tamanio
+package dominoPizzeria
 
 import org.eclipse.xtend.lib.annotations.Accessors
 
