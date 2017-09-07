@@ -2,15 +2,12 @@ package estadosDePedido
 
 import dominoPizzeria.Pedido
 
-class Cerrado implements EstadoDePedido {
+class Cerrado extends EstadoDePedido {
 	
 	override avanzarPedido(Pedido unPedido) {
 	}
 	
 	override retrocederPedido(Pedido unPedido) {
-	}
-	
-	override cancelarPedido(Pedido unPedido) {
 	}
 	
 }

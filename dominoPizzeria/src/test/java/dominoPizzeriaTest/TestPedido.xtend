@@ -60,17 +60,16 @@ class TestPedido {
 		val cien = 100 as float
 		
 		platoMock = mock(Plato)
+		
 		when(platoMock.monto).thenReturn(cien)
 				
 		platos.add(platoMock)
 				
 		pedidoMonto115 = new Pedido(platos, clienteMock, "ma gusta el arte",delivery)
-
-		pedidoMonto115.print()
-	
+		
 		assertEquals(115 , pedidoMonto115.montoFinal,0)	
 		
-		
 	}
+	
 	
 }

@@ -2,12 +2,12 @@ package estadosDePedido
 
 import dominoPizzeria.Pedido
 
-class ListoParaEnviar implements EstadoDePedido {
+class ListoParaEnviar extends EstadoDePedido {
 	
 	override avanzarPedido(Pedido unPedido) {
 
 		unPedido.estadoDePedido = new EnViaje()
-
+		
 	}
 	
 	override retrocederPedido(Pedido unPedido) {
@@ -15,13 +15,6 @@ class ListoParaEnviar implements EstadoDePedido {
 		unPedido.estadoDePedido = new Preparando()
 
 	}
-	
-	override cancelarPedido(Pedido unPedido) {
-		
-		unPedido.estadoDePedido = new Cerrado
-		
-	}
-	
 	
 	
 }

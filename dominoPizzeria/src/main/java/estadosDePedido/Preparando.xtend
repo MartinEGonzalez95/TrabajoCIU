@@ -2,7 +2,7 @@ package estadosDePedido
 
 import dominoPizzeria.Pedido
 
-class Preparando implements EstadoDePedido {
+class Preparando extends EstadoDePedido {
 	
 	override void avanzarPedido(Pedido unPedido){
 		
@@ -11,7 +11,5 @@ class Preparando implements EstadoDePedido {
 	}
 	
 	override void retrocederPedido(Pedido unPedido){}
-	
-	override void cancelarPedido(Pedido unPedido){}
 	
 }

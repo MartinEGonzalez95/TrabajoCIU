@@ -1,12 +1,15 @@
 package estadosDePedido
 
 import dominoPizzeria.Pedido
+import java.util.Date
 
-class ListoParaRetirar implements EstadoDePedido {
+class ListoParaRetirar extends EstadoDePedido {
 	
 	override avanzarPedido(Pedido unPedido) {
 	
 		unPedido.estadoDePedido = new Entregado
+		
+		unPedido.fechaDeEntrega = new Date()
 	
 	}
 	
@@ -16,10 +19,5 @@ class ListoParaRetirar implements EstadoDePedido {
 
 	}
 	
-	override cancelarPedido(Pedido unPedido) {
-		
-		unPedido.estadoDePedido = new Cerrado		
-
-	}
 	
 }

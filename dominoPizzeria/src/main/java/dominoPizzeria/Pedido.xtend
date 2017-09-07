@@ -27,15 +27,14 @@ class Pedido {
 		this.aclaraciones = aclaraciones
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
+		
 	}
 
 	def float getMontoFinal() {
 		var float monto = 0
 
 		for (Plato plato : platos) {
-
 			monto += plato.monto
-
 		}
 		monto + formaDeEnvio.costo
 	}
@@ -50,13 +49,6 @@ class Pedido {
 
 	def cancelar(){
 		estadoDePedido.cancelarPedido(this)
-	}
-
-	def print(){
-		
-		System.out.println(fechaDeCreacion)
-		System.out.println(fechaDeEntrega)
-		
 	}
 
 }
