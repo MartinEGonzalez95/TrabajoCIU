@@ -60,7 +60,7 @@ class TestPedido {
 		val cien = 100 as float
 		
 		platoMock = mock(Plato)
-		
+	
 		when(platoMock.monto).thenReturn(cien)
 				
 		platos.add(platoMock)
