@@ -2,7 +2,7 @@ package dominoPizzeria
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
-import formaDeEnvioPedido.FormaDeEnvio
+import formaDeEnvioPedido.*
 
 @Accessors
 class Cliente {

@@ -15,61 +15,59 @@ import formaDeEnvioPedido.RetiroPorLocal
 import formaDeEnvioPedido.Delivery
 
 class TestPedido {
-	
-	SimpleDateFormat sdf	
-	Date fechaCreacion
-	Pedido pedidoMonto100	
+
+	// SimpleDateFormat sdf	
+	// Date fechaCreacion
+	Pedido pedidoMonto100
 	Pedido pedidoMonto115
-	Plato platoMock	
-	Cliente clienteMock	
-	List<Plato> platos	
+	Plato platoMock
+	Cliente clienteMock
+	List<Plato> platos
 	RetiroPorLocal porLocal
 	Delivery delivery
 
 	@Before
-	def void setUp(){
-		
-		sdf = new SimpleDateFormat("yyyy-MM-dd")
-		fechaCreacion = new Date
-		fechaCreacion = sdf.parse("2017-05-15")
+	def void setUp() {
+
+		// sdf = new SimpleDateFormat("yyyy-MM-dd")
+		// fechaCreacion = new Date
+		// fechaCreacion = sdf.parse("2017-05-15")
 		platos = new ArrayList
 		porLocal = new RetiroPorLocal
 		delivery = new Delivery
 	}
-	
-	
+
 	@Test
-	def void unPedidoConFormaDeEnvioRetiroPorElLocalConMontoFinal100AlPedirleSuMontoFinalDevuelve100(){
-		
+	def void unPedidoConFormaDeEnvioRetiroPorElLocalConMontoFinal100AlPedirleSuMontoFinalDevuelve100() {
+
 		val cien = 100 as float
-		
+
 		platoMock = mock(Plato)
 		when(platoMock.monto).thenReturn(cien)
-				
-		platos.add(platoMock)
-				
-		pedidoMonto100 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",porLocal)
 
-		assertEquals(100 , pedidoMonto100.montoFinal,0)	
-	
+		platos.add(platoMock)
+
+		pedidoMonto100 = new Pedido(platos, clienteMock, "ma gusta el arte", porLocal)
+
+		assertEquals(100, pedidoMonto100.montoFinal, 0)
+
 	}
 
 	@Test
-	def void unPedidoConFormaDeEnvioDeliveryConMontoFinal115AlPedirleSuMontoFinalDevuelve115(){
-		
-		val cien = 100 as float
-		
-		platoMock = mock(Plato)
-		when(platoMock.monto).thenReturn(cien)
-				
-		platos.add(platoMock)
-				
-		pedidoMonto115 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",delivery)
+	def void unPedidoConFormaDeEnvioDeliveryConMontoFinal115AlPedirleSuMontoFinalDevuelve115() {
 
-		assertEquals(115 , pedidoMonto115.montoFinal,0)	
-		
-		System.out.println(fechaCreacion)
-		
+		val cien = 100 as float
+
+		platoMock = mock(Plato)
+
+		when(platoMock.monto).thenReturn(cien)
+
+		platos.add(platoMock)
+
+		pedidoMonto115 = new Pedido(platos, clienteMock, "ma gusta el arte", delivery)
+
+		assertEquals(115, pedidoMonto115.montoFinal, 0)
+
 	}
-	
+
 }

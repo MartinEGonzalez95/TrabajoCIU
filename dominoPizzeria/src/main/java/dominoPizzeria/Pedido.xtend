@@ -18,25 +18,23 @@ class Pedido {
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 
-	new(List<Plato> platos, Cliente cliente, Date fechaDeCreacion, Date fechaDeEntrega, String aclaraciones,
-		FormaDeEnvio formaDeEnvio) {
+	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
 		this.platos = platos
 		this.cliente = cliente
-		this.fechaDeCreacion = fechaDeCreacion
-		this.fechaDeEntrega = fechaDeEntrega
+		this.fechaDeCreacion = new Date()
+		this.fechaDeEntrega = new Date()
 		this.aclaraciones = aclaraciones
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
+
 	}
 
 	def float getMontoFinal() {
 		var float monto = 0
 
 		for (Plato plato : platos) {
-
 			monto += plato.monto
-
 		}
 		monto + formaDeEnvio.costo
 	}
@@ -49,7 +47,7 @@ class Pedido {
 		estadoDePedido.retrocederPedido(this)
 	}
 
-	def cancelar(){
+	def cancelar() {
 		estadoDePedido.cancelarPedido(this)
 	}
 
