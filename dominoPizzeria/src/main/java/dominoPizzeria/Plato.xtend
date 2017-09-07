@@ -24,7 +24,7 @@ class Plato {
 	/*Precio plato = Precio base * Tamaño + Recargo por ingredientes extras */
 	def float monto() {
 
-		(proporcionPorTamaño()) + recargoPorIngredientes()
+		(proporcionPorTamaño) + recargoPorIngredientes
 	}
 
 	def float proporcionPorTamaño() {
@@ -38,6 +38,14 @@ class Plato {
 
 	def agregarAdicional(Ingrediente ingrediente) {
 		ingredientesExtras.add(ingrediente)
+	}
+
+	def eliminarAdicional(Ingrediente ingrediente) {
+		ingredientesExtras.remove(ingrediente)
+	}
+
+	def cambiarTamaño(Tamanio nuevoTamanio) {
+		tamanio  = nuevoTamanio
 	}
 
 }
