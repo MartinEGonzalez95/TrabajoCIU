@@ -5,11 +5,15 @@ import dominoPizzeria.Pedido
 
 class RetiroPorLocal extends FormaDeEnvio {
 
-	override int costo(){
+	override int costo()
+	{
+		
 		0
+		
 	}
 	
-	override avanzar(Pedido unPedido){
+	override avanzar(Pedido unPedido)
+	{
 		
 		unPedido.estadoDePedido = new ListoParaRetirar()
 		

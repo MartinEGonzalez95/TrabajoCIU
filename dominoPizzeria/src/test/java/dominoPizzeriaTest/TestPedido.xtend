@@ -34,7 +34,7 @@ class TestPedido {
 		// fechaCreacion = sdf.parse("2017-05-15")
 		platos = new ArrayList
 		porLocal = new RetiroPorLocal
-		delivery = new Delivery
+		delivery = new Delivery("UnaDireccion")
 	}
 
 	@Test

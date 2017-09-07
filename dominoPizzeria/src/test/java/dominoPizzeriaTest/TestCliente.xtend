@@ -7,6 +7,8 @@ import java.util.ArrayList
 import dominoPizzeria.Plato
 import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
+import formaDeEnvioPedido.FormaDeEnvio
+import formaDeEnvioPedido.Delivery
 
 class TestCliente
 {
@@ -16,30 +18,18 @@ class TestCliente
 	ArrayList<Plato> platosPedidosMock = new ArrayList<Plato>
 	
 	@Test
-	def unClienteRealizarUnPedidoConRetiroPorElLocalYSeEncuentraRegistradoEnSuHistorial()
+	def unClienteRealizarUnPedidoYEstaIncluidoEnElMismo()
 	{
 	
 		platosPedidosMock.add(platoPedidoMock)
 		
 		val Cliente unCliente = new Cliente("Martin", "MEG", "1234", "martinegonzalez95@gmail", "Hipolito Yrigoyen 3737")
 		
-		val Pedido nuevoPedido = unCliente.hacerPedidoConRetiroPorElLocal(platosPedidosMock, "Mucho queso!")
+		val FormaDeEnvio deliveryACasa = new Delivery("Hipolito Yrigoyen 3737")
 		
-		assertTrue(unCliente.historialDePedidos.contains(nuevoPedido))
+		val Pedido nuevoPedido = unCliente.hacerPedido(platosPedidosMock, "Mucho queso!", deliveryACasa)
 		
-	}
-	
-	@Test
-	def unClienteRealizarUnPedidoConDeliveryYSeEncuentraRegistradoEnSuHistorial()
-	{
-	
-		platosPedidosMock.add(platoPedidoMock)
-		
-		val Cliente unCliente = new Cliente("Martin", "MEG", "1234", "martinegonzalez95@gmail", "Hipolito Yrigoyen 3737")
-		
-		val Pedido nuevoPedido = unCliente.hacerPedidoConDelivery(platosPedidosMock, "Mucho queso!")
-		
-		assertTrue(unCliente.historialDePedidos.contains(nuevoPedido))
+		assertTrue(nuevoPedido.cliente == unCliente)
 		
 	}
 
