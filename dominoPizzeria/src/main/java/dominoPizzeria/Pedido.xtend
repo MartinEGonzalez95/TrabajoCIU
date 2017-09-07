@@ -18,13 +18,12 @@ class Pedido {
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 
-	new(List<Plato> platos, Cliente cliente, Date fechaDeCreacion, Date fechaDeEntrega, String aclaraciones,
-		FormaDeEnvio formaDeEnvio) {
-
+	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
+	
 		this.platos = platos
 		this.cliente = cliente
-		this.fechaDeCreacion = fechaDeCreacion
-		this.fechaDeEntrega = fechaDeEntrega
+		this.fechaDeCreacion = new Date()
+		this.fechaDeEntrega = new Date()
 		this.aclaraciones = aclaraciones
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
@@ -35,7 +34,7 @@ class Pedido {
 
 		for (Plato plato : platos) {
 
-			monto += plato.precio
+			monto += plato.monto
 
 		}
 		monto + formaDeEnvio.costo
@@ -51,6 +50,13 @@ class Pedido {
 
 	def cancelar(){
 		estadoDePedido.cancelarPedido(this)
+	}
+
+	def print(){
+		
+		System.out.println(fechaDeCreacion)
+		System.out.println(fechaDeEntrega)
+		
 	}
 
 }

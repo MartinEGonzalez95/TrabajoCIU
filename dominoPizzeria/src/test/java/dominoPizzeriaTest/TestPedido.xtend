@@ -16,8 +16,8 @@ import formaDeEnvioPedido.Delivery
 
 class TestPedido {
 	
-	SimpleDateFormat sdf	
-	Date fechaCreacion
+	//SimpleDateFormat sdf	
+	//Date fechaCreacion
 	Pedido pedidoMonto100	
 	Pedido pedidoMonto115
 	Plato platoMock	
@@ -29,9 +29,9 @@ class TestPedido {
 	@Before
 	def void setUp(){
 		
-		sdf = new SimpleDateFormat("yyyy-MM-dd")
-		fechaCreacion = new Date
-		fechaCreacion = sdf.parse("2017-05-15")
+		//sdf = new SimpleDateFormat("yyyy-MM-dd")
+		//fechaCreacion = new Date
+		//fechaCreacion = sdf.parse("2017-05-15")
 		platos = new ArrayList
 		porLocal = new RetiroPorLocal
 		delivery = new Delivery
@@ -44,11 +44,11 @@ class TestPedido {
 		val cien = 100 as float
 		
 		platoMock = mock(Plato)
-		when(platoMock.precio).thenReturn(cien)
+		when(platoMock.monto).thenReturn(cien)
 				
 		platos.add(platoMock)
 				
-		pedidoMonto100 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",porLocal)
+		pedidoMonto100 = new Pedido(platos, clienteMock, "ma gusta el arte",porLocal)
 
 		assertEquals(100 , pedidoMonto100.montoFinal,0)	
 	
@@ -60,15 +60,16 @@ class TestPedido {
 		val cien = 100 as float
 		
 		platoMock = mock(Plato)
-		when(platoMock.precio).thenReturn(cien)
+		when(platoMock.monto).thenReturn(cien)
 				
 		platos.add(platoMock)
 				
-		pedidoMonto115 = new Pedido(platos, clienteMock, fechaCreacion, fechaCreacion, "ma gusta el arte",delivery)
+		pedidoMonto115 = new Pedido(platos, clienteMock, "ma gusta el arte",delivery)
 
+		pedidoMonto115.print()
+	
 		assertEquals(115 , pedidoMonto115.montoFinal,0)	
 		
-		System.out.println(fechaCreacion)
 		
 	}
 	

@@ -12,11 +12,9 @@ class TestPlato {
 
 	Pizza pizzaMock
 	float valorDePizzaMock
-	Ingrediente tomate
 
 	Plato platoDeMuzzaPorcion
 
-	Pizza pizzaPepita
 	
 	Tamanio grande
 
@@ -37,7 +35,7 @@ class TestPlato {
 
 		platoDeMuzzaPorcion = new Plato(pizzaMock, grande) // una pizza, tamaño
 
-		assertEquals(25, platoDeMuzzaPorcion.precio, 0)
+		assertEquals(25, platoDeMuzzaPorcion.monto, 0)
 
 	}
 

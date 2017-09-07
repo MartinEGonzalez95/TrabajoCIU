@@ -19,7 +19,7 @@ class Plato {
 	}
 
 	/*Precio plato = Precio base * Tamaño + Recargo por ingredientes extras */
-	def float precio() {
+	def float monto() {
 
 		(calcularPrecioDePizzaPorTamaño()) + recargoPorIngredientes()
 	}
