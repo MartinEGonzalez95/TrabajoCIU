@@ -17,6 +17,7 @@ class Pedido {
 	String aclaraciones
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
+	MailSender mailSender
 
 	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
@@ -27,6 +28,7 @@ class Pedido {
 		this.aclaraciones = aclaraciones
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
+		this.mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 
 	}
 
@@ -50,5 +52,19 @@ class Pedido {
 	def cancelar() {
 		estadoDePedido.cancelarPedido(this)
 	}
+	
+	def hayMasDe30MinDeDiferenciaEntre(){
+		
+		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000) 
+		  
+		var boolean bool = false 
+		  
+		if (minutos > 30){
+				bool = true	
+		}
+		
+		 bool
+	}
+	
 
 }

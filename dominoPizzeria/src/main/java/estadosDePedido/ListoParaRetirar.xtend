@@ -11,6 +11,12 @@ class ListoParaRetirar extends EstadoDePedido {
 		
 		unPedido.fechaDeEntrega = new Date()
 	
+		if (unPedido.hayMasDe30MinDeDiferenciaEntre){
+			
+			unPedido.mailSender.enviarMail(unPedido.cliente.email, "Disculpe por la demora", "Estimado cliente, le pedimos disculpas por la demora en su pedido, XOXO Domino's Pizza")
+			
+		}
+	
 	}
 	
 	override retrocederPedido(Pedido unPedido) {
