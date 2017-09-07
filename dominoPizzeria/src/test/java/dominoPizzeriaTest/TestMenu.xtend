@@ -1,18 +1,23 @@
 package dominoPizzeriaTest
 
-import static org.junit.Assert.*
-import org.junit.*
-import static org.mockito.Mockito.*;
-import dominoPizzeria.*
 import dominoPizzeria.Ingrediente
+import dominoPizzeria.Menu
 import dominoPizzeria.Pizza
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
+import static org.mockito.Mockito.*
+import org.mockito.Mock
 
 class TestMenu {
 
 	Menu menu
 
+	@Mock
 	Ingrediente ingredienteMock
 
+	@Mock
 	Pizza pizzaMock
 
 	@Before
@@ -31,8 +36,6 @@ class TestMenu {
 	@Test
 	def seTieneUnMenuSinAdicionalesYSeLeAgregaUnAdicional() {
 
-		ingredienteMock = mock(Ingrediente)
-
 		menu.agregarAdicional(ingredienteMock)
 
 		assertFalse(menu.ingredientesAdicionales.isEmpty())
@@ -40,8 +43,6 @@ class TestMenu {
 
 	@Test
 	def seTieneUnMenuSinPizasYSeLeAgregaUnaPizza() {
-
-		pizzaMock = mock(Pizza)
 
 		menu.agregarPizza(pizzaMock)
 
@@ -51,7 +52,6 @@ class TestMenu {
 	@Test
 	def seTieneUnMenuConPizasYSeLeQuitaEstaPizza() {
 
-		pizzaMock = mock(Pizza)
 		menu.agregarPizza(pizzaMock)
 		menu.eliminarPizza(pizzaMock)
 
@@ -61,11 +61,47 @@ class TestMenu {
 	@Test
 	def seTieneUnMenuConUnAdicionalYSeLeQuitaEste() {
 
-		ingredienteMock = mock(Ingrediente)
+
 		menu.agregarAdicional(ingredienteMock)
 		menu.eliminarAdicional(ingredienteMock)
 
 		assertTrue(menu.pizzas.isEmpty())
+	}
+
+	@Test
+	def DadoUnMenuCon2PizzasUnaDeTomateDe70PesosYOtraMuzzarellaDe90SeLeModificaElPrecioALaDeTomateA100Pesos() {
+
+		val pizzaConMuzarrella = mock(Pizza)
+		when(pizzaConMuzarrella.nombre).thenReturn("Muzzarella")
+
+		val pizzaConTomate = mock(Pizza)
+		when(pizzaConTomate.nombre).thenReturn("Tomate")
+
+		menu.agregarPizza(pizzaConMuzarrella)
+		menu.agregarPizza(pizzaConTomate)
+
+		menu.modificarPrecioDePizza(pizzaConTomate, 100)
+
+		verify(pizzaConTomate).precio = 100
+
+	}
+
+	@Test
+	def DadoUnMenuCon2AdicionalesUnTomateDeValor15PesosYJamonDe30SeLeModificaElPrecioAJamonA35Pesos() {
+
+		val adicionalJamon = mock(Ingrediente)
+		when(adicionalJamon.nombre).thenReturn("Jamon")
+
+		val adicionalTomate = mock(Ingrediente)
+		when(adicionalTomate.nombre).thenReturn("Tomate")
+
+		menu.agregarAdicional(adicionalJamon)
+		menu.agregarAdicional(adicionalTomate)
+
+		menu.modificarPrecioDeAdicional(adicionalJamon, 35)
+
+		verify(adicionalJamon).precio = 35
+
 	}
 
 }
