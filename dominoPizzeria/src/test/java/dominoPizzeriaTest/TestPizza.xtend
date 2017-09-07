@@ -7,27 +7,36 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
+import static org.mockito.Mockito.*;
+
 class TestPizza {
-	/**
-	 * Una pizza está determinada por
-	 * @Nombre
-	 * @Ingredientes ,es una lista de Ingredientes
-	 * 
-	 *  
-	 */
+
 	Pizza muzza
 	Ingrediente ingredienteMuzza
 
 	@Before
 	def void setUp() {
-		muzza = new Pizza("Muzza")
-		ingredienteMuzza = new Ingrediente("Muzzarella", "Completa", 15) // 15 pesitos
+		muzza = new Pizza("Muzzarella", 30, newArrayList)
+
 	}
 
 	@Test
 	def seTieneUnaPizzaMozzarellaConUnIngrediente() {
 
+		ingredienteMuzza = mock(Ingrediente)
 		muzza.agregarIngrediente(ingredienteMuzza)
+
+		assertFalse(muzza.ingredientes.isEmpty())
+
+	}
+
+	@Test
+	def seTieneUnaPizzaMozzarellaConUnIngredienteYSeLoElimina() {
+
+		ingredienteMuzza = mock(Ingrediente)
+
+		muzza.agregarIngrediente(ingredienteMuzza)
+		muzza.eliminarIngrediente(ingredienteMuzza)
 
 		assertTrue(muzza.ingredientes.isEmpty())
 
