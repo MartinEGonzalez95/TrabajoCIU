@@ -3,7 +3,6 @@ package dominoPizzeriaTest
 import static org.mockito.Mockito.*
 import java.text.SimpleDateFormat
 import java.util.Date
-import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
 import java.util.List
 import org.junit.Test
@@ -13,6 +12,7 @@ import dominoPizzeria.Plato
 import java.util.ArrayList
 import formaDeEnvioPedido.RetiroPorLocal
 import formaDeEnvioPedido.Delivery
+import dominoPizzeria.ClienteRegistrado
 
 class TestPedido {
 
@@ -21,7 +21,7 @@ class TestPedido {
 	Pedido pedidoMonto100
 	Pedido pedidoMonto115
 	Plato platoMock
-	Cliente clienteMock
+	ClienteRegistrado clienteMock
 	List<Plato> platos
 	RetiroPorLocal porLocal
 	Delivery delivery

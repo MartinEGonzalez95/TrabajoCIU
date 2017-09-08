@@ -7,9 +7,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Sistema
 {
 	
-	ArrayList<Cliente> clientes = new ArrayList()
+	ArrayList<ClienteRegistrado> clientes = new ArrayList()
 
-	def registrarCliente(Cliente unNuevoCliente)
+	def registrarCliente(ClienteRegistrado unNuevoCliente)
 	{
 		
 		if (existeUnClienteConInformacionDe(unNuevoCliente))
@@ -27,10 +27,10 @@ class Sistema
 		
 	}
 	
-	def private existeUnClienteConInformacionDe(Cliente unNuevoCliente)
+	def private existeUnClienteConInformacionDe(ClienteRegistrado unNuevoCliente)
 	{
 		
-		for (Cliente clienteYaRegistrado : clientes)
+		for (ClienteRegistrado clienteYaRegistrado : clientes)
 		{
 			
 			if (clienteYaRegistrado.nick == unNuevoCliente.nick || clienteYaRegistrado.email == unNuevoCliente.email)

@@ -1,36 +1,20 @@
 package dominoPizzeria
 
-import formaDeEnvioPedido.FormaDeEnvio
 import java.util.ArrayList
+import formaDeEnvioPedido.FormaDeEnvio
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class Cliente {
+abstract class Cliente {
 
 	String nombre
-	String nick
-	String contraseña
 	String email
-	String direccion
 
-	new(String nombreCliente, String nickCliente, String contraseñaCliente, String emailCliente,
-		String direccionCliente) {
-
-		nombre = nombreCliente
-		nick = nickCliente
-		contraseña = contraseñaCliente
+	new(String nombreCliente, String emailCliente) {
 		email = emailCliente
-		direccion = direccionCliente
-
+		nombre = nombreCliente
 	}
 
-	def hacerPedido(ArrayList<Plato> platosPedidos, String aclaraciones, FormaDeEnvio unaFormaDeEnvio)
-	{
-
-		val Pedido nuevoPedido = new Pedido(platosPedidos, this, aclaraciones, unaFormaDeEnvio)
-
-		return nuevoPedido
-
-	}
+	def Pedido hacerPedido(ArrayList<Plato> platos, String string, FormaDeEnvio envio)
 
 }

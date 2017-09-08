@@ -52,19 +52,18 @@ class Pedido {
 	def cancelar() {
 		estadoDePedido.cancelarPedido(this)
 	}
-	
-	def hayMasDe30MinDeDiferenciaEntre(){
-		
-		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000) 
-		  
-		var boolean bool = false 
-		  
-		if (minutos > 30){
-				bool = true	
+
+	def hayMasDe30MinDeDiferenciaEntre() {
+
+		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000)
+
+		var boolean bool = false
+
+		if (minutos > 30) {
+			bool = true
 		}
-		
-		 bool
+
+		bool
 	}
-	
 
 }

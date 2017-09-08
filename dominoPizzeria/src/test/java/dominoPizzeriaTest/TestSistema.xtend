@@ -3,18 +3,18 @@ package dominoPizzeriaTest
 import static org.junit.Assert.*
 import org.junit.Test
 import static org.mockito.Mockito.*
-import dominoPizzeria.Cliente
 import dominoPizzeria.Sistema
+import dominoPizzeria.ClienteRegistrado
 
 class TestSistema
 {
 	
 	Sistema unNuevoSistema
   
-  	Cliente clienteMock = mock(Cliente)
-  	Cliente clienteMockNickRepetido = mock(Cliente)
-  	Cliente clienteMockEmailRepetido = mock(Cliente)
-  	Cliente clienteConNuevaInformacion = mock(Cliente)
+  	ClienteRegistrado clienteMock = mock(ClienteRegistrado)
+  	ClienteRegistrado clienteMockNickRepetido = mock(ClienteRegistrado)
+  	ClienteRegistrado clienteMockEmailRepetido = mock(ClienteRegistrado)
+  	ClienteRegistrado clienteConNuevaInformacion = mock(ClienteRegistrado)
   
   	@Test
   	def unNuevoSistemaNoTieneClientes()
