@@ -13,6 +13,7 @@ import java.util.ArrayList
 import formaDeEnvioPedido.RetiroPorLocal
 import formaDeEnvioPedido.Delivery
 import dominoPizzeria.ClienteRegistrado
+import dominoPizzeria.Cliente
 
 class TestPedido {
 
@@ -21,7 +22,7 @@ class TestPedido {
 	Pedido pedidoMonto100
 	Pedido pedidoMonto115
 	Plato platoMock
-	ClienteRegistrado clienteMock
+	Cliente clienteMock
 	List<Plato> platos
 	RetiroPorLocal porLocal
 	Delivery delivery
@@ -31,7 +32,7 @@ class TestPedido {
 
 		// sdf = new SimpleDateFormat("yyyy-MM-dd")
 		// fechaCreacion = new Date
-		// fechaCreacion = sdf.parse("2017-05-15")
+		// fechaCreacion = sdf.parse("201	7-05-15")
 		platos = new ArrayList
 		porLocal = new RetiroPorLocal
 		delivery = new Delivery("UnaDireccion")
@@ -69,5 +70,7 @@ class TestPedido {
 		assertEquals(115, pedidoMonto115.montoFinal, 0)
 
 	}
+	
+
 
 }
