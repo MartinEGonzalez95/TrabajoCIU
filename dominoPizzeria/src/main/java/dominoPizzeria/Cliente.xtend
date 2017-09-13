@@ -3,7 +3,9 @@ package dominoPizzeria
 import java.util.ArrayList
 import formaDeEnvioPedido.FormaDeEnvio
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
+@TransactionalAndObservable
 @Accessors
 abstract class Cliente {
 

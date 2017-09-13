@@ -9,7 +9,6 @@ class ClienteRegistrado extends Cliente {
 
 	String nick
 	String contraseña
-
 	String direccion
 
 	new(String nombreCliente, String nickCliente, String contraseñaCliente, String emailCliente,
@@ -26,9 +25,9 @@ class ClienteRegistrado extends Cliente {
 	override hacerPedido(ArrayList<Plato> platosPedidos, String aclaraciones, FormaDeEnvio unaFormaDeEnvio) {
 
 		val Pedido nuevoPedido = new Pedido(platosPedidos, this, aclaraciones, unaFormaDeEnvio)
-
+		
 		return nuevoPedido
 
 	}
 
-}
+}	

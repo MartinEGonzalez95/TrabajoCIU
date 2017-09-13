@@ -29,7 +29,7 @@ class Pedido {
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
 		this.mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
-
+		
 	}
 
 	def float getMontoFinal() {
