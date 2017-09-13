@@ -46,6 +46,7 @@ class ListadosDePedidos extends MainWindow<Sistema> {
 			bindContentsToProperty("estadoDePedido").transformer = [EstadoDePedido estadoDePedido | ]
 		]
 		
+		/*
 		new Column<Pedido>(table) => [
 			title = "Monto"
 			fixedSize = 200
@@ -92,7 +93,7 @@ class ListadosDePedidos extends MainWindow<Sistema> {
 			caption = "Salir"
 			onClick [|this.modelObject.]
 		]
-
+*/
 	}
 
 	def static main(String[] args) {
