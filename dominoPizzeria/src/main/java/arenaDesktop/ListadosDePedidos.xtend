@@ -53,9 +53,11 @@ class ListadosDePedidos extends MainWindow<Sistema> {
 		]
 
 		new Column<Pedido>(table) => [
+	
 			title = "Hora"
 			fixedSize = 200
 			bindContentsToProperty("fechaDeCreacion").transformer = new DateTransformer
+			
 		]
 
 		new Button(panelIzquierdo) => [

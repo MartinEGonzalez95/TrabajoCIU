@@ -17,8 +17,6 @@ import dominoPizzeria.Cliente
 
 class TestPedido {
 
-	// SimpleDateFormat sdf	
-	// Date fechaCreacion
 	Pedido pedidoMonto100
 	Pedido pedidoMonto115
 	Plato platoMock
@@ -29,10 +27,6 @@ class TestPedido {
 
 	@Before
 	def void setUp() {
-
-		// sdf = new SimpleDateFormat("yyyy-MM-dd")
-		// fechaCreacion = new Date
-		// fechaCreacion = sdf.parse("201	7-05-15")
 		platos = new ArrayList
 		porLocal = new RetiroPorLocal
 		delivery = new Delivery("UnaDireccion")

@@ -17,7 +17,6 @@ class ClienteRegistrado extends Cliente {
 		super(nombreCliente, emailCliente)
 		nick = nickCliente
 		contraseña = contraseñaCliente
-
 		direccion = direccionCliente
 
 	}
