@@ -6,11 +6,14 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import estadosDePedido.EstadoDePedido
 import formaDeEnvioPedido.FormaDeEnvio
 import estadosDePedido.Preparando
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import estadosDePedido.EnViaje
 
 @Accessors
+@TransactionalAndObservable
 class Pedido {
 
-	List<Plato> platos
+	List<Plato> platos = newArrayList
 	Cliente cliente
 	Date fechaDeCreacion
 	Date fechaDeEntrega
@@ -31,10 +34,19 @@ class Pedido {
 		this.mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 		
 	}
+	
+	new()
+	{
+		estadoDePedido = new EnViaje
+		platos = newArrayList
+		platos.add(new Plato(null , null, null)) 
+		
+	}
 
 	def float getMontoFinal() {
 		var float monto = 0
 
+		// ingredientesExtras.stream.mapToInt([ingrediente|ingrediente.precio]).sum
 		for (Plato plato : platos) {
 			monto += plato.monto
 		}
@@ -57,13 +69,7 @@ class Pedido {
 
 		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000)
 
-		var boolean bool = false
-
-		if (minutos > 30) {
-			bool = true
-		}
-
-		bool
+		minutos > 30
 	}
 
 }

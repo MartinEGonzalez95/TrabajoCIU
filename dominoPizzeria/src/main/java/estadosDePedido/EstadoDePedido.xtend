@@ -17,4 +17,11 @@ abstract class EstadoDePedido {
 		
 	}
 	
+	override def toString()
+	{
+		
+		class.simpleName
+		
+	}
+	
 }

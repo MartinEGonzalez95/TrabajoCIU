@@ -21,12 +21,10 @@ class ClienteRegistrado extends Cliente {
 
 	}
 
+	//Modelo vs Realidad
 	override hacerPedido(ArrayList<Plato> platosPedidos, String aclaraciones, FormaDeEnvio unaFormaDeEnvio) {
 
-		val Pedido nuevoPedido = new Pedido(platosPedidos, this, aclaraciones, unaFormaDeEnvio)
-		
-		return nuevoPedido
-
+		new Pedido(platosPedidos, this, aclaraciones, unaFormaDeEnvio)
 	}
 
 }	

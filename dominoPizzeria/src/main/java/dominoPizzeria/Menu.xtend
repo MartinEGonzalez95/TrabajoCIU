@@ -38,6 +38,7 @@ class Menu {
 		ingredientesAdicionales.remove(ingrediente)
 	}
 
+	//TODO: Sacar esto
 	def modificarPrecioDePizza(Pizza pizza, int precioModificado) {
 
 		this.buscarPizza(pizza).precio = precioModificado
@@ -50,6 +51,7 @@ class Menu {
 
 	}
 
+	//TODO: Sacar esto
 	def modificarPrecioDeAdicional(Ingrediente adicional, int precioModificado) {
 
 		this.buscarAdicional(adicional).precio = precioModificado
