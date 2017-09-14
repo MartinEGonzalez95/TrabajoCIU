@@ -6,7 +6,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import estadosDePedido.EstadoDePedido
 import formaDeEnvioPedido.FormaDeEnvio
 import estadosDePedido.Preparando
+import org.uqbar.commons.model.annotations.Observable
 
+@Observable
 @Accessors
 class Pedido {
 
@@ -18,6 +20,7 @@ class Pedido {
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 	MailSender mailSender
+	float montoFinal
 
 	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
@@ -29,6 +32,11 @@ class Pedido {
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
 		this.mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
+		this.montoFinal = setMontoFinal
+		
+	}
+	
+	new() {
 		
 	}
 
@@ -38,7 +46,14 @@ class Pedido {
 		for (Plato plato : platos) {
 			monto += plato.monto
 		}
+		
 		monto + formaDeEnvio.costo
+	}
+
+		def setMontoFinal(){
+		
+		montoFinal = getMontoFinal
+		
 	}
 
 	def avanzar() {

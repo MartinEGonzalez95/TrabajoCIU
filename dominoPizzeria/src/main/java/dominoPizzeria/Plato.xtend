@@ -4,7 +4,9 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
 import dominoPizzeria.Tamanio
+import org.uqbar.commons.model.annotations.Observable
 
+@Observable
 @Accessors
 class Plato {
 
