@@ -6,13 +6,14 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import estadosDePedido.EstadoDePedido
 import formaDeEnvioPedido.FormaDeEnvio
 import estadosDePedido.Preparando
-import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import estadosDePedido.EnViaje
 
-@Observable
 @Accessors
+@TransactionalAndObservable
 class Pedido {
 
-	List<Plato> platos
+	List<Plato> platos = newArrayList
 	Cliente cliente
 	Date fechaDeCreacion
 	Date fechaDeEntrega
@@ -20,7 +21,6 @@ class Pedido {
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 	MailSender mailSender
-	float montoFinal
 
 	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
@@ -32,28 +32,25 @@ class Pedido {
 		this.formaDeEnvio = formaDeEnvio
 		this.estadoDePedido = new Preparando
 		this.mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
-		this.montoFinal = setMontoFinal
 		
 	}
 	
-	new() {
+	new()
+	{
+		estadoDePedido = new EnViaje
+		platos = newArrayList
+		platos.add(new Plato(null , null, null)) 
 		
 	}
 
 	def float getMontoFinal() {
 		var float monto = 0
 
+		// ingredientesExtras.stream.mapToInt([ingrediente|ingrediente.precio]).sum
 		for (Plato plato : platos) {
 			monto += plato.monto
 		}
-		
 		monto + formaDeEnvio.costo
-	}
-
-		def setMontoFinal(){
-		
-		montoFinal = getMontoFinal
-		
 	}
 
 	def avanzar() {
@@ -72,13 +69,7 @@ class Pedido {
 
 		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000)
 
-		var boolean bool = false
-
-		if (minutos > 30) {
-			bool = true
-		}
-
-		bool
+		minutos > 30
 	}
 
 }
