@@ -14,6 +14,9 @@ import dominoPizzeria.Pedido
 import dominoPizzeria.ClienteRegistrado
 import formaDeEnvioPedido.RetiroPorLocal
 import org.uqbar.arena.windows.Dialog
+import dominoPizzeria.Tamanio
+import dominoPizzeria.Plato
+import dominoPizzeria.Pizza
 
 class VerEditarPedidoMainWindow extends SimpleWindow<ControladorPedido>{
 	
@@ -54,6 +57,9 @@ class VerEditarPedidoMainWindow extends SimpleWindow<ControladorPedido>{
 	}
 	
 	Pedido unPedidoParaPrueba
+	Tamanio grande
+	Plato muzzaGrande
+	Pizza pizzaDeMuzarella
 	
 	def ControladorPedido controladorDePedidoParaPrueba()
 	{
@@ -70,6 +76,14 @@ class VerEditarPedidoMainWindow extends SimpleWindow<ControladorPedido>{
 		unPedidoParaPrueba.setAclaraciones("Ninguna")
 		unPedidoParaPrueba.setCliente(new ClienteRegistrado())
 		unPedidoParaPrueba.setFormaDeEnvio(new RetiroPorLocal())
+		
+		grande = new Tamanio("Grande", 1 as float)
+		
+		pizzaDeMuzarella = new Pizza("Pizza de Muzarella", 10, newArrayList)
+
+		muzzaGrande = new Plato(pizzaDeMuzarella, grande, newArrayList)
+		
+		unPedidoParaPrueba.platos.add(muzzaGrande)
 		
 		unPedidoParaPrueba
 		
