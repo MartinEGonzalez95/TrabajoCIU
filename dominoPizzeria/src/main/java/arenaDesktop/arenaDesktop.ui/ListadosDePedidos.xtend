@@ -1,4 +1,4 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.ui
 
 import org.uqbar.arena.windows.MainWindow
 import dominoPizzeria.Sistema

@@ -1,4 +1,4 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.ui
 
 import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
