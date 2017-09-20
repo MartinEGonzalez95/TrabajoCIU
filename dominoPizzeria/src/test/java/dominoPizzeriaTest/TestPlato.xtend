@@ -62,7 +62,7 @@ class TestPlato {
 		when(jamonMockeado.precio).thenReturn(30)
 
 		platoDeMuzzaGrande.agregarAdicional(jamonMockeado)
-		platoDeMuzzaGrande.cambiarTamaño(familiar)
+		platoDeMuzzaGrande.cambiarTamanio(familiar)
 
 		assertEquals(155, platoDeMuzzaGrande.monto, 0)
 

@@ -11,6 +11,7 @@ class ClienteRegistrado extends Cliente {
 	String contraseña
 	String direccion
 
+
 	new(String nombreCliente, String nickCliente, String contraseñaCliente, String emailCliente,
 		String direccionCliente) {
 

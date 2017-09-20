@@ -68,7 +68,7 @@ class VerEditarPedidoMainWindow extends SimpleWindow<ControladorPedido>{
 		unPedidoParaPrueba = new Pedido()
 		
 		unPedidoParaPrueba.setAclaraciones("Ninguna")
-		unPedidoParaPrueba.setCliente(new ClienteRegistrado())
+		unPedidoParaPrueba.setCliente(new ClienteRegistrado("1","2","3","2","3"))
 		unPedidoParaPrueba.setFormaDeEnvio(new RetiroPorLocal())
 		
 		unPedidoParaPrueba
