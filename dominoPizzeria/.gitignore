@@ -1,9 +1,6 @@
 /target/
-<<<<<<< HEAD
-=======
 .classpath
 .project
 bin
 generated*
 .settings
->>>>>>> refs/heads/Domino_Dominio_ArenaDesktop
