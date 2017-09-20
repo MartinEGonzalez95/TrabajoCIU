@@ -18,11 +18,18 @@ import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import java.util.Date
 import arenaDesktop.arenaDesktop.model.ControladorSistema
+import org.uqbar.arena.windows.Dialog
+import arenaDesktop.arenaDesktop.app.VerEditarPedidoMainWindow
+import java.util.ArrayList
+import dominoPizzeria.ClienteRegistrado
+import formaDeEnvioPedido.RetiroPorLocal
 
 class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 	
 	new(WindowOwner parent) {
+		
 		super(parent, new ControladorSistema)
+		this.modelObject.setPedidoParaPrueba
 	}
 
 	def protected createResultsGrid(Panel panelDeOpcionsDePedido) {
@@ -45,7 +52,7 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 		new Column<Pedido>(table) => [
 			title = "Estado"
 			fixedSize = 200
-			bindContentsToProperty("estadoDePedido").transformer = [EstadoDePedido estadoDePedido | ]
+			bindContentsToProperty("estadoDePedido").transformer = [EstadoDePedido estadoDePedido | estadoDePedido.toString]
 		]
 		
 		
@@ -93,6 +100,17 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 
 	}
 	
+	def intentarAvanzar(){
+		
+		try{
+			this.modelObject.pedidoSeleccionado.avanzar	
+		}
+		catch(Exception e){
+			taskDescription = "No se puede avanzar"
+		}
+		
+	}
+	
 	protected def Button botonesDePedido(Panel panelDeOpcionsDePedido) {
 		
 		val elementSelected = new NotNullObservable("pedidoSeleccionado")
@@ -102,23 +120,31 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "<<<<"
 			onClick [|this.modelObject.pedidoSeleccionado.retroceder]
+			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = ">>>>"
-			onClick [|this.modelObject.pedidoSeleccionado.avanzar]
+			onClick [|this.intentarAvanzar]
+			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "Cancelar"
 			onClick [|this.modelObject.pedidoSeleccionado.cancelar]
+			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "Editar"
 			//onClick [|this.openDialog(new VerEditarPedidoMainWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "Salir"
-			onClick [|]
+			onClick [|this.close]
 		]
+	}
+	
+		def openDialog(Dialog<?> dialog){
+		dialog.open
 	}
 	
 	override protected addActions(Panel actionsPanel) {
@@ -128,6 +154,5 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 	override protected createFormPanel(Panel mainPanel) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
-	
 
 }
