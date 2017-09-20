@@ -23,13 +23,13 @@ class Plato {
 		this.tamanio = tamanio
 	}
 
-	/*Precio plato = Precio base * Tamaño + Recargo por ingredientes extras */
+	/*Precio plato = Precio base * Tamanio + Recargo por ingredientes extras */
 	def float monto() {
 
-		(proporcionPorTamaño) + recargoPorIngredientes
+		(proporcionPorTamanio) + recargoPorIngredientes
 	}
 
-	def float proporcionPorTamaño() {
+	def float proporcionPorTamanio() {
 		pizza.precio * tamanio.valor
 	}
 
@@ -46,8 +46,9 @@ class Plato {
 		ingredientesExtras.remove(ingrediente)
 	}
 
-	def cambiarTamaño(Tamanio nuevoTamanio) {
+	def cambiarTamanio(Tamanio nuevoTamanio) {
 		tamanio  = nuevoTamanio
 	}
 
 }
+

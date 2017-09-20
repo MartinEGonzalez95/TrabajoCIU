@@ -6,6 +6,8 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @TransactionalAndObservable
 @Accessors
+
+// no deberia existir
 class Sistema {
 
 	ArrayList<Pedido> pedidos

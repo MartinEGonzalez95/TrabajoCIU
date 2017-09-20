@@ -57,4 +57,3 @@ class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
 	}
 
 }
-
