@@ -7,7 +7,8 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @TransactionalAndObservable
 @Accessors
-abstract class Cliente {
+abstract class Cliente
+{
 
 	String nombre
 	String email
