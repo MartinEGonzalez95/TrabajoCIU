@@ -22,7 +22,7 @@ class ClienteRegistrado extends Cliente {
 
 	}
 
-	//Modelo vs Realidad
+	//Modelo vs Realidad, no deberia hacer el pedido
 	override hacerPedido(ArrayList<Plato> platosPedidos, String aclaraciones, FormaDeEnvio unaFormaDeEnvio) {
 
 		new Pedido(platosPedidos, this, aclaraciones, unaFormaDeEnvio)
