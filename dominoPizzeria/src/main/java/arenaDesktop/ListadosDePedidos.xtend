@@ -2,7 +2,6 @@ package arenaDesktop
 
 import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
-import dominoPizzeria.Sistema
 import estadosDePedido.EstadoDePedido
 import org.uqbar.arena.bindings.DateTransformer
 import org.uqbar.arena.layout.ColumnLayout
@@ -11,7 +10,6 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
-import org.uqbar.arena.windows.MainWindow
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
@@ -19,6 +17,7 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import java.util.Date
+import arenaDesktop.arenaDesktop.model.ControladorSistema
 
 class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 	
@@ -114,7 +113,7 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "Editar"
-			//onClick [|this.openDialog(new VerEditarPedidoAbiertoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+			//onClick [|this.openDialog(new VerEditarPedidoMainWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
 		]
 		new Button(panelDeOpcionsDePedido) => [
 			caption = "Salir"
@@ -130,12 +129,5 @@ class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-//	override protected addActions(Panel actionsPanel) {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-//	}
-//	
-//	override protected createFormPanel(Panel mainPanel) {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-//	}
 
 }

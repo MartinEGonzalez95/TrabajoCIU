@@ -1,14 +1,12 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.model
 
-import dominoPizzeria.Sistema
 import java.util.ArrayList
 import dominoPizzeria.Pedido
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
-import java.util.Date
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class ControladorSistema {
 	
 	Pedido example = new Pedido
@@ -21,5 +19,6 @@ class ControladorSistema {
 		
 	}
 	
+
 	
 }
