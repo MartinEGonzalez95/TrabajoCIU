@@ -14,7 +14,7 @@ class DominosApplication extends Application {
 	}
 
 	override protected Window<?> createMainWindow() {
-		return new ListadosDePedidos(this)
+		return new DominosWindow(this)
 	}
 
 	

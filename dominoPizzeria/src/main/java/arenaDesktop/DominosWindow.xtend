@@ -24,7 +24,7 @@ import java.util.ArrayList
 import dominoPizzeria.ClienteRegistrado
 import formaDeEnvioPedido.RetiroPorLocal
 
-class ListadosDePedidos extends SimpleWindow<ControladorSistema> {
+class DominosWindow extends SimpleWindow<ControladorSistema> {
 	
 	new(WindowOwner parent) {
 		
