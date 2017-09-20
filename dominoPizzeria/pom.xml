@@ -7,10 +7,8 @@
 		<version>3.6.3</version>
 	</parent>
 	<groupId>unq.ciu.tp</groupId>
-	<artifactId>dominoPizzeria</artifactId>
+	<artifactId>dominio.dominoPizza</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Pizzeria Domino</name>
-	<description>Trabajo Practico Pizzeria Domino's </description>
 
 	<dependencies>
 		<dependency>
