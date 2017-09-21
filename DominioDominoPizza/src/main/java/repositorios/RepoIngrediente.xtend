@@ -37,5 +37,12 @@ class RepoIngrediente implements Repo<Ingrediente>
 	{
 		 
 	}
+	
+	override cargar()
+	{
+		
+		repositorio.values.toList
+		
+	}
 
 }

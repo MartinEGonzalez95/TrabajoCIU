@@ -37,5 +37,12 @@ class RepoPedido implements Repo<Pedido>
 	{
 		
 	}
+	
+	override cargar()
+	{
+		
+		repositorio.values.toList
+		
+	}
 
 }
