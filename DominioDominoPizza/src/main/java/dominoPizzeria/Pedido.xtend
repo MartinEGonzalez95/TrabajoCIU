@@ -21,6 +21,7 @@ class Pedido {
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 	MailSender mailSender
+	Integer numero
 
 	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
