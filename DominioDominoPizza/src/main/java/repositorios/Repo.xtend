@@ -1,5 +1,7 @@
 package repositorios
 
+import java.util.List
+
 interface Repo<T>
 {
 
@@ -10,5 +12,7 @@ interface Repo<T>
 	def T buscar (String claveString)
 
 	def T buscar (Integer claveInteger)
+	
+	def List<T> cargar()
 
 }

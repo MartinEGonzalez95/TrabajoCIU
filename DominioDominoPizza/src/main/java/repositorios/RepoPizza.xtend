@@ -38,4 +38,11 @@ class RepoPizza implements Repo<Pizza>
 		 
 	}
 	
+	override cargar()
+	{
+		
+		repositorio.values.toList
+		
+	}
+	
 }

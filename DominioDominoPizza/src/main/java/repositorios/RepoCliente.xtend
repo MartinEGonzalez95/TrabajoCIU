@@ -36,5 +36,12 @@ class RepoCliente implements Repo<Cliente>
 	{
 		 
 	}
+	
+	override cargar()
+	{
+		
+		repositorio.values.toList
+		
+	}
 
 }
