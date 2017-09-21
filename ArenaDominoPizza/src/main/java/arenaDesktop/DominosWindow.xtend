@@ -3,7 +3,6 @@ package arenaDesktop
 import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
 import estadosDePedido.EstadoDePedido
-import org.uqbar.arena.bindings.DateTransformer
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -15,14 +14,10 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.bindings.NotNullObservable
-import org.uqbar.arena.layout.HorizontalLayout
 import java.util.Date
 import arenaDesktop.arenaDesktop.model.ControladorSistema
 import org.uqbar.arena.windows.Dialog
-import arenaDesktop.arenaDesktop.app.VerEditarPedidoMainWindow
-import java.util.ArrayList
-import dominoPizzeria.ClienteRegistrado
-import formaDeEnvioPedido.RetiroPorLocal
+import java.text.SimpleDateFormat
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 	
@@ -32,9 +27,9 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		this.modelObject.setPedidoParaPrueba
 	}
 
-	def protected createResultsGrid(Panel panelDeOpcionsDePedido) {
-		val table = new Table<Pedido>(panelDeOpcionsDePedido, typeof(Pedido)) => [
-			items <=> "pedidos"
+	def protected createResultsGrid(Panel panelDeOpcionesDePedido) {
+		val table = new Table<Pedido>(panelDeOpcionesDePedido, typeof(Pedido)) => [
+			items <=> "pedidosAbiertos"
 			value <=> "pedidoSeleccionado"
 			numberVisibleRows = 8
 		]
@@ -66,8 +61,10 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	
 			title = "Hora"
 			fixedSize = 200
-			//bindContentsToProperty("fechaDeCreacion").transformer = new DateTransformer
-			bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion | fechaDeCreacion.toString]
+			//bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion | fechaDeCreacion.toString]
+			val sdf = new SimpleDateFormat("HH:mm:ss")
+			bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion | sdf.format(fechaDeCreacion)]
+
 		]
 	}
 		
@@ -90,13 +87,12 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(panelIzquierdo) => [
 			caption = "Pedidos Cerrados"
-			//onClick [|this.openDialog(new PedidosCerradosWindow(this))]
+			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
 		]
 
-		val panelDeOpcionsDePedido = new Panel(mainPanel)
-
+		val panelDeOpcionesDePedido = new Panel(mainPanel)
 	
-		botonesDePedido(panelDeOpcionsDePedido)
+		botonesDePedido(panelDeOpcionesDePedido)
 
 	}
 	
@@ -111,33 +107,31 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		
 	}
 	
-	protected def Button botonesDePedido(Panel panelDeOpcionsDePedido) {
+	protected def Button botonesDePedido(Panel panelDeOpcionesDePedido) {
 		
 		val elementSelected = new NotNullObservable("pedidoSeleccionado")
 		
-		val actionsPanel = new Panel(panelDeOpcionsDePedido).layout = new HorizontalLayout
-		
-		new Button(panelDeOpcionsDePedido) => [
+		new Button(panelDeOpcionesDePedido) => [
 			caption = "<<<<"
 			onClick [|this.modelObject.pedidoSeleccionado.retroceder]
 			bindEnabled(elementSelected)
 		]
-		new Button(panelDeOpcionsDePedido) => [
+		new Button(panelDeOpcionesDePedido) => [
 			caption = ">>>>"
 			onClick [|this.intentarAvanzar]
 			bindEnabled(elementSelected)
 		]
-		new Button(panelDeOpcionsDePedido) => [
+		new Button(panelDeOpcionesDePedido) => [
 			caption = "Cancelar"
 			onClick [|this.modelObject.pedidoSeleccionado.cancelar]
 			bindEnabled(elementSelected)
 		]
-		new Button(panelDeOpcionsDePedido) => [
+		new Button(panelDeOpcionesDePedido) => [
 			caption = "Editar"
-			//onClick [|this.openDialog(new VerEditarPedidoMainWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+			//onClick [|this.openDialog(new VerEditarPedidoAbiertoMainWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
 			bindEnabled(elementSelected)
 		]
-		new Button(panelDeOpcionsDePedido) => [
+		new Button(panelDeOpcionesDePedido) => [
 			caption = "Salir"
 			onClick [|this.close]
 		]

@@ -14,9 +14,34 @@ class ControladorSistema {
 	
 	Pedido example = new Pedido
 	ArrayList<Pedido> pedidos
-	Pedido pedidoSeleccionado 
+	Pedido pedidoSeleccionado
+	ArrayList<Pedido> pedidosAbiertos
+	ArrayList<Pedido> pedidosCerrados
+	
 	
 	//Eliminar los mensajes de prueba y usar repo
+	
+	def setPedidosCerradosParaPrueba(){
+		for(Pedido pedido: pedidos){
+			if (pedido.estadoDePedido.toString == "Cerrado" || pedido.estadoDePedido.toString == "Entregado"){
+				pedidosCerrados.add(pedido)
+			}
+		}
+	}
+	
+	def setPedidosAbiertosParaPrueba(){
+		for(Pedido pedido: pedidos){
+			if (!(pedido.estadoDePedido.toString == "Cerrado" || pedido.estadoDePedido.toString == "Entregado")){
+				pedidosAbiertos.add(pedido)
+			}
+		}
+	}
+	
+	def tiempoDeEspera(){
+		
+		pedidoSeleccionado.fechaDeEntrega.time - pedidoSeleccionado.fechaDeCreacion.time
+		
+	}
 	
  	def setPedidoParaPrueba(){
  		
