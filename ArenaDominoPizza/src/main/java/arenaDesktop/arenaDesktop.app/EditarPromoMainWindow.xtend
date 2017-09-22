@@ -43,19 +43,25 @@ class EditarPromoMainWindow extends SimpleWindow<ControladorPizzaAdicionales> {
 
 	def void levantarVentanaPromo() {
 
-		this.openDialog(new EditarPromoVentana(this,controladorDePizzaYAdicionales))
+		this.openDialog(new EditarPromoVentana(this, controladorDePizzaYAdicionales))
 
 	}
 
 	def ControladorPizzaAdicionales controladorDePizzaYAdicionales() {
+		
 		var adicionales = newArrayList()
-		adicionales.add(new Ingrediente("queso", " ", 10))
-		adicionales.add(new Ingrediente("cebolla", " ", 15))
+		
+		adicionales.add(new Ingrediente => [nombre = "queso" distribucion = " " precio = 10])
 
-		var pizzaSeleccionada = new Pizza("pizzaPrueba", 10, newArrayList())
+		adicionales.add(new Ingrediente => [nombre = "tomate" distribucion = " " precio = 15])
 
+		var pizzaSeleccionada = new Pizza => [
+			nombre = "muzarella"
+			precioBase = 100
+			ingredientes = newArrayList()
+		]
+		
 		new ControladorPizzaAdicionales(pizzaSeleccionada, adicionales)
-
 	}
 
 }

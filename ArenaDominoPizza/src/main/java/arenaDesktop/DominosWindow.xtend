@@ -49,7 +49,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		new Column<Pedido>(table) => [
 			title = "Estado"
 			fixedSize = 200
-			bindContentsToProperty("estadoDePedido").transformer = [EstadoDePedido estadoDePedido |
+			bindContentsToProperty("estadoDePedido").transformer = [ EstadoDePedido estadoDePedido |
 				estadoDePedido.toString
 			]
 		]
@@ -87,7 +87,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(panelIzquierdo) => [
 			caption = "Menu"
-		 onClick [|(new MenuWindow(this,new ControladorMenu)).open]
+			onClick [|(new MenuWindow(this, new ControladorMenu)).open]
 		]
 
 		new Button(panelIzquierdo) => [

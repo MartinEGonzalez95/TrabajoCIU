@@ -3,10 +3,11 @@ package arenaDesktop.arenaDesktop.model
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import java.util.List
-import dominoPizzeria.Pizza
-import dominoPizzeria.Ingrediente
+
 import repositorios.RepoIngrediente
 import repositorios.RepoPizza
+import dominoPizzeria.Pizza
+import dominoPizzeria.Ingrediente
 
 @Accessors
 @Observable
@@ -23,9 +24,9 @@ class ControladorMenu {
 	}
 
 	new() {
-		
+
 		this.cargar
-		
+
 	}
 
 	def getRepoPizzas() {
@@ -36,16 +37,18 @@ class ControladorMenu {
 		new RepoIngrediente
 	}
 
-	def cargar(){
+	def cargar() { // mensaje de prueba
 		val repoIngrediente = repoIngredientes
-		
-		repoIngrediente.agregar(new Ingrediente("muzza","todo",15))
-		
+
+		repoIngrediente.agregar(new Ingrediente => 
+			[nombre = "muzza" distribucion = "todo" precio = 15]
+		)
+
 		ingredientes = repoIngrediente.cargar
 	}
 
-
 	def updateIngredientes() {
+		
 	}
 
 }

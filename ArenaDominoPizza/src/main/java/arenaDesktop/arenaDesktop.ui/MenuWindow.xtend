@@ -137,7 +137,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		new Column<Pizza>(tablaPromociones) => [
 			title = "precio"
 			fixedSize = 100
-			bindContentsToProperty("precio")
+			bindContentsToProperty("precioBase")
 		]
 
 	}

@@ -10,32 +10,33 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
 @TransactionalAndObservable
-class Pedido
-{
+class Pedido {
 
 	List<Plato> platos = newArrayList
 	Cliente cliente
 	Date fechaDeCreacion = new Date()
 	Date fechaDeEntrega
-	String aclaraciones
+	String aclaraciones = " "
 	EstadoDePedido estadoDePedido = new Preparando
 	FormaDeEnvio formaDeEnvio
-	
-	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017") 
+	long tiempoDeEspera = 0
+	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	// Para mandar mails cuando cambia de estado //
-	
 	Integer numero // Clave para el pedido //
-	
-	def double montoFinal()
-	{
-		
-		platos.stream.mapToDouble( [ plato | plato.precio ] ).sum + formaDeEnvio.costo
-		// pesos //
-		
+
+	def double montoFinal() {
+
+		platos.stream.mapToDouble( [plato|plato.precio]).sum + formaDeEnvio.costo
+	// pesos //
 	}
 
+	def setTiempoDeEspera(){
 		
-		 tiempoDeEspera = fechaDeEntrega.time - fechaDeCreacion.time
+		this.tiempoDeEspera = tiempoDeEspera()
+	}
+
+	def tiempoDeEspera() {
+		fechaDeEntrega.time - fechaDeCreacion.time
 
 //		tiempoDeEspera = String.format("%02d:%02d:%02d", 
 //		TimeUnit.MILLISECONDS.toHours(milisegundos),
@@ -43,37 +44,32 @@ class Pedido
 //		TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milisegundos)), 
 //		TimeUnit.MILLISECONDS.toSeconds(milisegundos) - 
 //		TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milisegundos))); 
-		
 	}
 
-	def avanzar()
-	{
+	def avanzar() {
 
 		estadoDePedido.avanzarPedido(this)
-		
+
 	}
 
-	def retroceder()
-	{
-		
+	def retroceder() {
+
 		estadoDePedido.retrocederPedido(this)
-		
+
 	}
 
-	def cancelar()
-	{
-		
+	def cancelar() {
+
 		estadoDePedido.cancelarPedido(this)
-		
+
 	}
 
-	def hayMasDe30MinDeDiferenciaEntre()
-	{
+	def hayMasDe30MinDeDiferenciaEntre() {
 
-		var minutos = ((fechaDeEntrega.getTime() - fechaDeCreacion.getTime()) / 60000)
+		var minutos = ((this.tiempoDeEspera) / 60000)
 
 		minutos > 30
-		
+
 	}
 
 }
