@@ -7,35 +7,71 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import dominoPizzeria.ClienteRegistrado
 import formaDeEnvioPedido.RetiroPorLocal
 import org.uqbar.commons.model.annotations.Observable
+import repositorios.RepoPedido
+import java.util.List
+import formaDeEnvioPedido.Delivery
 
 @Accessors
 @Observable
 class ControladorSistema {
 	
 	Pedido example = new Pedido
-	ArrayList<Pedido> pedidos
-	Pedido pedidoSeleccionado 
+	List<Pedido> pedidos
+	Pedido pedidoSeleccionado
+	List<Pedido> pedidosAbiertos
+	List<Pedido> pedidosCerrados
+	
 	
 	//Eliminar los mensajes de prueba y usar repo
 	
- 	def setPedidoParaPrueba(){
- 		
- 		pedidos = newArrayList()
- 		
- 		pedidos.add(pedidoParaPrueba)
- 		
- 	}
-	
-	def Pedido pedidoParaPrueba()
-	{	
+	def setPedidosCerradosParaPrueba(){
 		
-	 new Pedido(newArrayList(), new ClienteRegistrado("F","2","3","2","3"), "Ninguna", new RetiroPorLocal())
+		pedidosCerrados = newArrayList()
+		pedidosCerrados = pedidos.filter[it.estadoDePedido.toString == "Cerrado" || it.estadoDePedido.toString == "Entregado"].toList
+	}
 	
+	def setPedidosAbiertosParaPrueba(){
+		pedidosAbiertos = newArrayList()
+
+		pedidosAbiertos = pedidos.filter[it.estadoDePedido.toString != "Cerrado" && it.estadoDePedido.toString != "Entregado"].toList
+	}
+	
+	def updatePedidos(){
+		
+		setPedidosAbiertosParaPrueba
+		setPedidosCerradosParaPrueba
+		
+	}
+		
+	def cargar(){
+		
+		val repoPedido1 = repoPedido
+		
+		val pedido1 = new Pedido(newArrayList(), new ClienteRegistrado("Fran","2","3","2","3"), "Ninguna", new RetiroPorLocal())
+		pedido1.numero = 1
+
+		val pedido2 = new Pedido(newArrayList(), new ClienteRegistrado("Martin","2","3","fake@gmail.com","3"), "Ninguna", new Delivery("Calle falsa 123"))
+		pedido2.numero = 2
+		
+		val pedido3 = new Pedido(newArrayList(), new ClienteRegistrado("Gaston","2","3","2","3"), "Ninguna", new RetiroPorLocal())
+		pedido3.numero = 3
+				
+		repoPedido1.agregar(pedido1)
+		repoPedido1.agregar(pedido2)
+		repoPedido1.agregar(pedido3)
+		
+		
+		pedidos = newArrayList()
+		pedidos = repoPedido1.cargar
+		
+		this.setPedidosAbiertosParaPrueba
+		this.setPedidosCerradosParaPrueba
+		
 	}
 
-	def getRepoPedidos(){
+	def getRepoPedido(){
 		
-//		new RepoPedidos()
+			new RepoPedido()
 		
 	}
 	

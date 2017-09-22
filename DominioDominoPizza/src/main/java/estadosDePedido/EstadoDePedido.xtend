@@ -15,6 +15,8 @@ abstract class EstadoDePedido {
 		
 		unPedido.fechaDeEntrega = new Date()
 		
+		unPedido.setTiempoDeEspera
+		
 	}
 	
 	override def toString()

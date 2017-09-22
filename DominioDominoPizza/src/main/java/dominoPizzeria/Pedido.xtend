@@ -34,9 +34,21 @@ class Pedido
 		
 	}
 
+		
+		 tiempoDeEspera = fechaDeEntrega.time - fechaDeCreacion.time
+
+//		tiempoDeEspera = String.format("%02d:%02d:%02d", 
+//		TimeUnit.MILLISECONDS.toHours(milisegundos),
+//		TimeUnit.MILLISECONDS.toMinutes(milisegundos) -  
+//		TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milisegundos)), 
+//		TimeUnit.MILLISECONDS.toSeconds(milisegundos) - 
+//		TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milisegundos))); 
+		
+	}
+
 	def avanzar()
 	{
-		
+
 		estadoDePedido.avanzarPedido(this)
 		
 	}
