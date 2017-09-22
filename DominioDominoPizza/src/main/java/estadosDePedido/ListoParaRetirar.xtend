@@ -10,6 +10,8 @@ class ListoParaRetirar extends EstadoDePedido {
 		unPedido.estadoDePedido = new Entregado
 		
 		unPedido.fechaDeEntrega = new Date()
+		
+		unPedido.setTiempoDeEspera
 	
 		if (unPedido.hayMasDe30MinDeDiferenciaEntre){
 			

@@ -1,6 +1,5 @@
 package arenaDesktop
 
-import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
 import estadosDePedido.EstadoDePedido
 import org.uqbar.arena.layout.ColumnLayout
@@ -18,13 +17,14 @@ import java.util.Date
 import arenaDesktop.arenaDesktop.model.ControladorSistema
 import org.uqbar.arena.windows.Dialog
 import java.text.SimpleDateFormat
+import org.uqbar.arena.windows.ErrorsPanel
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 	
 	new(WindowOwner parent) {
 		
 		super(parent, new ControladorSistema)
-		this.modelObject.setPedidoParaPrueba
+		this.modelObject.cargar
 	}
 
 	def protected createResultsGrid(Panel panelDeOpcionesDePedido) {
@@ -39,9 +39,9 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	def void describeResultsGrid(Table<Pedido> table) {
 
 		new Column<Pedido>(table) => [
-			title = "Pedido de"
+			title = "Pedido"
 			fixedSize = 200
-			bindContentsToProperty("cliente").transformer = [Cliente cliente|cliente.nombre]
+			bindContentsToProperty("numero").transformer = [Integer numero | "Pedido " + numero]
 		]
 
 		new Column<Pedido>(table) => [
@@ -61,7 +61,6 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	
 			title = "Hora"
 			fixedSize = 200
-			//bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion | fechaDeCreacion.toString]
 			val sdf = new SimpleDateFormat("HH:mm:ss")
 			bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion | sdf.format(fechaDeCreacion)]
 
@@ -76,7 +75,10 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		val panelIzquierdo = new Panel(mainPanel)
 
-		new Label(panelIzquierdo).text = "Pedidos abiertos"
+		new ErrorsPanel(panelIzquierdo, "")
+		
+		val labelPedidosAbiertos = new Label(panelIzquierdo).text = "Pedidos abiertos"
+		labelPedidosAbiertos.alignLeft
 		
 		this.createResultsGrid(panelIzquierdo)
 		
@@ -99,10 +101,23 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	def intentarAvanzar(){
 		
 		try{
-			this.modelObject.pedidoSeleccionado.avanzar	
+			this.modelObject.pedidoSeleccionado.avanzar
+			this.modelObject.updatePedidos
 		}
 		catch(Exception e){
 			taskDescription = "No se puede avanzar"
+		}
+		
+	}
+	
+	def intentarRetroceder(){
+		
+		try{
+			this.modelObject.pedidoSeleccionado.retroceder
+			this.modelObject.updatePedidos
+		}
+		catch(Exception e){
+			taskDescription = "No se puede retroceder"
 		}
 		
 	}
@@ -113,7 +128,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "<<<<"
-			onClick [|this.modelObject.pedidoSeleccionado.retroceder]
+			onClick [|this.intentarRetroceder]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [

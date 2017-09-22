@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import dominoPizzeria.Cliente
+import java.util.concurrent.TimeUnit
 
 class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -55,9 +56,9 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 	def void describeResultsGrid(Table<Pedido> table) {
 
 		new Column<Pedido>(table) => [
-			title = "Pedido de"
+			title = "Pedido"
 			fixedSize = 200
-			bindContentsToProperty("cliente").transformer = [Cliente cliente|cliente.nombre]
+			bindContentsToProperty("numero").transformer = [Integer numero | "Pedido " + numero]
 		]
 
 		new Column<Pedido>(table) => [
@@ -75,13 +76,19 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
 		]
 		
-//		new Column<Pedido>(table) => [
-//			
-//			title = "Tiempo de espera"
-//			fixedSize = 200
-//			bindContentsToProperty("").transformer = []
-//			
-//		]
+		new Column<Pedido>(table) => [
+			
+			title = "Tiempo de espera"
+			fixedSize = 200
+			
+			bindContentsToProperty("tiempoDeEspera").transformer = [long tiempoDeEspera | String.format("%02d:%02d:%02d", 
+			TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
+			TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -  
+			TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)), 
+			TimeUnit.MILLISECONDS.toSeconds(tiempoDeEspera) - 
+			TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera))); ]
+			
+		]
 	}
 
 	override protected addActions(Panel actionsPanel) {

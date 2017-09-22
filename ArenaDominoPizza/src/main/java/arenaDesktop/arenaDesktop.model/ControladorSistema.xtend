@@ -7,60 +7,71 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import dominoPizzeria.ClienteRegistrado
 import formaDeEnvioPedido.RetiroPorLocal
 import org.uqbar.commons.model.annotations.Observable
+import repositorios.RepoPedido
+import java.util.List
+import formaDeEnvioPedido.Delivery
 
 @Accessors
 @Observable
 class ControladorSistema {
 	
 	Pedido example = new Pedido
-	ArrayList<Pedido> pedidos
+	List<Pedido> pedidos
 	Pedido pedidoSeleccionado
-	ArrayList<Pedido> pedidosAbiertos
-	ArrayList<Pedido> pedidosCerrados
+	List<Pedido> pedidosAbiertos
+	List<Pedido> pedidosCerrados
 	
 	
 	//Eliminar los mensajes de prueba y usar repo
 	
 	def setPedidosCerradosParaPrueba(){
-		for(Pedido pedido: pedidos){
-			if (pedido.estadoDePedido.toString == "Cerrado" || pedido.estadoDePedido.toString == "Entregado"){
-				pedidosCerrados.add(pedido)
-			}
-		}
+		
+		pedidosCerrados = newArrayList()
+		pedidosCerrados = pedidos.filter[it.estadoDePedido.toString == "Cerrado" || it.estadoDePedido.toString == "Entregado"].toList
 	}
 	
 	def setPedidosAbiertosParaPrueba(){
-		for(Pedido pedido: pedidos){
-			if (!(pedido.estadoDePedido.toString == "Cerrado" || pedido.estadoDePedido.toString == "Entregado")){
-				pedidosAbiertos.add(pedido)
-			}
-		}
+		pedidosAbiertos = newArrayList()
+
+		pedidosAbiertos = pedidos.filter[it.estadoDePedido.toString != "Cerrado" && it.estadoDePedido.toString != "Entregado"].toList
 	}
 	
-	def tiempoDeEspera(){
+	def updatePedidos(){
 		
-		pedidoSeleccionado.fechaDeEntrega.time - pedidoSeleccionado.fechaDeCreacion.time
+		setPedidosAbiertosParaPrueba
+		setPedidosCerradosParaPrueba
 		
 	}
-	
- 	def setPedidoParaPrueba(){
- 		
- 		pedidos = newArrayList()
- 		
- 		pedidos.add(pedidoParaPrueba)
- 		
- 	}
-	
-	def Pedido pedidoParaPrueba()
-	{	
 		
-	 new Pedido(newArrayList(), new ClienteRegistrado("F","2","3","2","3"), "Ninguna", new RetiroPorLocal())
-	
+	def cargar(){
+		
+		val repoPedido1 = repoPedido
+		
+		val pedido1 = new Pedido(newArrayList(), new ClienteRegistrado("Fran","2","3","2","3"), "Ninguna", new RetiroPorLocal())
+		pedido1.numero = 1
+
+		val pedido2 = new Pedido(newArrayList(), new ClienteRegistrado("Martin","2","3","fake@gmail.com","3"), "Ninguna", new Delivery("Calle falsa 123"))
+		pedido2.numero = 2
+		
+		val pedido3 = new Pedido(newArrayList(), new ClienteRegistrado("Gaston","2","3","2","3"), "Ninguna", new RetiroPorLocal())
+		pedido3.numero = 3
+				
+		repoPedido1.agregar(pedido1)
+		repoPedido1.agregar(pedido2)
+		repoPedido1.agregar(pedido3)
+		
+		
+		pedidos = newArrayList()
+		pedidos = repoPedido1.cargar
+		
+		this.setPedidosAbiertosParaPrueba
+		this.setPedidosCerradosParaPrueba
+		
 	}
 
-	def getRepoPedidos(){
+	def getRepoPedido(){
 		
-//		new RepoPedidos()
+			new RepoPedido()
 		
 	}
 	
