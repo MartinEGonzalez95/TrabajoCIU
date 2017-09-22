@@ -23,6 +23,9 @@ class ControladorMenu {
 	}
 
 	new() {
+		
+		this.cargar
+		
 	}
 
 	def getRepoPizzas() {
@@ -31,6 +34,18 @@ class ControladorMenu {
 
 	def getRepoIngredientes() {
 		new RepoIngrediente
+	}
+
+	def cargar(){
+		val repoIngrediente = repoIngredientes
+		
+		repoIngrediente.agregar(new Ingrediente("muzza","todo",15))
+		
+		ingredientes = repoIngrediente.cargar
+	}
+
+
+	def updateIngredientes() {
 	}
 
 }

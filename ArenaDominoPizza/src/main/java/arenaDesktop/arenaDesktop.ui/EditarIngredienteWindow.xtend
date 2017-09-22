@@ -13,6 +13,7 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.windows.WindowOwner
 
+
 class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
 
 	new(WindowOwner laVentanaMenu, Ingrediente ingredienteSeleccionado) {
@@ -21,7 +22,7 @@ class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
 
 	override createFormPanel(Panel mainPanel) {
 
-		mainPanel.layout = new ColumnLayout(2)
+//		mainPanel.layout = new ColumnLayout(2)
 
 		this.title = "Editar Ingrediente"
 
@@ -45,7 +46,7 @@ class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
 			caption = "Aceptar"
-			onClick [|this.accept]
+			onClick [|this.aceptar]
 			setAsDefault
 
 		]
@@ -54,6 +55,12 @@ class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
 			caption = "Cancelar"
 			onClick [|this.cancel]
 		]
+	}
+	
+	def aceptar() {
+		
+		
+		this.accept
 	}
 
 }

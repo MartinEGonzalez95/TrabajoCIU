@@ -8,6 +8,7 @@ import formaDeEnvioPedido.FormaDeEnvio
 import estadosDePedido.Preparando
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import estadosDePedido.EnViaje
+import java.util.concurrent.TimeUnit
 
 @Accessors
 @TransactionalAndObservable
@@ -22,6 +23,7 @@ class Pedido {
 	FormaDeEnvio formaDeEnvio
 	MailSender mailSender
 	Integer numero
+	long tiempoDeEspera
 
 	new(List<Plato> platos, Cliente cliente, String aclaraciones, FormaDeEnvio formaDeEnvio) {
 
@@ -41,6 +43,19 @@ class Pedido {
 		estadoDePedido = new EnViaje
 		platos = newArrayList
 		platos.add(new Plato(null , null, null)) 
+		
+	}
+
+	def setTiempoDeEspera(){
+		
+		 tiempoDeEspera = fechaDeEntrega.time - fechaDeCreacion.time
+
+//		tiempoDeEspera = String.format("%02d:%02d:%02d", 
+//		TimeUnit.MILLISECONDS.toHours(milisegundos),
+//		TimeUnit.MILLISECONDS.toMinutes(milisegundos) -  
+//		TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milisegundos)), 
+//		TimeUnit.MILLISECONDS.toSeconds(milisegundos) - 
+//		TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milisegundos))); 
 		
 	}
 

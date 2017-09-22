@@ -18,6 +18,8 @@ import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import arenaDesktop.CrearIngredienteWindow
+import org.uqbar.arena.windows.Dialog
+import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
@@ -161,27 +163,31 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def eliminarPizza() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 	def editarPizza() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		openDialog(
+			new EditarPromoVentana(this,
+				new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
 	}
 
 	def crearPizza() {
-		(new EditarIngredienteWindow(this,modelObject.ingredienteSeleccionado)).open
+		
 	}
 
 	def editarIngrediente() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		openDialog(new EditarIngredienteWindow(this, modelObject.ingredienteSeleccionado))
 	}
 
 	def eliminarIngrediente() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 	def crearIngrediente() {
-		(new CrearIngredienteWindow(this)).open
+		openDialog(new CrearIngredienteWindow(this))
+	}
+
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
 	}
 
 }
