@@ -5,20 +5,24 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
 @TransactionalAndObservable
-class Ingrediente {
+class Ingrediente
+{
 
 	String nombre
-
 	String distribucion
-
 	int precio
 
-	new(String nombre, String distribucion, int precio) {
-
-		this.nombre = nombre
-		this.distribucion = distribucion
-		this.precio = precio
-
+	def getPrecio()
+	{
+		
+		if ( distribucion.equals("Toda") )
+		{
+			
+			return precio * 2
+			
+		}
+		
+		precio
 	}
 	
 	new() {
