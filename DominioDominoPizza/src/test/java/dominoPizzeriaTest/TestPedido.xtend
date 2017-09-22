@@ -1,19 +1,20 @@
 package dominoPizzeriaTest
 
-import static org.mockito.Mockito.*
-import java.text.SimpleDateFormat
-import java.util.Date
-import dominoPizzeria.Pedido
-import java.util.List
-import org.junit.Test
-import org.junit.Before
-import static org.junit.Assert.*
-import dominoPizzeria.Plato
-import java.util.ArrayList
-import formaDeEnvioPedido.RetiroPorLocal
-import formaDeEnvioPedido.Delivery
-import dominoPizzeria.ClienteRegistrado
 import dominoPizzeria.Cliente
+import dominoPizzeria.Pedido
+import dominoPizzeria.Plato
+import formaDeEnvioPedido.Delivery
+import formaDeEnvioPedido.RetiroPorLocal
+import java.util.ArrayList
+import java.util.List
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
+import static org.mockito.Mockito.*
+import java.util.Date
+import estadosDePedido.Preparando
+import org.apache.commons.lang.time.DateUtils
 
 class TestPedido {
 
@@ -33,9 +34,50 @@ class TestPedido {
 	}
 
 	@Test
-	def void unPedidoConFormaDeEnvioRetiroPorElLocalConMontoFinal100AlPedirleSuMontoFinalDevuelve100() {
+	def test01TodoPedidoNuevoComienzaConElEstadoPreparando()
+	{
+		
+		val Pedido unPedidoNuevo = new Pedido()
+		
+		assertEquals(unPedidoNuevo.estadoDePedido.class, Preparando)
+		
+	}
+	
+	@Test
+	def test02UnPedidoSeEntregaALosVeinteMinutosDeSerCreadoSeVerificaQueNoPasaronMasDeTreitaMinutosDesdeSuCreacion()
+	{
+		
+		val Pedido unPedido = new Pedido()
+		
+		unPedido.fechaDeEntrega = DateUtils.addMinutes(unPedido.fechaDeCreacion, 20)
+		
+		assertFalse(unPedido.hayMasDe30MinDeDiferenciaEntre)
+		
+	}
+	
+	@Test
+	def test03UnPedidoSeEntregaALosCuarentaMinutosDeSerCreadoSeVerificaQuePasaronMasDeTreitaMinutosDesdeSuCreacion()
+	{
+		
+		val Pedido unPedido = new Pedido()
+		
+		unPedido.fechaDeEntrega = DateUtils.addMinutes(unPedido.fechaDeCreacion, 40)
+		
+		assertTrue(unPedido.hayMasDe30MinDeDiferenciaEntre)
+		
+	}
 
-		val cien = 100 as float
+	/*
+	 * 
+	 * Primero hacemos Plato
+
+	@Test
+	def test02unPedidoConMontoFinalCienPesosQueSeRetiraPorElLocalTieneUnMontoFinalDeCienPesos()
+	{
+		
+		val Pedido unPedidoConMontoFinalCienPesos = new Pedido() 
+		
+		
 
 		platoMock = mock(Plato)
 		when(platoMock.monto).thenReturn(cien)
@@ -65,6 +107,6 @@ class TestPedido {
 
 	}
 	
-
+	*/
 
 }

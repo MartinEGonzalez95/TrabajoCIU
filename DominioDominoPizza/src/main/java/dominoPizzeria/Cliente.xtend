@@ -1,23 +1,29 @@
 package dominoPizzeria
 
-import java.util.ArrayList
-import formaDeEnvioPedido.FormaDeEnvio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @TransactionalAndObservable
 @Accessors
-abstract class Cliente
+class Cliente
 {
 
 	String nombre
+	String nick
+	String password
 	String email
+	String direccion
 
-	new(String nombreCliente, String emailCliente) {
-		email = emailCliente
+	new(String nombreCliente, String nickCliente, String passwordCliente, String emailCliente, 
+		String direccionCliente)
+	{
+		
 		nombre = nombreCliente
+		nick = nickCliente
+		password = passwordCliente
+		email = emailCliente
+		direccion = direccionCliente
+		
 	}
-
-	def Pedido hacerPedido(ArrayList<Plato> platos, String string, FormaDeEnvio envio)
 
 }
