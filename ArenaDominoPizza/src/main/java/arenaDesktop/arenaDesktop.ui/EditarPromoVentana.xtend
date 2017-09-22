@@ -34,7 +34,7 @@ class EditarPromoVentana extends TransactionalDialog<ControladorPizzaAdicionales
 
 		this.crearPanelDePizzas(mainPanel)
 		this.crearPanelDeIngredientes(mainPanel)
-		this.addActions(mainPanel)
+	
 
 	}
 
