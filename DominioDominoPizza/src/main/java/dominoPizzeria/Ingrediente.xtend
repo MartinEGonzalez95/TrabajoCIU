@@ -20,5 +20,9 @@ class Ingrediente {
 		this.precio = precio
 
 	}
+	
+	new() {
+		
+	}
 
 }

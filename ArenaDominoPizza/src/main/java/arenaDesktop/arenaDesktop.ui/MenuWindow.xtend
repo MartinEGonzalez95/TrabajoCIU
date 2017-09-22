@@ -17,6 +17,7 @@ import dominoPizzeria.Pizza
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
+import arenaDesktop.CrearIngredienteWindow
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
@@ -37,11 +38,14 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	override protected createFormPanel(Panel mainPanel) {
 		// creo 2 paneles, para separar los ingredientes de las pizzas
-		new Label(mainPanel).text = "Promociones"
+		val promociociones = new Label(mainPanel).text = "Promociones"
+		promociociones.alignLeft
 		val panelSuperior = new Panel(mainPanel)
+
 		this.crearPanelDePromociones(panelSuperior)
 
-		new Label(mainPanel).text = "Ingredientes Adicionales"
+		val adicionales = new Label(mainPanel).text = "Ingredientes Adicionales"
+		adicionales.alignLeft
 		val panelInferior = new Panel(mainPanel)
 		this.crearPanelDeIngredientes(panelInferior)
 
@@ -49,7 +53,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def crearPanelDeIngredientes(Panel panelInferior) {
 
-//		panelInferior.layout = new ColumnLayout(2)
+		panelInferior.layout = new ColumnLayout(2)
 
 		val panelDeIngredientes = new Panel(panelInferior)
 
@@ -66,9 +70,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 		new Button(panel) => [
 			caption = "Crear"
-
 			onClick [|this.crearIngrediente]
-			bindEnabled(elementSelected)
 		]
 
 		new Button(panel) => [
@@ -107,7 +109,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def crearPanelDePromociones(Panel panelSuperior) {
 
-//		panelSuperior.layout = new ColumnLayout(2)
+		panelSuperior.layout = new ColumnLayout(2)
 
 		val panelDePromociones = new Panel(panelSuperior)
 
@@ -117,7 +119,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		]
 
 		creacionTablaDePromociones(tablaDePromociones)
-		
+
 		accionesDelPanelIPromociones(new Panel(panelSuperior))
 
 	}
@@ -143,7 +145,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		new Button(actions) => [
 			caption = "Crear"
 			onClick [|this.crearPizza]
-			bindEnabled(elementSelected)
+
 		]
 
 		new Button(actions) => [
@@ -167,7 +169,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def crearPizza() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		(new EditarIngredienteWindow(this,modelObject.ingredienteSeleccionado)).open
 	}
 
 	def editarIngrediente() {
@@ -179,7 +181,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def crearIngrediente() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		(new CrearIngredienteWindow(this)).open
 	}
 
 }

@@ -22,9 +22,9 @@ class ControladorMenu {
 		this.pizzas = this.getRepoPizzas.cargar
 	}
 
-	new(){
-		
+	new() {
 	}
+
 	def getRepoPizzas() {
 		new RepoPizza
 	}
