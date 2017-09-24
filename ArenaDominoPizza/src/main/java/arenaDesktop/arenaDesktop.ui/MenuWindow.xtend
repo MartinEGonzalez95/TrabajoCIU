@@ -15,12 +15,9 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import arenaDesktop.arenaDesktop.model.ControladorMenu
 import dominoPizzeria.Pizza
 import org.uqbar.arena.bindings.NotNullObservable
-import org.uqbar.arena.layout.HorizontalLayout
-import org.uqbar.arena.layout.VerticalLayout
-import arenaDesktop.CrearIngredienteWindow
+
 import org.uqbar.arena.windows.Dialog
 import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
-import arenaDesktop.CrearPromoWindow
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
@@ -167,23 +164,25 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def editarPizza() {
-		openDialog(	new EditarPromoVentana(this,new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
+		openDialog(
+			new EditarPromoDialogT(this,
+				new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
 	}
 
 	def crearPizza() {
-		openDialog(new CrearPromoWindow(this))
+		openDialog(new CrearPromoDialogT(this))
 
 	}
 
 	def editarIngrediente() {
-		openDialog(new EditarIngredienteWindow(this, modelObject.ingredienteSeleccionado))
+		openDialog(new EditarIngredienteDialogT(this, modelObject.ingredienteSeleccionado))
 	}
 
 	def eliminarIngrediente() {
 	}
 
 	def crearIngrediente() {
-		openDialog(new CrearIngredienteWindow(this))
+		openDialog(new CrearIngredienteDialogT(this))
 	}
 
 	def openDialog(Dialog<?> dialog) {

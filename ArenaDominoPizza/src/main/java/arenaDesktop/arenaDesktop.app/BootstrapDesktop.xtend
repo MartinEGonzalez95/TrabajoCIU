@@ -1,4 +1,4 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.app
 
 import org.uqbar.arena.bootstrap.Bootstrap
 import repositorios.RepoIngrediente
@@ -6,6 +6,7 @@ import repositorios.RepoPizza
 import repositorios.RepoCliente
 import repositorios.RepoPedido
 import dominoPizzeria.Ingrediente
+import dominoPizzeria.Pizza
 
 class BootstrapDesktop implements Bootstrap {
 
@@ -34,35 +35,45 @@ class BootstrapDesktop implements Bootstrap {
 	def cargarPizzas() {
 
 		val repo = RepoPizza.getRepo
+
+		repo.agregar(new Pizza => [
+			it.precioBase = 100
+			it.nombre = "Pizza con Muzarella"
+		])
+		repo.agregar(new Pizza => [
+			it.precioBase = 150
+			it.nombre = "Pizza con Tomate"
+		])
+
+		repo.agregar(new Pizza => [
+			it.precioBase = 50
+			it.nombre = "PrePizza"
+		])
+
+
 	}
 
 	def cargarIngredientes() {
 
 		val repo = RepoIngrediente.getRepo
-		var ingredientes = newArrayList()
-		
-		ingredientes.add(new Ingrediente => [
+
+		repo.agregar(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Muzzarella"
 			it.distribucion = ""
 		])
 
-		ingredientes.add(new Ingrediente => [
+		repo.agregar(new Ingrediente => [
 			it.precio = 12
 			it.nombre = "Tomate"
 			it.distribucion = ""
 		])
 
-		ingredientes.add(new Ingrediente => [
+		repo.agregar(new Ingrediente => [
 			it.precio = 5
 			it.nombre = "Cebolla"
 			it.distribucion = ""
 		])
-
-
-		for (Ingrediente unIngrediente : ingredientes) {
-			repo.agregar(unIngrediente)
-		}
 
 	}
 

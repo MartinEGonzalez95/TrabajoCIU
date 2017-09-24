@@ -14,7 +14,7 @@ import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.windows.WindowOwner
 
 
-class EditarIngredienteWindow extends TransactionalDialog<Ingrediente> {
+class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	new(WindowOwner laVentanaMenu, Ingrediente ingredienteSeleccionado) {
 		super(laVentanaMenu, ingredienteSeleccionado)

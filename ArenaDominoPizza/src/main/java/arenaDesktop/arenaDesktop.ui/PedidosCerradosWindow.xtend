@@ -1,4 +1,4 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorSistema
 import org.uqbar.arena.windows.SimpleWindow
@@ -64,7 +64,7 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 		new Column<Pedido>(table) => [
 			title = "Estado"
 			fixedSize = 200
-			bindContentsToProperty("estadoDePedido").transformer = [EstadoDePedido estadoDePedido |
+			bindContentsToProperty("estadoDePedido").transformer = [ EstadoDePedido estadoDePedido |
 				estadoDePedido.toString
 			]
 		]
@@ -83,7 +83,7 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 			title = "Tiempo de espera"
 			fixedSize = 200
 
-			bindContentsToProperty("tiempoDeEspera").transformer = [long tiempoDeEspera |
+			bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |
 				String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
 					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
 						TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)),

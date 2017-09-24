@@ -1,4 +1,4 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.app
 
 import dominoPizzeria.Pedido
 import estadosDePedido.EstadoDePedido
@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat
 import org.uqbar.arena.windows.ErrorsPanel
 import arenaDesktop.arenaDesktop.ui.MenuWindow
 import arenaDesktop.arenaDesktop.model.ControladorMenu
+import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 

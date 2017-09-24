@@ -1,10 +1,9 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.ui
 
-import arenaDesktop.arenaDesktop.ui.EditarIngredienteWindow
 import org.uqbar.arena.windows.WindowOwner
 import dominoPizzeria.Ingrediente
 
-class CrearIngredienteWindow extends EditarIngredienteWindow {
+class CrearIngredienteDialogT extends EditarIngredienteDialogT {
 	
 	new(WindowOwner laVentanaMenu) {
 		super(laVentanaMenu, new Ingrediente)

@@ -19,7 +19,7 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.Selector
 
-class EditarPromoVentana extends TransactionalDialog<ControladorPizzaAdicionales> {
+class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
 	new(WindowOwner owner, ControladorPizzaAdicionales controladorDePizzaEIngredientes) {
 		super(owner, controladorDePizzaEIngredientes)

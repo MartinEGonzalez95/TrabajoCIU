@@ -1,7 +1,8 @@
-package arenaDesktop
+package arenaDesktop.arenaDesktop.app
 
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
+import arenaDesktop.arenaDesktop.app.BootstrapDesktop
 
 class DominosApplication extends Application {
 
