@@ -5,9 +5,10 @@ import org.uqbar.arena.windows.Window
 
 class DominosApplication extends Application {
 
-//	new(PedidosBootstrap bootstrap) {
-//		super(bootstrap)
-//	}
+
+	new() {
+		super(new BootstrapDesktop)
+	}
 
 	static def void main(String[] args) {
 		new DominosApplication().start()
@@ -17,5 +18,4 @@ class DominosApplication extends Application {
 		return new DominosWindow(this)
 	}
 
-	
 }

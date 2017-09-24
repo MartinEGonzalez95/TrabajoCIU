@@ -4,44 +4,46 @@ import dominoPizzeria.Cliente
 import java.util.HashMap
 import java.util.Map
 
-class RepoCliente implements Repo<Cliente>
-{
-	
+class RepoCliente implements Repo<Cliente> {
+
+	static RepoCliente instance
+
 	Map<String, Cliente> repositorio = new HashMap<String, Cliente>()
 
-	override agregar(Cliente cliente)
-	{
-		
-		repositorio.put(cliente.email,cliente)
-		
+	def static getRepo() {
+		if (instance === null) {
+			instance = new RepoCliente
+		}
+
+		return instance
 	}
 
-	override eliminar(Cliente cliente)
-	{
-		
+	override agregar(Cliente cliente) {
+
+		repositorio.put(cliente.email, cliente)
+
+	}
+
+	override eliminar(Cliente cliente) {
+
 		repositorio.remove(cliente.email)
-		
+
 	}
 
-	override Cliente buscar(String email)
-	{
-		
+	override Cliente buscar(String email) {
+
 		repositorio.get(email)
-		
+
 	}
-	
+
 	// No deberia ser usado //
-	
-	override buscar(Integer claveInteger)
-	{
-		 
+	override buscar(Integer claveInteger) {
 	}
-	
-	override cargar()
-	{
-		
+
+	override cargar() {
+
 		repositorio.values.toList
-		
+
 	}
 
 }

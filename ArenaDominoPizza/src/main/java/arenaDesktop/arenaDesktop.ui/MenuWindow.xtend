@@ -20,6 +20,7 @@ import org.uqbar.arena.layout.VerticalLayout
 import arenaDesktop.CrearIngredienteWindow
 import org.uqbar.arena.windows.Dialog
 import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
+import arenaDesktop.CrearPromoWindow
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
@@ -39,7 +40,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-		// creo 2 paneles, para separar los ingredientes de las pizzas
+
 		val promociociones = new Label(mainPanel).text = "Promociones"
 		promociociones.alignLeft
 		val panelSuperior = new Panel(mainPanel)
@@ -166,13 +167,12 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def editarPizza() {
-		openDialog(
-			new EditarPromoVentana(this,
-				new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
+		openDialog(	new EditarPromoVentana(this,new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
 	}
 
 	def crearPizza() {
-		
+		openDialog(new CrearPromoWindow(this))
+
 	}
 
 	def editarIngrediente() {

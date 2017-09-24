@@ -4,10 +4,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import java.util.List
 
-import repositorios.RepoIngrediente
-import repositorios.RepoPizza
 import dominoPizzeria.Pizza
 import dominoPizzeria.Ingrediente
+import repositorios.RepoIngrediente
+import repositorios.RepoPizza
 
 @Accessors
 @Observable
@@ -19,35 +19,30 @@ class ControladorMenu {
 	Pizza pizzaSeleccionada
 
 	new(List<Pizza> pizzas, List<Ingrediente> adicionales) {
-		this.ingredientes = this.getRepoIngredientes.cargar
-		this.pizzas = this.getRepoPizzas.cargar
+		this.ingredientes = adicionales
+		this.pizzas = pizzas
 	}
 
 	new() {
-
 		this.cargar
-
 	}
 
 	def getRepoPizzas() {
-		new RepoPizza
+		return RepoPizza.getRepo
 	}
 
 	def getRepoIngredientes() {
-		new RepoIngrediente
+		return RepoIngrediente.getRepo
 	}
 
-	def cargar() { // mensaje de prueba
-		val repoIngrediente = repoIngredientes
+	def cargar() {
 
-		repoIngrediente.agregar(new Ingrediente => 
-			[nombre = "muzza" distribucion = "todo" precio = 15]
-		)
-
-		ingredientes = repoIngrediente.cargar
-	}
-
-	def updateIngredientes() {
+		ingredientes = getRepoIngredientes.cargar
+		pizzas = getRepoPizzas.cargar
+		
+		ingredienteSeleccionado = ingredientes.get(0)
+		pizzaSeleccionada = pizzas.get(0)
+		
 		
 	}
 

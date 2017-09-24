@@ -27,14 +27,10 @@ class EditarPromoVentana extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
-//	override ErrorsPanel createErrorsPanel(Panel mainPanel) {
-//		return new ErrorsPanel(mainPanel, "Listo para modificar la pizza", 2);
-//	}
 	override protected createFormPanel(Panel mainPanel) {
 
 		this.crearPanelDePizzas(mainPanel)
 		this.crearPanelDeIngredientes(mainPanel)
-	
 
 	}
 
@@ -52,7 +48,7 @@ class EditarPromoVentana extends TransactionalDialog<ControladorPizzaAdicionales
 //			allowNull(false)
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
-			
+
 		]
 
 		accionesDelPanelIngredientes(panelDeIngredientes)
