@@ -18,22 +18,21 @@ import org.uqbar.arena.bindings.NotNullObservable
 
 import org.uqbar.arena.windows.Dialog
 import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
+import net.sf.oval.constraint.Size.List
+import org.uqbar.arena.layout.HorizontalLayout
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
-	new(WindowOwner parent, ControladorMenu model) {
-		super(parent, model)
+	new(WindowOwner parent, ControladorMenu menu) {
+		super(parent, menu)
 		this.title = "Menu"
 	}
 
 	override protected addActions(Panel actionsPanel) {
-
 		new Button(actionsPanel) => [
-			caption = "Cerrar"
+			caption = "Ir a Pedidos"
 			onClick [|this.close]
-
 		]
-
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -53,7 +52,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def crearPanelDeIngredientes(Panel panelInferior) {
 
-		panelInferior.layout = new ColumnLayout(2)
+		panelInferior.layout = new HorizontalLayout
 
 		val panelDeIngredientes = new Panel(panelInferior)
 
@@ -66,7 +65,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def accionesDelPanelIngredientes(Panel panel) {
 
-		val elementSelected = new NotNullObservable("ingredienteSeleccionado")
+		val ingredienteSeleccionado = new NotNullObservable("ingredienteSeleccionado")
 
 		new Button(panel) => [
 			caption = "Crear"
@@ -76,12 +75,12 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		new Button(panel) => [
 			caption = "Editar"
 			onClick [|this.editarIngrediente]
-			bindEnabled(elementSelected)
+			bindEnabled(ingredienteSeleccionado)
 		]
 		new Button(panel) => [
 			caption = "Eliminar"
 			onClick [|this.eliminarIngrediente]
-			bindEnabled(elementSelected)
+			bindEnabled(ingredienteSeleccionado)
 		]
 
 	}
@@ -91,17 +90,19 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		val tablaDeIngredientes = new Table<Ingrediente>(panelDeIngredientes, typeof(Ingrediente)) => [
 			items <=> "ingredientes"
 			value <=> "ingredienteSeleccionado"
+			numberVisibleRows = 8
+
 		]
 
 		new Column<Ingrediente>(tablaDeIngredientes) => [
 			title = "Nombre"
-			fixedSize = 100
+			weight = 200
 			bindContentsToProperty("nombre")
 		]
 
 		new Column<Ingrediente>(tablaDeIngredientes) => [
 			title = "precio"
-			fixedSize = 100
+			weight = 200
 			bindContentsToProperty("precio")
 		]
 
@@ -109,13 +110,13 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def crearPanelDePromociones(Panel panelSuperior) {
 
-		panelSuperior.layout = new ColumnLayout(2)
-
+		panelSuperior.layout = new HorizontalLayout
 		val panelDePromociones = new Panel(panelSuperior)
 
 		val tablaDePromociones = new Table<Pizza>(panelDePromociones, typeof(Pizza)) => [
 			items <=> "pizzas"
 			value <=> "pizzaSeleccionada"
+			numberVisibleRows = 8
 		]
 
 		creacionTablaDePromociones(tablaDePromociones)
@@ -128,13 +129,13 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 		new Column<Pizza>(tablaPromociones) => [
 			title = "Nombre"
-			fixedSize = 100
+			weight = 100
 			bindContentsToProperty("nombre")
 		]
 
 		new Column<Pizza>(tablaPromociones) => [
 			title = "precio"
-			fixedSize = 100
+			weight = 100
 			bindContentsToProperty("precioBase")
 		]
 
@@ -145,9 +146,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		new Button(actions) => [
 			caption = "Crear"
 			onClick [|this.crearPizza]
-
 		]
-
 		new Button(actions) => [
 			caption = "Editar"
 			onClick [|this.editarPizza]
@@ -161,12 +160,25 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	def eliminarPizza() {
+		this.modelObject.eliminarPizza()
+
+	}
+
+	def eliminarIngrediente() {
+		this.modelObject.eliminarIngrediente()
+
 	}
 
 	def editarPizza() {
-		openDialog(
-			new EditarPromoDialogT(this,
-				new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada, modelObject.ingredientes)))
+		openDialog(new EditarPromoDialogT(this, new ControladorPizzaAdicionales(modelObject.pizzaSeleccionada)))
+	}
+
+	def editarIngrediente() {
+		openDialog(new EditarIngredienteDialogT(this, modelObject.ingredienteSeleccionado))
+	}
+
+	def crearIngrediente() {
+		openDialog(new CrearIngredienteDialogT(this))
 	}
 
 	def crearPizza() {
@@ -174,19 +186,10 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	}
 
-	def editarIngrediente() {
-		openDialog(new EditarIngredienteDialogT(this, modelObject.ingredienteSeleccionado))
-	}
-
-	def eliminarIngrediente() {
-	}
-
-	def crearIngrediente() {
-		openDialog(new CrearIngredienteDialogT(this))
-	}
-
 	def openDialog(Dialog<?> dialog) {
+		dialog.onAccept([|modelObject.cargar])
 		dialog.open
+
 	}
 
 }

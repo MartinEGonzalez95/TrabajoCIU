@@ -11,20 +11,17 @@ class Pizza {
 	String nombre
 	List<Ingrediente> ingredientes = newArrayList
 	double precioBase
-	
 
-	def agregarIngrediente(Ingrediente ingrediente)
-	{
+	def agregarIngrediente(Ingrediente ingrediente) {
 
 		ingredientes.add(ingrediente)
-		
+
 	}
 
-	def eliminarIngrediente(Ingrediente ingrediente)
-	{
+	def eliminarIngrediente(Ingrediente ingrediente) {
 
 		ingredientes.remove(ingrediente)
-		
+
 	}
 
 }

@@ -2,39 +2,33 @@ package repositorios
 
 import dominoPizzeria.Pizza
 
-import java.util.Map
-import java.util.HashMap
+
+import java.util.List
 
 class RepoPizza implements Repo<Pizza> {
 
-	Map<String, Pizza> repositorio = new HashMap<String, Pizza>()
 
-	static RepoPizza instance
+	List<Pizza> repositorio = newArrayList()
+
+	static RepoPizza instance = new RepoPizza
 
 	def static getRepo() {
-		if (instance === null) {
-			instance = new RepoPizza
-		}
-
-		return instance
+		instance
 	}
 
 	override agregar(Pizza pizza) {
 
-		repositorio.put(pizza.nombre, pizza)
-
+		repositorio.add(pizza)
 	}
 
 	override eliminar(Pizza pizza) {
 
-		repositorio.remove(pizza.nombre)
-
+		repositorio.remove(pizza)
 	}
 
 	override Pizza buscar(String nombre) {
 
-		repositorio.get(nombre)
-
+		repositorio.findFirst[it.nombre.equals(nombre)]
 	}
 
 	// No deberia ser usado //
@@ -43,8 +37,12 @@ class RepoPizza implements Repo<Pizza> {
 
 	override cargar() {
 
-		repositorio.values.toList
+		repositorio
+	}
 
+	override modificar(Pizza pizza) {
+		agregar(pizza)
+		eliminar(pizza)
 	}
 
 }

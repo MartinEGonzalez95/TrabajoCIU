@@ -45,5 +45,10 @@ class RepoCliente implements Repo<Cliente> {
 		repositorio.values.toList
 
 	}
+	
+	override modificar(Cliente cliente) {
+		agregar(cliente)
+		eliminar(cliente)
+	}
 
 }

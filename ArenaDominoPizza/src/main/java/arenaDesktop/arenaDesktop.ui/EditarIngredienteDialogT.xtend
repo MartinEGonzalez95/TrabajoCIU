@@ -9,10 +9,10 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.NumericField
 
 import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.layout.ColumnLayout
+
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.windows.WindowOwner
-
+import repositorios.RepoIngrediente
 
 class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
@@ -21,8 +21,6 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 	}
 
 	override createFormPanel(Panel mainPanel) {
-
-//		mainPanel.layout = new ColumnLayout(2)
 
 		this.title = "Editar Ingrediente"
 
@@ -35,32 +33,35 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 		new TextBox(panelDerecho) => [
 			value <=> "nombre"
-
 		]
-
 		new NumericField(panelDerecho) => [
 			value <=> "precio"
 		]
 	}
 
+	def getRepoIngredientes() {
+
+		RepoIngrediente.getRepo
+	}
+
+	override executeTask() {
+		getRepoIngredientes.modificar(modelObject)
+
+		super.executeTask()
+	}
+
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
 			caption = "Aceptar"
-			onClick [|this.aceptar]
+			onClick [|this.accept]
 			setAsDefault
-
+			disableOnError
 		]
 
 		new Button(actions) => [
 			caption = "Cancelar"
 			onClick [|this.cancel]
 		]
-	}
-	
-	def aceptar() {
-		
-		
-		this.accept
 	}
 
 }

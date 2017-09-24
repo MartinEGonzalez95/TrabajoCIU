@@ -46,5 +46,10 @@ class RepoPedido implements Repo<Pedido> {
 		repositorio.values.toList
 
 	}
+	
+	override modificar(Pedido instanciaT) {
+		agregar(instanciaT)
+		eliminar(instanciaT)
+	}
 
 }

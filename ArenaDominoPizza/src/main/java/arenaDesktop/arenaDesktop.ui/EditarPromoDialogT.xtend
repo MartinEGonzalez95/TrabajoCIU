@@ -16,8 +16,10 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.windows.ErrorsPanel
+
 import org.uqbar.arena.widgets.Selector
+import repositorios.RepoPizza
+import repositorios.RepoIngrediente
 
 class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
@@ -34,6 +36,16 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
+	def getRepoPizza() {
+
+		RepoPizza.getRepo
+	}
+	override executeTask() {
+		getRepoPizza.modificar(modelObject.pizzaSeleccionada)
+
+		super.executeTask()
+	}
+
 	private def void crearPanelDeIngredientes(Panel mainPanel) {
 
 		val panelDeIngredientes = new Panel(mainPanel)
@@ -44,6 +56,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 
 		creacionTablaDeIngredientes(tablaDeIngredientes)
+
 		new Selector<Ingrediente>(panelDeIngredientes) => [
 //			allowNull(false)
 			value <=> "ingredienteSeleccionado.distribucion"
@@ -83,7 +96,6 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 			onClick [|modelObject.agregarIngrediente(modelObject.ingredienteSeleccionado)]
 			bindEnabled(elementSelected)
 		]
-
 		// boton para quitar el adicional seleccionado a la pizza
 		new Button(actionsPanel) => [
 			caption = "Quitar Adicional"
@@ -100,17 +112,14 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		val panelIzquierdo = new Panel(panelDePizzas)
 
 		new Label(panelIzquierdo).text = "Nombre"
-		new Label(panelIzquierdo).text = "Precio"
+		new Label(panelIzquierdo).text = "precioBase"
 
 		val panelDerecho = new Panel(panelDePizzas)
 		new TextBox(panelDerecho) => [
 			value <=> "pizzaSeleccionada.nombre"
-
 		]
-
 		new NumericField(panelDerecho) => [
-			value <=> "pizzaSeleccionada.precio"
-
+			value <=> "pizzaSeleccionada.precioBase"
 		]
 
 	}

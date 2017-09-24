@@ -2,49 +2,46 @@ package repositorios
 
 import dominoPizzeria.Ingrediente
 
-import java.util.Map
-import java.util.HashMap
+import java.util.List
 
 class RepoIngrediente implements Repo<Ingrediente> {
 
-	static RepoIngrediente instance
+	static RepoIngrediente instance = new RepoIngrediente
 
-	Map<String, Ingrediente> repositorio = new HashMap<String, Ingrediente>()
+	List<Ingrediente> repositorio = newArrayList()
 
 	def static getRepo() {
-		if (instance === null) {
-			instance = new RepoIngrediente
-		}
 
 		return instance
 	}
 
 	override agregar(Ingrediente ingrediente) {
 
-		repositorio.put(ingrediente.nombre, ingrediente)
-
+		repositorio.add(ingrediente)
 	}
 
 	override eliminar(Ingrediente ingrediente) {
 
-		repositorio.remove(ingrediente.nombre)
-
+		repositorio.remove(ingrediente)
 	}
 
 	override Ingrediente buscar(String nombre) {
-
-		repositorio.get(nombre)
-
+		/* por invariante, no deberia de haber dos ingredientes con el mismo nombre en el repo */
+		repositorio.findFirst[it.nombre.equals(nombre)]
 	}
 
 	// No deberia ser usado //
 	override buscar(Integer claveInteger) {
-		
 	}
 
 	override cargar() {
 
-		repositorio.values.toList
+		repositorio
+	}
+
+	override modificar(Ingrediente ingrediente) {
+		eliminar(ingrediente)
+		agregar(ingrediente)
 
 	}
 

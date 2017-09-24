@@ -38,11 +38,11 @@ class BootstrapDesktop implements Bootstrap {
 
 		repo.agregar(new Pizza => [
 			it.precioBase = 100
-			it.nombre = "Pizza con Muzarella"
+			it.nombre = "Muzarella"
 		])
 		repo.agregar(new Pizza => [
 			it.precioBase = 150
-			it.nombre = "Pizza con Tomate"
+			it.nombre = "Tomate"
 		])
 
 		repo.agregar(new Pizza => [
