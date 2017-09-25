@@ -5,10 +5,12 @@ import dominoPizzeria.Pedido
 
 class RetiroPorLocal extends FormaDeEnvio {
 
+	int costo = 0 // pesos //
+	
 	override int costo()
 	{
 		
-		0
+		costo
 		
 	}
 	

@@ -5,7 +5,8 @@ import java.util.Date
 
 class EnViaje extends EstadoDePedido {
 	
-	override avanzarPedido(Pedido unPedido) {
+	override avanzarPedido(Pedido unPedido)
+	{
 
 		unPedido.estadoDePedido = new Entregado
 		
@@ -13,15 +14,17 @@ class EnViaje extends EstadoDePedido {
 		
 		unPedido.setTiempoDeEspera
 		
-		if (unPedido.hayMasDe30MinDeDiferenciaEntre){
+		if (unPedido.hayMasDe30MinDeDiferenciaEntre)
+		{
 			
-			unPedido.mailSender.enviarMail(unPedido.cliente.email, "Disculpe por la demora", "Estimado cliente, le pedimos disculpas por la demora en su pedido, XOXO Domino's Pizza")
+			unPedido.enviarMailPorDemora()
 			
 		}
 
 	}
 	
-	override retrocederPedido(Pedido unPedido) {
+	override retrocederPedido(Pedido unPedido)
+	{
 		
 		unPedido.estadoDePedido = new ListoParaEnviar
 		

@@ -85,5 +85,19 @@ class Pedido
 		platos.add(plato)
 		
 	}
+	
+	def enviarMailPorDemora()
+	{
+		
+		mailSender.enviarMail(cliente.email, "Disculpe la demora!", "Estimado cliente, le pedimos disculpas por la demora en su pedido, XOXO Domino's Pizza")
+		
+	}
+	
+	def enviarMailPorPedidoEnViaje()
+	{
+		
+		mailSender.enviarMail(cliente.email, "Pedido en viaje!", "Estimado "+ cliente.nombre + ", su pedido ya se encuentra en viaje, XOXO Domino's Pizza")
+		
+	}
 
 }

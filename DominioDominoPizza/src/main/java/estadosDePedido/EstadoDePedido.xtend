@@ -1,7 +1,6 @@
 package estadosDePedido
 
 import dominoPizzeria.Pedido
-import java.util.Date
 
 abstract class EstadoDePedido {
 	
@@ -9,13 +8,15 @@ abstract class EstadoDePedido {
 	
 	def void retrocederPedido(Pedido unPedido)
 	
-	def void cancelarPedido(Pedido unPedido){
+	def void cancelarPedido(Pedido unPedido)
+	{
 		
 		unPedido.estadoDePedido = new Cerrado
 		
-		unPedido.fechaDeEntrega = new Date()
+		// Es raro tecnicamente //
 		
-		unPedido.setTiempoDeEspera
+		// unPedido.fechaDeEntrega = new Date()
+		// unPedido.setTiempoDeEspera
 		
 	}
 	

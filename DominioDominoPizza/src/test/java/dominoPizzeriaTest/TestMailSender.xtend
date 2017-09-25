@@ -10,7 +10,7 @@ class TestMailSender
 	MailSenderMock mailSenderMock
 	
 	@Test
-	def sePruebaQueUnMailSenderEnvieUnMailDesdeUnCorreoValido()
+	def test01SePruebaQueUnMailSenderEnvieUnMailDesdeUnCorreoValido()
 	{
 		
 		mailSenderMock = new MailSenderMock("ciu.dominos.pizza@gmail.com", "interfaces2017")

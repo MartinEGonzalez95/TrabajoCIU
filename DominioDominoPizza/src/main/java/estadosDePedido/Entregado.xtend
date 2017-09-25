@@ -2,13 +2,21 @@ package estadosDePedido
 
 import dominoPizzeria.Pedido
 
-class Entregado extends EstadoDePedido {
+class Entregado extends EstadoDePedido
+{
 	
-	override avanzarPedido(Pedido unPedido) {
-		throw new Exception("No se puede avanzar")
+	override avanzarPedido(Pedido unPedido)
+	{
+		
+		throw new RuntimeException("El Pedido Ya Fue Entregado!")
+		
 	}
 	
-	override retrocederPedido(Pedido unPedido) {
+	override retrocederPedido(Pedido unPedido)
+	{
+		
+		throw new RuntimeException("El Pedido Ya Fue Entregado!")
+		
 	}
 	
 }
