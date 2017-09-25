@@ -10,6 +10,11 @@ class Preparando extends EstadoDePedido {
 		
 	}
 	
-	override void retrocederPedido(Pedido unPedido){}
+	override void retrocederPedido(Pedido unPedido){
+		
+		throw new Exception("No se puede retroceder")
+			
+	}
 	
+		
 }

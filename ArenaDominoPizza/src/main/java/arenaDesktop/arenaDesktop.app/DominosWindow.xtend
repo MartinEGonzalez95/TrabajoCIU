@@ -113,13 +113,24 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 	}
 
-	def intentarRetroceder() {
+	def intentarRetroceder(Panel panelDeOpcionesDePedido) {
 
 		try {
 			this.modelObject.pedidoSeleccionado.retroceder
 			this.modelObject.updatePedidos
 		} catch (Exception e) {
-			taskDescription = "No se puede retroceder"
+			new ErrorsPanel(panelDeOpcionesDePedido, "No se puede retroceder")
+		}
+
+	}
+	
+	def intentarCancelar() {
+
+		try {
+			this.modelObject.pedidoSeleccionado.cancelar
+			this.modelObject.updatePedidos
+		} catch (Exception e) {
+			taskDescription = "No se puede cancelar"
 		}
 
 	}
@@ -130,7 +141,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "<<<<"
-			onClick [|this.intentarRetroceder]
+			onClick [|this.intentarRetroceder(panelDeOpcionesDePedido)]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [
@@ -140,7 +151,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		]
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Cancelar"
-			onClick [|this.modelObject.pedidoSeleccionado.cancelar]
+			onClick [|this.intentarCancelar]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [

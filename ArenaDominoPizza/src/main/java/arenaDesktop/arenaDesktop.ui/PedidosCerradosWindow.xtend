@@ -14,7 +14,6 @@ import estadosDePedido.EstadoDePedido
 import java.text.SimpleDateFormat
 import java.util.Date
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import dominoPizzeria.Cliente
 import java.util.concurrent.TimeUnit
 
 class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {

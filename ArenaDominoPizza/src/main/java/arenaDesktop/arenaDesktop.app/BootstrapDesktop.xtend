@@ -7,6 +7,10 @@ import repositorios.RepoCliente
 import repositorios.RepoPedido
 import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
+import dominoPizzeria.Pedido
+import dominoPizzeria.Cliente
+import formaDeEnvioPedido.RetiroPorLocal
+import formaDeEnvioPedido.Delivery
 
 class BootstrapDesktop implements Bootstrap {
 
@@ -24,6 +28,24 @@ class BootstrapDesktop implements Bootstrap {
 	def cargarPedidos() {
 
 		val repo = RepoPedido.getRepo
+		
+		repo.agregar(new Pedido => [
+			cliente = new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho")
+			formaDeEnvio = new RetiroPorLocal
+			numero = 1
+		])
+			
+		repo.agregar(new Pedido => [
+			cliente = new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa")
+			formaDeEnvio = new Delivery("Falsa 123")
+			numero = 2
+		])
+			
+		repo.agregar(new Pedido => [
+			cliente = new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa")
+			formaDeEnvio = new RetiroPorLocal
+			numero = 3
+		])
 
 	}
 
