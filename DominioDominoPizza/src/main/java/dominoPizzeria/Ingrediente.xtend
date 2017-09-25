@@ -18,7 +18,4 @@ class Ingrediente {
 		precio
 	}
 
-	new() {
-	}
-
 }

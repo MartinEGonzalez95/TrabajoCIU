@@ -1,43 +1,27 @@
 package dominoPizzeriaTest
 
-import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
+import dominoPizzeria.Pizza
 import dominoPizzeria.Plato
+import dominoPizzeria.Tamanio
+
+import estadosDePedido.Preparando
 import formaDeEnvioPedido.Delivery
 import formaDeEnvioPedido.RetiroPorLocal
-import java.util.ArrayList
-import java.util.List
-import org.junit.Before
+
+import org.apache.commons.lang.time.DateUtils
 import org.junit.Test
 
 import static org.junit.Assert.*
-import static org.mockito.Mockito.*
-import java.util.Date
-import estadosDePedido.Preparando
-import org.apache.commons.lang.time.DateUtils
 
-class TestPedido {
-
-	Pedido pedidoMonto100
-	Pedido pedidoMonto115
-	Plato platoMock
-	Cliente clienteMock
-	List<Plato> platos
-	RetiroPorLocal porLocal
-	Delivery delivery
-
-	@Before
-	def void setUp() {
-		platos = new ArrayList
-		porLocal = new RetiroPorLocal
-		delivery = new Delivery("UnaDireccion")
-	}
+class TestPedido
+{
 
 	@Test
 	def test01TodoPedidoNuevoComienzaConElEstadoPreparando()
 	{
 		
-		val Pedido unPedidoNuevo = new Pedido()
+		val Pedido unPedidoNuevo = new Pedido(1 /* Numero Clave */ )
 		
 		assertEquals(unPedidoNuevo.estadoDePedido.class, Preparando)
 		
@@ -47,7 +31,7 @@ class TestPedido {
 	def test02UnPedidoSeEntregaALosVeinteMinutosDeSerCreadoSeVerificaQueNoPasaronMasDeTreitaMinutosDesdeSuCreacion()
 	{
 		
-		val Pedido unPedido = new Pedido()
+		val Pedido unPedido = new Pedido(1 /* Numero Clave */ )
 		
 		unPedido.fechaDeEntrega = DateUtils.addMinutes(unPedido.fechaDeCreacion, 20)
 		
@@ -59,7 +43,7 @@ class TestPedido {
 	def test03UnPedidoSeEntregaALosCuarentaMinutosDeSerCreadoSeVerificaQuePasaronMasDeTreitaMinutosDesdeSuCreacion()
 	{
 		
-		val Pedido unPedido = new Pedido()
+		val Pedido unPedido = new Pedido(1 /* Numero Clave */ )
 		
 		unPedido.fechaDeEntrega = DateUtils.addMinutes(unPedido.fechaDeCreacion, 40)
 		
@@ -67,46 +51,57 @@ class TestPedido {
 		
 	}
 
-	/*
-	 * 
-	 * Primero hacemos Plato
 
 	@Test
-	def test02unPedidoConMontoFinalCienPesosQueSeRetiraPorElLocalTieneUnMontoFinalDeCienPesos()
+	def test04unPedidoTieneDosPlatosDeCostoCienPesosYSeRetiraPorLocalSeVerificaQueElMontoFinalSeaDoscientosPesos()
 	{
 		
-		val Pedido unPedidoConMontoFinalCienPesos = new Pedido() 
+		val Pedido unPedido = new Pedido(1 /* Numero Clave */ )
 		
+		// Creamos un plato de precio $100 //
+
+		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
+		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
 		
+		val Tamanio tamañoGrande = new Tamanio("Grande")
+		
+		val Plato unPlatoDeCostoCienPesos = new Plato()
+		unPlatoDeCostoCienPesos.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
+		unPlatoDeCostoCienPesos.tamañoPizza = tamañoGrande
 
-		platoMock = mock(Plato)
-		when(platoMock.monto).thenReturn(cien)
+		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
+		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
+		
+		unPedido.formaDeEnvio = new RetiroPorLocal
 
-		platos.add(platoMock)
-
-		pedidoMonto100 = new Pedido(platos, clienteMock, "ma gusta el arte", porLocal)
-
-		assertEquals(100, pedidoMonto100.montoFinal, 0)
-
-	}
-
-	@Test
-	def void unPedidoConFormaDeEnvioDeliveryConMontoFinal115AlPedirleSuMontoFinalDevuelve115() {
-
-		val cien = 100 as float
-
-		platoMock = mock(Plato)
-
-		when(platoMock.monto).thenReturn(cien)
-
-		platos.add(platoMock)
-
-		pedidoMonto115 = new Pedido(platos, clienteMock, "ma gusta el arte", delivery)
-
-		assertEquals(115, pedidoMonto115.montoFinal, 0)
+		assertEquals(unPedido.montoFinal, 200 /* pesos */, 0)
 
 	}
 	
-	*/
+	@Test
+	def test05unPedidoTieneDosPlatosDeCostoCienPesosYEnviaPorDeliverySeVerificaQueElMontoFinalSeaDoscientosQuincePesos()
+	{
+		
+		val Pedido unPedido = new Pedido(1 /* Numero Clave */ )
+		
+		// Creamos un plato de precio $100 //
+
+		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
+		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
+		
+		val Tamanio tamañoGrande = new Tamanio("Grande")
+		
+		val Plato unPlatoDeCostoCienPesos = new Plato()
+		unPlatoDeCostoCienPesos.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
+		unPlatoDeCostoCienPesos.tamañoPizza = tamañoGrande
+
+		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
+		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
+		
+		unPedido.formaDeEnvio = new Delivery
+
+		assertEquals(unPedido.montoFinal, 215 /* pesos */, 0)
+
+	}
 
 }

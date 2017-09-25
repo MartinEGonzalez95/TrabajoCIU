@@ -10,40 +10,48 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
 @TransactionalAndObservable
-class Pedido {
+class Pedido
+{
 
 	List<Plato> platos = newArrayList
 	Cliente cliente
 	Date fechaDeCreacion = new Date()
 	Date fechaDeEntrega
+	long tiempoDeEspera = 0
 	String aclaraciones = " "
 	EstadoDePedido estadoDePedido = new Preparando
 	FormaDeEnvio formaDeEnvio
-	long tiempoDeEspera = 0
 	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	// Para mandar mails cuando cambia de estado //
 	Integer numero // Clave para el pedido //
+	
+	new (Integer numeroClave)
+	{
+		
+		numero = numeroClave
+		
+	}
 
-	def double montoFinal() {
+	def double montoFinal()
+	{
 
 		platos.stream.mapToDouble( [plato|plato.precio]).sum + formaDeEnvio.costo
-	// pesos //
-	}
-
-	def setTiempoDeEspera(){
+		// pesos //
 		
-		this.tiempoDeEspera = tiempoDeEspera()
+	}
+	
+	def setTiempoDeEspera()
+	{
+		
+		tiempoDeEspera = tiempoDeEspera()
+		
 	}
 
-	def tiempoDeEspera() {
+	def tiempoDeEspera()
+	{
+		
 		fechaDeEntrega.time - fechaDeCreacion.time
 
-//		tiempoDeEspera = String.format("%02d:%02d:%02d", 
-//		TimeUnit.MILLISECONDS.toHours(milisegundos),
-//		TimeUnit.MILLISECONDS.toMinutes(milisegundos) -  
-//		TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milisegundos)), 
-//		TimeUnit.MILLISECONDS.toSeconds(milisegundos) - 
-//		TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milisegundos))); 
 	}
 
 	def avanzar() {
@@ -64,12 +72,18 @@ class Pedido {
 
 	}
 
-	def hayMasDe30MinDeDiferenciaEntre() {
+	def hayMasDe30MinDeDiferenciaEntre()
+	{
 
-		var minutos = ((this.tiempoDeEspera) / 60000)
+		( tiempoDeEspera() / 60000) > 30
 
-		minutos > 30
-
+	}
+	
+	def agregarPlato(Plato plato)
+	{
+		
+		platos.add(plato)
+		
 	}
 
 }

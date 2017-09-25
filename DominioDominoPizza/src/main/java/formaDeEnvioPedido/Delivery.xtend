@@ -7,16 +7,9 @@ import dominoPizzeria.Pedido
 @Accessors
 class Delivery extends FormaDeEnvio {
 	
-	int costo = 15
+	int costo = 15 // pesos //
 	
 	String direccion
-	
-	new(String direccionDeEnvio)
-	{
-		
-		direccion = direccionDeEnvio
-		
-	}
 
 	override int costo()
 	{
