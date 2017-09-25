@@ -17,12 +17,11 @@ import formaDeEnvioPedido.Delivery
 class ControladorSistema {
 
 	Pedido example = new Pedido
-	List<Pedido> pedidos
+	List<Pedido> pedidos = newArrayList()
 	Pedido pedidoSeleccionado
 	List<Pedido> pedidosAbiertos
 	List<Pedido> pedidosCerrados
 
-	// Eliminar los mensajes de prueba y usar repo
 	def setPedidosCerradosParaPrueba() {
 
 		pedidosCerrados = newArrayList()
@@ -48,44 +47,16 @@ class ControladorSistema {
 
 	def cargar() {
 
-		val repoPedido1 = repoPedido
+		pedidos = null
+		pedidos = repoPedido.cargar
 
-		val pedido1 = new Pedido => [
-
-			cliente = new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho")
-			formaDeEnvio = new RetiroPorLocal
-			numero = 1
-		]
-
-		val pedido2 = new Pedido => [
-
-			cliente = new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa")
-			formaDeEnvio = new Delivery("Falsa 123")
-			numero = 2
-		]
-
-		val pedido3 = new Pedido => [
-
-			cliente = new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa")
-			formaDeEnvio = new RetiroPorLocal
-			numero = 3
-		]
-
-		repoPedido1.agregar(pedido1)
-		repoPedido1.agregar(pedido2)
-		repoPedido1.agregar(pedido3)
-
-		pedidos = newArrayList()
-		pedidos = repoPedido1.cargar
-
-		this.setPedidosAbiertosParaPrueba
-		this.setPedidosCerradosParaPrueba
+		updatePedidos
 
 	}
 
 	def getRepoPedido() {
 
-		new RepoPedido()
+		 RepoPedido.getRepo
 
 	}
 
