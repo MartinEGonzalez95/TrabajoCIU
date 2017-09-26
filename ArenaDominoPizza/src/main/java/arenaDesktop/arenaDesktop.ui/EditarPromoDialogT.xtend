@@ -58,7 +58,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		creacionTablaDeIngredientes(tablaDeIngredientes)
 
 		new Selector<Ingrediente>(panelDeIngredientes) => [
-//			allowNull(false)
+
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
 
@@ -75,7 +75,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 			bindContentsToProperty("nombre")
 		]
 
-		// a ver si bindea 
+
 		new Column<Ingrediente>(tablaDeIngredientes) => [
 			title = "distribucion"
 			fixedSize = 100
@@ -85,18 +85,18 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	}
 
 	private def void accionesDelPanelIngredientes(Panel panelDeIngredientes) {
-		// Deshabilitar los botones si no hay ningún elemento seleccionado en la grilla.
+		
 		val elementSelected = new NotNullObservable("ingredienteSeleccionado")
 
 		val actionsPanel = new Panel(panelDeIngredientes).layout = new HorizontalLayout
 
-		// boton para agregar el adicional seleccionado a la pizza
+
 		new Button(actionsPanel) => [
 			caption = "Agregar Adicional"
 			onClick [|modelObject.agregarIngrediente(modelObject.ingredienteSeleccionado)]
 			bindEnabled(elementSelected)
 		]
-		// boton para quitar el adicional seleccionado a la pizza
+
 		new Button(actionsPanel) => [
 			caption = "Quitar Adicional"
 			onClick [|modelObject.quitarIngrediente(modelObject.ingredienteSeleccionado)]

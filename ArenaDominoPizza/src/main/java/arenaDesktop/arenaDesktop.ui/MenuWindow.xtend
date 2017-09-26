@@ -23,8 +23,8 @@ import org.uqbar.arena.layout.HorizontalLayout
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 
-	new(WindowOwner parent, ControladorMenu menu) {
-		super(parent, menu)
+	new(WindowOwner parent) {
+		super(parent, new ControladorMenu)
 		this.title = "Menu"
 	}
 
@@ -71,7 +71,6 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 			caption = "Crear"
 			onClick [|this.crearIngrediente]
 		]
-
 		new Button(panel) => [
 			caption = "Editar"
 			onClick [|this.editarIngrediente]

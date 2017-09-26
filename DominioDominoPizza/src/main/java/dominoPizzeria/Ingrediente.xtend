@@ -12,7 +12,7 @@ class Ingrediente {
 	int precio
 
 	def getPrecio() {
-		if (distribucion.equals("Toda")) {
+		if (!distribucion.nullOrEmpty && distribucion.equals("Toda")) {
 			return precio * 2
 		}
 		precio
