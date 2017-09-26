@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import java.util.concurrent.TimeUnit
+import java.awt.Color
 
 class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -64,15 +65,18 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 			title = "Estado"
 			fixedSize = 200
 			bindContentsToProperty("estadoDePedido").transformer = [ EstadoDePedido estadoDePedido |
-				estadoDePedido.toString
-			]
+				estadoDePedido.toString]
+			
+			bindBackground("estadoDePedido").transformer =
+				[ EstadoDePedido estadoDePedido | if (estadoDePedido.toString == "Cerrado") Color.RED else Color.GREEN]
+			
 		]
 
 		new Column<Pedido>(table) => [
 
 			title = "Fecha"
 			fixedSize = 200
-			val sdf = new SimpleDateFormat("yyyy-MM-dd")
+			val sdf = new SimpleDateFormat("yyyy/MM/dd")
 			bindContentsToProperty("fechaDeCreacion").transformer = [Date fechaDeCreacion|sdf.format(fechaDeCreacion)]
 
 		]
@@ -81,15 +85,17 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
 			title = "Tiempo de espera"
 			fixedSize = 200
-
-			bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |
-				String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
+				bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |  
+					String.format("%02d" + " mins",
 					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
-						TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)),
-					TimeUnit.MILLISECONDS.toSeconds(tiempoDeEspera) -
-						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera)));
-			]
-
+					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
+					
+//					String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
+//					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
+//					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)),
+//					TimeUnit.MILLISECONDS.toSeconds(tiempoDeEspera) -
+//					TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera)));
+				]	
 		]
 	}
 

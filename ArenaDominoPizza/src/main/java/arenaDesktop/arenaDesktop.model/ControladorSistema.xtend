@@ -16,7 +16,7 @@ import formaDeEnvioPedido.Delivery
 @Observable
 class ControladorSistema {
 
-	Pedido example = new Pedido
+//	Pedido example = new Pedido()
 	List<Pedido> pedidos = newArrayList()
 	Pedido pedidoSeleccionado
 	List<Pedido> pedidosAbiertos

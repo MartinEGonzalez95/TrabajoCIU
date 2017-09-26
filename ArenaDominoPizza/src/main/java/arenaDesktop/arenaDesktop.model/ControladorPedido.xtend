@@ -5,26 +5,32 @@ import dominoPizzeria.Plato
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import java.util.List
 
 @Accessors
 @Observable
 class ControladorPedido
 {
 	
-	Pedido pedidoSeleccionado
-	Plato platoSeleccionado
+	Plato platoSeleccionado = null
+	List<Plato> platos = newArrayList()
+	Pedido pedido
 	
-	new(Pedido pedidoSeleccionado)
+	new(Pedido unPedido)
 	{
-		
-		this.pedidoSeleccionado = pedidoSeleccionado
-		
+		pedido = unPedido
+		cargarPlatos
+			
+	}
+	
+		def void cargarPlatos() {
+		platos = null
+		platos = pedido.platos
 	}
 	
 // ----------------------------------------------------------------------------------------------------//
 // 									¡¡¡BORRAR CUANDO JUNTEMOS!!!									   //
 // ----------------------------------------------------------------------------------------------------//
 
-	new(){}
 	
 }

@@ -13,6 +13,8 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import dominoPizzeria.Pizza
+import dominoPizzeria.Tamanio
 
 class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido> 
 {
@@ -40,7 +42,7 @@ class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido
 
 		new TextBox(panelEstados) => [
 			
-			value <=> "pedidoSeleccionado.estadoDePedido"
+			value <=> "pedido.estadoDePedido"
 			width = 200
 			alignCenter
 			
@@ -58,7 +60,7 @@ class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido
 
 val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
 			
-			items <=> "pedidoSeleccionado.platos"
+			items <=> "platos"
 			value <=> "platoSeleccionado"
 			
 			numberVisibleRows = 2
@@ -82,19 +84,19 @@ val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
 			
 			new Column<Plato>(table) => [
 				title = "Nombre"
-				bindContentsToProperty("pizza.nombre")
+				bindContentsToProperty("pizzaBase").transformer = [Pizza pizzaBase | pizzaBase.nombre]
 				fixedSize = 200
 			]
 			
 			new Column<Plato>(table) => [
 				title = "Tamaño"
-				bindContentsToProperty("tamanio.nombre")
+				bindContentsToProperty("tamañoPizza").transformer = [Tamanio tamanio | tamanio.nombre]
 				fixedSize = 100
 			]
 			
 			new Column<Plato>(table) => [
 				title = "Precio"
-				bindContentsToProperty("monto")
+				bindContentsToProperty("precio")
 				fixedSize = 50
 			]
 	

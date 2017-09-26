@@ -62,7 +62,7 @@ class VerEditarPedidoMainWindow extends SimpleWindow<ControladorPedido> {
 
 	def Pedido pedidoParaPrueba() {
 
-		unPedidoParaPrueba = new Pedido()
+		unPedidoParaPrueba = new Pedido(1)
 
 		unPedidoParaPrueba.setAclaraciones("Ninguna")
 		unPedidoParaPrueba.setCliente(new Cliente("fulano", "nickfulano", "1234", "fake@gmail.com", "calle falsa"))
