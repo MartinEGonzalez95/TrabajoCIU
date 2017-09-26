@@ -18,6 +18,7 @@ import org.apache.commons.lang.time.DateUtils
 import org.junit.Test
 
 import static org.junit.Assert.*
+import estadosDePedido.Cerrado
 
 class TestPedido
 {
@@ -212,7 +213,174 @@ class TestPedido
 		assertEquals(unPedidoConSuEstadoListoParaEnviar.estadoDePedido.class, EnViaje)
 		
 	}
+	
+	@Test
+	def test13UnPedidoConSuEstadoEnViajeAvanzaAlEstadoEntregado()
+	{
+	
+		val Cliente clienteMock = new Cliente("Martin Gonzalez", "martingonzalez", "1234", "martin@mail.com", "Calle Falsa 123")
+		val MailSenderMock mailSenderMock = new MailSenderMock(clienteMock.nombre, clienteMock.password)
+		val Pedido unPedidoConSuEstadoEnViaje = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoConSuEstadoEnViaje.estadoDePedido = new EnViaje
+		unPedidoConSuEstadoEnViaje.cliente = clienteMock
+		unPedidoConSuEstadoEnViaje.mailSender = mailSenderMock
+		
+		unPedidoConSuEstadoEnViaje.avanzar
+		
+		assertEquals(unPedidoConSuEstadoEnViaje.estadoDePedido.class, Entregado)
+		
+	}
 
+	@Test
+	def test14UnPedidoConSuEstadoEnViajeRetrocedeAlEstadoListoParaEnviar()
+	{
+	
+		val Cliente clienteMock = new Cliente("Martin Gonzalez", "martingonzalez", "1234", "martin@mail.com", "Calle Falsa 123")
+		val MailSenderMock mailSenderMock = new MailSenderMock(clienteMock.nombre, clienteMock.password)
+		val Pedido unPedidoConSuEstadoEnViaje = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoConSuEstadoEnViaje.estadoDePedido = new EnViaje
+		unPedidoConSuEstadoEnViaje.cliente = clienteMock
+		unPedidoConSuEstadoEnViaje.mailSender = mailSenderMock
+		
+		unPedidoConSuEstadoEnViaje.retroceder
+		
+		assertEquals(unPedidoConSuEstadoEnViaje.estadoDePedido.class, ListoParaEnviar)
+		
+	}
+
+	@Test
+	def test15UnPedidoEntregadoNoPuedeAvanzarDeEstado()
+	{
+		
+		val Pedido unPedidoEntregado = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoEntregado.estadoDePedido = new Entregado
+		
+		try { unPedidoEntregado.avanzar }
+		catch (RuntimeException excepcionPorPedidoEntregado)
+		{
+			
+			assertEquals(excepcionPorPedidoEntregado.message, "El Pedido Ya Fue Entregado!")
+			
+		}
+		
+	}
+	
+	@Test
+	def test16UnPedidoEntregadoNoPuedeRetrocederDeEstado()
+	{
+		
+		val Pedido unPedidoEntregado = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoEntregado.estadoDePedido = new Entregado
+		
+		try { unPedidoEntregado.retroceder }
+		catch (RuntimeException excepcionPorPedidoEntregado)
+		{
+			
+			assertEquals(excepcionPorPedidoEntregado.message, "El Pedido Ya Fue Entregado!")
+			
+		}
+		
+	}
+	
+	@Test
+	def test17UnPedidoCerradoNoPuedeAvanzarDeEstado()
+	{
+		
+		val Pedido unPedidoCerrado = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoCerrado.estadoDePedido = new Cerrado
+		
+		try { unPedidoCerrado.avanzar }
+		catch (RuntimeException excepcionPorPedidoCerrado)
+		{
+			
+			assertEquals(excepcionPorPedidoCerrado.message, "El Pedido Se Encuentra Cerrado!")
+			
+		}
+		
+	}
+
+	@Test
+	def test18UnPedidoCerradoNoPuedeRetrocederDeEstado()
+	{
+		
+		val Pedido unPedidoCerrado = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoCerrado.estadoDePedido = new Cerrado
+		
+		try { unPedidoCerrado.retroceder }
+		catch (RuntimeException excepcionPorPedidoCerrado)
+		{
+			
+			assertEquals(excepcionPorPedidoCerrado.message, "El Pedido Se Encuentra Cerrado!")
+			
+		}
+		
+	}
+	
+	@Test
+	def test19UnPedidoConSuEstadoListoParaEnviarAlAvanzarEnviaUnMail()
+	{
+	
+		val Cliente clienteMock = new Cliente("Martin Gonzalez", "martingonzalez", "1234", "martin@mail.com", "Calle Falsa 123")
+		val MailSenderMock mailSenderMock = new MailSenderMock(clienteMock.nombre, clienteMock.password)
+		val Pedido unPedidoConSuEstadoListoParaEnviar = new Pedido(1 /* Numero Clave */)
+		
+		unPedidoConSuEstadoListoParaEnviar.estadoDePedido = new ListoParaEnviar
+		unPedidoConSuEstadoListoParaEnviar.cliente = clienteMock
+		unPedidoConSuEstadoListoParaEnviar.mailSender = mailSenderMock
+		
+		unPedidoConSuEstadoListoParaEnviar.avanzar
+		
+		assertTrue(unPedidoConSuEstadoListoParaEnviar.mailSender.comprobanteDeMailEnviado)
+		
+	}
+	
+	@Test
+	def test20UnPedidoConSuEstadoListoParaRetirarAvanzaAlEstadoEntregadoYEnviaMailPorDemora()
+	{
+		
+		val Cliente clienteMock = new Cliente("Martin Gonzalez", "martingonzalez", "1234", "martin@mail.com", "Calle Falsa 123")
+		val MailSenderMock mailSenderMock = new MailSenderMock(clienteMock.nombre, clienteMock.password)
+		val Pedido unPedidoConSuEstadoListoParaRetirar = new Pedido(1 /* Numero Clave */)
+			
+		unPedidoConSuEstadoListoParaRetirar.estadoDePedido = new ListoParaRetirar
+		unPedidoConSuEstadoListoParaRetirar.cliente = clienteMock
+		unPedidoConSuEstadoListoParaRetirar.mailSender = mailSenderMock
+		
+		// Le resto 40 minutos a la fecha de creacion //
+		unPedidoConSuEstadoListoParaRetirar.fechaDeCreacion = DateUtils.addMinutes(unPedidoConSuEstadoListoParaRetirar.fechaDeCreacion, -40)
+		
+		unPedidoConSuEstadoListoParaRetirar.avanzar
+		
+		assertTrue(unPedidoConSuEstadoListoParaRetirar.mailSender.comprobanteDeMailEnviado)
+		
+	}
+
+	@Test
+	def test21UnPedidoConSuEstadoEnViajeAvanzaAlEstadoEntregadoYEnviaMailPorDemora()
+	{
+		
+		val Cliente clienteMock = new Cliente("Martin Gonzalez", "martingonzalez", "1234", "martin@mail.com", "Calle Falsa 123")
+		val MailSenderMock mailSenderMock = new MailSenderMock(clienteMock.nombre, clienteMock.password)
+		val Pedido unPedidoConSuEstadoEnViaje = new Pedido(1 /* Numero Clave */)
+			
+		unPedidoConSuEstadoEnViaje.estadoDePedido = new EnViaje
+		unPedidoConSuEstadoEnViaje.cliente = clienteMock
+		unPedidoConSuEstadoEnViaje.mailSender = mailSenderMock
+		
+		// Le resto 40 minutos a la fecha de creacion //
+		unPedidoConSuEstadoEnViaje.fechaDeCreacion = DateUtils.addMinutes(unPedidoConSuEstadoEnViaje.fechaDeCreacion, -40)
+		
+		unPedidoConSuEstadoEnViaje.avanzar
+		
+		assertTrue(unPedidoConSuEstadoEnViaje.mailSender.comprobanteDeMailEnviado)
+		
+	}
 
 }
 	
