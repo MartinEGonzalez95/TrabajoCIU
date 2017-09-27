@@ -1,26 +1,23 @@
 package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorPlato
-
 import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
-
-
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.widgets.List
 import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.NotNullObservable
 
 class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
@@ -33,46 +30,15 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 	override protected createFormPanel(Panel mainPanel) {
 
-		val panelPizza = new Panel(mainPanel)
-		panelPizza.layout = new HorizontalLayout()
+		createPanelPizza(mainPanel)
 
-		new Label(panelPizza) => [
-
-			text = "Pizza"
-			width = 100
-			alignLeft
-
-		]
-
-		new Selector<Pizza>(panelPizza) => [
-			allowNull(false)
-			value <=> "platoSeleccionado.pizzaBase"
-			items <=> "pizzas"
-
-		]
-
-		val panelTamaño = new Panel(mainPanel)
-		panelTamaño.layout = new HorizontalLayout()
-
-		new Label(panelTamaño) => [
-
-			text = "Tamaño"
-			width = 100
-			alignLeft
-
-		]
-
-		new Selector<Pizza>(panelTamaño) => [
-			allowNull(false)
-			value <=> "platoSeleccionado.tamañoPizza"
-			items <=> "tamaños"
-
-		]
+		createSelectorDetamanio(mainPanel)
 
 		new List(mainPanel) => [
 			bindItemsToProperty("platoSeleccionado.ingredientesExtras")
+
 		]
-		
+
 		agregarQuitarAdicional(mainPanel)
 
 		new Label(mainPanel) => [
@@ -83,8 +49,33 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		]
 
-		val panelDeAgregados = new Panel(mainPanel)
-		panelDeAgregados.layout = new VerticalLayout()
+		createPanelDeAgregados(mainPanel)
+
+		createPanelDePrecio(mainPanel)
+
+	}
+
+	protected def Label createPanelDePrecio(Panel mainPanel) {
+		val panelPrecio = new Panel(mainPanel)
+		panelPrecio.layout = new HorizontalLayout()
+
+		new Label(panelPrecio) => [
+
+			text = "Precio"
+			width = 100
+			alignLeft
+
+		]
+
+		new Label(panelPrecio) => [
+
+			text = precioPlato
+
+		]
+	}
+
+	protected def Selector<Ingrediente> createPanelDeAgregados(Panel mainPanel) {
+		val panelDeAgregados = new Panel(mainPanel).layout = new VerticalLayout()
 
 		val tablaDeAgregados = new Table<Ingrediente>(panelDeAgregados, typeof(Ingrediente)) => [
 			value <=> "ingredienteSeleccionado"
@@ -105,24 +96,44 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
 		]
+	}
 
-		val panelPrecio = new Panel(mainPanel)
-		panelPrecio.layout = new HorizontalLayout()
+	protected def Selector<Pizza> createSelectorDetamanio(Panel mainPanel) {
+		val panelTamaño = new Panel(mainPanel).layout = new HorizontalLayout()
 
-		new Label(panelPrecio) => [
+		new Label(panelTamaño) => [
 
-			text = "Precio"
+			text = "Tamaño"
 			width = 100
 			alignLeft
 
 		]
 
-		new Label(panelPrecio) => [
+		new Selector<Pizza>(panelTamaño) => [
+			allowNull(false)
+			value <=> "platoSeleccionado.tamañoPizza"
+			items <=> "tamaños"
 
-			text = precioPlato
+		]
+	}
+
+	protected def Selector<Pizza> createPanelPizza(Panel mainPanel) {
+		val panelPizza = new Panel(mainPanel).layout = new HorizontalLayout()
+
+		new Label(panelPizza) => [
+
+			text = "Pizza"
+			width = 100
+			alignLeft
 
 		]
 
+		new Selector<Pizza>(panelPizza) => [
+			allowNull(false)
+			value <=> "platoSeleccionado.pizzaBase"
+			items <=> "pizzas"
+
+		]
 	}
 
 	def String precioPlato() {
@@ -131,29 +142,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 	}
 
-	override protected void addActions(Panel actions) {
-
-		new Button(actions) => [
-			caption = "Aceptar"
-			onClick [|this.aceptar]
-
-		]
-
-		new Button(actions) => [
-			caption = "Cancelar"
-			onClick [|this.cancel]
-			setAsDefault
-		]
-
-	}
-
-	def aceptar() {
-
-		this.accept
-
-	}
-	
-		private def void agregarQuitarAdicional(Panel panelDeIngredientes) {
+	private def void agregarQuitarAdicional(Panel panelDeIngredientes) {
 
 		val elementSelected = new NotNullObservable("ingredienteSeleccionado")
 
@@ -171,7 +160,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 			bindEnabled(elementSelected)
 		]
 	}
-	
+
 	private def boolean agregarAdicional() {
 		modelObject.agregarIngrediente()
 	}
@@ -196,4 +185,25 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 	}
 
+	override protected void addActions(Panel actions) {
+
+		new Button(actions) => [
+			caption = "Aceptar"
+			onClick [|this.accept]
+
+		]
+
+		new Button(actions) => [
+			caption = "Cancelar"
+			onClick [|this.cancel]
+			setAsDefault
+		]
+
+	}
+
+	def aceptar() {
+
+		this.accept
+
+	}
 }

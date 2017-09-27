@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit
 import java.awt.Color
 import org.uqbar.arena.windows.Dialog
 import arenaDesktop.arenaDesktop.model.ControladorPedido
+import org.uqbar.arena.bindings.NotNullObservable
 
 class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -79,9 +80,8 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 			title = "Tiempo de espera"
 			fixedSize = 200
 			bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |
-				String.format("%02d" + " mins",
-					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
-						TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
+				String.format("%02d" + " mins", TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
+					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
 
 //					String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
 //					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
@@ -97,15 +97,19 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected addActions(Panel actionsPanel) {
-
-		new Button(actionsPanel) => [
-			caption = "Ver"
-			onClick [|this.openDialog(new VerPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
-		]
+		
 		new Button(actionsPanel) => [
 			caption = "Volver"
 			onClick [|this.close]
 		]
+		
+		val elementSelected = new NotNullObservable("pedidoSeleccionado")
+		new Button(actionsPanel) => [
+			caption = "Ver"
+			bindEnabled(elementSelected)
+			onClick [|this.openDialog(new VerPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+		]
+
 	}
 
 }

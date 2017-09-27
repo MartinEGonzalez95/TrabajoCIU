@@ -18,31 +18,25 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
+class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 
 	new(WindowOwner owner, ControladorPedido controladorPedidoModel) {
 
 		super(owner, controladorPedidoModel)
+		title = "Ver Pedido"
 
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
-		title = "Editar pedido"
-
 		panelEstado(mainPanel)
-
 
 		new Label(mainPanel) => [
 			text = "Platos"
 			alignLeft
 		]
-		
-		val panelPlatos = new Panel(mainPanel)
-		
-		panelPlatos.layout = new HorizontalLayout
-		
-		panelTablaPlatos(panelPlatos)
+
+		panelTablaPlatos(mainPanel)
 
 		panelAclaraciones(mainPanel)
 
@@ -50,7 +44,9 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 
 	}
 
-	def panelTablaPlatos(Panel panelPlatos) {
+	def panelTablaPlatos(Panel mainPanel) {
+
+		val panelPlatos = new Panel(mainPanel).layout = new HorizontalLayout
 
 		val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
 			items <=> "pedido.platos"
@@ -61,19 +57,19 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 	}
 
 	def panelEstado(Panel panelEstado) {
-		
+
 		val panel = new Panel(panelEstado)
-		
+
 		panel.layout = new ColumnLayout(2)
-		
+
 		val panelIzq = new Panel(panel)
-		
+
 		new Label(panelIzq) => [
 			text = "Estado: "
 		]
-		
+
 		val panelDer = new Panel(panel)
-		
+
 		new Label(panelDer) => [
 			value <=> "pedido.estadoDePedido"
 		]
@@ -117,8 +113,8 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 	def void panelInformacionPedido(Panel informacionPanel) {
 
 		val panelInfo = new Panel(informacionPanel)
-		
-		panelInfo.layout = new ColumnLayout(2)	
+
+		panelInfo.layout = new ColumnLayout(2)
 
 		new Label(panelInfo) => [
 			text = "Cliente"
@@ -127,8 +123,8 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 		new Label(panelInfo) => [
 			value <=> "pedido.cliente.nombre"
 			alignLeft
-		]		
-		
+		]
+
 		new Label(panelInfo) => [
 			text = "Costo de envio"
 			alignLeft
@@ -137,7 +133,7 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 			value <=> "pedido.formaDeEnvio.costo"
 			alignLeft
 		]
-		
+
 		new Label(panelInfo) => [
 			text = "Monto total"
 			alignLeft
@@ -145,8 +141,8 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 		new Label(panelInfo) => [
 			text = this.montoFinalToString()
 			alignLeft
-		]	
-		
+		]
+
 		new Label(panelInfo) => [
 			text = "Fecha"
 			alignLeft
@@ -154,37 +150,32 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 		new Label(panelInfo) => [
 			text = this.fechaCreacionPedido()
 			alignLeft
-		]	
+		]
 	}
-	
-	def montoFinalToString(){
+
+	def montoFinalToString() {
 		"$" + modelObject.pedido.montoFinal.toString
 	}
-	
-	def fechaCreacionPedido(){
-		
-	val fechaDeCreacion = modelObject.pedido.fechaDeCreacion
-	
-	val hora = fechaDeCreacion.hours
-	
-	val min = fechaDeCreacion.minutes
-		
-	val sdf = new SimpleDateFormat("yyyy/MM/dd - ")
-		
+
+	def fechaCreacionPedido() {
+
+		val fechaDeCreacion = modelObject.pedido.fechaDeCreacion
+
+		val hora = fechaDeCreacion.hours
+
+		val min = fechaDeCreacion.minutes
+
+		val sdf = new SimpleDateFormat("yyyy/MM/dd - ")
+
 		sdf.format(fechaDeCreacion) + hora + "." + min
-		
+
 	}
 
 	override protected void addActions(Panel actionsPanel) {
 
 		new Button(actionsPanel) => [
-			caption = "Aceptar"
-			onClick [|this.accept]
-		]
-
-		new Button(actionsPanel) => [
-			caption = "Cancelar"	
-			onClick [|this.cancel]	
+			caption = "Salir"
+			onClick [|this.close]
 		]
 	}
 

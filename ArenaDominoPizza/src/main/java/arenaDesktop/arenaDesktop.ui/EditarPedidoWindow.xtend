@@ -73,4 +73,15 @@ class EditarPedidoWindow extends VerPedidoWindow {
 		dialog.open
 	}
 
+	override protected void addActions(Panel actionsPanel) {
+
+		new Button(actionsPanel) => [
+			caption = "Aceptar"
+			onClick [|this.accept]
+		]
+		new Button(actionsPanel) => [
+			caption = "Cerrar"
+			onClick [|this.close]
+		]
+	}
 }
