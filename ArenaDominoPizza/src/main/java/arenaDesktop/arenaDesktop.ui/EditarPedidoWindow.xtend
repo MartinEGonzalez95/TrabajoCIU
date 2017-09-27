@@ -17,6 +17,8 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import arenaDesktop.arenaDesktop.model.ControladorPlato
+import org.uqbar.arena.windows.Dialog
 
 class EditarPedidoWindow extends VerPedidoWindow  {
 
@@ -66,7 +68,7 @@ class EditarPedidoWindow extends VerPedidoWindow  {
 
 		new Button(panelBotones) => [
 			caption = "Editar"
-			// onClick([|new EditarPlatoWindow(this, modelObject.platoSeleccionado)])
+			onClick([openDialog(new VerEditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))])
 			bindEnabled(elementSelected)
 		]
 
@@ -77,7 +79,9 @@ class EditarPedidoWindow extends VerPedidoWindow  {
 		]
 
 	}
-
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
 
 
 }
