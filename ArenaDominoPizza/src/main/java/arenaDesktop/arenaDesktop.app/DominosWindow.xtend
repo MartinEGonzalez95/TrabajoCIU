@@ -21,8 +21,8 @@ import org.uqbar.arena.windows.ErrorsPanel
 import arenaDesktop.arenaDesktop.ui.MenuWindow
 import arenaDesktop.arenaDesktop.model.ControladorMenu
 import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
-import arenaDesktop.arenaDesktop.ui.VerEditarPedidoAbiertoWindow
 import arenaDesktop.arenaDesktop.model.ControladorPedido
+import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -158,7 +158,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		]
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Editar"
-			onClick [|this.openDialog(new VerEditarPedidoAbiertoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+			onClick [|this.openDialog(new EditarPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [

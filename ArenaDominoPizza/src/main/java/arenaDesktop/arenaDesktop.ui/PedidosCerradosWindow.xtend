@@ -16,6 +16,8 @@ import java.util.Date
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import java.util.concurrent.TimeUnit
 import java.awt.Color
+import org.uqbar.arena.windows.Dialog
+import arenaDesktop.arenaDesktop.model.ControladorPedido
 
 class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -34,7 +36,7 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(mainPanel) => [
 			caption = "Ver"
-		// onClick [|this.openDialog(new VerEditarPedidoCerradoMainWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+		onClick [|this.openDialog(new VerPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
 		]
 		new Button(mainPanel) => [
 			caption = "Volver"
@@ -99,6 +101,9 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 		]
 	}
 
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
 	override protected addActions(Panel actionsPanel) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
