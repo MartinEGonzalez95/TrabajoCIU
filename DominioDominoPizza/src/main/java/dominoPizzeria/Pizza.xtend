@@ -23,5 +23,12 @@ class Pizza {
 		ingredientes.remove(ingrediente)
 
 	}
+	
+	override toString()
+	{
+		
+		nombre.concat(" ($").concat(precioBase.toString).concat(")")
+		
+	}
 
 }
