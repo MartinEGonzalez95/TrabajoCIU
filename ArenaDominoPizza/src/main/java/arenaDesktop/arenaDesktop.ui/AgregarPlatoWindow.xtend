@@ -7,6 +7,7 @@ import dominoPizzeria.Plato
 import org.uqbar.arena.windows.WindowOwner
 
 import dominoPizzeria.Pedido
+import repositorios.RepoPedido
 
 class AgregarPlatoWindow extends EditarPlatoWindow {
 
@@ -15,9 +16,9 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 		title = "Agregar Plato"
 	}
 
-	override void aceptar(){
-		
-		modelObject.agregarPlato
-		this.accept
+	override executeTask() {
+		RepoPedido.repo.modificar(modelObject.agregarPlato)
+		super.executeTask()
 	}
+
 }

@@ -25,7 +25,7 @@ class Plato {
 
 		if (ingredientesExtras.isEmpty) {
 
-			return pizzaBase.precioBase * tamañoPizza.valor
+			return pizzaBase.precioBase * tamañoPizza.valor 
 
 		}
 

@@ -52,13 +52,13 @@ class ControladorPlato extends ControladorMenu {
 	
 	def agregarPlato(){
 		pedido.agregarPlato(platoSeleccionado)
+		pedido
 	}
 	
-		def agregarIngrediente() {
+	def agregarIngrediente() {
 		if (!platoSeleccionado.ingredientesExtras.contains(ingredienteSeleccionado)) {
 			platoSeleccionado.agregarAdicional(ingredienteSeleccionado)
 		}
-
 	}
 
 	def quitarIngrediente() {
