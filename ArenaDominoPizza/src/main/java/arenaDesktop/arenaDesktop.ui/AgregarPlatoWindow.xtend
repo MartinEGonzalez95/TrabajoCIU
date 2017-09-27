@@ -12,6 +12,7 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 
 	new(WindowOwner owner, Pedido unPedido) {
 		super(owner, new ControladorPlato(new Plato, unPedido))
+		title = "Agregar Plato"
 	}
 
 	override void aceptar(){

@@ -1,6 +1,7 @@
 package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
+import arenaDesktop.arenaDesktop.model.FiltroSoloDeLetras
 import dominoPizzeria.Ingrediente
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
@@ -8,6 +9,7 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.NumericField
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Selector
@@ -15,13 +17,9 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.widgets.List
-
 import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-
-import arenaDesktop.arenaDesktop.model.FiltroSoloDeLetras
 
 class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
@@ -57,23 +55,27 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 			bindItemsToProperty("pizzaSeleccionada.ingredientes")
 
 		]
-
 		creacionTablaDeIngredientes(panelDeIngredientes)
-		
-		new Label(panelDeIngredientes) => [
-			
-			text = "Distribuciones:"
-			alignLeft
-			
-		]
-		
-		new Selector<Ingrediente>(panelDeIngredientes) => [
-			value <=> "ingredienteSeleccionado.distribucion"
-			items <=> "distribuciones"
-		]
+
+		crearPanelDeDistribuciones(mainPanel, panelDeIngredientes)
 
 		accionesDelPanelIngredientes(panelDeIngredientes)
 
+	}
+
+	protected def void crearPanelDeDistribuciones(Panel mainPanel, Panel panelDeIngredientes) {
+		val panelDistribuciones = new Panel(mainPanel).layout = new HorizontalLayout
+		new Label(panelDistribuciones) => [
+
+			text = "Distribuciones:   "
+			alignLeft
+
+		]
+
+		new Selector<Ingrediente>(panelDistribuciones) => [
+			value <=> "ingredienteSeleccionado.distribucion"
+			items <=> "distribuciones"
+		]
 	}
 
 	private def void creacionTablaDeIngredientes(Panel panel) {
