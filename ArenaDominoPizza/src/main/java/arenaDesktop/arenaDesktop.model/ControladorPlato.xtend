@@ -11,7 +11,7 @@ import java.util.List
 class ControladorPlato extends ControladorMenu
 {
 	
-	Plato platoSeleccionado
+	Plato platoSeleccionado = null
 	
 	new(Plato unPlato)
 	{

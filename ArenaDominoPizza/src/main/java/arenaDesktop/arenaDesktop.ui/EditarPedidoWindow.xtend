@@ -20,7 +20,7 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import arenaDesktop.arenaDesktop.model.ControladorPlato
 import org.uqbar.arena.windows.Dialog
 
-class EditarPedidoWindow extends VerPedidoWindow  {
+class EditarPedidoWindow extends VerPedidoWindow {
 
 	new(WindowOwner owner, ControladorPedido controladorPedidoModel) {
 
@@ -34,16 +34,15 @@ class EditarPedidoWindow extends VerPedidoWindow  {
 
 		panelEstado(mainPanel)
 
-
 		new Label(mainPanel) => [
 			text = "Platos"
 			alignLeft
 		]
-		
+
 		val panelPlatos = new Panel(mainPanel)
-		
+
 		panelPlatos.layout = new HorizontalLayout
-		
+
 		panelTablaPlatos(panelPlatos)
 
 		botonesDePedido(panelPlatos)
@@ -53,22 +52,22 @@ class EditarPedidoWindow extends VerPedidoWindow  {
 		panelInformacionPedido(mainPanel)
 
 	}
-	
-		protected def Button botonesDePedido(Panel panelPlatos) {
+
+	protected def Button botonesDePedido(Panel panelPlatos) {
 
 		val panelBotones = new Panel(panelPlatos)
-	
+
 		val elementSelected = new NotNullObservable("platoSeleccionado")
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			// onClick([|new AgregarPlatoWindow(this, new Plato)])
-			bindEnabled(elementSelected)
+			onClick([|new AgregarPlatoWindow(this).open])
+
 		]
 
 		new Button(panelBotones) => [
 			caption = "Editar"
-			onClick([openDialog(new VerEditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))])
+			onClick([openDialog(new EditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))])
 			bindEnabled(elementSelected)
 		]
 
@@ -79,9 +78,9 @@ class EditarPedidoWindow extends VerPedidoWindow  {
 		]
 
 	}
+
 	def openDialog(Dialog<?> dialog) {
 		dialog.open
 	}
-
 
 }

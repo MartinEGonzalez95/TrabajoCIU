@@ -25,24 +25,13 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 		super(parent, model)
 	}
 
-	override createContents(Panel mainPanel) {
-
+	override protected createFormPanel(Panel mainPanel) {
 		this.title = "Domino´s Pizza (XTend)"
 		mainPanel.layout = new VerticalLayout
 
 		new Label(mainPanel).text = "Pedidos cerrados"
 
 		this.createResultsGrid(mainPanel)
-
-		new Button(mainPanel) => [
-			caption = "Ver"
-		onClick [|this.openDialog(new VerPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
-		]
-		new Button(mainPanel) => [
-			caption = "Volver"
-			onClick [|this.close]
-		]
-
 	}
 
 	def protected createResultsGrid(Panel panel) {
@@ -67,11 +56,13 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 			title = "Estado"
 			fixedSize = 200
 			bindContentsToProperty("estadoDePedido").transformer = [ EstadoDePedido estadoDePedido |
-				estadoDePedido.toString]
-			
-			bindBackground("estadoDePedido").transformer =
-				[ EstadoDePedido estadoDePedido | if (estadoDePedido.toString == "Cerrado") Color.RED else Color.GREEN]
-			
+				estadoDePedido.toString
+			]
+
+			bindBackground("estadoDePedido").transformer = [ EstadoDePedido estadoDePedido |
+				if(estadoDePedido.toString == "Cerrado") Color.RED else Color.GREEN
+			]
+
 		]
 
 		new Column<Pedido>(table) => [
@@ -87,29 +78,34 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
 			title = "Tiempo de espera"
 			fixedSize = 200
-				bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |  
-					String.format("%02d" + " mins",
+			bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |
+				String.format("%02d" + " mins",
 					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
-					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
-					
+						TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
+
 //					String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
 //					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
 //					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)),
 //					TimeUnit.MILLISECONDS.toSeconds(tiempoDeEspera) -
 //					TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera)));
-				]	
+			]
 		]
 	}
 
 	def openDialog(Dialog<?> dialog) {
 		dialog.open
 	}
-	override protected addActions(Panel actionsPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
 
-	override protected createFormPanel(Panel mainPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override protected addActions(Panel actionsPanel) {
+
+		new Button(actionsPanel) => [
+			caption = "Ver"
+			onClick [|this.openDialog(new VerPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+		]
+		new Button(actionsPanel) => [
+			caption = "Volver"
+			onClick [|this.close]
+		]
 	}
 
 }

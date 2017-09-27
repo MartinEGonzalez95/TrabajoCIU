@@ -21,7 +21,7 @@ import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class VerEditarPlatoWindow extends TransactionalDialog<ControladorPlato>
+class EditarPlatoWindow extends TransactionalDialog<ControladorPlato>
 {
 	
 	List<Pizza> pizzasMenu
@@ -63,7 +63,7 @@ class VerEditarPlatoWindow extends TransactionalDialog<ControladorPlato>
 		]
 		
 		new Selector<Pizza>(panelPizza) => [
-
+			allowNull(false)
 			value <=> "platoSeleccionado.pizzaBase"
 			items <=> "pizzas"
 
