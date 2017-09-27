@@ -24,8 +24,6 @@ import org.uqbar.arena.bindings.NotNullObservable
 
 class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
-
-
 	new(WindowOwner owner, ControladorPlato modelObject) {
 
 		super(owner, modelObject)
@@ -84,10 +82,10 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 			alignLeft
 
 		]
-			
+
 		val panelDeAgregados = new Panel(mainPanel)
 		panelDeAgregados.layout = new VerticalLayout()
-		
+
 		val tablaDeAgregados = new Table<Ingrediente>(panelDeAgregados, typeof(Ingrediente)) => [
 			value <=> "ingredienteSeleccionado"
 			items <=> "ingredientes"
@@ -95,14 +93,14 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 		creacionTablaDeAgregados(tablaDeAgregados)
-		
+
 		new Label(panelDeAgregados) => [
-			
+
 			text = "Distribucion:"
 			alignLeft
-			
+
 		]
-		
+
 		new Selector<Ingrediente>(panelDeAgregados) => [
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
@@ -148,13 +146,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 	}
-	
+
 	def aceptar() {
-		
-		
-		
+
 		this.accept
-		
+
 	}
 	
 		private def void agregarQuitarAdicional(Panel panelDeIngredientes) {
