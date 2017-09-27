@@ -29,5 +29,12 @@ class Tamanio
 		mapValorPorTamaño.get(nombre)
 		
 	}
+	
+	override toString()
+	{
+		
+		nombre
+		
+	}
 
 }
