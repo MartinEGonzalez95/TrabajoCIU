@@ -17,5 +17,9 @@ class Ingrediente {
 		}
 		precio
 	}
+	
+	override toString(){
+		nombre
+	}
 
 }

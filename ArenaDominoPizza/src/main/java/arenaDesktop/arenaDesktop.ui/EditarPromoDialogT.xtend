@@ -10,16 +10,16 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.NumericField
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
+import repositorios.RepoIngrediente
+import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-
-import org.uqbar.arena.widgets.Selector
-import repositorios.RepoPizza
-import repositorios.RepoIngrediente
+import org.uqbar.arena.widgets.List
 
 class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
@@ -29,6 +29,17 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
+	def getRepoPizza() {
+
+		RepoPizza.getRepo
+	}
+
+	override executeTask() {
+		getRepoPizza.modificar(modelObject.pizzaSeleccionada)
+
+		super.executeTask()
+	}
+
 	override protected createFormPanel(Panel mainPanel) {
 
 		this.crearPanelDePizzas(mainPanel)
@@ -36,27 +47,16 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
-	def getRepoPizza() {
-
-		RepoPizza.getRepo
-	}
-	override executeTask() {
-		getRepoPizza.modificar(modelObject.pizzaSeleccionada)
-
-		super.executeTask()
-	}
-
 	private def void crearPanelDeIngredientes(Panel mainPanel) {
 
 		val panelDeIngredientes = new Panel(mainPanel)
 
-		val tablaDeIngredientes = new Table<Ingrediente>(panelDeIngredientes, typeof(Ingrediente)) => [
-			items <=> "ingredientes"
-			value <=> "ingredienteSeleccionado"
+		new List(panelDeIngredientes) => [
+			bindItemsToProperty("pizzaSeleccionada.ingredientes")
+
 		]
 
-		creacionTablaDeIngredientes(tablaDeIngredientes)
-
+		creacionTablaDeIngredientes(panelDeIngredientes)
 		new Selector<Ingrediente>(panelDeIngredientes) => [
 
 			value <=> "ingredienteSeleccionado.distribucion"
@@ -68,13 +68,19 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
-	private def void creacionTablaDeIngredientes(Table<Ingrediente> tablaDeIngredientes) {
+	private def void creacionTablaDeIngredientes(Panel panel) {
+
+		val tablaDeIngredientes = new Table<Ingrediente>(panel, typeof(Ingrediente)) => [
+			items <=> "ingredientes"
+			value <=> "ingredienteSeleccionado"
+			numberVisibleRows = 8
+		]
+
 		new Column<Ingrediente>(tablaDeIngredientes) => [
 			title = "Nombre"
 			fixedSize = 100
 			bindContentsToProperty("nombre")
 		]
-
 
 		new Column<Ingrediente>(tablaDeIngredientes) => [
 			title = "distribucion"
@@ -85,23 +91,30 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	}
 
 	private def void accionesDelPanelIngredientes(Panel panelDeIngredientes) {
-		
+
 		val elementSelected = new NotNullObservable("ingredienteSeleccionado")
 
 		val actionsPanel = new Panel(panelDeIngredientes).layout = new HorizontalLayout
 
-
 		new Button(actionsPanel) => [
 			caption = "Agregar Adicional"
-			onClick [|modelObject.agregarIngrediente(modelObject.ingredienteSeleccionado)]
+			onClick [|agregarAdicional()]
 			bindEnabled(elementSelected)
 		]
 
 		new Button(actionsPanel) => [
 			caption = "Quitar Adicional"
-			onClick [|modelObject.quitarIngrediente(modelObject.ingredienteSeleccionado)]
+			onClick [|quitarAdicional()]
 			bindEnabled(elementSelected)
 		]
+	}
+
+	protected def boolean agregarAdicional() {
+		modelObject.agregarIngrediente(modelObject.ingredienteSeleccionado)
+	}
+
+	protected def boolean quitarAdicional() {
+		modelObject.quitarIngrediente(modelObject.ingredienteSeleccionado)
 	}
 
 	protected def void crearPanelDePizzas(Panel mainPanel) {
