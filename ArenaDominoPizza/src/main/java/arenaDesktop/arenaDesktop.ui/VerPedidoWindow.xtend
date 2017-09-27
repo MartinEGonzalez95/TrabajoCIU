@@ -53,9 +53,9 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido>  {
 	def panelTablaPlatos(Panel panelPlatos) {
 
 		val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
-			items <=> "platos"
+			items <=> "pedido.platos"
 			value <=> "platoSeleccionado"
-			numberVisibleRows = 2
+			numberVisibleRows = 4
 		]
 		ordenarTablaPlatos(tablaPlatos)
 	}

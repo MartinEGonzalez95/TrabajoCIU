@@ -187,6 +187,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept([|modelObject.cargar])
+		
 		dialog.open
 
 	}

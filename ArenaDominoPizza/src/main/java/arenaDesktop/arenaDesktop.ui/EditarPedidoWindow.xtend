@@ -61,7 +61,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick([|new AgregarPlatoWindow(this).open])
+			onClick([|new AgregarPlatoWindow(this, this.modelObject.pedido).open])
 
 		]
 
@@ -73,13 +73,14 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Eliminar"
-			onClick [|modelObject.eliminarPlato(modelObject.platoSeleccionado)]
+			onClick [|modelObject.pedido.eliminarPlato(modelObject.platoSeleccionado)]
 			bindEnabled(elementSelected)
 		]
 
 	}
 
 	def openDialog(Dialog<?> dialog) {
+
 		dialog.open
 	}
 

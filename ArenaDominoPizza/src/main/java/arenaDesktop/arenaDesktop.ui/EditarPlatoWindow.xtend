@@ -21,125 +21,106 @@ import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class EditarPlatoWindow extends TransactionalDialog<ControladorPlato>
-{
-	
-	List<Pizza> pizzasMenu
-	
-	new(WindowOwner owner, ControladorPlato modelObject)
-	{
-		
+class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
+
+
+
+	new(WindowOwner owner, ControladorPlato modelObject) {
+
 		super(owner, modelObject)
 		title = "Plato"
-		
-	}
-	
-	def getRepoPizza()
-	{
 
-		RepoPizza.getRepo
-		
 	}
-	
-	override executeTask()
-	{
-		pizzasMenu = getRepoPizza.cargar
 
-		super.executeTask()
-	}
-	
-	override protected createFormPanel(Panel mainPanel)
-	{
-		
+	override protected createFormPanel(Panel mainPanel) {
+
 		val panelPizza = new Panel(mainPanel)
 		panelPizza.layout = new HorizontalLayout()
-		 
+
 		new Label(panelPizza) => [
-			
+
 			text = "Pizza"
 			width = 100
 			alignLeft
-			
+
 		]
-		
+
 		new Selector<Pizza>(panelPizza) => [
 			allowNull(false)
 			value <=> "platoSeleccionado.pizzaBase"
 			items <=> "pizzas"
 
 		]
-		
+
 		val panelTamaño = new Panel(mainPanel)
 		panelTamaño.layout = new HorizontalLayout()
-		 
+
 		new Label(panelTamaño) => [
-			
+
 			text = "Tamaño"
 			width = 100
 			alignLeft
-			
+
 		]
-		
+
 		new Selector<Pizza>(panelTamaño) => [
 			allowNull(false)
 			value <=> "platoSeleccionado.tamañoPizza"
 			items <=> "tamaños"
 
 		]
-		
+
 		val panelDeAgregados = new Panel(mainPanel)
 		panelDeAgregados.layout = new VerticalLayout()
-		
+
 		new Label(panelTamaño) => [
-			
+
 			text = "Agregados"
 			width = 100
 			alignLeft
-			
+
 		]
 
 		val tablaDeAgregados = new Table<Ingrediente>(panelDeAgregados, typeof(Ingrediente)) => [
 			value <=> "ingredienteSeleccionado"
 			items <=> "ingredientes"
-			numberVisibleRows = 2
+			numberVisibleRows = 4
 		]
 
 		creacionTablaDeAgregados(tablaDeAgregados)
-		
+
 		val panelPrecio = new Panel(mainPanel)
 		panelPrecio.layout = new HorizontalLayout()
-		 
+
 		new Label(panelPrecio) => [
-			
+
 			text = "Precio"
 			width = 100
 			alignLeft
-			
+
 		]
-		
+
 		new Label(panelPrecio) => [
-			
+
 			text = precioPlato()
 			width = 100
 			alignCenter
-			
+
 		]
-		
+
 	}
-	
-	def String precioPlato()
-	{
-		
-		"$".concat(modelObject.platoSeleccionado.precio.toString)
-		
+
+	def String precioPlato() {
+
+		"$".concat(modelObject.precio.toString)
+
 	}
-	
-	override protected void addActions(Panel actions)
-	{
-		
+
+	override protected void addActions(Panel actions) {
+
 		new Button(actions) => [
 			caption = "Aceptar"
-			onClick [|this.accept]
+			onClick [|this.aceptar]
 
 		]
 
@@ -148,12 +129,19 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato>
 			onClick [|this.cancel]
 			setAsDefault
 		]
-		
+
 	}
 	
-	private def void creacionTablaDeAgregados(Table<Ingrediente> tablaDeAgregados)
-	{
+	def aceptar() {
 		
+		
+		
+		this.accept
+		
+	}
+
+	private def void creacionTablaDeAgregados(Table<Ingrediente> tablaDeAgregados) {
+
 		new Column<Ingrediente>(tablaDeAgregados) => [
 			title = "Nombre"
 			fixedSize = 200
@@ -167,5 +155,5 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato>
 		]
 
 	}
-	
+
 }

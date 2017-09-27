@@ -139,16 +139,17 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	}
 
 	override protected void addActions(Panel actions) {
-		new Button(actions) => [
-			caption = "Aceptar"
-			onClick [|this.aceptar]
-			disableOnError
-		]
 
 		new Button(actions) => [
 			caption = "Cancelar"
 			onClick [|this.cancel]
 
+		]
+
+		new Button(actions) => [
+			caption = "Aceptar"
+			onClick [|this.aceptar]
+			disableOnError
 		]
 	}
 
