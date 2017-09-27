@@ -100,7 +100,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		]
 
 		new Column<Ingrediente>(tablaDeIngredientes) => [
-			title = "precio"
+			title = "Precio"
 			weight = 200
 			bindContentsToProperty("precio")
 		]
@@ -133,7 +133,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 		]
 
 		new Column<Pizza>(tablaPromociones) => [
-			title = "precio"
+			title = "Precio"
 			weight = 100
 			bindContentsToProperty("precioBase")
 		]
@@ -185,9 +185,11 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	}
 
-	def openDialog(Dialog<?> dialog) {
-		dialog.onAccept([|modelObject.cargar])
+	def openDialog(Dialog<?> dialog)
+	{
 		
+		dialog.onAccept([|modelObject.cargar])
+
 		dialog.open
 
 	}

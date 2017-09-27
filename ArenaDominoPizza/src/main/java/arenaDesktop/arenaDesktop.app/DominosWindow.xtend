@@ -166,8 +166,9 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(actionsPanel) => [
 			caption = "Pedidos Cerrados"
+			modelObject.pedidoSeleccionado = null
 			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
-		]
+			]
 		new Button(actionsPanel) => [
 			caption = "Salir"
 			onClick [|this.close]
