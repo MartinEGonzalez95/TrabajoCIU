@@ -10,7 +10,7 @@ class Pizza {
 
 	String nombre
 	List<Ingrediente> ingredientes = newArrayList
-	double precioBase
+	double precioBase = 0
 
 	def agregarIngrediente(Ingrediente ingrediente) {
 

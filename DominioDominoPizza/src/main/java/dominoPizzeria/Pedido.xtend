@@ -85,7 +85,13 @@ class Pedido
 		platos.add(plato)
 		
 	}
-	
+		
+	def eliminarPlato(Plato plato)
+	{
+		
+		platos.remove(plato)
+		
+	}
 	def enviarMailPorDemora()
 	{
 		
