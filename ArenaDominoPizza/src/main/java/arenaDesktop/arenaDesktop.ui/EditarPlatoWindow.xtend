@@ -213,6 +213,14 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 	}
+	
+//		override executeTask() {
+//		modelObject.platoSeleccionado.ingredientesExtras = modelObject.ingredientesParaAgregar
+//
+//		modelObject.pedido.agregarPlato(modelObject.platoSeleccionado)	
+//
+//		super.executeTask()
+//	}
 
 	def aceptar() {
 

@@ -10,11 +10,13 @@ class CrearPromoDialogT extends EditarPromoDialogT {
 		super(window, new ControladorPizzaAdicionales(new Pizza))
 		this.title = "Crear Promocion"
 	}
+	
+	 override executeTask() {
+  		modelObject.pizzaSeleccionada.ingredientes = modelObject.ingredientesParaAgregar
 
-	override executeTask() {
-		getRepoPizza.agregar(modelObject.pizzaSeleccionada)
-
-		super.executeTask()
-	}
+  		repoPizza.agregar(modelObject.pizzaSeleccionada)
+  		
+  		super.executeTask()
+ }
 
 }
