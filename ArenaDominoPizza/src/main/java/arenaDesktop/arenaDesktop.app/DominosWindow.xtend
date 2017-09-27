@@ -154,6 +154,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	def openDialog(Dialog<?> dialog) {
+		dialog.onAccept([|modelObject.updatePedidos])
 		dialog.open
 	}
 

@@ -31,16 +31,10 @@ class ControladorPizzaAdicionales {
 		RepoIngrediente.getRepo
 	}
 
-	new() {
-
-		pizzaSeleccionada = new Pizza
-	}
-
 	def agregarIngrediente() {
 		if (!ingredientesParaAgregar.contains(ingredienteSeleccionado)) {
 			ingredientesParaAgregar.add(ingredienteSeleccionado)
 		}
-
 	}
 
 	def quitarIngrediente() {

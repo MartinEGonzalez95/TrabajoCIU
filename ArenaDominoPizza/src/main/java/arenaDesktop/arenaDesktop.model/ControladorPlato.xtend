@@ -7,6 +7,7 @@ import dominoPizzeria.Tamanio
 import java.util.List
 import org.uqbar.commons.model.annotations.Dependencies
 import dominoPizzeria.Pedido
+import dominoPizzeria.Ingrediente
 
 @Accessors
 @Observable
@@ -15,6 +16,7 @@ class ControladorPlato extends ControladorMenu {
 	Plato platoSeleccionado = null
 	Pedido pedido = null
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
+	List<Ingrediente> ingredientesParaAgregar = newArrayList()
 
 
 	def getPrecio() {
@@ -29,6 +31,7 @@ class ControladorPlato extends ControladorMenu {
 	new(Plato unPlato) {
 
 		platoSeleccionado = unPlato
+		this.ingredientesParaAgregar.addAll(platoSeleccionado.ingredientesExtras)
 
 	}
 
@@ -52,13 +55,13 @@ class ControladorPlato extends ControladorMenu {
 	
 	def agregarPlato(){
 		pedido.agregarPlato(platoSeleccionado)
+		pedido
 	}
 	
-		def agregarIngrediente() {
+	def agregarIngrediente() {
 		if (!platoSeleccionado.ingredientesExtras.contains(ingredienteSeleccionado)) {
 			platoSeleccionado.agregarAdicional(ingredienteSeleccionado)
 		}
-
 	}
 
 	def quitarIngrediente() {

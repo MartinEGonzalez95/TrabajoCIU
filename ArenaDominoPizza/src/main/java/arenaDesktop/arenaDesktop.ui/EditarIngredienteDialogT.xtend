@@ -61,7 +61,6 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	override executeTask() {
 		repoIngredientes.modificar(modelObject)
-
 		super.executeTask()
 	}
 

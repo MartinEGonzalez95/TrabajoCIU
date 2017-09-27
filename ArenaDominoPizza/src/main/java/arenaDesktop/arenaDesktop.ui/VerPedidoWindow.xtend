@@ -23,7 +23,7 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 	new(WindowOwner owner, ControladorPedido controladorPedidoModel) {
 
 		super(owner, controladorPedidoModel)
-		title = "Ver Pedido"
+		title = "Ver/Editar Pedido"
 
 	}
 

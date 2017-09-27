@@ -34,16 +34,21 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		createSelectorDetamanio(mainPanel)
 
+		new Label(mainPanel) => [
+
+			text = "Adicionales agregados:"
+			width = 100
+			alignLeft
+
+		]
 		new List(mainPanel) => [
 			bindItemsToProperty("platoSeleccionado.ingredientesExtras")
 
 		]
 
-		agregarQuitarAdicional(mainPanel)
-
 		new Label(mainPanel) => [
 
-			text = "Agregados"
+			text = "Adicionales disponibles:"
 			width = 100
 			alignLeft
 
@@ -82,6 +87,8 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 			items <=> "ingredientes"
 			numberVisibleRows = 4
 		]
+
+		agregarQuitarAdicional(mainPanel)
 
 		creacionTablaDeAgregados(tablaDeAgregados)
 
@@ -178,6 +185,12 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 		new Column<Ingrediente>(tablaDeAgregados) => [
+			title = "Precio"
+			fixedSize = 100
+			bindContentsToProperty("precio")
+		]
+
+		new Column<Ingrediente>(tablaDeAgregados) => [
 			title = "Distribucion"
 			fixedSize = 100
 			bindContentsToProperty("distribucion")
@@ -200,6 +213,14 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 	}
+	
+//		override executeTask() {
+//		modelObject.platoSeleccionado.ingredientesExtras = modelObject.ingredientesParaAgregar
+//
+//		modelObject.pedido.agregarPlato(modelObject.platoSeleccionado)	
+//
+//		super.executeTask()
+//	}
 
 	def aceptar() {
 
