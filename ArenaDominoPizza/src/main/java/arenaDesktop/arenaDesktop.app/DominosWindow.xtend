@@ -90,7 +90,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(panelIzquierdo) => [
 			caption = "Menu"
-			onClick [|(new MenuWindow(this, new ControladorMenu)).open]
+			onClick [|new MenuWindow(this).open]
 		]
 
 		new Button(panelIzquierdo) => [

@@ -12,8 +12,7 @@ import org.uqbar.commons.model.annotations.Dependencies
 @Accessors
 @Observable
 class ControladorMenu {
-	
-	
+
 	List<Pizza> pizzas = newArrayList()
 	List<Ingrediente> ingredientes = newArrayList()
 	Ingrediente ingredienteSeleccionado = null
@@ -46,12 +45,11 @@ class ControladorMenu {
 		ingredientes = getRepoIngredientes.cargar
 	}
 
-	
 	def eliminarIngrediente() {
 		this.repoIngredientes.eliminar(ingredienteSeleccionado)
 		this.cargarIngredientes
 		this.ingredienteSeleccionado = null
-	
+
 	}
 
 	def void eliminarPizza() {

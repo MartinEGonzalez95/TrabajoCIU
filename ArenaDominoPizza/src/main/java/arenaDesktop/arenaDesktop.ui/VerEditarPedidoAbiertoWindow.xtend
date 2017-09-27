@@ -31,24 +31,27 @@ class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido
 
 		panelEstado(mainPanel)
 
-		panelTablaPlatos(mainPanel)
 
-		botonesDePedido(mainPanel)
+		new Label(mainPanel) => [
+			text = "Platos"
+			alignLeft
+		]
+		
+		val panelPlatos = new Panel(mainPanel)
+		
+		panelPlatos.layout = new HorizontalLayout
+		
+		panelTablaPlatos(panelPlatos)
+
+		botonesDePedido(panelPlatos)
 
 		panelAclaraciones(mainPanel)
 
 		panelInformacionPedido(mainPanel)
 
-		addActions(mainPanel)
-
 	}
 
 	def panelTablaPlatos(Panel panelPlatos) {
-
-		new Label(panelPlatos) => [
-			text = "Platos"
-			alignLeft
-		]
 
 		val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
 			items <=> "platos"
@@ -60,39 +63,45 @@ class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido
 
 	def panelEstado(Panel panelEstado) {
 		
-///// NO FUNCA
-//		panelEstado.layout = new ColumnLayout(2)
-//		
-//		val panelIzquierdo = new Panel(panelEstado)
+		val panel = new Panel(panelEstado)
 		
-		new Label(panelEstado) => [
+		panel.layout = new ColumnLayout(2)
+		
+		val panelIzq = new Panel(panel)
+		
+		new Label(panelIzq) => [
 			text = "Estado"
 			alignLeft
 		]
-		new TextBox(panelEstado) => [
+		
+		val panelDer = new Panel(panel)
+		
+		new TextBox(panelDer) => [
 			value <=> "pedido.estadoDePedido"
 			width = 200
-			alignRight
+			alignLeft
 		]
 	}
 
 	protected def Button botonesDePedido(Panel panelPlatos) {
 
+		val panelBotones = new Panel(panelPlatos)
+	
 		val elementSelected = new NotNullObservable("platoSeleccionado")
 
-		new Button(panelPlatos) => [
+		new Button(panelBotones) => [
 			caption = "Agregar"
 			// onClick([|new AgregarPlatoWindow(this, new Plato)])
 			bindEnabled(elementSelected)
 		]
 
-		new Button(panelPlatos) => [
+		new Button(panelBotones) => [
 			caption = "Editar"
 			// onClick([|new EditarPlatoWindow(this, modelObject.platoSeleccionado)])
 			bindEnabled(elementSelected)
 		]
 
-		new Button(panelPlatos) => [
+		new Button(panelBotones) => [
 			caption = "Eliminar"
 			onClick [|modelObject.eliminarPlato(modelObject.platoSeleccionado)]
 			bindEnabled(elementSelected)
@@ -157,13 +166,9 @@ class VerEditarPedidoAbiertoWindow extends TransactionalDialog<ControladorPedido
 
 	override protected void addActions(Panel actionsPanel) {
 
-///////// error doble aceptar/cancelar
-	
 		new Button(actionsPanel) => [
 			caption = "Aceptar"
 			onClick [|this.accept]
-			setAsDefault
-			disableOnError	
 		]
 
 		new Button(actionsPanel) => [
