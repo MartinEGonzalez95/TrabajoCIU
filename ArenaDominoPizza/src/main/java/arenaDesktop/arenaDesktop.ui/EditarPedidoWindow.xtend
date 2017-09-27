@@ -51,7 +51,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick([|new AgregarPlatoWindow(this, this.modelObject.pedido).open])
+			onClick([openDialog(new AgregarPlatoWindow(this, this.modelObject.pedido))])
 		]
 
 		new Button(panelBotones) => [

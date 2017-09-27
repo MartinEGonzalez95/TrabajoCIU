@@ -16,6 +16,7 @@ class ControladorPlato extends ControladorMenu {
 	Pedido pedido = null
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
 
+
 	def getPrecio() {
 		if (platoSeleccionado.pizzaBase !== null) {
 			return platoSeleccionado.precio
@@ -53,5 +54,15 @@ class ControladorPlato extends ControladorMenu {
 		pedido.agregarPlato(platoSeleccionado)
 	}
 	
+		def agregarIngrediente() {
+		if (!platoSeleccionado.ingredientesExtras.contains(ingredienteSeleccionado)) {
+			platoSeleccionado.agregarAdicional(ingredienteSeleccionado)
+		}
+
+	}
+
+	def quitarIngrediente() {
+		platoSeleccionado.eliminarAdicional(ingredienteSeleccionado)
+	}
 
 }

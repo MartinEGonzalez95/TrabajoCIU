@@ -1,10 +1,10 @@
 package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorPlato
+
 import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
 
-import java.util.List
 
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.HorizontalLayout
@@ -16,10 +16,11 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-
+import org.uqbar.arena.widgets.List
 import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.arena.bindings.NotNullObservable
 
 class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
@@ -70,6 +71,12 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		]
 
+		new List(mainPanel) => [
+			bindItemsToProperty("platoSeleccionado.ingredientesExtras")
+		]
+		
+		agregarQuitarAdicional(mainPanel)
+
 		new Label(mainPanel) => [
 
 			text = "Agregados"
@@ -115,14 +122,14 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		new Label(panelPrecio) => [
 
 			text = precioPlato
-//			value <=> "platoSeleccionado.precio"
+
 		]
 
 	}
 
 	def String precioPlato() {
 
-		"$".concat(modelObject.platoSeleccionado.precio.toString)
+		"$".concat(modelObject.precio.toString)
 
 	}
 
@@ -148,6 +155,33 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		
 		this.accept
 		
+	}
+	
+		private def void agregarQuitarAdicional(Panel panelDeIngredientes) {
+
+		val elementSelected = new NotNullObservable("ingredienteSeleccionado")
+
+		val actionsPanel = new Panel(panelDeIngredientes).layout = new HorizontalLayout
+
+		new Button(actionsPanel) => [
+			caption = "Agregar Adicional"
+			onClick [|agregarAdicional()]
+			bindEnabled(elementSelected)
+		]
+
+		new Button(actionsPanel) => [
+			caption = "Quitar Adicional"
+			onClick [|quitarAdicional()]
+			bindEnabled(elementSelected)
+		]
+	}
+	
+	private def boolean agregarAdicional() {
+		modelObject.agregarIngrediente()
+	}
+
+	private def boolean quitarAdicional() {
+		modelObject.quitarIngrediente()
 	}
 
 	private def void creacionTablaDeAgregados(Table<Ingrediente> tablaDeAgregados) {

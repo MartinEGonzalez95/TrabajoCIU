@@ -53,7 +53,6 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 		new List(panelDeIngredientes) => [
 			bindItemsToProperty("pizzaSeleccionada.ingredientes")
-
 		]
 		creacionTablaDeIngredientes(panelDeIngredientes)
 
