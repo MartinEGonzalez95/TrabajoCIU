@@ -15,14 +15,16 @@ class ControladorPizzaAdicionales {
 	List<Ingrediente> ingredientes = newArrayList()
 	Ingrediente ingredienteSeleccionado = null
 
+	List<Ingrediente> ingredientesParaAgregar = newArrayList()
+
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
 
 	Pizza pizzaSeleccionada = null
 
 	new(Pizza pizzaSeleccionada) {
-		this.ingredientes = getRepoIngredientes.cargar()
+		this.ingredientes = repoIngredientes.cargar()
 		this.pizzaSeleccionada = pizzaSeleccionada
-
+		this.ingredientesParaAgregar.addAll(pizzaSeleccionada.ingredientes)
 	}
 
 	def getRepoIngredientes() {
@@ -30,13 +32,13 @@ class ControladorPizzaAdicionales {
 	}
 
 	def agregarIngrediente() {
-		if (!pizzaSeleccionada.ingredientes.contains(ingredienteSeleccionado)) {
-			pizzaSeleccionada.agregarIngrediente(ingredienteSeleccionado)
+		if (!ingredientesParaAgregar.contains(ingredienteSeleccionado)) {
+			ingredientesParaAgregar.add(ingredienteSeleccionado)
 		}
 	}
 
 	def quitarIngrediente() {
-		pizzaSeleccionada.eliminarIngrediente(ingredienteSeleccionado)
+		ingredientesParaAgregar.remove(ingredienteSeleccionado)
 	}
 
 }
