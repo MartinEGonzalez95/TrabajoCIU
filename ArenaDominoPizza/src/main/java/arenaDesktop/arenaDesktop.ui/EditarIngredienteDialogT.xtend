@@ -13,6 +13,7 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.windows.WindowOwner
 import repositorios.RepoIngrediente
+import arenaDesktop.arenaDesktop.model.FiltroSoloDeLetras
 
 class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
@@ -31,7 +32,8 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 		val panelDerecho = new Panel(mainPanel)
 
-		new TextBox(panelDerecho) => [
+		new TextBox(panelDerecho).withFilter(new FiltroSoloDeLetras) => [
+
 			value <=> "nombre"
 		]
 		new NumericField(panelDerecho) => [

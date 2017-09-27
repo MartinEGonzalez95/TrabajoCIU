@@ -16,10 +16,12 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.List
-import org.uqbar.arena.windows.MessageBox
+
 import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+
+import arenaDesktop.arenaDesktop.model.FiltroSoloDeLetras
 
 class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
@@ -126,7 +128,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		new Label(panelIzquierdo).text = "Precio Base"
 
 		val panelDerecho = new Panel(panelDePizzas)
-		new TextBox(panelDerecho) => [
+		new TextBox(panelDerecho).withFilter(new FiltroSoloDeLetras) => [
 			value <=> "pizzaSeleccionada.nombre"
 		]
 		new NumericField(panelDerecho) => [
@@ -140,7 +142,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		new Button(actions) => [
 			caption = "Aceptar"
 			onClick [|this.aceptar]
-
+			disableOnError
 		]
 
 		new Button(actions) => [
