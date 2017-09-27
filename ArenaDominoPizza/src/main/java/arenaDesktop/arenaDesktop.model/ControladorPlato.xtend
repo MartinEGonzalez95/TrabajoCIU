@@ -48,10 +48,9 @@ class ControladorPlato extends ControladorMenu {
 		listaDeTamaños
 
 	}
-	
-	def agregarPlato(){
+
+	def agregarPlato() {
 		pedido.agregarPlato(platoSeleccionado)
 	}
-	
 
 }

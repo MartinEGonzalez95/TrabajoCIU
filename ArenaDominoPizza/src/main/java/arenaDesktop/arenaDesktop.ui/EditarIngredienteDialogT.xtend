@@ -14,43 +14,30 @@ import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.windows.WindowOwner
 import repositorios.RepoIngrediente
 import arenaDesktop.arenaDesktop.model.FiltroSoloDeLetras
+import org.uqbar.arena.layout.ColumnLayout
 
 class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	new(WindowOwner laVentanaMenu, Ingrediente ingredienteSeleccionado) {
 		super(laVentanaMenu, ingredienteSeleccionado)
+		this.title = "Editar Ingrediente"
 	}
 
 	override createFormPanel(Panel mainPanel) {
 
-		this.title = "Editar Ingrediente"
+		val panel = new Panel(mainPanel).layout = new ColumnLayout(2)
 
-		val panelIzquierdo = new Panel(mainPanel)
+		new Label(panel).text = "Nombre"
 
-		new Label(panelIzquierdo).text = "Nombre"
-		new Label(panelIzquierdo).text = "Precio"
-
-		val panelDerecho = new Panel(mainPanel)
-
-		new TextBox(panelDerecho).withFilter(new FiltroSoloDeLetras) => [
-
+		new TextBox(panel).withFilter(new FiltroSoloDeLetras) => [
 			value <=> "nombre"
 		]
-		new NumericField(panelDerecho) => [
+
+		new Label(panel).text = "Precio"
+
+		new NumericField(panel) => [
 			value <=> "precio"
-
 		]
-	}
-
-	def getRepoIngredientes() {
-
-		RepoIngrediente.getRepo
-	}
-
-	override executeTask() {
-		getRepoIngredientes.modificar(modelObject)
-
-		super.executeTask()
 	}
 
 	override protected void addActions(Panel actions) {
@@ -65,6 +52,17 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 			caption = "Cancelar"
 			onClick [|this.cancel]
 		]
+	}
+
+	def getRepoIngredientes() {
+
+		RepoIngrediente.getRepo
+	}
+
+	override executeTask() {
+		repoIngredientes.modificar(modelObject)
+
+		super.executeTask()
 	}
 
 	def void aceptar() {
