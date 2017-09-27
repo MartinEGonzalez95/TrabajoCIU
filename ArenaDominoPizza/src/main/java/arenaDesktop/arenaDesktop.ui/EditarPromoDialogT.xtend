@@ -35,6 +35,8 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	}
 
 	override executeTask() {
+		modelObject.pizzaSeleccionada.ingredientes = modelObject.ingredientesParaAgregar
+
 		getRepoPizza.modificar(modelObject.pizzaSeleccionada)
 
 		super.executeTask()
@@ -52,7 +54,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		val panelDeIngredientes = new Panel(mainPanel)
 
 		new List(panelDeIngredientes) => [
-			bindItemsToProperty("pizzaSeleccionada.ingredientes")
+			bindItemsToProperty("ingredientesParaAgregar")
 		]
 		creacionTablaDeIngredientes(panelDeIngredientes)
 
@@ -65,10 +67,8 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	protected def void crearPanelDeDistribuciones(Panel mainPanel, Panel panelDeIngredientes) {
 		val panelDistribuciones = new Panel(mainPanel).layout = new HorizontalLayout
 		new Label(panelDistribuciones) => [
-
 			text = "Distribuciones:   "
 			alignLeft
-
 		]
 
 		new Selector<Ingrediente>(panelDistribuciones) => [
