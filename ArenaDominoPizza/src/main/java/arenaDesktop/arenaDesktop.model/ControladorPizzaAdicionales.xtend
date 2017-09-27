@@ -34,12 +34,15 @@ class ControladorPizzaAdicionales {
 		pizzaSeleccionada = new Pizza
 	}
 
-	def agregarIngrediente(Ingrediente ingrediente) {
-		pizzaSeleccionada.agregarIngrediente(ingrediente)
+	def agregarIngrediente() {
+		if (!pizzaSeleccionada.ingredientes.contains(ingredienteSeleccionado)) {
+			pizzaSeleccionada.agregarIngrediente(ingredienteSeleccionado)
+		}
+
 	}
 
-	def quitarIngrediente(dominoPizzeria.Ingrediente ingrediente) {
-		pizzaSeleccionada.eliminarIngrediente(ingrediente)
+	def quitarIngrediente() {
+		pizzaSeleccionada.eliminarIngrediente(ingredienteSeleccionado)
 	}
 
 }

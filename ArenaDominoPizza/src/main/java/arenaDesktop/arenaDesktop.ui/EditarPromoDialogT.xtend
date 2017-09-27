@@ -107,12 +107,12 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 	}
 
-	protected def boolean agregarAdicional() {
-		modelObject.agregarIngrediente(modelObject.ingredienteSeleccionado)
+	private def boolean agregarAdicional() {
+		modelObject.agregarIngrediente()
 	}
 
-	protected def boolean quitarAdicional() {
-		modelObject.quitarIngrediente(modelObject.ingredienteSeleccionado)
+	private def boolean quitarAdicional() {
+		modelObject.quitarIngrediente()
 	}
 
 	protected def void crearPanelDePizzas(Panel mainPanel) {
@@ -123,7 +123,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		val panelIzquierdo = new Panel(panelDePizzas)
 
 		new Label(panelIzquierdo).text = "Nombre"
-		new Label(panelIzquierdo).text = "precioBase"
+		new Label(panelIzquierdo).text = "Precio Base"
 
 		val panelDerecho = new Panel(panelDePizzas)
 		new TextBox(panelDerecho) => [
@@ -131,6 +131,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 		new NumericField(panelDerecho) => [
 			value <=> "pizzaSeleccionada.precioBase"
+
 		]
 
 	}
