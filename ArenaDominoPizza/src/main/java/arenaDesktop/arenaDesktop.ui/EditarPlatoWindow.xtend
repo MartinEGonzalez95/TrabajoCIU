@@ -77,6 +77,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 			alignLeft
 
 		]
+			
 		val panelDeAgregados = new Panel(mainPanel)
 		panelDeAgregados.layout = new VerticalLayout()
 		
@@ -87,6 +88,18 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 		creacionTablaDeAgregados(tablaDeAgregados)
+		
+		new Label(panelDeAgregados) => [
+			
+			text = "Distribucion:"
+			alignLeft
+			
+		]
+		
+		new Selector<Ingrediente>(panelDeAgregados) => [
+			value <=> "ingredienteSeleccionado.distribucion"
+			items <=> "distribuciones"
+		]
 
 		val panelPrecio = new Panel(mainPanel)
 		panelPrecio.layout = new HorizontalLayout()
@@ -103,7 +116,6 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 			text = precioPlato
 //			value <=> "platoSeleccionado.precio"
-
 		]
 
 	}
