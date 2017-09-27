@@ -57,6 +57,7 @@ class BootstrapDesktop implements Bootstrap {
 			cliente = new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho")
 			formaDeEnvio = new RetiroPorLocal
 			platos = unosPlatos
+			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 			
 		repo.agregar(new Pedido(2) => [
