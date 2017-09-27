@@ -28,7 +28,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 	new(WindowOwner owner, ControladorPlato modelObject) {
 
 		super(owner, modelObject)
-		title = "Plato"
+		title = "Editar plato"
 
 	}
 
@@ -70,17 +70,16 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		]
 
-		val panelDeAgregados = new Panel(mainPanel)
-		panelDeAgregados.layout = new VerticalLayout()
-
-		new Label(panelTamaño) => [
+		new Label(mainPanel) => [
 
 			text = "Agregados"
 			width = 100
 			alignLeft
 
 		]
-
+		val panelDeAgregados = new Panel(mainPanel)
+		panelDeAgregados.layout = new VerticalLayout()
+		
 		val tablaDeAgregados = new Table<Ingrediente>(panelDeAgregados, typeof(Ingrediente)) => [
 			value <=> "ingredienteSeleccionado"
 			items <=> "ingredientes"
@@ -102,9 +101,8 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		new Label(panelPrecio) => [
 
-			text = precioPlato()
-			width = 100
-			alignCenter
+			text = precioPlato
+//			value <=> "platoSeleccionado.precio"
 
 		]
 
@@ -112,7 +110,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 	def String precioPlato() {
 
-		"$".concat(modelObject.precio.toString)
+		"$".concat(modelObject.platoSeleccionado.precio.toString)
 
 	}
 

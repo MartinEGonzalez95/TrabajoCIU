@@ -15,7 +15,6 @@ class ControladorPlato extends ControladorMenu {
 	Plato platoSeleccionado = null
 	Pedido pedido = null
 
-	@Dependencies("platoSeleccionado.precio")
 	def getPrecio() {
 		if (platoSeleccionado.pizzaBase !== null) {
 			return platoSeleccionado.precio

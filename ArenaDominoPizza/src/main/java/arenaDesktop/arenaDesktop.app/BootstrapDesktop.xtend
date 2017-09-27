@@ -38,7 +38,7 @@ class BootstrapDesktop implements Bootstrap {
 		ingredientes.add(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Muzzarella"
-			it.distribucion = ""
+			it.distribucion = "Todo"
 		])
 		
 		val unosPlatos = new ArrayList<Plato>

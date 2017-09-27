@@ -59,6 +59,14 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 
 		creacionTablaDeIngredientes(panelDeIngredientes)
+		
+		new Label(panelDeIngredientes) => [
+			
+			text = "Distribuciones:"
+			alignLeft
+			
+		]
+		
 		new Selector<Ingrediente>(panelDeIngredientes) => [
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
@@ -83,7 +91,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 
 		new Column<Ingrediente>(tablaDeIngredientes) => [
-			title = "distribucion"
+			title = "Distribucion"
 			fixedSize = 100
 			bindContentsToProperty("distribucion")
 		]

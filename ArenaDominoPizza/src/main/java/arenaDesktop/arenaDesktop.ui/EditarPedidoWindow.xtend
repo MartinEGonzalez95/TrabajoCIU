@@ -1,24 +1,14 @@
 package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorPedido
-import dominoPizzeria.Pizza
-import dominoPizzeria.Plato
-import dominoPizzeria.Tamanio
-import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
-import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.NotNullObservable
-import org.uqbar.arena.layout.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.widgets.TextBox
-import org.uqbar.arena.widgets.tables.Column
-import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import arenaDesktop.arenaDesktop.model.ControladorPlato
 import org.uqbar.arena.windows.Dialog
+import org.uqbar.arena.layout.HorizontalLayout
 
 class EditarPedidoWindow extends VerPedidoWindow {
 
@@ -62,7 +52,6 @@ class EditarPedidoWindow extends VerPedidoWindow {
 		new Button(panelBotones) => [
 			caption = "Agregar"
 			onClick([|new AgregarPlatoWindow(this, this.modelObject.pedido).open])
-
 		]
 
 		new Button(panelBotones) => [
