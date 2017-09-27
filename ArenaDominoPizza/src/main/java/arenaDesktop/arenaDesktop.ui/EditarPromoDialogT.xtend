@@ -15,11 +15,11 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-import repositorios.RepoIngrediente
+import org.uqbar.arena.widgets.List
+import org.uqbar.arena.windows.MessageBox
 import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.widgets.List
 
 class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales> {
 
@@ -58,10 +58,8 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 		creacionTablaDeIngredientes(panelDeIngredientes)
 		new Selector<Ingrediente>(panelDeIngredientes) => [
-
 			value <=> "ingredienteSeleccionado.distribucion"
 			items <=> "distribuciones"
-
 		]
 
 		accionesDelPanelIngredientes(panelDeIngredientes)
@@ -140,15 +138,29 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
 			caption = "Aceptar"
-			onClick [|this.accept]
+			onClick [|this.aceptar]
 
 		]
 
 		new Button(actions) => [
 			caption = "Cancelar"
 			onClick [|this.cancel]
-			setAsDefault
+
 		]
+	}
+
+	def void aceptar() {
+
+		if (!this.pizzaSinTerminar) {
+			this.accept
+		} else {
+			super.showInfo("No dejes la pizza vacía che!")
+		}
+	}
+
+	def boolean pizzaSinTerminar() {
+
+		modelObject.pizzaSeleccionada.nombre.nullOrEmpty
 	}
 
 }

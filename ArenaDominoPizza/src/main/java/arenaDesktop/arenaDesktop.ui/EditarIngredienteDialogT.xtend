@@ -36,6 +36,7 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 		]
 		new NumericField(panelDerecho) => [
 			value <=> "precio"
+
 		]
 	}
 
@@ -53,8 +54,8 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 	override protected void addActions(Panel actions) {
 		new Button(actions) => [
 			caption = "Aceptar"
-			onClick [|this.accept]
-			setAsDefault
+			onClick [|this.aceptar]
+
 			disableOnError
 		]
 
@@ -62,6 +63,20 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 			caption = "Cancelar"
 			onClick [|this.cancel]
 		]
+	}
+
+	def void aceptar() {
+
+		if (!this.ingredienteSinTerminar) {
+			this.accept
+		} else {
+			super.showInfo("No dejes la pizza vacía che!")
+		}
+	}
+
+	def ingredienteSinTerminar() {
+
+		modelObject.nombre.nullOrEmpty
 	}
 
 }
