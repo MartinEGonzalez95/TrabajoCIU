@@ -70,7 +70,7 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 		if (!this.ingredienteSinTerminar) {
 			this.accept
 		} else {
-			super.showInfo("No dejes la pizza vacía che!")
+			super.showInfo("¡No dejes el ingrediente vacío che!")
 		}
 	}
 

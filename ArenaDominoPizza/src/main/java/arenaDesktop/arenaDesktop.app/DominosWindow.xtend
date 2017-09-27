@@ -1,47 +1,62 @@
 package arenaDesktop.arenaDesktop.app
 
+import arenaDesktop.arenaDesktop.model.ControladorPedido
+import arenaDesktop.arenaDesktop.model.ControladorSistema
+import arenaDesktop.arenaDesktop.ui.MenuWindow
+import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
 import dominoPizzeria.Pedido
 import estadosDePedido.EstadoDePedido
-import org.uqbar.arena.layout.ColumnLayout
+import java.text.SimpleDateFormat
+import java.util.Date
+import org.uqbar.arena.bindings.NotNullObservable
+import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.Dialog
+import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.bindings.NotNullObservable
-import java.util.Date
-import arenaDesktop.arenaDesktop.model.ControladorSistema
-import org.uqbar.arena.windows.Dialog
-import java.text.SimpleDateFormat
-import org.uqbar.arena.windows.ErrorsPanel
-import arenaDesktop.arenaDesktop.ui.MenuWindow
-import arenaDesktop.arenaDesktop.model.ControladorMenu
-import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
-import arenaDesktop.arenaDesktop.model.ControladorPedido
 import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 	new(WindowOwner parent) {
-
 		super(parent, new ControladorSistema)
 		this.modelObject.cargar
 	}
 
-	def protected createResultsGrid(Panel panelDeOpcionesDePedido) {
-		val table = new Table<Pedido>(panelDeOpcionesDePedido, typeof(Pedido)) => [
+	override protected createFormPanel(Panel mainPanel) {
+
+		this.title = "Domino's Pizzeria (XTend)"
+
+		new Label(mainPanel) => [
+			text = "Pedidos abiertos"
+			alignLeft
+		]
+		val panelPedidos = new Panel(mainPanel).layout = new HorizontalLayout
+
+		this.crearTablaDePedidos(panelPedidos)
+
+		botonesDePedido(panelPedidos)
+	}
+
+	def protected crearTablaDePedidos(Panel panel) {
+
+		val table = new Table<Pedido>(panel, typeof(Pedido)) => [
 			items <=> "pedidosAbiertos"
 			value <=> "pedidoSeleccionado"
 			numberVisibleRows = 8
 		]
-		this.describeResultsGrid(table)
+		this.crearColumnasDeTablaPedidos(table)
 	}
 
-	def void describeResultsGrid(Table<Pedido> table) {
+	def void crearColumnasDeTablaPedidos(Table<Pedido> table) {
 
 		new Column<Pedido>(table) => [
 			title = "Pedido"
@@ -60,7 +75,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		new Column<Pedido>(table) => [
 			title = "Monto"
 			fixedSize = 200
-			bindContentsToProperty("montoFinal").transformer = [double montoFinal | "$" + montoFinal.toString]
+			bindContentsToProperty("montoFinal").transformer = [double montoFinal|"$" + montoFinal.toString]
 		]
 
 		new Column<Pedido>(table) => [
@@ -73,43 +88,12 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		]
 	}
 
-	override createContents(Panel mainPanel) {
-
-		this.title = "Domino's Pizzeria (XTend)"
-
-		mainPanel.layout = new ColumnLayout(2)
-
-		val panelIzquierdo = new Panel(mainPanel)
-
-		new ErrorsPanel(panelIzquierdo, "")
-
-		val labelPedidosAbiertos = new Label(panelIzquierdo).text = "Pedidos abiertos"
-		labelPedidosAbiertos.alignLeft
-
-		this.createResultsGrid(panelIzquierdo)
-
-		new Button(panelIzquierdo) => [
-			caption = "Menu"
-			onClick [|new MenuWindow(this).open]
-		]
-
-		new Button(panelIzquierdo) => [
-			caption = "Pedidos Cerrados"
-			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
-		]
-
-		val panelDeOpcionesDePedido = new Panel(mainPanel)
-
-		botonesDePedido(panelDeOpcionesDePedido)
-
-	}
-
 	def intentarAvanzar() {
 
 		try {
 			this.modelObject.pedidoSeleccionado.avanzar
 			this.modelObject.updatePedidos
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			taskDescription = "No se puede avanzar"
 		}
 
@@ -120,12 +104,12 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		try {
 			this.modelObject.pedidoSeleccionado.retroceder
 			this.modelObject.updatePedidos
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			new ErrorsPanel(panelDeOpcionesDePedido, "No se puede retroceder")
 		}
 
 	}
-	
+
 	def intentarCancelar() {
 
 		try {
@@ -137,13 +121,14 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 	}
 
-	protected def Button botonesDePedido(Panel panelDeOpcionesDePedido) {
-
+	protected def Button botonesDePedido(Panel mainPanel) {
 		val elementSelected = new NotNullObservable("pedidoSeleccionado")
+
+		val panelDeOpcionesDePedido = new Panel(mainPanel).layout = new VerticalLayout
 
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "<<<<"
-			onClick [|this.intentarRetroceder(panelDeOpcionesDePedido)]
+			onClick [|this.intentarRetroceder(mainPanel)]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [
@@ -151,6 +136,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 			onClick [|this.intentarAvanzar]
 			bindEnabled(elementSelected)
 		]
+
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Cancelar"
 			onClick [|this.intentarCancelar]
@@ -158,13 +144,13 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		]
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Editar"
-			onClick [|this.openDialog(new EditarPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))]
+			onClick [|
+				this.openDialog(
+					new EditarPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))
+			]
 			bindEnabled(elementSelected)
 		]
-		new Button(panelDeOpcionesDePedido) => [
-			caption = "Salir"
-			onClick [|this.close]
-		]
+
 	}
 
 	def openDialog(Dialog<?> dialog) {
@@ -172,11 +158,25 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected addActions(Panel actionsPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+
+		new Button(actionsPanel) => [
+			caption = "Menu"
+			onClick [|abrirMenu()]
+		]
+
+		new Button(actionsPanel) => [
+			caption = "Pedidos Cerrados"
+			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
+		]
+		new Button(actionsPanel) => [
+			caption = "Salir"
+			onClick [|this.close]
+		]
+
 	}
 
-	override protected createFormPanel(Panel mainPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	protected def void abrirMenu() {
+		new MenuWindow(this).open
 	}
 
 }
