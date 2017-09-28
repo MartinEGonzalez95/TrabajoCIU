@@ -30,20 +30,18 @@ class ControladorMenu {
 		return RepoIngrediente.getRepo
 	}
 
-	def void cargar()
-	{
-		
+	def void cargar() {
+
 		cargarIngredientes()
 		cargarPizzas()
-		
-		if (!pizzas.empty || !ingredientes.empty)
-		{
-			
+
+		if (!pizzas.empty || !ingredientes.empty) {
+
 			pizzaSeleccionada = pizzas.get(0)
 			ingredienteSeleccionado = ingredientes.get(0)
-			
+
 		}
-		
+
 	}
 
 	def List<Pizza> cargarPizzas() {

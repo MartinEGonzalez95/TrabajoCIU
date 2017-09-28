@@ -23,6 +23,8 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
+import arenaDesktop.arenaDesktop.ui.ImagenWindow
+import arenaDesktop.arenaDesktop.model.Imagen
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -145,8 +147,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Editar"
 			onClick [|
-				this.openDialog(
-					new EditarPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))
+				this.openDialog(new EditarPedidoWindow(this, new ControladorPedido(modelObject.pedidoSeleccionado)))
 			]
 			bindEnabled(elementSelected)
 		]
@@ -169,7 +170,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 			caption = "Pedidos Cerrados"
 			modelObject.pedidoSeleccionado = null
 			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
-			]
+		]
 		new Button(actionsPanel) => [
 			caption = "Salir"
 			onClick [|this.close]
