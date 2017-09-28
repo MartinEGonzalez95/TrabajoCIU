@@ -49,7 +49,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		]
 		new List(mainPanel) => [
-			bindItemsToProperty("platoSeleccionado.ingredientesExtras")
+			bindItemsToProperty("ingredientesParaAgregar")
 
 		]
 

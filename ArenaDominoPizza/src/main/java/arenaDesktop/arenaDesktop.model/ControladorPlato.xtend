@@ -8,9 +8,10 @@ import java.util.List
 import org.uqbar.commons.model.annotations.Dependencies
 import dominoPizzeria.Pedido
 import dominoPizzeria.Ingrediente
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class ControladorPlato extends ControladorMenu {
 
 	Plato platoSeleccionado = null
