@@ -16,8 +16,10 @@ class ControladorPedido {
 	Pedido pedido
 
 	new(Pedido unPedido) {
+		
 		pedido = unPedido
 
 	}
+	
 
 }

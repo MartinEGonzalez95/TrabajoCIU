@@ -24,7 +24,7 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 
 	override executeTask() {
 
-		if (!this.platoSinTerminar) {
+		if (!modelObject.platoSinTerminar) {
 
 			RepoPedido.repo.modificar(modelObject.agregarPlato)
 
@@ -38,10 +38,6 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 	override void aceptar() {
 		this.accept
 
-	}
-
-	def platoSinTerminar() {
-		modelObject.platoSeleccionado === null || modelObject.platoSeleccionado.pizzaBase === null
 	}
 
 }

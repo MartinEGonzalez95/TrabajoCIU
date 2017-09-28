@@ -79,4 +79,8 @@ class ControladorPlato extends ControladorMenu {
 		ObservableUtils.firePropertyChanged(this, "precio")
 	}
 
+	def platoSinTerminar() {
+		platoSeleccionado === null || platoSeleccionado.pizzaBase === null
+	}
+	
 }

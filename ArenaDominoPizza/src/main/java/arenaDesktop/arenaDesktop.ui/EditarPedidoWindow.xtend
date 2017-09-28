@@ -92,7 +92,8 @@ class EditarPedidoWindow extends VerPedidoWindow {
 	}
 
 	def openDialog(Dialog<?> dialog) {
-
+		
+		
 		dialog.open
 	}
 

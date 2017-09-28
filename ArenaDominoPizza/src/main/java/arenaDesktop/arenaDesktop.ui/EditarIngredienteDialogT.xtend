@@ -73,16 +73,12 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	def void aceptar() {
 
-		if (!this.ingredienteSinTerminar) {
+		if (modelObject.completo) {
 			this.accept
 		} else {
 			super.showInfo("¡No dejes el ingrediente vacío che!")
 		}
 	}
 
-	def ingredienteSinTerminar() {
-
-		modelObject.nombre.nullOrEmpty
-	}
 
 }

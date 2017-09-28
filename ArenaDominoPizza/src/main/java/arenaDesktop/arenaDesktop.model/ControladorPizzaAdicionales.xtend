@@ -42,9 +42,10 @@ class ControladorPizzaAdicionales {
 		ingredientesParaAgregar.remove(ingredienteSeleccionado)
 	}
 
-	def boolean pizzaSinTerminar() {
+	def boolean pizzaTerminada() {
 
-		pizzaSeleccionada.nombre.nullOrEmpty
+		!pizzaSeleccionada.nombre.nullOrEmpty
+	
 	}
 
 }

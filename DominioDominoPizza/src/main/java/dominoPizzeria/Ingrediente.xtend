@@ -21,5 +21,11 @@ class Ingrediente {
 	override toString(){
 		nombre
 	}
+	
+	def completo() {
+
+		!nombre.nullOrEmpty
+	
+	}
 
 }

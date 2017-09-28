@@ -188,7 +188,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	def void aceptar() {
 
-		if (!modelObject.pizzaSinTerminar) {
+		if (modelObject.pizzaTerminada) {
 			this.accept
 			
 		} else {
