@@ -15,7 +15,6 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.WindowOwner
-import repositorios.RepoPizza
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
@@ -81,8 +80,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		new Label(panelPrecio) => [
 
-			text = precioPlato
-
+			value <=> "precio"
 		]
 	}
 
@@ -143,10 +141,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 		new Selector<Pizza>(panelPizza) => [
+			
 			allowNull(false)
 			value <=> "platoSeleccionado.pizzaBase"
 			items <=> "pizzas"
-
+			
 		]
 	}
 
@@ -175,11 +174,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 	}
 
-	private def boolean agregarAdicional() {
+	private def  agregarAdicional() {
 		modelObject.agregarIngrediente()
 	}
 
-	private def boolean quitarAdicional() {
+	private def  quitarAdicional() {
 		modelObject.quitarIngrediente()
 	}
 

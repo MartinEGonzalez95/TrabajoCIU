@@ -8,6 +8,7 @@ import org.uqbar.commons.model.annotations.Dependencies
 import dominoPizzeria.Pedido
 import dominoPizzeria.Ingrediente
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.utils.ObservableUtils
 
 @Accessors
 @TransactionalAndObservable
@@ -18,7 +19,7 @@ class ControladorPlato extends ControladorMenu {
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
 	List<Ingrediente> ingredientesParaAgregar = newArrayList()
 
-
+	@Dependencies("platoSeleccionado.precio")
 	def getPrecio() {
 		if (platoSeleccionado.pizzaBase !== null) {
 			return platoSeleccionado.precio
@@ -26,6 +27,13 @@ class ControladorPlato extends ControladorMenu {
 			return 0
 		}
 
+	}
+
+	def setPlatoSeleccionado(Plato unPlato){
+		
+		platoSeleccionado = unPlato
+		ObservableUtils.firePropertyChanged(this, "precio")
+		
 	}
 
 	new(Plato unPlato) {
@@ -55,17 +63,20 @@ class ControladorPlato extends ControladorMenu {
 	
 	def agregarPlato(){
 		pedido.agregarPlato(platoSeleccionado)
+		ObservableUtils.firePropertyChanged(this, "precio")
 		pedido
 	}
 	
-	def agregarIngrediente() {
+	def void agregarIngrediente() {
 		if (!platoSeleccionado.ingredientesExtras.contains(ingredienteSeleccionado)) {
 			platoSeleccionado.agregarAdicional(ingredienteSeleccionado)
+			ObservableUtils.firePropertyChanged(this, "precio")
 		}
 	}
 
-	def quitarIngrediente() {
+	def void quitarIngrediente() {
 		platoSeleccionado.eliminarAdicional(ingredienteSeleccionado)
+		ObservableUtils.firePropertyChanged(this, "precio")
 	}
 
 }

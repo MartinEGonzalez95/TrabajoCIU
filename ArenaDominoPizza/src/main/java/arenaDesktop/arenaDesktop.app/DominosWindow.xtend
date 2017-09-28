@@ -22,6 +22,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import javax.mail.MessagingException
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -96,6 +97,11 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		} catch (RuntimeException e) {
 			super.showInfo(e.message)
 		}
+		catch(MessagingException e){
+			
+			super.showInfo(e.message)
+			
+		}
 
 	}
 
@@ -167,8 +173,9 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(actionsPanel) => [
 			caption = "Pedidos Cerrados"
-			modelObject.pedidoSeleccionado = null // Que tiene para que no ande! //
-			onClick [|new PedidosCerradosWindow(this, modelObject).open]
+			onClick [|modelObject.pedidoSeleccionado = null
+				new PedidosCerradosWindow(this, modelObject).open
+			]
 		]
 		new Button(actionsPanel) => [
 			caption = "Salir"
