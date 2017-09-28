@@ -58,9 +58,25 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	private def void crearPanelDeIngredientes(Panel mainPanel) {
 
 		val panelDeIngredientes = new Panel(mainPanel)
+		
+		new Label(panelDeIngredientes) => [
+
+			text = "Adicionales agregados:"
+			width = 100
+			alignLeft
+
+		]
 
 		new List(panelDeIngredientes) => [
 			bindItemsToProperty("ingredientesParaAgregar")
+		]
+		
+		new Label(panelDeIngredientes) => [
+
+			text = "Adicionales disponibles:"
+			width = 100
+			alignLeft
+
 		]
 		creacionTablaDeIngredientes(panelDeIngredientes)
 
