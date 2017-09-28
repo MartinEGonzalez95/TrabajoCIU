@@ -122,7 +122,7 @@ class TestPedido
 		catch (RuntimeException excepcionPorEstadoEnPreparando)
 		{
 			
-			assertEquals(excepcionPorEstadoEnPreparando.message, "No Se Puede Retroceder Un Pedido En Preparacion!")
+			assertEquals(excepcionPorEstadoEnPreparando.message, "¡No se puede retroceder un pedido en preparacion!")
 			
 		}
 		
@@ -262,7 +262,7 @@ class TestPedido
 		catch (RuntimeException excepcionPorPedidoEntregado)
 		{
 			
-			assertEquals(excepcionPorPedidoEntregado.message, "El Pedido Ya Fue Entregado!")
+			assertEquals(excepcionPorPedidoEntregado.message, "¡El pedido ya fue entregado!")
 			
 		}
 		
@@ -280,7 +280,7 @@ class TestPedido
 		catch (RuntimeException excepcionPorPedidoEntregado)
 		{
 			
-			assertEquals(excepcionPorPedidoEntregado.message, "El Pedido Ya Fue Entregado!")
+			assertEquals(excepcionPorPedidoEntregado.message, "¡El pedido ya fue entregado!")
 			
 		}
 		
@@ -298,7 +298,7 @@ class TestPedido
 		catch (RuntimeException excepcionPorPedidoCerrado)
 		{
 			
-			assertEquals(excepcionPorPedidoCerrado.message, "El Pedido Se Encuentra Cerrado!")
+			assertEquals(excepcionPorPedidoCerrado.message, "¡El pedido se encuentra cerrado!")
 			
 		}
 		
@@ -316,7 +316,7 @@ class TestPedido
 		catch (RuntimeException excepcionPorPedidoCerrado)
 		{
 			
-			assertEquals(excepcionPorPedidoCerrado.message, "El Pedido Se Encuentra Cerrado!")
+			assertEquals(excepcionPorPedidoCerrado.message, "¡El pedido se encuentra cerrado!")
 			
 		}
 		
