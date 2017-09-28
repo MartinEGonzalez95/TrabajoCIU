@@ -45,6 +45,8 @@ class ControladorSistema {
 		pedidos = repoPedido.cargar
 
 		updatePedidos
+		
+		if(!pedidos.isEmpty){pedidoSeleccionado = pedidos.get(pedidos.length - 1)}
 
 	}
 

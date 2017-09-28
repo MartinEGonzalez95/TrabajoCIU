@@ -107,11 +107,11 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 	def void panelAclaraciones(Panel aclaracionPanel) {
 
 		new Label(aclaracionPanel) => [
-			text = "Aclaraciones"
+			text = "Aclaraciones:"
 			alignLeft
 		]
 
-		new TextBox(aclaracionPanel) => [
+		new Label(aclaracionPanel) => [
 			value <=> "pedido.aclaraciones"
 			width = 200
 			alignLeft

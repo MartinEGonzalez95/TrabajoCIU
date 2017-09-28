@@ -16,17 +16,32 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 		title = "Agregar Plato"
 	}
 
-	override titulo(){
-		
+	override titulo() {
+
 		title = "Agregar pedido"
-		
+
 	}
 
 	override executeTask() {
 
-		RepoPedido.repo.modificar(modelObject.agregarPlato)			
-	
+		if (!this.platoSinTerminar) {
+
+			RepoPedido.repo.modificar(modelObject.agregarPlato)
+
+		} else {
+			super.showInfo("No dejes el plato vacío che!")
+		}
+
 		super.executeTask()
+	}
+
+	override void aceptar() {
+		this.accept
+
+	}
+
+	def platoSinTerminar() {
+		modelObject.platoSeleccionado === null || modelObject.platoSeleccionado.pizzaBase === null
 	}
 
 }

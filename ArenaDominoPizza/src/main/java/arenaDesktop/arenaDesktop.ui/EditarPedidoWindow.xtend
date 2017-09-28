@@ -9,6 +9,8 @@ import org.uqbar.arena.windows.WindowOwner
 import arenaDesktop.arenaDesktop.model.ControladorPlato
 import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.layout.HorizontalLayout
+import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import org.uqbar.arena.widgets.TextBox
 
 class EditarPedidoWindow extends VerPedidoWindow {
 
@@ -21,6 +23,21 @@ class EditarPedidoWindow extends VerPedidoWindow {
 	override titulo(){
 		
 		title = "Editar pedido"
+		
+	}
+
+	override panelAclaraciones(Panel aclaracionPanel){
+		
+		new Label(aclaracionPanel) => [
+			text = "Aclaraciones"
+			alignLeft
+		]
+
+		new TextBox(aclaracionPanel) => [
+			value <=> "pedido.aclaraciones"
+			width = 200
+			alignLeft
+		]
 		
 	}
 
