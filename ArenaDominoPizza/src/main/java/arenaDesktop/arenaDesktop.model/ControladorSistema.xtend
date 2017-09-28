@@ -1,16 +1,10 @@
 package arenaDesktop.arenaDesktop.model
 
-
 import dominoPizzeria.Pedido
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-
-import dominoPizzeria.Cliente
-import formaDeEnvioPedido.RetiroPorLocal
 import org.uqbar.commons.model.annotations.Observable
 import repositorios.RepoPedido
-import java.util.List
-import formaDeEnvioPedido.Delivery
-
 
 @Accessors
 @Observable

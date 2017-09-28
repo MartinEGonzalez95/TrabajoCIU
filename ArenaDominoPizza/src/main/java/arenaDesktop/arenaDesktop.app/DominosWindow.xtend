@@ -2,6 +2,7 @@ package arenaDesktop.arenaDesktop.app
 
 import arenaDesktop.arenaDesktop.model.ControladorPedido
 import arenaDesktop.arenaDesktop.model.ControladorSistema
+import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
 import arenaDesktop.arenaDesktop.ui.MenuWindow
 import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
 import dominoPizzeria.Pedido
@@ -17,14 +18,10 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.Dialog
-import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
-import arenaDesktop.arenaDesktop.ui.ImagenWindow
-import arenaDesktop.arenaDesktop.model.Imagen
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 
@@ -169,8 +166,8 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(actionsPanel) => [
 			caption = "Pedidos Cerrados"
-			modelObject.pedidoSeleccionado = null
-			onClick [|new PedidosCerradosWindow(this, this.modelObject).open]
+			modelObject.pedidoSeleccionado = null // Que tiene para que no ande! //
+			onClick [|new PedidosCerradosWindow(this, modelObject).open]
 		]
 		new Button(actionsPanel) => [
 			caption = "Salir"

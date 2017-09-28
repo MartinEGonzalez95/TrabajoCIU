@@ -138,7 +138,7 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 			alignLeft
 		]
 		new Label(panelInfo) => [
-			value <=> "pedido.formaDeEnvio.costo"
+			text = this.costoDeEnvioToString()
 			alignLeft
 		]
 
@@ -163,6 +163,10 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 
 	def montoFinalToString() {
 		"$" + modelObject.pedido.montoFinal.toString
+	}
+
+	def costoDeEnvioToString() {
+		"$" + modelObject.pedido.formaDeEnvio.costo.toString
 	}
 
 	def fechaCreacionPedido() {
