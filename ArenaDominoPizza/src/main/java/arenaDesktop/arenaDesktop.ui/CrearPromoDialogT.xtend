@@ -8,7 +8,12 @@ class CrearPromoDialogT extends EditarPromoDialogT {
 
 	new(WindowOwner window) {
 		super(window, new ControladorPizzaAdicionales(new Pizza))
-		this.title = "Crear Promocion"
+	}
+	
+	override titulo(){
+		
+		title = "Crear Promocion"
+		
 	}
 	
 	 override executeTask() {

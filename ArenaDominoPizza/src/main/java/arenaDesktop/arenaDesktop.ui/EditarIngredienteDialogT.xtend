@@ -20,10 +20,17 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	new(WindowOwner laVentanaMenu, Ingrediente ingredienteSeleccionado) {
 		super(laVentanaMenu, ingredienteSeleccionado)
-		this.title = "Editar Ingrediente"
+	}
+
+	def titulo(){
+		
+		title = "Editar ingrediente"
+		
 	}
 
 	override createFormPanel(Panel mainPanel) {
+
+		titulo
 
 		val panel = new Panel(mainPanel).layout = new ColumnLayout(2)
 

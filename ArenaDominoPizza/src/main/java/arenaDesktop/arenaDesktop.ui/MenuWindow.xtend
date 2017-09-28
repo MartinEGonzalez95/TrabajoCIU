@@ -25,7 +25,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	new(WindowOwner parent) {
 		super(parent, new ControladorMenu)
-		this.title = "Menu"
+	
 	}
 
 	override protected addActions(Panel actionsPanel) {
@@ -36,7 +36,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-
+	this.title = "Menu"
 		val promociociones = new Label(mainPanel).text = "Promociones"
 		promociociones.alignLeft
 		val panelSuperior = new Panel(mainPanel)

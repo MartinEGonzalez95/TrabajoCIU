@@ -7,7 +7,12 @@ class CrearIngredienteDialogT extends EditarIngredienteDialogT {
 
 	new(WindowOwner laVentanaMenu) {
 		super(laVentanaMenu, new Ingrediente)
-		this.title = "Crear Ingrediente"
+	}
+
+	override titulo(){
+		
+		title = "Crear Ingrediente"
+		
 	}
 
 	override executeTask() {

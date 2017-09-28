@@ -33,15 +33,8 @@ class ControladorPizzaAdicionales {
 
 	def agregarIngrediente() {
 		
-		//Se "clona" el ingrediente para que no se pise la distribucion del ingrediente cada vez que se edite.
-		val ingredienteClonado = new Ingrediente => [
-			it.precio = ingredienteSeleccionado.precio
-			it.nombre = ingredienteSeleccionado.nombre
-			it.distribucion = ingredienteSeleccionado.distribucion
-		]
-		
 		if (!ingredientesParaAgregar.contains(ingredienteSeleccionado)) {
-			ingredientesParaAgregar.add(ingredienteClonado)
+			ingredientesParaAgregar.add(ingredienteSeleccionado)
 		}
 	}
 

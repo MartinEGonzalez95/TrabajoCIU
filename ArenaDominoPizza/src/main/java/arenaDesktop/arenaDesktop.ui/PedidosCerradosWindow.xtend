@@ -27,10 +27,14 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-		this.title = "Domino´s Pizza (XTend)"
+		this.title = "Domino´s Pizza"
 		mainPanel.layout = new VerticalLayout
 
-		new Label(mainPanel).text = "Pedidos cerrados"
+		new Label(mainPanel) => [
+			text =  "Pedidos cerrados"
+			alignLeft
+			fontSize = 12
+		]
 
 		this.createResultsGrid(mainPanel)
 	}

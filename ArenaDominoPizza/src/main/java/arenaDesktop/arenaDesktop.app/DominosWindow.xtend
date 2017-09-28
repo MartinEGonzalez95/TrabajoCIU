@@ -34,12 +34,13 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-
-		this.title = "Domino's Pizzeria (XTend)"
+		
+		this.title = "Domino's Pizzeria"
 
 		new Label(mainPanel) => [
 			text = "Pedidos abiertos"
 			alignLeft
+			fontSize = 12
 		]
 		val panelPedidos = new Panel(mainPanel).layout = new HorizontalLayout
 
@@ -96,7 +97,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 			this.modelObject.pedidoSeleccionado.avanzar
 			this.modelObject.updatePedidos
 		} catch (RuntimeException e) {
-			taskDescription = "No se puede avanzar"
+			super.showInfo(e.message)
 		}
 
 	}
@@ -107,7 +108,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 			this.modelObject.pedidoSeleccionado.retroceder
 			this.modelObject.updatePedidos
 		} catch (RuntimeException e) {
-			new ErrorsPanel(panelDeOpcionesDePedido, "No se puede retroceder")
+			super.showInfo(e.message)
 		}
 
 	}
@@ -117,8 +118,8 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		try {
 			this.modelObject.pedidoSeleccionado.cancelar
 			this.modelObject.updatePedidos
-		} catch (Exception e) {
-			taskDescription = "No se puede cancelar"
+		} catch (RuntimeException e) {
+			super.showInfo(e.message)
 		}
 
 	}

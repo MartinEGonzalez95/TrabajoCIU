@@ -23,12 +23,20 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 	new(WindowOwner owner, ControladorPedido controladorPedidoModel) {
 
 		super(owner, controladorPedidoModel)
-		title = "Ver/Editar Pedido"
 
+
+	}
+
+	def titulo(){
+		
+		title = "Ver Pedido"
+		
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
+		titulo
+	
 		panelEstado(mainPanel)
 
 		new Label(mainPanel) => [

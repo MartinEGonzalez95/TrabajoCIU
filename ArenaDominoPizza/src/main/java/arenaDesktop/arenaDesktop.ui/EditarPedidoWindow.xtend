@@ -18,9 +18,15 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 	}
 
+	override titulo(){
+		
+		title = "Editar pedido"
+		
+	}
+
 	override protected createFormPanel(Panel mainPanel) {
 
-//		title = "Editar pedido"
+		titulo
 
 		panelEstado(mainPanel)
 

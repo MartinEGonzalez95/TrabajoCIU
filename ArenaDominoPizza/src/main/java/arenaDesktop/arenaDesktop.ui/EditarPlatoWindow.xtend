@@ -24,12 +24,19 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 	new(WindowOwner owner, ControladorPlato modelObject) {
 
 		super(owner, modelObject)
-		title = "Editar plato"
 
+	}
+	
+	def titulo(){
+		
+		title = "Editar plato"
+		
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
+		titulo
+	
 		createPanelPizza(mainPanel)
 
 		createSelectorDetamanio(mainPanel)

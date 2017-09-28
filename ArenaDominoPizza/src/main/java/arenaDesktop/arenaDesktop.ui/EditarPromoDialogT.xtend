@@ -25,8 +25,12 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	new(WindowOwner owner, ControladorPizzaAdicionales controladorDePizzaEIngredientes) {
 		super(owner, controladorDePizzaEIngredientes)
-		this.title = "Editar Promocion"
+	}
 
+	def titulo(){
+		
+		title = "Editar Promocion"
+		
 	}
 
 	def getRepoPizza() {
@@ -43,6 +47,8 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
+
+		titulo
 
 		this.crearPanelDePizzas(mainPanel)
 		this.crearPanelDeIngredientes(mainPanel)
