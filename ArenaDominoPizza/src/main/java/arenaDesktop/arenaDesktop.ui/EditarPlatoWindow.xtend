@@ -231,7 +231,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 	def aceptar() {
 
-		this.accept
-
+			this.accept
+			
 	}
 }

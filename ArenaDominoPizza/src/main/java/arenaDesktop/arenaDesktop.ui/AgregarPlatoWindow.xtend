@@ -23,7 +23,9 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 	}
 
 	override executeTask() {
-		RepoPedido.repo.modificar(modelObject.agregarPlato)
+
+		RepoPedido.repo.modificar(modelObject.agregarPlato)			
+	
 		super.executeTask()
 	}
 

@@ -2,7 +2,6 @@ package arenaDesktop.arenaDesktop.model
 
 import dominoPizzeria.Plato
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
 import dominoPizzeria.Tamanio
 import java.util.List
 import org.uqbar.commons.model.annotations.Dependencies

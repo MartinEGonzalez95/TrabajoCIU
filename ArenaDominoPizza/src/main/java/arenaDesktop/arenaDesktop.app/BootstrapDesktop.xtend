@@ -112,7 +112,7 @@ class BootstrapDesktop implements Bootstrap {
 		repo.agregar(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Muzzarella"
-			it.distribucion = ""
+			it.distribucion = "Todo"
 		])
 
 		repo.agregar(new Ingrediente => [
