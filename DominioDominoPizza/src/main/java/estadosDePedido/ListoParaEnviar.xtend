@@ -10,7 +10,7 @@ class ListoParaEnviar extends EstadoDePedido
 
 		unPedido.estadoDePedido = new EnViaje()
 	
-		unPedido.enviarMailPorPedidoEnViaje
+		unPedido.enviarMailPorPedidoEnViaje 
 		
 	}
 	

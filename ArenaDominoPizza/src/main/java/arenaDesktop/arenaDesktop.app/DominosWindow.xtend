@@ -94,10 +94,8 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		try {
 			this.modelObject.pedidoSeleccionado.avanzar
 			this.modelObject.updatePedidos
-		} catch (RuntimeException e) {
-			super.showInfo(e.message)
 		}
-		catch(MessagingException e){
+		catch(MessagingException e){ // Para cuando el mail no puede ser enviado 
 			
 			super.showInfo(e.message)
 			
@@ -107,23 +105,15 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 	def intentarRetroceder(Panel panelDeOpcionesDePedido) {
 
-		try {
 			this.modelObject.pedidoSeleccionado.retroceder
 			this.modelObject.updatePedidos
-		} catch (RuntimeException e) {
-			super.showInfo(e.message)
-		}
 
 	}
 
 	def intentarCancelar() {
 
-		try {
 			this.modelObject.pedidoSeleccionado.cancelar
 			this.modelObject.updatePedidos
-		} catch (RuntimeException e) {
-			super.showInfo(e.message)
-		}
 
 	}
 
