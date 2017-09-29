@@ -48,8 +48,9 @@ class RepoPedido implements Repo<Pedido> {
 	}
 	
 	override modificar(Pedido instanciaT) {
-		agregar(instanciaT)
 		eliminar(instanciaT)
+		agregar(instanciaT)
+		
 	}
 
 }

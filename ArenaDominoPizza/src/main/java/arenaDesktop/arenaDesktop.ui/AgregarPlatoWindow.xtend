@@ -22,21 +22,21 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 
 	}
 
-	override executeTask() {
-
-		if (!modelObject.platoSinTerminar) {
-
+	override void aceptar()
+	{
+		
+		if (modelObject.platoTerminado)
+		{
+		
 			RepoPedido.repo.modificar(modelObject.agregarPlato)
-
-		} else {
+			this.accept	
+			
+		} else
+		{
+			
 			super.showInfo("No dejes el plato vacío che!")
+			
 		}
-
-		super.executeTask()
-	}
-
-	override void aceptar() {
-		this.accept
 
 	}
 

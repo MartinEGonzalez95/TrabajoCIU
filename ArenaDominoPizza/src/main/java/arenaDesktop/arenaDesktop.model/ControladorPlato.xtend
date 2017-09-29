@@ -1,51 +1,84 @@
 package arenaDesktop.arenaDesktop.model
 
-import dominoPizzeria.Plato
-import org.eclipse.xtend.lib.annotations.Accessors
-import dominoPizzeria.Tamanio
-import java.util.List
-import org.uqbar.commons.model.annotations.Dependencies
-import dominoPizzeria.Pedido
 import dominoPizzeria.Ingrediente
+import dominoPizzeria.Pedido
+import dominoPizzeria.Pizza
+import dominoPizzeria.Plato
+import dominoPizzeria.Tamanio
+
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import org.uqbar.commons.model.utils.ObservableUtils
+import org.uqbar.commons.model.annotations.Dependencies
+import java.util.stream.DoubleStream.Builder
 
 @Accessors
 @TransactionalAndObservable
 class ControladorPlato extends ControladorMenu {
 
 	Plato platoSeleccionado = null
+	Pizza pizza = null
+	Tamanio tamanio = null
 	Pedido pedido = null
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
 	List<Ingrediente> ingredientesParaAgregar = newArrayList()
-
-	@Dependencies("platoSeleccionado.precio")
-	def getPrecio() {
-		if (platoSeleccionado.pizzaBase !== null) {
+	
+	def getPrecio()
+	{
+		
+		if (platoTerminado) {
 			return platoSeleccionado.precio
 		} else {
 			return 0
 		}
-
-	}
-
-	def setPlatoSeleccionado(Plato unPlato){
-		
-		platoSeleccionado = unPlato
-		ObservableUtils.firePropertyChanged(this, "precio")
 		
 	}
+	
+	def getPizzaBase() {
+		platoSeleccionado.pizzaBase
+	}
+	
+	def setPizzaBase(Pizza unaPizza)
+	{
+		platoSeleccionado.pizzaBase = unaPizza
+		ObservableUtils.firePropertyChanged(this,"precio")
+	}
+	
+	def getTamanio() {
+		platoSeleccionado.tamañoPizza
+	}
+	
+	def setTamanio(Tamanio unTamaño)
+	{
+		
+		platoSeleccionado.tamañoPizza = unTamaño
+		ObservableUtils.firePropertyChanged(this,"precio")
+		
+	}
 
-	new(Plato unPlato) {
-
-		platoSeleccionado = unPlato
-		this.ingredientesParaAgregar.addAll(platoSeleccionado.ingredientesExtras)
+	new(Plato unPlato)
+	{
+		
+		platoSeleccionado = unPlato // Este unPlato existe, no necesito agregarlo
+		
+		pizza = unPlato.pizzaBase
+		
+		tamanio = unPlato.tamañoPizza
+		
+		ingredientesParaAgregar.addAll(platoSeleccionado.ingredientesExtras)
 
 	}
 
-	new(Plato plato, Pedido pedido) {
-		this.platoSeleccionado = plato
-		this.pedido = pedido
+	new(Plato unPlato, Pedido unPedido)
+	{
+		
+		// Siempre Plato esta vacio pq lo usa agregar
+		
+		platoSeleccionado = unPlato // new Plato
+		
+		pedido = unPedido // Pedido al que hay que agregar unPlato 
+		
 	}
 
 	def List<Tamanio> getTamaños() {
@@ -61,10 +94,12 @@ class ControladorPlato extends ControladorMenu {
 
 	}
 	
-	def agregarPlato(){
+	def agregarPlato()
+	{
+		
 		pedido.agregarPlato(platoSeleccionado)
-		ObservableUtils.firePropertyChanged(this, "precio")
 		pedido
+		
 	}
 	
 	def void agregarIngrediente() {
@@ -79,8 +114,8 @@ class ControladorPlato extends ControladorMenu {
 		ObservableUtils.firePropertyChanged(this, "precio")
 	}
 
-	def platoSinTerminar() {
-		platoSeleccionado === null || platoSeleccionado.pizzaBase === null
+	def platoTerminado() {
+		platoSeleccionado.pizzaBase !== null && platoSeleccionado.tamañoPizza !== null
 	}
 	
 }

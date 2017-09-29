@@ -3,7 +3,6 @@ package dominoPizzeria
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
-import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
@@ -13,8 +12,6 @@ class Plato {
 	Tamanio tamañoPizza
 	List<Ingrediente> ingredientesExtras = newArrayList
 
-	/* Precio plato = Precio base * Tamanio + Recargo por ingredientes extras */
-	@Dependencies("precioEnBaseAlTamaño", "precioIngredientesExtras")
 	def double precio() {
 
 		precioEnBaseAlTamaño + precioIngredientesExtras

@@ -74,7 +74,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick([openDialog(new AgregarPlatoWindow(this, this.modelObject.pedido))])
+			onClick([openDialog(new AgregarPlatoWindow(this, modelObject.pedido))])
 		]
 
 		new Button(panelBotones) => [
@@ -93,7 +93,8 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 	def openDialog(Dialog<?> dialog) {
 		
-		
+		dialog.onAccept([|modelObject.cargar])
+
 		dialog.open
 	}
 
