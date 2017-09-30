@@ -32,42 +32,41 @@ class BootstrapDesktop implements Bootstrap {
 	def cargarPedidos() {
 
 		val repo = RepoPedido.getRepo
-		
+
 		val ingredientes = new ArrayList<Ingrediente>
-		
+
 		ingredientes.add(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Muzzarella"
 			it.distribucion = "Todo"
 		])
-		
+
 		val unosPlatos = new ArrayList<Plato>
 		val plato = new Plato() => [
 			pizzaBase = new Pizza => [
-			it.precioBase = 100
-			it.nombre = "Muzarella"
+				it.precioBase = 100
+				it.nombre = "Muzarella"
 			]
 			tamañoPizza = new Tamanio("Grande")
-			ingredientesExtras = ingredientes		
+			ingredientesExtras = ingredientes
 		]
 		unosPlatos.add(plato)
-		
-		
+
 		repo.agregar(new Pedido(1) => [
 			cliente = new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho")
 			formaDeEnvio = new RetiroPorLocal
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
-			
+
 		repo.agregar(new Pedido(2) => [
-			cliente = new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa")
+			cliente = new Cliente("Martin", "martinG", "hackme", "emailQueVaAFallar:D", "not falsa")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 		])
-			
+
 		repo.agregar(new Pedido(3) => [
 			cliente = new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa")
-			formaDeEnvio = new RetiroPorLocal
+			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 		])
 
 	}
@@ -75,13 +74,13 @@ class BootstrapDesktop implements Bootstrap {
 	def cargarClientes() {
 
 		val repo = RepoCliente.getRepo
-		
+
 		repo.agregar(new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho"))
-		
+
 		repo.agregar(new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa"))
-		
+
 		repo.agregar(new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa"))
-		
+
 	}
 
 	def cargarPizzas() {
@@ -101,7 +100,6 @@ class BootstrapDesktop implements Bootstrap {
 			it.precioBase = 50
 			it.nombre = "PrePizza"
 		])
-
 
 	}
 

@@ -147,7 +147,7 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 			alignLeft
 		]
 		new Label(panelInfo) => [
-			text = this.montoFinalToString()
+			value <=> "montoFinal"
 			alignLeft
 		]
 

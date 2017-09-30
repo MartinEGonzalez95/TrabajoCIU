@@ -5,6 +5,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import repositorios.RepoPedido
+import org.uqbar.commons.model.exceptions.UserException
 
 @Accessors
 @Observable
@@ -45,15 +46,47 @@ class ControladorSistema {
 		pedidos = repoPedido.cargar
 
 		updatePedidos
-		
-		if(!pedidos.isEmpty){pedidoSeleccionado = pedidos.get(pedidos.length - 1)}
+
+		if (!pedidos.isEmpty) {
+			pedidoSeleccionado = pedidos.get(pedidos.length - 1)
+		}
 
 	}
 
 	def getRepoPedido() {
 
-		 RepoPedido.getRepo
+		RepoPedido.getRepo
 
+	}
+
+	def avanzar() {
+		try {
+			pedidoSeleccionado.avanzar
+			updatePedidos
+		} catch (RuntimeException e) {
+
+			throw new UserException(e.message)
+		}
+	}
+
+	def retroceder() {
+		try {
+			pedidoSeleccionado.retroceder
+			updatePedidos
+		} catch (RuntimeException e) {
+
+			throw new UserException(e.message)
+		}
+	}
+
+	def cancelar() {
+		try {
+			pedidoSeleccionado.cancelar
+			updatePedidos
+		} catch (RuntimeException e) {
+
+			throw new UserException(e.message)
+		}
 	}
 
 }

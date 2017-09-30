@@ -48,7 +48,7 @@ class MailSender
 			comprobanteDeMailEnviado = false
 			
 			exception.printStackTrace
-			throw exception
+			throw new RuntimeException(exception.message)
 			
 		}
 	}

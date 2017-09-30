@@ -9,14 +9,14 @@ class Entregado extends EstadoDePedido
 	override avanzarPedido(Pedido unPedido)
 	{
 		
-		throw new UserException("¡El pedido ya fue entregado!")
+		throw new RuntimeException("¡El pedido ya fue entregado!")
 		
 	}
 	
 	override retrocederPedido(Pedido unPedido)
 	{
 		
-		throw new UserException("¡El pedido ya fue entregado!")
+		throw new RuntimeException("¡El pedido ya fue entregado!")
 		
 	}
 	

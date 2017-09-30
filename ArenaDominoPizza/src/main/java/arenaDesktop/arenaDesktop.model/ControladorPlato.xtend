@@ -28,9 +28,9 @@ class ControladorPlato extends ControladorMenu {
 	{
 		
 		if (platoTerminado) {
-			return platoSeleccionado.precio
+			return  "$ " + platoSeleccionado.precio.toString
 		} else {
-			return 0
+			return "$" + 0.toString
 		}
 		
 	}

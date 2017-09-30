@@ -32,7 +32,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-		
+
 		this.title = "Domino's Pizzeria"
 
 		new Label(mainPanel) => [
@@ -89,34 +89,6 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 		]
 	}
 
-	def intentarAvanzar() {
-
-		try {
-			this.modelObject.pedidoSeleccionado.avanzar
-			this.modelObject.updatePedidos
-		}
-		catch(MessagingException e){ // Para cuando el mail no puede ser enviado 
-			
-			super.showInfo(e.message)
-			
-		}
-
-	}
-
-	def intentarRetroceder(Panel panelDeOpcionesDePedido) {
-
-			this.modelObject.pedidoSeleccionado.retroceder
-			this.modelObject.updatePedidos
-
-	}
-
-	def intentarCancelar() {
-
-			this.modelObject.pedidoSeleccionado.cancelar
-			this.modelObject.updatePedidos
-
-	}
-
 	protected def Button botonesDePedido(Panel mainPanel) {
 		val elementSelected = new NotNullObservable("pedidoSeleccionado")
 
@@ -124,18 +96,18 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "<<<<"
-			onClick [|this.intentarRetroceder(mainPanel)]
+			onClick [|modelObject.retroceder]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [
 			caption = ">>>>"
-			onClick [|this.intentarAvanzar]
+			onClick [|modelObject.avanzar]
 			bindEnabled(elementSelected)
 		]
 
 		new Button(panelDeOpcionesDePedido) => [
 			caption = "Cancelar"
-			onClick [|this.intentarCancelar]
+			onClick [|modelObject.cancelar]
 			bindEnabled(elementSelected)
 		]
 		new Button(panelDeOpcionesDePedido) => [
@@ -163,7 +135,8 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 
 		new Button(actionsPanel) => [
 			caption = "Pedidos Cerrados"
-			onClick [|modelObject.pedidoSeleccionado = null
+			onClick [|
+				modelObject.pedidoSeleccionado = null
 				new PedidosCerradosWindow(this, modelObject).open
 			]
 		]

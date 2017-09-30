@@ -7,11 +7,11 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
-class Pedido
-{
+class Pedido {
 
 	List<Plato> platos = newArrayList
 	Cliente cliente
@@ -24,32 +24,27 @@ class Pedido
 	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	// Para mandar mails cuando cambia de estado //
 	Integer numero // Clave para el pedido //
-	
-	new (Integer numeroClave)
-	{
-		
+
+	new(Integer numeroClave) {
+
 		numero = numeroClave
-		
+
 	}
 
-	def double montoFinal()
-	{
+	def double montoFinal() {
 
 		platos.stream.mapToDouble( [plato|plato.precio]).sum + formaDeEnvio.costo
-		// pesos //
-		
-	}
-	
-	def setTiempoDeEspera()
-	{
-		
-		tiempoDeEspera = tiempoDeEspera()
-		
+	// pesos //
 	}
 
-	def tiempoDeEspera()
-	{
-		
+	def setTiempoDeEspera() {
+
+		tiempoDeEspera = tiempoDeEspera()
+
+	}
+
+	def tiempoDeEspera() {
+
 		fechaDeEntrega.time - fechaDeCreacion.time
 
 	}
@@ -72,38 +67,36 @@ class Pedido
 
 	}
 
-	def hayMasDe30MinDeDiferenciaEntre()
-	{
+	def hayMasDe30MinDeDiferenciaEntre() {
 
 		( tiempoDeEspera() / 60000) > 30
 
 	}
-	
-	def agregarPlato(Plato plato)
-	{
-		
+
+	def agregarPlato(Plato plato) {
+
 		platos.add(plato)
-		
+
 	}
-		
-	def eliminarPlato(Plato plato)
-	{
-		
+
+	def eliminarPlato(Plato plato) {
+
 		platos.remove(plato)
-		
+
 	}
-	def enviarMailPorDemora()
-	{
-		
-		mailSender.enviarMail(cliente.email, "Disculpe la demora!", "Estimado cliente, le pedimos disculpas por la demora en su pedido, XOXO Domino's Pizza")
-		
+
+	def enviarMailPorDemora() {
+
+		mailSender.enviarMail(cliente.email, "Disculpe la demora!",
+			"Estimado cliente, le pedimos disculpas por la demora en su pedido, XOXO Domino's Pizza")
+
 	}
-	
-	def enviarMailPorPedidoEnViaje()
-	{
-		
-		mailSender.enviarMail(cliente.email, "Pedido en viaje!", "Estimado "+ cliente.nombre + ", su pedido ya se encuentra en viaje, XOXO Domino's Pizza")
-		
+
+	def enviarMailPorPedidoEnViaje() {
+
+		mailSender.enviarMail(cliente.email, "Pedido en viaje!",
+			"Estimado " + cliente.nombre + ", su pedido ya se encuentra en viaje, XOXO Domino's Pizza")
+
 	}
 
 }

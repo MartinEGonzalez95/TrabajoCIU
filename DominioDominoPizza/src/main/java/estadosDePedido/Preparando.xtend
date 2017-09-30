@@ -14,7 +14,7 @@ class Preparando extends EstadoDePedido {
 	
 	override void retrocederPedido(Pedido unPedido)
 	{
-		throw new UserException("¡No se puede retroceder un pedido en preparacion!")		
+		throw new RuntimeException("¡No se puede retroceder un pedido en preparacion!")		
 	}
 	
 		
