@@ -27,10 +27,10 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		super(owner, controladorDePizzaEIngredientes)
 	}
 
-	def titulo(){
-		
+	def titulo() {
+
 		title = "Editar Promocion"
-		
+
 	}
 
 	def getRepoPizza() {
@@ -58,7 +58,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 	private def void crearPanelDeIngredientes(Panel mainPanel) {
 
 		val panelDeIngredientes = new Panel(mainPanel)
-		
+
 		new Label(panelDeIngredientes) => [
 
 			text = "Adicionales agregados:"
@@ -68,9 +68,9 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 		]
 
 		new List(panelDeIngredientes) => [
-			bindItemsToProperty("ingredientesParaAgregar")
+			items <=> ("ingredientesParaAgregar")
 		]
-		
+
 		new Label(panelDeIngredientes) => [
 
 			text = "Adicionales disponibles:"
@@ -190,11 +190,10 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 		if (modelObject.pizzaTerminada) {
 			this.accept
-			
+
 		} else {
 			super.showInfo("No dejes la pizza vacía che!")
 		}
 	}
-
 
 }

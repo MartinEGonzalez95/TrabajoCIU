@@ -8,7 +8,7 @@ import org.uqbar.commons.model.annotations.Observable
 import repositorios.RepoPedido
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.utils.ObservableUtils
-
+import java.util.List
 
 @Accessors
 @Observable
@@ -24,15 +24,21 @@ class ControladorPedido {
 
 	}
 
+	def getPlatos() {
+		pedido.platos
+	}
+
 	def cargar() {
-		RepoPedido.repo.modificar(pedido)
 		val id = pedido.numero
+		RepoPedido.repo.modificar(pedido)
+
 		pedido = null
 		pedido = RepoPedido.repo.buscar(id)
 		ObservableUtils.firePropertyChanged(this, "montoFinal")
 	}
 
-	def getMontoFinal() {
+	
+	def montoFinal() {
 		"$ " + pedido.montoFinal.toString
 	}
 
@@ -41,11 +47,8 @@ class ControladorPedido {
 		ObservableUtils.firePropertyChanged(this, "montoFinal")
 	}
 
-	def void agregarPlato(Plato unPlato) {
-		pedido.agregarPlato(unPlato)
-		ObservableUtils.firePropertyChanged(this, "montoFinal")
-	}
-
-
-
+//	def void agregarPlato(Plato unPlato) {
+//		pedido.agregarPlato(unPlato)
+//		ObservableUtils.firePropertyChanged(this, "montoFinal")
+//	}
 }

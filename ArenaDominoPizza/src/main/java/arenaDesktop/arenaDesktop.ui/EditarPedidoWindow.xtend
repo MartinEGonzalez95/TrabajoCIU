@@ -20,14 +20,14 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 	}
 
-	override titulo(){
-		
+	override titulo() {
+
 		title = "Editar pedido"
-		
+
 	}
 
-	override panelAclaraciones(Panel aclaracionPanel){
-		
+	override panelAclaraciones(Panel aclaracionPanel) {
+
 		new Label(aclaracionPanel) => [
 			text = "Aclaraciones"
 			alignLeft
@@ -38,7 +38,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 			width = 200
 			alignLeft
 		]
-		
+
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
@@ -85,14 +85,14 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Eliminar"
-			onClick [|modelObject.pedido.eliminarPlato(modelObject.platoSeleccionado)]
+			onClick [|modelObject.eliminarPlato()]
 			bindEnabled(elementSelected)
 		]
 
 	}
 
 	def openDialog(Dialog<?> dialog) {
-		
+
 		dialog.onAccept([|modelObject.cargar])
 
 		dialog.open

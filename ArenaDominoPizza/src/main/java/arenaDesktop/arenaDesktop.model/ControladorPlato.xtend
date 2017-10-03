@@ -23,62 +23,53 @@ class ControladorPlato extends ControladorMenu {
 	Pedido pedido = null
 	List<String> distribuciones = #["Izquierda", "Todo", "Derecha"]
 	List<Ingrediente> ingredientesParaAgregar = newArrayList()
-	
-	def getPrecio()
-	{
-		
+
+	def getPrecio() {
+
 		if (platoTerminado) {
-			return  "$ " + platoSeleccionado.precio.toString
+			return "$ " + platoSeleccionado.precio.toString
 		} else {
 			return "$" + 0.toString
 		}
-		
+
 	}
-	
+
 	def getPizzaBase() {
 		platoSeleccionado.pizzaBase
 	}
-	
-	def setPizzaBase(Pizza unaPizza)
-	{
+
+	def setPizzaBase(Pizza unaPizza) {
 		platoSeleccionado.pizzaBase = unaPizza
-		ObservableUtils.firePropertyChanged(this,"precio")
+		ObservableUtils.firePropertyChanged(this, "precio")
 	}
-	
+
 	def getTamanio() {
 		platoSeleccionado.tamañoPizza
 	}
-	
-	def setTamanio(Tamanio unTamaño)
-	{
-		
+
+	def setTamanio(Tamanio unTamaño) {
+
 		platoSeleccionado.tamañoPizza = unTamaño
-		ObservableUtils.firePropertyChanged(this,"precio")
-		
+		ObservableUtils.firePropertyChanged(this, "precio")
+
 	}
 
-	new(Plato unPlato)
-	{
-		
+	new(Plato unPlato) {
+
 		platoSeleccionado = unPlato // Este unPlato existe, no necesito agregarlo
-		
 		pizza = unPlato.pizzaBase
-		
+
 		tamanio = unPlato.tamañoPizza
-		
+
 		ingredientesParaAgregar.addAll(platoSeleccionado.ingredientesExtras)
 
 	}
 
-	new(Plato unPlato, Pedido unPedido)
-	{
-		
+	new(Plato unPlato, Pedido unPedido) {
+
 		// Siempre Plato esta vacio pq lo usa agregar
-		
 		platoSeleccionado = unPlato // new Plato
-		
 		pedido = unPedido // Pedido al que hay que agregar unPlato 
-		
 	}
 
 	def List<Tamanio> getTamaños() {
@@ -93,29 +84,37 @@ class ControladorPlato extends ControladorMenu {
 		listaDeTamaños
 
 	}
-	
-	def agregarPlato()
-	{
-		
+
+	def Pedido agregarPlato() {
+
 		pedido.agregarPlato(platoSeleccionado)
+
 		pedido
-		
+
 	}
-	
+
+	def getIngredientesExtras() {
+		platoSeleccionado.ingredientesExtras
+	}
+
 	def void agregarIngrediente() {
 		if (!platoSeleccionado.ingredientesExtras.contains(ingredienteSeleccionado)) {
 			platoSeleccionado.agregarAdicional(ingredienteSeleccionado)
 			ObservableUtils.firePropertyChanged(this, "precio")
+			ObservableUtils.firePropertyChanged(platoSeleccionado, "ingredientesExtras")
 		}
 	}
 
 	def void quitarIngrediente() {
 		platoSeleccionado.eliminarAdicional(ingredienteSeleccionado)
 		ObservableUtils.firePropertyChanged(this, "precio")
+		ObservableUtils.firePropertyChanged(platoSeleccionado, "ingredientesExtras")
 	}
 
 	def platoTerminado() {
 		platoSeleccionado.pizzaBase !== null && platoSeleccionado.tamañoPizza !== null
 	}
-	
+
+
+
 }

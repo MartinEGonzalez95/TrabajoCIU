@@ -24,19 +24,18 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 
 		super(owner, controladorPedidoModel)
 
-
 	}
 
-	def titulo(){
-		
+	def titulo() {
+
 		title = "Ver Pedido"
-		
+
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
 		titulo
-	
+
 		panelEstado(mainPanel)
 
 		new Label(mainPanel) => [
@@ -50,18 +49,6 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 
 		panelInformacionPedido(mainPanel)
 
-	}
-
-	def panelTablaPlatos(Panel mainPanel) {
-
-		val panelPlatos = new Panel(mainPanel).layout = new HorizontalLayout
-
-		val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
-			items <=> "pedido.platos"
-			value <=> "platoSeleccionado"
-			numberVisibleRows = 4
-		]
-		ordenarTablaPlatos(tablaPlatos)
 	}
 
 	def panelEstado(Panel panelEstado) {
@@ -81,6 +68,18 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 		new Label(panelDer) => [
 			value <=> "pedido.estadoDePedido"
 		]
+	}
+
+	def panelTablaPlatos(Panel mainPanel) {
+
+		val panelPlatos = new Panel(mainPanel).layout = new HorizontalLayout
+
+		val tablaPlatos = new Table<Plato>(panelPlatos, typeof(Plato)) => [
+			items <=> "pedido.platos"
+			value <=> "platoSeleccionado"
+			numberVisibleRows = 4
+		]
+		ordenarTablaPlatos(tablaPlatos)
 	}
 
 	def void ordenarTablaPlatos(Table<Plato> table) {
@@ -159,10 +158,6 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 			text = this.fechaCreacionPedido()
 			alignLeft
 		]
-	}
-
-	def montoFinalToString() {
-		"$" + modelObject.pedido.montoFinal.toString
 	}
 
 	def costoDeEnvioToString() {

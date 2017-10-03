@@ -26,17 +26,17 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		super(owner, modelObject)
 
 	}
-	
-	def titulo(){
-		
+
+	def titulo() {
+
 		title = "Editar plato"
-		
+
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
 
 		titulo
-	
+
 		createPanelPizza(mainPanel)
 
 		createSelectorDetamanio(mainPanel)
@@ -49,7 +49,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 
 		]
 		new List(mainPanel) => [
-			bindItemsToProperty("ingredientesParaAgregar")
+			items <=> "platoSeleccionado.ingredientesExtras"
 
 		]
 
@@ -66,7 +66,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		createPanelDePrecio(mainPanel)
 
 	}
-	
+
 	protected def void createPanelPizza(Panel mainPanel) {
 		val panelPizza = new Panel(mainPanel).layout = new HorizontalLayout()
 
@@ -79,11 +79,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 		new Selector<Pizza>(panelPizza) => [
-			
+
 			allowNull(true)
 			value <=> "pizzaBase"
 			items <=> "pizzas"
-			
+
 		]
 	}
 
@@ -175,11 +175,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 	}
 
-	private def  agregarAdicional() {
+	private def agregarAdicional() {
 		modelObject.agregarIngrediente()
 	}
 
-	private def  quitarAdicional() {
+	private def quitarAdicional() {
 		modelObject.quitarIngrediente()
 	}
 
@@ -220,11 +220,11 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 		]
 
 	}
-	
 
 	def aceptar() {
+		
+		
+		this.accept
 
-			this.accept
-			
 	}
 }
