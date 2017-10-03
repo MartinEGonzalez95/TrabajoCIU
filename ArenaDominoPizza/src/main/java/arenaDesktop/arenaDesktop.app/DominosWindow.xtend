@@ -32,7 +32,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-
+	this.iconImage = "src/main/resources/DominoLogo.png"
 		this.title = "Domino's Pizzeria"
 
 		new Label(mainPanel) => [

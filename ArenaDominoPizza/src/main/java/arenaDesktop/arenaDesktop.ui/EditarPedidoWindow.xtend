@@ -23,6 +23,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 	override titulo() {
 
 		title = "Editar pedido"
+	
 
 	}
 
@@ -94,7 +95,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 	def openDialog(Dialog<?> dialog) {
 
 		dialog.onAccept([|modelObject.cargar])
-
+		
 		dialog.open
 	}
 
@@ -106,7 +107,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 		]
 		new Button(actionsPanel) => [
 			caption = "Cerrar"
-			onClick [|this.close]
+			onClick [|this.cancel]
 		]
 	}
 }

@@ -9,9 +9,10 @@ import repositorios.RepoPedido
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.utils.ObservableUtils
 import java.util.List
+import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
-@Observable
+@TransactionalAndObservable
 class ControladorPedido {
 
 	Plato platoSeleccionado = null
@@ -35,6 +36,7 @@ class ControladorPedido {
 		pedido = null
 		pedido = RepoPedido.repo.buscar(id)
 		ObservableUtils.firePropertyChanged(this, "montoFinal")
+		ObservableUtils.firePropertyChanged(pedido, "montoFinal")
 	}
 
 	

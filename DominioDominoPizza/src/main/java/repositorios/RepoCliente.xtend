@@ -47,8 +47,9 @@ class RepoCliente implements Repo<Cliente> {
 	}
 	
 	override modificar(Cliente cliente) {
-		agregar(cliente)
 		eliminar(cliente)
+		agregar(cliente)
+	
 	}
 
 }
