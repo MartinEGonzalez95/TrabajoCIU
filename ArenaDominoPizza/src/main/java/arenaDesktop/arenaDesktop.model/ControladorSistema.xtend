@@ -6,6 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import repositorios.RepoPedido
 import org.uqbar.commons.model.exceptions.UserException
+import estadosDePedido.PedidoException
 
 @Accessors
 @Observable
@@ -62,7 +63,7 @@ class ControladorSistema {
 		try {
 			pedidoSeleccionado.avanzar
 			updatePedidos
-		} catch (RuntimeException e) {
+		} catch (PedidoException e) {
 
 			throw new UserException(e.message)
 		}
@@ -72,7 +73,7 @@ class ControladorSistema {
 		try {
 			pedidoSeleccionado.retroceder
 			updatePedidos
-		} catch (RuntimeException e) {
+		} catch (PedidoException e) {
 
 			throw new UserException(e.message)
 		}
@@ -82,7 +83,7 @@ class ControladorSistema {
 		try {
 			pedidoSeleccionado.cancelar
 			updatePedidos
-		} catch (RuntimeException e) {
+		} catch (PedidoException e) {
 
 			throw new UserException(e.message)
 		}
