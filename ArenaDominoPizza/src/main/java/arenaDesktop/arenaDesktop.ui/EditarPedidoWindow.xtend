@@ -24,7 +24,6 @@ class EditarPedidoWindow extends VerPedidoWindow {
 	override titulo() {
 
 		title = "Editar pedido"
-	
 
 	}
 
@@ -76,15 +75,14 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick([openDialog(new AgregarPlatoWindow(this, new ControladorPlato(new Plato, modelObject.pedido)))
-			//onClick([openDialog(new AgregarPlatoWindow(this, modelObject.pedido))
+			onClick([new AgregarPlatoWindow(this, new ControladorPlato(new Plato, modelObject.pedido)).open
 					 modelObject.agregarPlato()
 					])
 		]
 
 		new Button(panelBotones) => [
 			caption = "Editar"
-			onClick([openDialog(new EditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))
+			onClick([new EditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)).open
 					 modelObject.editarPlato(modelObject.platoSeleccionado)
 					])
 			bindEnabled(elementSelected)
@@ -96,13 +94,6 @@ class EditarPedidoWindow extends VerPedidoWindow {
 			bindEnabled(elementSelected)
 		]
 
-	}
-
-	def openDialog(Dialog<?> dialog) {
-
-		dialog.onAccept([|modelObject.cargar])
-		
-		dialog.open
 	}
 
 	override protected void addActions(Panel actionsPanel) {
