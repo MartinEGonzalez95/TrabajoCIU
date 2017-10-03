@@ -1,25 +1,22 @@
 package arenaDesktop.arenaDesktop.ui
 
+import dominoPizzeria.Ingrediente
+import dominoPizzeria.Pizza
+
+import arenaDesktop.arenaDesktop.model.ControladorMenu
+import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
+import org.uqbar.arena.bindings.NotNullObservable
+import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.tables.Column
+import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.widgets.tables.Column
-import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.widgets.Label
-import org.uqbar.arena.widgets.tables.Table
-
-import dominoPizzeria.Ingrediente
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import arenaDesktop.arenaDesktop.model.ControladorMenu
-import dominoPizzeria.Pizza
-import org.uqbar.arena.bindings.NotNullObservable
-
-import org.uqbar.arena.windows.Dialog
-import arenaDesktop.arenaDesktop.model.ControladorPizzaAdicionales
-import net.sf.oval.constraint.Size.List
-import org.uqbar.arena.layout.HorizontalLayout
 
 class MenuWindow extends SimpleWindow<ControladorMenu> {
 

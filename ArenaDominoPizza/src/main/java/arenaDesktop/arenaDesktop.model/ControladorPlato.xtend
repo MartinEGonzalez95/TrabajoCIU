@@ -8,10 +8,9 @@ import dominoPizzeria.Tamanio
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import org.uqbar.commons.model.utils.ObservableUtils
-import org.uqbar.commons.model.annotations.Dependencies
-import java.util.stream.DoubleStream.Builder
 
 @Accessors
 @TransactionalAndObservable
@@ -82,14 +81,6 @@ class ControladorPlato extends ControladorMenu {
 		listaDeTamaños.add(new Tamanio("Familiar"))
 
 		listaDeTamaños
-
-	}
-
-	def Pedido agregarPlato() {
-
-		pedido.agregarPlato(platoSeleccionado)
-
-		pedido
 
 	}
 

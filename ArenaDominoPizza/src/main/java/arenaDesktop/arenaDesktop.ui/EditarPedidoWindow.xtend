@@ -11,6 +11,7 @@ import org.uqbar.arena.windows.Dialog
 import org.uqbar.arena.layout.HorizontalLayout
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.TextBox
+import dominoPizzeria.Plato
 
 class EditarPedidoWindow extends VerPedidoWindow {
 
@@ -74,12 +75,17 @@ class EditarPedidoWindow extends VerPedidoWindow {
 
 		new Button(panelBotones) => [
 			caption = "Agregar"
-			onClick([openDialog(new AgregarPlatoWindow(this, modelObject.pedido))])
+			onClick([openDialog(new AgregarPlatoWindow(this, new ControladorPlato(new Plato, modelObject.pedido)))
+			//onClick([openDialog(new AgregarPlatoWindow(this, modelObject.pedido))
+					 modelObject.agregarPlato()
+					])
 		]
 
 		new Button(panelBotones) => [
 			caption = "Editar"
-			onClick([openDialog(new EditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))])
+			onClick([openDialog(new EditarPlatoWindow(this, new ControladorPlato(modelObject.platoSeleccionado)))
+					 modelObject.editarPlato(modelObject.platoSeleccionado)
+					])
 			bindEnabled(elementSelected)
 		]
 

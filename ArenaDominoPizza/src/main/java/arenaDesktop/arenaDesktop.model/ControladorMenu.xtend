@@ -2,12 +2,14 @@ package arenaDesktop.arenaDesktop.model
 
 import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
+
 import repositorios.RepoIngrediente
 import repositorios.RepoPizza
-import org.uqbar.commons.model.annotations.Dependencies
+
+import java.util.List
+
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
 
 @Accessors
 @Observable

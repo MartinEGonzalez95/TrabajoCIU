@@ -1,19 +1,22 @@
 package arenaDesktop.arenaDesktop.ui
 
 import arenaDesktop.arenaDesktop.model.ControladorPlato
-
-import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import dominoPizzeria.Plato
 import org.uqbar.arena.windows.WindowOwner
-
-import dominoPizzeria.Pedido
 import repositorios.RepoPedido
 
 class AgregarPlatoWindow extends EditarPlatoWindow {
 
-	new(WindowOwner owner, Pedido unPedido) {
-		super(owner, new ControladorPlato(new Plato, unPedido))
+//	new(WindowOwner owner, Pedido unPedido) {
+//		super(owner, new ControladorPlato(new Plato, unPedido))
+//		title = "Agregar Plato"
+//	}
+	
+	new(WindowOwner owner, ControladorPlato modelObject)
+	{
+
+		super(owner, modelObject)
 		title = "Agregar Plato"
+
 	}
 
 	override titulo() {
@@ -22,14 +25,19 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 
 	}
 
-	override void aceptar() {
+	override void aceptar()
+	{
 
-		if (modelObject.platoTerminado) {
-			modelObject.agregarPlato
+		if (modelObject.platoTerminado)
+		{
+			
+			modelObject.pedido.agregarPlato(modelObject.platoSeleccionado)
 			RepoPedido.repo.modificar(modelObject.pedido)
 			this.accept
 
-		} else {
+		}
+		else
+		{
 
 			super.showInfo("No dejes el plato vacío che!")
 

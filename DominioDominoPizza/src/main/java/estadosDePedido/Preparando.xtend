@@ -1,7 +1,6 @@
 package estadosDePedido
 
 import dominoPizzeria.Pedido
-import org.uqbar.commons.model.exceptions.UserException
 
 class Preparando extends EstadoDePedido {
 	
