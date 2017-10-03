@@ -6,13 +6,13 @@ class Cerrado extends EstadoDePedido {
 
 	override avanzarPedido(Pedido unPedido) {
 
-		throw new RuntimeException("¡El pedido se encuentra cerrado!")
+		throw new PedidoException("¡El pedido se encuentra cerrado!")
 
 	}
 
 	override retrocederPedido(Pedido unPedido) {
 
-		throw new RuntimeException("¡El pedido se encuentra cerrado!")
+		throw new PedidoException("¡El pedido se encuentra cerrado!")
 
 	}
 

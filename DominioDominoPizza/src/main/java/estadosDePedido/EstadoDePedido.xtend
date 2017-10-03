@@ -13,10 +13,7 @@ abstract class EstadoDePedido {
 		
 		unPedido.estadoDePedido = new Cerrado
 		
-		// Es raro tecnicamente //
-		
-		// unPedido.fechaDeEntrega = new Date()
-		// unPedido.setTiempoDeEspera
+
 		
 	}
 	
