@@ -26,16 +26,6 @@ class ControladorPedido {
 		pedido.platos
 	}
 
-	def cargar() {
-		val id = pedido.numero
-		RepoPedido.repo.modificar(pedido)
-
-		pedido = null
-		pedido = RepoPedido.repo.buscar(id)
-		ObservableUtils.firePropertyChanged(this, "montoFinal")
-	}
-
-	
 	def montoFinal() {
 		"$ " + pedido.montoFinal.toString
 	}
