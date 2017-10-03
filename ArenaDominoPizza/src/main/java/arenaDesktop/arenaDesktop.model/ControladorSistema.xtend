@@ -11,7 +11,6 @@ import org.uqbar.commons.model.exceptions.UserException
 @Observable
 class ControladorSistema {
 
-//	Pedido example = new Pedido()
 	List<Pedido> pedidos = newArrayList()
 	Pedido pedidoSeleccionado
 	List<Pedido> pedidosAbiertos

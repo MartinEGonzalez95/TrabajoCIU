@@ -25,9 +25,7 @@ class AgregarPlatoWindow extends EditarPlatoWindow {
 
 		if (modelObject.platoTerminado)
 		{
-			
-			modelObject.pedido.agregarPlato(modelObject.platoSeleccionado)
-			RepoPedido.repo.modificar(modelObject.pedido)
+			modelObject.agregarPlato()
 			this.accept
 
 		}

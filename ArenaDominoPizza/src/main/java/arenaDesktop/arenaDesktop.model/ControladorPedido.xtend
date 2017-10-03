@@ -32,10 +32,10 @@ class ControladorPedido {
 
 	def void eliminarPlato() {
 		pedido.eliminarPlato(platoSeleccionado)
-		ObservableUtils.firePropertyChanged(this, "montoFinal")
+		actualizarPlatos
 	}
 
-	def void agregarPlato()
+	def void actualizarPlatos()
 	{
 		
 		ObservableUtils.firePropertyChanged(this, "montoFinal")
@@ -47,7 +47,7 @@ class ControladorPedido {
 		
 		pedido.eliminarPlato(plato)
 		pedido.agregarPlato(plato)
-		ObservableUtils.firePropertyChanged(this, "montoFinal")
+		actualizarPlatos
 		
 	}
 	

@@ -88,12 +88,6 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 			bindContentsToProperty("tiempoDeEspera").transformer = [ long tiempoDeEspera |
 				String.format("%02d" + " mins", TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
 					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)));
-
-//					String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(tiempoDeEspera),
-//					TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera) -
-//					TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(tiempoDeEspera)),
-//					TimeUnit.MILLISECONDS.toSeconds(tiempoDeEspera) -
-//					TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(tiempoDeEspera)));
 			]
 		]
 	}

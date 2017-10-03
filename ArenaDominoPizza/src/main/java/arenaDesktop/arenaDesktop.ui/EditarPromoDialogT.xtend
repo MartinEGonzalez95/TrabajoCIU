@@ -34,15 +34,10 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	}
 
-	def getRepoPizza() {
-
-		RepoPizza.getRepo
-	}
-
 	override executeTask() {
 		modelObject.pizzaSeleccionada.ingredientes = modelObject.ingredientesParaAgregar
 
-		getRepoPizza.modificar(modelObject.pizzaSeleccionada)
+		modelObject.modificarPromo()
 
 		super.executeTask()
 	}

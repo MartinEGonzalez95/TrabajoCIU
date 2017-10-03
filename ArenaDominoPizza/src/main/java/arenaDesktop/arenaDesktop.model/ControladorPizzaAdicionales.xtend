@@ -7,6 +7,7 @@ import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pizza
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
 import repositorios.RepoIngrediente
+import repositorios.RepoPizza
 
 @Accessors
 @TransactionalAndObservable
@@ -43,9 +44,17 @@ class ControladorPizzaAdicionales {
 	}
 
 	def boolean pizzaTerminada() {
-
-		!pizzaSeleccionada.nombre.nullOrEmpty
 	
+		pizzaSeleccionada.validar
+	
+	}
+	
+	def agregarPizza() {
+		RepoPizza.getRepo.agregar(pizzaSeleccionada)
+	}
+	
+	def modificarPromo() {
+		RepoPizza.getRepo.modificar(pizzaSeleccionada)
 	}
 
 }

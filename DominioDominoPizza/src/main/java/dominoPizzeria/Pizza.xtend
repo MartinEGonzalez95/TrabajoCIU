@@ -30,5 +30,11 @@ class Pizza {
 		nombre.concat(" ($").concat(precioBase.toString).concat(")")
 		
 	}
+	
+	def boolean validar() {
+	
+		!nombre.nullOrEmpty
+	
+	}
 
 }

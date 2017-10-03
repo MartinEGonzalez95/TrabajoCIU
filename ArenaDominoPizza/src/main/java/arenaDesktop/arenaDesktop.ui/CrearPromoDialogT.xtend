@@ -19,7 +19,7 @@ class CrearPromoDialogT extends EditarPromoDialogT {
 	 override executeTask() {
   		modelObject.pizzaSeleccionada.ingredientes = modelObject.ingredientesParaAgregar
 
-  		repoPizza.agregar(modelObject.pizzaSeleccionada)
+		modelObject.agregarPizza()
   		
   		super.executeTask()
  }

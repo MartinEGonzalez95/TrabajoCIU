@@ -125,7 +125,7 @@ class DominosWindow extends SimpleWindow<ControladorSistema> {
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept([|modelObject.cargar])
 		dialog.open
-		modelObject.pedidoSeleccionado = null
+		modelObject.pedidoSeleccionado = null 
 	}
 
 	override protected addActions(Panel actionsPanel) {

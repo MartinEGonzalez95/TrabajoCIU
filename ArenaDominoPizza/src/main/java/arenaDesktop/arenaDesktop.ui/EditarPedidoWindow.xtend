@@ -76,7 +76,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 		new Button(panelBotones) => [
 			caption = "Agregar"
 			onClick([new AgregarPlatoWindow(this, new ControladorPlato(new Plato, modelObject.pedido)).open
-					 modelObject.agregarPlato()
+					 modelObject.actualizarPlatos()
 					])
 		]
 
