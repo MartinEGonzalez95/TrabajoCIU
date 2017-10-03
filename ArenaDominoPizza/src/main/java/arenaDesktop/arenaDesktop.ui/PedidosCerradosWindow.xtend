@@ -24,9 +24,11 @@ class PedidosCerradosWindow extends SimpleWindow<ControladorSistema> {
 
 	new(WindowOwner parent, ControladorSistema model) {
 		super(parent, model)
+	
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
+		this.iconImage = "src/main/resources/DominoLogo.png"
 		this.title = "Domino´s Pizza"
 		mainPanel.layout = new VerticalLayout
 

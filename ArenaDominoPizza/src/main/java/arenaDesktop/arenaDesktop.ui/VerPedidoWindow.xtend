@@ -24,7 +24,7 @@ class VerPedidoWindow extends TransactionalDialog<ControladorPedido> {
 	new(WindowOwner owner, ControladorPedido controladorPedidoModel) {
 
 		super(owner, controladorPedidoModel)
-
+		this.iconImage = "src/main/resources/DominoLogo.png"
 	}
 
 	def titulo() {

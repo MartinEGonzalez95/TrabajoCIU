@@ -20,6 +20,7 @@ class EditarIngredienteDialogT extends TransactionalDialog<Ingrediente> {
 
 	new(WindowOwner laVentanaMenu, Ingrediente ingredienteSeleccionado) {
 		super(laVentanaMenu, ingredienteSeleccionado)
+		this.iconImage = "src/main/resources/DominoLogo.png"
 	}
 
 	def titulo(){

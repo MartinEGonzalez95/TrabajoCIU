@@ -25,6 +25,7 @@ class EditarPromoDialogT extends TransactionalDialog<ControladorPizzaAdicionales
 
 	new(WindowOwner owner, ControladorPizzaAdicionales controladorDePizzaEIngredientes) {
 		super(owner, controladorDePizzaEIngredientes)
+		this.iconImage = "src/main/resources/DominoLogo.png"
 	}
 
 	def titulo() {

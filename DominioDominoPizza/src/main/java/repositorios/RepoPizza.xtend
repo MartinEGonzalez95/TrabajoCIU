@@ -41,8 +41,9 @@ class RepoPizza implements Repo<Pizza> {
 	}
 
 	override modificar(Pizza pizza) {
-		agregar(pizza)
+		
 		eliminar(pizza)
+		agregar(pizza)
 	}
 
 }

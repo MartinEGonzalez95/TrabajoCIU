@@ -22,7 +22,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	new(WindowOwner parent) {
 		super(parent, new ControladorMenu)
-	
+		this.iconImage = "src/main/resources/DominoLogo.png"
 	}
 
 	override protected addActions(Panel actionsPanel) {
@@ -33,7 +33,7 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 	}
 
 	override protected createFormPanel(Panel mainPanel) {
-	this.title = "Menu"
+		this.title = "Menu"
 		val promociociones = new Label(mainPanel).text = "Promociones"
 		promociociones.alignLeft
 		val panelSuperior = new Panel(mainPanel)
@@ -182,9 +182,8 @@ class MenuWindow extends SimpleWindow<ControladorMenu> {
 
 	}
 
-	def openDialog(Dialog<?> dialog)
-	{
-		
+	def openDialog(Dialog<?> dialog) {
+
 		dialog.onAccept([|modelObject.cargar])
 
 		dialog.open

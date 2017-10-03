@@ -24,7 +24,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 	new(WindowOwner owner, ControladorPlato modelObject) {
 
 		super(owner, modelObject)
-
+		this.iconImage = "src/main/resources/DominoLogo.png"
 	}
 
 	def titulo() {
@@ -222,8 +222,7 @@ class EditarPlatoWindow extends TransactionalDialog<ControladorPlato> {
 	}
 
 	def aceptar() {
-		
-		
+
 		this.accept
 
 	}

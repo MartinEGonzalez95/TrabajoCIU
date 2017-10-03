@@ -104,7 +104,7 @@ class EditarPedidoWindow extends VerPedidoWindow {
 		]
 		new Button(actionsPanel) => [
 			caption = "Cerrar"
-			onClick [|this.close]
+			onClick [|this.cancel]
 		]
 	}
 }
