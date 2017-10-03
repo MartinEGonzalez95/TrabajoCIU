@@ -1,20 +1,22 @@
 package arenaDesktop.arenaDesktop.app
 
-import org.uqbar.arena.bootstrap.Bootstrap
-import repositorios.RepoIngrediente
-import repositorios.RepoPizza
-import repositorios.RepoCliente
-import repositorios.RepoPedido
-import dominoPizzeria.Ingrediente
-import dominoPizzeria.Pizza
-import dominoPizzeria.Pedido
 import dominoPizzeria.Cliente
-import formaDeEnvioPedido.RetiroPorLocal
-import formaDeEnvioPedido.Delivery
+import dominoPizzeria.Ingrediente
+import dominoPizzeria.Pedido
+import dominoPizzeria.Pizza
 import dominoPizzeria.Plato
 import dominoPizzeria.Tamanio
-import java.util.List
+
+import formaDeEnvioPedido.Delivery
+import formaDeEnvioPedido.RetiroPorLocal
+import repositorios.RepoCliente
+import repositorios.RepoIngrediente
+import repositorios.RepoPedido
+import repositorios.RepoPizza
+
 import java.util.ArrayList
+import org.uqbar.arena.bootstrap.Bootstrap
+
 
 class BootstrapDesktop implements Bootstrap {
 

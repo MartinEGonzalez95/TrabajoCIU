@@ -5,10 +5,13 @@ import arenaDesktop.arenaDesktop.model.ControladorSistema
 import arenaDesktop.arenaDesktop.ui.EditarPedidoWindow
 import arenaDesktop.arenaDesktop.ui.MenuWindow
 import arenaDesktop.arenaDesktop.ui.PedidosCerradosWindow
+
 import dominoPizzeria.Pedido
 import estadosDePedido.EstadoDePedido
+
 import java.text.SimpleDateFormat
 import java.util.Date
+
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -22,7 +25,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import javax.mail.MessagingException
 
 class DominosWindow extends SimpleWindow<ControladorSistema> {
 

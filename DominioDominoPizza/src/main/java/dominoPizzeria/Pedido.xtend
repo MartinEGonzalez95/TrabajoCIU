@@ -7,7 +7,6 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
-import org.uqbar.commons.model.annotations.Dependencies
 
 @Accessors
 @TransactionalAndObservable
