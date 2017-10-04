@@ -47,5 +47,12 @@ class Plato {
 		ingredientesExtras.remove(ingrediente)
 
 	}
+	
+	def verificar()
+	{
+		
+		pizzaBase !== null && tamañoPizza !== null
+		
+	}
 
 }

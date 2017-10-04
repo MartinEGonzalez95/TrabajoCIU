@@ -20,16 +20,9 @@ class ControladorMenu {
 	Ingrediente ingredienteSeleccionado = null
 	Pizza pizzaSeleccionada = null
 
-	new() {
-		this.cargar
-	}
-
-	def getRepoPizzas() {
-		return RepoPizza.getRepo
-	}
-
-	def getRepoIngredientes() {
-		return RepoIngrediente.getRepo
+	new()
+	{
+		cargar
 	}
 
 	def void cargar()
@@ -47,25 +40,25 @@ class ControladorMenu {
 
 	def List<Pizza> cargarPizzas() {
 		pizzas = null
-		pizzas = getRepoPizzas.cargar
+		pizzas = RepoPizza.getRepo.cargar
 	}
 
 	def List<Ingrediente> cargarIngredientes() {
 		ingredientes = null
-		ingredientes = getRepoIngredientes.cargar
+		ingredientes = RepoIngrediente.getRepo.cargar
 	}
 
 	def eliminarIngrediente() {
-		this.repoIngredientes.eliminar(ingredienteSeleccionado)
-		this.cargarIngredientes
-		this.ingredienteSeleccionado = null
+		RepoIngrediente.getRepo.eliminar(ingredienteSeleccionado)
+		cargarIngredientes
+		ingredienteSeleccionado = null
 
 	}
 
 	def void eliminarPizza() {
-		this.repoPizzas.eliminar(pizzaSeleccionada)
-		this.cargarPizzas
-		this.pizzaSeleccionada = null
+		RepoPizza.getRepo.eliminar(pizzaSeleccionada)
+		cargarPizzas
+		pizzaSeleccionada = null
 	}
 
 }

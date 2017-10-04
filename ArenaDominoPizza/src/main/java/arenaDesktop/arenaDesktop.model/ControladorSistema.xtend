@@ -43,19 +43,13 @@ class ControladorSistema {
 	def cargar() {
 
 		pedidos = null
-		pedidos = repoPedido.cargar
+		pedidos = RepoPedido.getRepo.cargar
 
 		updatePedidos
 
 		if (!pedidos.isEmpty) {
 			pedidoSeleccionado = pedidos.get(pedidos.length - 1)
 		}
-
-	}
-
-	def getRepoPedido() {
-
-		RepoPedido.getRepo
 
 	}
 

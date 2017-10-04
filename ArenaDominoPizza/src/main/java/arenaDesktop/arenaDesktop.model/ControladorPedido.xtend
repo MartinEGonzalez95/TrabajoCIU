@@ -2,7 +2,6 @@ package arenaDesktop.arenaDesktop.model
 
 import dominoPizzeria.Pedido
 import dominoPizzeria.Plato
-import repositorios.RepoPedido
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
@@ -34,13 +33,6 @@ class ControladorPedido {
 		pedido.eliminarPlato(platoSeleccionado)
 		actualizarPlatos
 	}
-
-	def void actualizarPlatos()
-	{
-		
-		ObservableUtils.firePropertyChanged(this, "montoFinal")
-		
-	}
 	
 	def editarPlato(Plato plato)
 	{
@@ -51,4 +43,10 @@ class ControladorPedido {
 		
 	}
 	
+	def actualizarPlatos()
+	{
+		
+		ObservableUtils.firePropertyChanged(this, "montoFinal")
+		
+	}
 }

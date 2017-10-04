@@ -103,11 +103,15 @@ class ControladorPlato extends ControladorMenu {
 		ObservableUtils.firePropertyChanged(platoSeleccionado, "ingredientesExtras")
 	}
 
-	def platoTerminado() {
-		platoSeleccionado.pizzaBase !== null && platoSeleccionado.tamañoPizza !== null
+	def platoTerminado()
+	{
+		
+		platoSeleccionado.verificar()
+		
 	}
 	
-	def agregarPlato() {
+	def agregarPlato()
+	{
 			pedido.agregarPlato(platoSeleccionado)
 			RepoPedido.repo.modificar(pedido)
 	}

@@ -22,14 +22,10 @@ class ControladorPizzaAdicionales {
 
 	Pizza pizzaSeleccionada = null
 
-	new(Pizza pizzaSeleccionada) {
-		this.ingredientes = repoIngredientes.cargar()
-		this.pizzaSeleccionada = pizzaSeleccionada
-		this.ingredientesParaAgregar.addAll(pizzaSeleccionada.ingredientes)
-	}
-
-	def getRepoIngredientes() {
-		RepoIngrediente.getRepo
+	new(Pizza unaPizza) {
+		ingredientes = RepoIngrediente.getRepo.cargar()
+		pizzaSeleccionada = unaPizza
+		ingredientesParaAgregar.addAll(unaPizza.ingredientes)
 	}
 
 	def agregarIngrediente() {
