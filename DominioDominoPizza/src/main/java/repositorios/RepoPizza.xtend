@@ -45,5 +45,9 @@ class RepoPizza implements Repo<Pizza> {
 		eliminar(pizza)
 		agregar(pizza)
 	}
+	
+	override search(String claveString) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
 
 }

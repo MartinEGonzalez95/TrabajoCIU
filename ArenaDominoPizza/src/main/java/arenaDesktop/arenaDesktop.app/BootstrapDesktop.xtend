@@ -17,7 +17,6 @@ import repositorios.RepoPizza
 import java.util.ArrayList
 import org.uqbar.arena.bootstrap.Bootstrap
 
-
 class BootstrapDesktop implements Bootstrap {
 
 	override isPending() {

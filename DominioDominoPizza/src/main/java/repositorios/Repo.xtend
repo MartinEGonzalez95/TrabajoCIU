@@ -15,5 +15,9 @@ interface Repo<T> {
 	def List<T> cargar()
 	
 	def void modificar(T  instanciaT)
+	
+	def List<T> search(String claveString)
+	
+	
 
 }

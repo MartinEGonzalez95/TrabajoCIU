@@ -45,11 +45,21 @@ class RepoCliente implements Repo<Cliente> {
 		repositorio.values.toList
 
 	}
-	
+
 	override modificar(Cliente cliente) {
 		eliminar(cliente)
 		agregar(cliente)
-	
+
+	}
+
+	override search(String claveString) {
+
+		if (claveString.nullOrEmpty) {
+			return repositorio.values.toList
+		} else {
+
+			repositorio.values.filter[it.nick.equals(claveString)].toList
+		}
 	}
 
 }

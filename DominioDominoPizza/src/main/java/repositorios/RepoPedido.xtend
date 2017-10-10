@@ -4,6 +4,7 @@ import dominoPizzeria.Pedido
 
 import java.util.Map
 import java.util.HashMap
+import java.util.List
 
 class RepoPedido implements Repo<Pedido> {
 
@@ -46,11 +47,25 @@ class RepoPedido implements Repo<Pedido> {
 		repositorio.values.toList
 
 	}
-	
+
 	override modificar(Pedido instanciaT) {
 		eliminar(instanciaT)
 		agregar(instanciaT)
-		
+
 	}
+
+	override List<Pedido> search(String claveString) {
+		
+		if(claveString.nullOrEmpty){
+			return repositorio.values.toList
+		}else{
+			val claveNumerica = Integer.valueOf(claveString)
+			repositorio.values.filter[it.numero.equals(claveNumerica)].toList	
+		}
+
+
+
+	}
+
 
 }
