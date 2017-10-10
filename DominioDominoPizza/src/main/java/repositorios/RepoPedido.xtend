@@ -52,5 +52,9 @@ class RepoPedido implements Repo<Pedido> {
 		agregar(instanciaT)
 		
 	}
+	
+	override search(String claveString) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
 
 }

@@ -44,5 +44,15 @@ class RepoIngrediente implements Repo<Ingrediente> {
 		agregar(ingrediente)
 
 	}
+	
+	override search(String nombreBuscado) {
+		if(nombreBuscado.nullOrEmpty){
+			return repositorio
+		}else{
+			return repositorio.filter[it.nombre.toLowerCase.contains(nombreBuscado.toLowerCase)].toList
+		}
+		
+		
+	}
 
 }

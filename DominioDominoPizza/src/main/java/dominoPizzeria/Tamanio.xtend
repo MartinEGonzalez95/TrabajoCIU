@@ -9,24 +9,24 @@ class Tamanio
 {
 
 	String nombre
-	Map<String, Double> mapValorPorTamaño = new HashMap<String, Double>()
+	Map<String, Double> valor = new HashMap<String, Double>()
 	
 	new(String nombreTamaño)
 	{
 		
 		nombre = nombreTamaño
 		
-		mapValorPorTamaño.put("Porcion", 0.125)
-		mapValorPorTamaño.put("Chica", 0.5)
-		mapValorPorTamaño.put("Grande", 1.0)
-		mapValorPorTamaño.put("Familiar", 1.25)
+		valor.put("Porcion", 0.125)
+		valor.put("Chica", 0.5)
+		valor.put("Grande", 1.0)
+		valor.put("Familiar", 1.25)
 		
 	}
 
 	def double getValor()
 	{
 		
-		mapValorPorTamaño.get(nombre)
+		valor.get(nombre)
 		
 	}
 	

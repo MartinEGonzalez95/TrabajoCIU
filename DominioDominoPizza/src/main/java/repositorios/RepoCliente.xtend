@@ -51,5 +51,9 @@ class RepoCliente implements Repo<Cliente> {
 		agregar(cliente)
 	
 	}
+	
+	override search(String claveString) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
 
 }

@@ -7,6 +7,8 @@ import org.uqbar.xtrest.json.JSONUtils
 import repositorios.RepoPedido
 import repositorios.RepoIngrediente
 import domino.app.BootstrapWeb
+import dominoPizzeria.Tamanio
+import java.util.ArrayList
 
 @Controller
 class DominoRestAPI {
@@ -22,6 +24,19 @@ class DominoRestAPI {
 		
 		return ok(RepoIngrediente.getRepo.search(nombre).toJson)
 	} 
+	
+	@Get("/tamanios")
+	def getTamanios(String nombre){
+		response.contentType = ContentType.APPLICATION_JSON
+		
+		val tamanios = new ArrayList<Tamanio>
+		tamanios.add(new Tamanio("Porcion"))
+		tamanios.add(new Tamanio("Chica"))
+		tamanios.add(new Tamanio("Grande"))
+		tamanios.add(new Tamanio("Familiar"))
+		
+		return ok(tamanios.toJson)
+	}
 
 
 
