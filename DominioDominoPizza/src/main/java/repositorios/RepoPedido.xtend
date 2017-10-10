@@ -55,17 +55,14 @@ class RepoPedido implements Repo<Pedido> {
 	}
 
 	override List<Pedido> search(String claveString) {
-		
-		if(claveString.nullOrEmpty){
+
+		if (claveString.nullOrEmpty) {
 			return repositorio.values.toList
-		}else{
+		} else {
 			val claveNumerica = Integer.valueOf(claveString)
-			repositorio.values.filter[it.numero.equals(claveNumerica)].toList	
+			repositorio.values.filter[it.numero.equals(claveNumerica)].toList
 		}
 
-
-
 	}
-
 
 }
