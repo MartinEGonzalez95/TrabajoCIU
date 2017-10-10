@@ -69,6 +69,7 @@ class MailSender
 	
 }
 
+@Accessors
 class UserPasswordAuthentication extends Authenticator
 {
 

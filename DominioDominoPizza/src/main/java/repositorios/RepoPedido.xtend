@@ -60,7 +60,7 @@ class RepoPedido implements Repo<Pedido> {
 			return repositorio.values.toList
 		} else {
 			val claveNumerica = Integer.valueOf(claveString)
-			repositorio.values.filter[it.numero.equals(claveNumerica)].toList
+			return repositorio.values.filter[it.numero.equals(claveNumerica)].toList
 		}
 
 	}

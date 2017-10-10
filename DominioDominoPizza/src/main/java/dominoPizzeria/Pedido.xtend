@@ -10,7 +10,7 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @Accessors
 @TransactionalAndObservable
-class Pedido {
+class Pedido{
 
 	List<Plato> platos = newArrayList
 	Cliente cliente

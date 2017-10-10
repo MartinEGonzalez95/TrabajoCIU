@@ -37,23 +37,34 @@ class DominoRestAPI {
 		return ok(tamanios.toJson)
 	}
 
-	@Get('/pedidos/:numero')
-	def getPedidos() {
-		
-		val claveNumerica = Integer.valueOf(numero);
+
+	@Get('/pedidos')
+	def getPedidos(String numero) {
 		response.contentType = ContentType.APPLICATION_JSON
 		try {
-			val pedido = RepoPedido.repo.buscar(claveNumerica)
-
-			if (pedido === null) {
-				return notFound(getErrorJson("No existe el pedido con ese numero"))
-			} else {
-				return ok(pedido.toJson)
-			}
-
+			return ok(RepoPedido.getRepo.search(numero).toJson)
 		} catch (NumberFormatException exception) {
 			return badRequest(getErrorJson("El numero debe ser un entero"))
 		}
 	}
+
+//	@Get('/pedidos/:numero')
+//	def getPedidos() {
+//		
+//		val claveNumerica = Integer.valueOf(numero);
+//		response.contentType = ContentType.APPLICATION_JSON
+//		try {
+//			val pedido = RepoPedido.repo.buscar(claveNumerica)
+//
+//			if (pedido === null) {
+//				return notFound(getErrorJson("No existe el pedido con ese numero"))
+//			} else {
+//				return ok(pedido.toJson)
+//			}
+//
+//		} catch (NumberFormatException exception) {
+//			return badRequest(getErrorJson("El numero debe ser un entero"))
+//		}
+//	}
 
 }
