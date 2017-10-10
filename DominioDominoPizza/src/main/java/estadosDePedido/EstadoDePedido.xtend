@@ -1,7 +1,6 @@
 package estadosDePedido
 
 import dominoPizzeria.Pedido
-import org.reflections.serializers.Serializer
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors

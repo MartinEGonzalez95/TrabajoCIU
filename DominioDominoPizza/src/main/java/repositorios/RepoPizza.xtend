@@ -1,8 +1,6 @@
 package repositorios
 
 import dominoPizzeria.Pizza
-
-
 import java.util.List
 
 class RepoPizza implements Repo<Pizza> {
@@ -46,7 +44,9 @@ class RepoPizza implements Repo<Pizza> {
 		agregar(pizza)
 	}
 	
-	override search(String claveString) {
+	override search(String claveString)
+	{
+		
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 

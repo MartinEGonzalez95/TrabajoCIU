@@ -1,18 +1,19 @@
 package domino.app
 
-import dominoPizzeria.Ingrediente
-import repositorios.RepoIngrediente
-import dominoPizzeria.Pizza
-import repositorios.RepoPizza
-import repositorios.RepoCliente
 import dominoPizzeria.Cliente
+import dominoPizzeria.Ingrediente
 import dominoPizzeria.Pedido
-import formaDeEnvioPedido.*
-import dominoPizzeria.Tamanio
-import java.util.ArrayList
+import dominoPizzeria.Pizza
 import dominoPizzeria.Plato
-import repositorios.RepoPedido
+import dominoPizzeria.Tamanio
+import formaDeEnvioPedido.Delivery
+import formaDeEnvioPedido.RetiroPorLocal
+import java.util.ArrayList
 import org.uqbar.arena.bootstrap.Bootstrap
+import repositorios.RepoCliente
+import repositorios.RepoIngrediente
+import repositorios.RepoPedido
+import repositorios.RepoPizza
 
 class BootstrapWeb implements Bootstrap {
 
@@ -88,6 +89,7 @@ class BootstrapWeb implements Bootstrap {
 		repo.agregar(new Pizza => [
 			it.precioBase = 100
 			it.nombre = "Muzarella"
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Muzzarella"))
 		])
 		repo.agregar(new Pizza => [
 			it.precioBase = 150

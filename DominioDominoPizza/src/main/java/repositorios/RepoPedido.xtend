@@ -1,10 +1,8 @@
 package repositorios
 
 import dominoPizzeria.Pedido
-
-import java.util.Map
 import java.util.HashMap
-import java.util.List
+import java.util.Map
 
 class RepoPedido implements Repo<Pedido> {
 
@@ -54,7 +52,7 @@ class RepoPedido implements Repo<Pedido> {
 
 	}
 
-	override List<Pedido> search(String claveString) {
+	override search(String claveString) {
 
 		if (claveString.nullOrEmpty) {
 			return repositorio.values.toList
