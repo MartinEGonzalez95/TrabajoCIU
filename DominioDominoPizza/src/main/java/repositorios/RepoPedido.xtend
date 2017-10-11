@@ -62,5 +62,13 @@ class RepoPedido implements Repo<Pedido> {
 		}
 
 	}
+	
+	def searchPorPedido(String string) {
+		if (string.nullOrEmpty) {
+			return repositorio.values.toList
+		} else {
+			return repositorio.values.filter[it.estadoDePedido.toString.toLowerCase.contains(string.toLowerCase)].toList
+		}
+	}
 
 }

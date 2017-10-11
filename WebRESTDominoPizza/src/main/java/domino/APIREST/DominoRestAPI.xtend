@@ -89,7 +89,7 @@ class DominoRestAPI
 		
 	}
 	
-	@Get("/pedidos:numero")
+	@Get("/pedidos/:numero")
 	def getPedidoConNumero()
 	{
 		
@@ -97,17 +97,34 @@ class DominoRestAPI
 		
 		val pedido = RepoPedido.repo.search(numero)
 		
-		if (pedido === null)
-		{
-			
+		if (pedido === null){
+        
             return notFound()
             
-        } else
-        {
-        	
+        } else{
+        
             return ok(pedido.toJson)
             
         }
 	}
+	
+	@Get("/pedidos/:estadoDePedido")
+	def getPedidoConEstado()
+	{
+		
+		response.contentType = ContentType.APPLICATION_JSON
+		
+		val pedido = RepoPedido.repo.searchPorPedido(estadoDePedido)
+		
+		if (pedido === null){
+        
+            return notFound()
+            
+        } else{
+        
+            return ok(pedido.toJson)
+            
+        }
+	}	
 
 }
