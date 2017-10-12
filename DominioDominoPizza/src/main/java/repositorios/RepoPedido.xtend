@@ -3,6 +3,7 @@ package repositorios
 import dominoPizzeria.Pedido
 import java.util.HashMap
 import java.util.Map
+import org.apache.commons.lang.StringUtils
 
 class RepoPedido implements Repo<Pedido> {
 
@@ -62,9 +63,9 @@ class RepoPedido implements Repo<Pedido> {
 		}
 
 	}
-	
+
 	def searchPorPedido(String string) {
-		if (string.nullOrEmpty) {
+		if (StringUtils.isBlank(string)) {
 			return repositorio.values.toList
 		} else {
 			return repositorio.values.filter[it.estadoDePedido.toString.toLowerCase.contains(string.toLowerCase)].toList

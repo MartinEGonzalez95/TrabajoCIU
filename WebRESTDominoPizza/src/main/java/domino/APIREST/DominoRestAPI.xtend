@@ -27,12 +27,14 @@ class DominoRestAPI {
 	}
 
 	/** PEDIDOS REST */
+	// busca todos los pedidos, o filtra por estado si se envía algo
+	// en el parametro de la forma ?estado=unEstado.
 	@Get("/pedidos")
-	def getPedidos() {
+	def getPedidos(String estado) {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		return ok(RepoPedido.getRepo.cargar().toJson)
+		return ok(RepoPedido.getRepo.searchPorPedido(estado).toJson)
 
 	}
 
@@ -43,13 +45,11 @@ class DominoRestAPI {
 
 		val pedido = bodyConPedido.fromJson(Pedido)
 
-		if (pedido === null) {
-
-			return badRequest()
-
-		} else {
+		try {
 			RepoPedido.repo.agregar(pedido)
 			return ok()
+		} catch (RuntimeException e) {
+			return badRequest()
 		}
 
 	}
@@ -60,24 +60,6 @@ class DominoRestAPI {
 		response.contentType = ContentType.APPLICATION_JSON
 
 		val pedido = RepoPedido.repo.search(numero)
-
-		if (pedido === null) {
-
-			return notFound()
-
-		} else {
-
-			return ok(pedido.toJson)
-
-		}
-	}
-
-	@Get("/pedidos/:estadoDePedido")
-	def getPedidoConEstado() {
-
-		response.contentType = ContentType.APPLICATION_JSON
-
-		val pedido = RepoPedido.repo.searchPorPedido(estadoDePedido)
 
 		if (pedido === null) {
 

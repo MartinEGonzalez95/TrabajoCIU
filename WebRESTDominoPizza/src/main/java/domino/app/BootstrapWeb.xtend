@@ -56,6 +56,7 @@ class BootstrapWeb implements Bootstrap {
 			formaDeEnvio = new RetiroPorLocal
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
+
 		])
 
 		repo.agregar(new Pedido(2) => [
