@@ -16,6 +16,7 @@ import repositorios.RepoCliente
 import dominoPizzeria.Cliente
 import org.uqbar.commons.model.exceptions.UserException
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import dominio.DTO.PedidoDTO
 
 @Controller
 class DominoRestAPI {
@@ -34,17 +35,18 @@ class DominoRestAPI {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		return ok(RepoPedido.getRepo.searchPorPedido(estado).toJson)
+		return ok(RepoPedido.getRepo.searchPorEstado(estado).toJson)
 
 	}
 
 	@Post("/pedidos")
 	def postPedido(@Body String bodyConPedido) {
-
+		
 		response.contentType = ContentType.APPLICATION_JSON
-
+		
 		val pedido = bodyConPedido.fromJson(Pedido)
-
+		
+		
 		try {
 			RepoPedido.repo.agregar(pedido)
 			return ok()

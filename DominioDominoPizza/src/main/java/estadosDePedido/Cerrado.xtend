@@ -17,5 +17,6 @@ class Cerrado extends EstadoDePedido {
 		throw new PedidoException("¡El pedido se encuentra cerrado!")
 
 	}
-
+	
+	
 }

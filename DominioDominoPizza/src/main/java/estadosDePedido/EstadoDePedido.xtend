@@ -17,8 +17,6 @@ abstract class EstadoDePedido{
 		
 		unPedido.estadoDePedido = new Cerrado
 		
-
-		
 	}
 	
 	override def toString()
