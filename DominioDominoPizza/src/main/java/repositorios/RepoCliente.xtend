@@ -20,7 +20,11 @@ class RepoCliente implements Repo<Cliente> {
 
 	override agregar(Cliente cliente) {
 
-		repositorio.put(cliente.email, cliente)
+		if (cliente.esValido) {
+			repositorio.put(cliente.nick, cliente)
+		} else {
+			throw new RuntimeException("Los datos no son suficientes")
+		}
 
 	}
 
@@ -30,9 +34,9 @@ class RepoCliente implements Repo<Cliente> {
 
 	}
 
-	override Cliente buscar(String email) {
+	override Cliente buscar(String username) {
 
-		repositorio.get(email)
+		repositorio.get(username)
 
 	}
 

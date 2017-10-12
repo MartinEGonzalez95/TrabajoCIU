@@ -5,8 +5,7 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 
 @TransactionalAndObservable
 @Accessors
-class Cliente
-{
+class Cliente {
 
 	String nombre
 	String nick
@@ -14,16 +13,22 @@ class Cliente
 	String email
 	String direccion
 
-	new(String nombreCliente, String nickCliente, String passwordCliente, String emailCliente, 
-		String direccionCliente)
-	{
-		
+	new() {
+	}
+
+	new(String nombreCliente, String nickCliente, String passwordCliente, String emailCliente,
+		String direccionCliente) {
+
 		nombre = nombreCliente
 		nick = nickCliente
 		password = passwordCliente
 		email = emailCliente
 		direccion = direccionCliente
-		
+
+	}
+
+	def esValido() {
+		!nick.nullOrEmpty && !email.nullOrEmpty
 	}
 
 }
