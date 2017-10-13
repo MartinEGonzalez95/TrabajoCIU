@@ -64,7 +64,7 @@ class RepoPedido implements Repo<Pedido> {
 
 	}
 
-	def searchPorPedido(String string) {
+	def searchPorEstado(String string) {
 		if (StringUtils.isBlank(string)) {
 			return repositorio.values.toList
 		} else {

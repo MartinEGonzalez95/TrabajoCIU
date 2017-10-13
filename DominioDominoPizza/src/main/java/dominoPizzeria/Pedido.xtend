@@ -23,6 +23,10 @@ class Pedido{
 	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	// Para mandar mails cuando cambia de estado //
 	Integer numero // Clave para el pedido //
+	
+	new(){
+		
+	}
 
 	new(Integer numeroClave) {
 
