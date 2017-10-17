@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "DreamTeam",
-  "license": "ISC"
-
+  "license": "ISC",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
