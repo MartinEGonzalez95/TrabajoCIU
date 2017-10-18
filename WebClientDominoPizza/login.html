@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- ANGULAR  -->
+	<script rel="stylesheet" src="node_modules/angular/angular.min.js"></script>
+</head>
+
+
+<body>
+	<!-- Botones para lanzar los modales de login -->
+	<!--SI NO QUEREMOS USAR MODAL IGUAL LAS ESTRUCTURAS HTML SIRVEN-->
+	<a href="#inicioSesion" class="btn btn-lg btn-primary" data-toggle="modal">Login Modal</a>
+	<a href="#registro" class="btn btn-lg btn-primary" data-toggle="modal">Registro usuario</a>
+
+	<!-- Modal LOGIN -->
+	<div id="inicioSesion" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header btn-primary">
+					<h4 class="modal-title">Iniciar sesion</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row text-center">
+							<label clas="col-md-5">Usuario</label>
+							<input clas="col-md-7" ng-model="nick" placeholder="usuario">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Contrasenia</label>
+							<input clas="col-md-7" type="password" ng-model="pass" placeholder="pass">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="text-center">
+						<button type="button" class="btn btn-primary">Iniciar sesion</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal de Registro-->
+	<div id="registro" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header btn-primary">
+					<h4 class="modal-title">Registrarse</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row text-center">
+							<label clas="col-md-5">Usuario</label>
+							<input clas="col-md-7" ng-model="nick" placeholder="usuario">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Contrasenia</label>
+							<input clas="col-md-7" type="password" ng-model="pass">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Repita Contrasenia</label>
+							<input clas="col-md-7" type="password" ng-model="passrepe">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Nombre</label>
+							<input clas="col-md-7" ng-model="nombre" placeholder="nombre">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Mail</label>
+							<input clas="col-md-7" ng-model="mail" placeholder="correo electronico">
+						</div>
+						<div class="row text-center">
+							<label clas="col-md-5">Direccion</label>
+							<input clas="col-md-7" ng-model="direccion" placeholder="direccion">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-12 text-center">
+						<div class="col">
+							<button type="button" class="btn btn-primary">Registrarse</button>
+							<a href="ingresarcomoinvitado">O puedes ingresar como INVITADO</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
