@@ -38,8 +38,7 @@ class RepoPedido implements Repo<Pedido> {
 	}
 
 	// No deberia ser usado //
-	override buscar(String nombre) {
-	}
+	override buscar(String nick) {}
 
 	override cargar() {
 
@@ -64,12 +63,25 @@ class RepoPedido implements Repo<Pedido> {
 
 	}
 
-	def searchPorEstado(String string) {
-		if (StringUtils.isBlank(string)) {
-			return repositorio.values.toList
+	def buscarPorEstado(String estado)
+	{
+		
+		if (StringUtils.isBlank(estado)) {
+			repositorio.values.toList
 		} else {
-			return repositorio.values.filter[it.estadoDePedido.toString.toLowerCase.contains(string.toLowerCase)].toList
+			repositorio.values.filter[ it.estadoDePedido.toString.toLowerCase.contains(estado.toLowerCase) ].toList
 		}
+				
 	}
-
+	
+	def buscarPorNick(String nick)
+	{
+		
+		if (StringUtils.isBlank(nick)) {
+			repositorio.values.toList
+		} else {
+			repositorio.values.filter[ it.cliente.nick.toLowerCase.contains(nick.toLowerCase) ].toList
+		}
+				
+	}
 }

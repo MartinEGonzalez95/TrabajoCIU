@@ -14,6 +14,7 @@ import repositorios.RepoCliente
 import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
+import estadosDePedido.Cerrado
 
 class BootstrapWeb implements Bootstrap {
 
@@ -62,6 +63,7 @@ class BootstrapWeb implements Bootstrap {
 		repo.agregar(new Pedido(2) => [
 			cliente = new Cliente("Martin", "martinG", "hackme", "emailQueVaAFallar:D", "not falsa")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			estadoDePedido = new Cerrado
 		])
 
 		repo.agregar(new Pedido(3) => [

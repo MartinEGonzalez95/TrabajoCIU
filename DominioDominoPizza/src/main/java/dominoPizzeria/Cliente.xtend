@@ -30,5 +30,4 @@ class Cliente {
 	def esValido() {
 		!nick.nullOrEmpty && !email.nullOrEmpty
 	}
-
 }

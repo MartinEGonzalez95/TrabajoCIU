@@ -1,22 +1,24 @@
 package domino.APIREST
 
+import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
 import dominoPizzeria.Tamanio
 import java.util.ArrayList
+
+import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
-import repositorios.RepoIngrediente
-import repositorios.RepoPizza
-import repositorios.RepoPedido
+
 import repositorios.RepoCliente
-import dominoPizzeria.Cliente
-import org.uqbar.commons.model.exceptions.UserException
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import dominio.DTO.PedidoDTO
+import repositorios.RepoIngrediente
+import repositorios.RepoPedido
+import repositorios.RepoPizza
+import estadosDePedido.EstadoDePedido
+import org.uqbar.xtrest.api.annotation.Put
 
 @Controller
 class DominoRestAPI {
@@ -26,55 +28,7 @@ class DominoRestAPI {
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
 	}
-
-	/** PEDIDOS REST */
-	// busca todos los pedidos, o filtra por estado si se envía algo
-	// en el parametro de la forma ?estado=unEstado.
-	@Get("/pedidos")
-	def getPedidos(String estado) {
-
-		response.contentType = ContentType.APPLICATION_JSON
-
-		return ok(RepoPedido.getRepo.searchPorEstado(estado).toJson)
-
-	}
-
-	@Post("/pedidos")
-	def postPedido(@Body String bodyConPedido) {
-		
-		response.contentType = ContentType.APPLICATION_JSON
-		
-		val pedido = bodyConPedido.fromJson(Pedido)
-		
-		
-		try {
-			RepoPedido.repo.agregar(pedido)
-			return ok()
-		} catch (RuntimeException e) {
-			return badRequest()
-		}
-
-	}
-
-	@Get("/pedidos/:numero")
-	def getPedidoConNumero() {
-
-		response.contentType = ContentType.APPLICATION_JSON
-
-		val pedido = RepoPedido.repo.search(numero)
-
-		if (pedido === null) {
-
-			return notFound()
-
-		} else {
-
-			return ok(pedido.toJson)
-
-		}
-	}
-
-	/** PROMOCIONES E INGREDIENTES */
+	
 	@Get("/promos")
 	def getPromos() {
 
@@ -83,7 +37,7 @@ class DominoRestAPI {
 		return ok(RepoPizza.getRepo.cargar().toJson)
 
 	}
-
+	
 	@Get("/tamanios")
 	def getTamanios(String nombre) {
 
@@ -97,7 +51,7 @@ class DominoRestAPI {
 
 		return ok(tamanios.toJson)
 	}
-
+	
 	@Get("/ingredientes")
 	def getIngredientes(String nombre) {
 
@@ -107,14 +61,137 @@ class DominoRestAPI {
 
 	}
 
-	/** USUARIOS  */
-	@Get("/usuarios")
-	def getClientes(String username) {
+	@Post("/pedidos")
+	def postPedido(@Body String bodyConPedido) {
+		
 		response.contentType = ContentType.APPLICATION_JSON
-
-		return ok(RepoCliente.getRepo.search(username).toJson)
+		
+		val pedido = bodyConPedido.fromJson(Pedido)
+		
+		try {
+			RepoPedido.getRepo.agregar(pedido)
+			return ok()
+		} catch (RuntimeException e) {
+			return badRequest()
+		}
 
 	}
+
+	@Get("/pedidos/:numero")
+	def getPedidoConNumero() {
+
+		response.contentType = ContentType.APPLICATION_JSON
+
+		val pedido = RepoPedido.getRepo.search(numero)
+
+		if (pedido === null) {
+
+			return notFound()
+
+		} else {
+
+			return ok(pedido.toJson)
+
+		}
+	}
+	
+	@Get("/pedido")
+	def getPedidoPorUsuario(String nick) {
+
+		response.contentType = ContentType.APPLICATION_JSON
+
+		return ok(RepoPedido.getRepo.buscarPorNick(nick).toJson)
+
+	}
+	
+	@Get("/pedidos")
+	def getPedidosPorEstado(String estado) {
+
+		response.contentType = ContentType.APPLICATION_JSON
+
+		return ok(RepoPedido.getRepo.buscarPorEstado(estado).toJson)
+
+	}
+
+	@Post("/pedidos/:numero/estado")
+	def postCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
+		
+		response.contentType = ContentType.APPLICATION_JSON
+
+		val pedido = RepoPedido.getRepo.buscar(Integer.valueOf(numero))
+		
+		val estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedido)
+	
+		pedido.estadoDePedido = estadoNuevo
+		
+		return ok()
+
+	}
+
+	@Get("/pedidos/:numero/estado")
+	def getEstadoDePedidoPorNumero() {
+
+		response.contentType = ContentType.APPLICATION_JSON
+
+		val pedido = RepoPedido.getRepo.buscar(Integer.valueOf(numero))
+
+		if (pedido === null) {
+
+			return notFound()
+
+		} else {
+
+			return ok(pedido.estadoDePedido.toJson)
+
+		}
+	}
+	
+	@Get("/usuarios/:username")
+	def getUsuarioConUsername() {
+
+		response.contentType = ContentType.APPLICATION_JSON
+
+		val usuario = RepoCliente.getRepo.search(username)
+
+		if (usuario === null) {
+
+			return notFound()
+
+		} else {
+
+			return ok(usuario.toJson)
+
+		}
+	}
+	
+	// TERMINAR //
+	@Put("/usuarios/:username")
+	def putEditarUsuario(@Body String bodyEditUsuario)
+	{
+		
+		response.contentType = ContentType.APPLICATION_JSON
+		
+		val clienteActualizado = bodyEditUsuario.fromJson(Cliente)
+		val cliente = RepoCliente.getRepo.buscar(username)
+		
+		val prueba = bodyEditUsuario.getPropertyValue("")
+		
+		
+		return ok(cliente.toJson)
+
+	}
+//	
+//		@Put('/tareas/:id')
+//	def Result actualizar(@Body String body) {
+//
+//			val asignadoA = body.getPropertyValue("asignadoA")
+//			val asignatario = RepoUsuarios.instance.getAsignatario(asignadoA)
+//			actualizado.asignarA(asignatario)
+//
+//
+//			RepoTareas.instance.update(actualizado)
+
+//}	
 
 	@Post("/usuarios")
 	def createClientes(@Body String body) {
@@ -133,22 +210,6 @@ class DominoRestAPI {
 
 	}
 
-	@Get("/usuarios/:username")
-	def getUsuarioConUsername() {
 
-		response.contentType = ContentType.APPLICATION_JSON
-
-		val usuario = RepoCliente.repo.search(username)
-
-		if (usuario === null) {
-
-			return notFound()
-
-		} else {
-
-			return ok(usuario.toJson)
-
-		}
-	}
 
 }
