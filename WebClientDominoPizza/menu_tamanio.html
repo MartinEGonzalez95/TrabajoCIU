@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="pizzaTamanio">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar Tamanio</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <!-- JQUERY -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- ANGULAR -->
+    <script src="node_modules/angular/angular.min.js"></script>
+
+</head>
+
+
+<body ng-controller="PizzaTamanioController as tamanioApp">
+
+<!--   La parte de arriba que dice "MENU"-->
+<div class="container">
+
+    <ul class="list-inline">
+
+        <li class="list-group-item"><a href="#Menu">Menu</a></li>
+
+        <li class="list-group-item"> {{tamanioApp.user.nick}}</li>
+    </ul>
+
+</div>
+
+<div class="container">
+    <span> tamanio </span>
+</div>
+
+
+<div class="container">
+    <table class="table table-striped table-hover">
+
+        <tbody data-ng-repeat="tamanio in tamanioApp.tamanios">
+        <tr>
+            <td>
+                {{tamanio.nombre}}
+            </td>
+            <td>${{tamanio.precio * tamanioApp.pizza.precio}}</td>
+            <td>
+                <button class="btn btn-default" ng-click="tamanioApp.crearPedido(pizza)">
+                    >
+                </button>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+</div>
+
+</body>
+
+<!-- JS -->
+<script src="js/appTamanioMenu.js"></script>
+
+</html>
