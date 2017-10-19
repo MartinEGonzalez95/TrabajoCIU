@@ -17,7 +17,7 @@
 </head>
 
 
-<body ng-controller="PizzaTamanioController as tamanioApp">
+<body ng-controller="PizzaTamanioController as pizzaController">
 
 <!--   La parte de arriba que dice "MENU"-->
 <div class="container">
@@ -26,27 +26,27 @@
 
         <li class="list-group-item"><a href="#Menu">Menu</a></li>
 
-        <li class="list-group-item"> {{tamanioApp.user.nick}}</li>
+        <li class="list-group-item"> {{pizzaController.user.nick}}</li>
     </ul>
 
 </div>
 
 <div class="container">
-    <span> tamanio </span>
+    <h1>{{pizzaController.plato.pizza.nombre}}</h1>
 </div>
 
 
 <div class="container">
     <table class="table table-striped table-hover">
 
-        <tbody data-ng-repeat="tamanio in tamanioApp.tamanios">
+        <tbody data-ng-repeat="unTamanio in pizzaController.tamanios">
         <tr>
             <td>
-                {{tamanio.nombre}}
+                {{unTamanio.nombre}}
             </td>
-            <td>${{tamanio.precio * tamanioApp.pizza.precio}}</td>
+            <td>${{unTamanio.valor * pizzaController.plato.precio}}</td>
             <td>
-                <button class="btn btn-default" ng-click="tamanioApp.crearPedido(pizza)">
+                <button class="btn btn-default" ng-click="pizzaController.crearPedido(pizza)">
                     >
                 </button>
             </td>

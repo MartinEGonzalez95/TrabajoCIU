@@ -45,9 +45,12 @@
         <tr>
             <td>
                 <dl>
-                    <dt>{{pizza.nombre}}</dt>
-                    <dd data-ng-repeat=" ingrediente in pizza.ingredientes">
-                        {{ingrediente.nombre}}
+                    <dt>
+                        <h5>{{pizza.nombre}}</h5>
+                    </dt>
+
+                    <dd class="list-inline" data-ng-repeat=" ingrediente in pizza.ingredientes">
+                       <h6> {{ingrediente.nombre}}</h6>
                     </dd>
                 </dl>
             </td>
