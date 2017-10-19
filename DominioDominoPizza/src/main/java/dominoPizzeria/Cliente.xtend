@@ -2,6 +2,7 @@ package dominoPizzeria
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import com.fasterxml.jackson.annotation.JsonProperty
 
 @TransactionalAndObservable
 @Accessors
@@ -29,5 +30,23 @@ class Cliente {
 
 	def esValido() {
 		!nick.nullOrEmpty && !email.nullOrEmpty
+	}
+	
+	@JsonProperty("nombreDe")
+	def getNombre()
+	{
+		nombre
+	}
+	
+	@JsonProperty("emailDe")
+	def getEmail()
+	{
+		email
+	}
+	
+	@JsonProperty("direccionDe")
+	def getDireccion()
+	{
+		direccion
 	}
 }

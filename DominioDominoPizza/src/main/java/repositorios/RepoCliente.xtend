@@ -30,7 +30,7 @@ class RepoCliente implements Repo<Cliente> {
 
 	override eliminar(Cliente cliente) {
 
-		repositorio.remove(cliente.email)
+		repositorio.remove(cliente.nick)
 
 	}
 
