@@ -24,6 +24,8 @@ import org.uqbar.xtrest.api.annotation.Put
 class DominoRestAPI {
 
 	extension JSONUtils = new JSONUtils
+	
+	Class<Object> Login
 
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
@@ -164,34 +166,34 @@ class DominoRestAPI {
 		}
 	}
 	
-	// TERMINAR //
 	@Put("/usuarios/:username")
 	def putEditarUsuario(@Body String bodyEditUsuario)
 	{
 		
 		response.contentType = ContentType.APPLICATION_JSON
 		
-		val clienteActualizado = bodyEditUsuario.fromJson(Cliente)
-		val cliente = RepoCliente.getRepo.buscar(username)
+		val clienteEditado = RepoCliente.getRepo.buscar(username)
 		
-		val prueba = bodyEditUsuario.getPropertyValue("")
+		if (clienteEditado === null)
+		{
+			
+			return notFound()
+			
+		}
 		
+		val nombreNuevo = bodyEditUsuario.getPropertyValue("nombreDe")
+		val emailNuevo = bodyEditUsuario.getPropertyValue("emailDe")
+		val direccionNueva = bodyEditUsuario.getPropertyValue("direccionDe")
 		
-		return ok(cliente.toJson)
+		clienteEditado.nombre = nombreNuevo
+		clienteEditado.email = emailNuevo
+		clienteEditado.direccion = direccionNueva
+		
+		RepoCliente.getRepo.modificar(clienteEditado)
+		
+		ok('{ "status" : "OK" }')
 
 	}
-//	
-//		@Put('/tareas/:id')
-//	def Result actualizar(@Body String body) {
-//
-//			val asignadoA = body.getPropertyValue("asignadoA")
-//			val asignatario = RepoUsuarios.instance.getAsignatario(asignadoA)
-//			actualizado.asignarA(asignatario)
-//
-//
-//			RepoTareas.instance.update(actualizado)
-
-//}	
 
 	@Post("/usuarios")
 	def createClientes(@Body String body) {
@@ -209,7 +211,20 @@ class DominoRestAPI {
 		}
 
 	}
+	
+	@Post("/login")
+	def postLogin(@Body String bodyConLogin) {
 
+		response.contentType = ContentType.APPLICATION_JSON
+		
+		val login = bodyConLogin.fromJson(Login)
+		
+		try {
+			return ok()
+		} catch (RuntimeException e) {
+			return badRequest()
+		}
 
+	}
 
 }
