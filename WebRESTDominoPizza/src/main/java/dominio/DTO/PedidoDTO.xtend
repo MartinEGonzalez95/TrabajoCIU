@@ -8,18 +8,16 @@ import formaDeEnvioPedido.FormaDeEnvio
 import dominoPizzeria.MailSender
 import dominoPizzeria.Pedido
 import org.eclipse.xtend.lib.annotations.Accessors
+import estadosDePedido.EstadoDePedido
 
 @Accessors
 class PedidoDTO {
 	List<Plato> platos = newArrayList
 	String nickCliente
 	Date fechaDeCreacion = new Date()
-	Date fechaDeEntrega
-	long tiempoDeEspera = 0
 	String aclaraciones = " "
-	String estadoDePedidoDTO
+	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
-	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	Integer numero // Clave para el pedido //
 	
 	new(Pedido pedido){
@@ -27,10 +25,9 @@ class PedidoDTO {
 		platos = pedido.platos
 		nickCliente = pedido.cliente.nick
 		fechaDeCreacion = pedido.fechaDeCreacion
-		fechaDeEntrega = pedido.fechaDeEntrega
-		tiempoDeEspera = pedido.tiempoDeEspera()
 		aclaraciones = pedido.aclaraciones
-		estadoDePedidoDTO = pedido.estadoDePedido.toString
+		estadoDePedido = pedido.estadoDePedido
+		formaDeEnvio = pedido.formaDeEnvio
 		
 	}
 	
