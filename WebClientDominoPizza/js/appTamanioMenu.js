@@ -32,8 +32,8 @@ app.controller('PizzaTamanioController', function () {
             "nombre": "Familiar",
             "valor": 1.25
         }
-    ]
+    ];
 
-};
+});
 
 

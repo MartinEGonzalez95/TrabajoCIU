@@ -33,9 +33,7 @@ app.controller('MenuController', function () {
     this.crearPedido = function(pizza){
 
         alert(pizza.nombre)
-    }
-
-
+    };
 });
 
 
