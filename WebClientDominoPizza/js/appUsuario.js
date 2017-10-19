@@ -1,9 +1,9 @@
-let app = angular.module('usuarioApp', []);
+let app = angular.module('appUsuario', []);
 
 app.controller('UsuarioCtrl', function () {
 
     this.nombre = "juan";
-    this.nick = "jon";
+    this.nick = "JuanK-po";
     this.email = "juanemail@email.com";
     this.direccion = "una calle";
 
@@ -12,12 +12,21 @@ app.controller('UsuarioCtrl', function () {
             "pizza": "Muzarella",
             "direccion": "calle123",
             "monto": "123"
+        },
+        {
+            "pizza": "Tomaco",
+            "direccion": "calle321",
+            "monto": "321"
         }
         ];
 
+    linkAPaginaDeConfirmacion = function (pedido) {
+        /*ir a la ventana confirmacionPedido*/
+        window.open("menu_confirmar.html");
+    };
+
+    setearCambios = function (){
+        /*post con el servidor rest*/
+    };
+
 });
-
-linkAPaginaDeConfirmacion = function (pedido) {
-    window.open("confirmacionPedido.html");
-
-};
