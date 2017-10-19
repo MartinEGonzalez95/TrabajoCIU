@@ -19,6 +19,13 @@ import repositorios.RepoPedido
 import repositorios.RepoPizza
 import estadosDePedido.EstadoDePedido
 import org.uqbar.xtrest.api.annotation.Put
+import org.eclipse.xtend.lib.annotations.Accessors
+import estadosDePedido.Cerrado
+import estadosDePedido.Entregado
+import estadosDePedido.EnViaje
+import estadosDePedido.ListoParaEnviar
+import estadosDePedido.ListoParaRetirar
+import estadosDePedido.Preparando
 
 @Controller
 class DominoRestAPI {
@@ -120,12 +127,23 @@ class DominoRestAPI {
 
 		val pedido = RepoPedido.getRepo.buscar(Integer.valueOf(numero))
 		
-		val estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedido)
+		val estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedidoDTO)
 	
-		pedido.estadoDePedido = estadoNuevo
+		pedido.estadoDePedido = transform(estadoNuevo.nombre)
 		
 		return ok()
 
+	}
+	
+	def transform(String estado) {
+		switch(estado){
+			case "Cerrado": return new Cerrado(),
+			case "Entregado": return new Entregado(),
+			case "EnViaje": return new EnViaje(),
+			case "ListoParaEnviar": return new ListoParaEnviar(),
+			case "ListoParaRetirar": return new ListoParaRetirar(),
+			case "Preparando": return new Preparando()
+		}
 	}
 
 	@Get("/pedidos/:numero/estado")
@@ -212,4 +230,9 @@ class DominoRestAPI {
 
 
 
+}
+
+@Accessors
+class EstadoDePedidoDTO {
+	String nombre
 }
