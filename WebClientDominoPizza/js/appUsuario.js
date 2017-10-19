@@ -1,5 +1,3 @@
-'use strict';
-
 let app = angular.module('usuarioApp', []);
 
 app.controller('UsuarioCtrl', function () {

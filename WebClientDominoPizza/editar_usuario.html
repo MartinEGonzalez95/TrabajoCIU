@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="appUsuaio">
+<html lang="es" ng-app="appUsuario">
 <head>
     <meta charset="UTF-8">
 
@@ -24,7 +24,7 @@
 
         <li class="list-group-item"><a href="#Menu">Menu</a></li>
 
-        <li class="list-group-item"> {{usuario.nombre}}</li>
+        <li class="list-group-item"> {{usuario.nick}}</li>
     </ul>
 
 </div>
@@ -35,15 +35,15 @@
 
     <div class="container">
         <label>Nombre</label>
-        <input type="text" ng-model="usuario.setNombre" placeholder={{usuario.nombre}}>
+        <input type="text" ng-model="usuario.nombre" placeholder={{usuario.nombre}}>
     </div>
     <div class="container">
         <label>Mail</label>
-        <input type="text" ng-model="usuario.setEmail" placeholder={{usuario.email}}>
+        <input type="text" ng-model="usuario.email" placeholder={{usuario.email}}>
     </div>
     <div class="container"  >
         <label>Direccion</label>
-        <input type="text" ng-model="usuario.setDireccion" placeholder={{usuario.direccion}}>
+        <input type="text" ng-model="usuario.direccion" placeholder={{usuario.direccion}}>
     </div>
     <div align="right">
         <button class="btn btn-default" ng-click="usuario.setearCambios()">
@@ -76,6 +76,6 @@
 </div>
 
 
-<script src="js/usuarioAppModel.js"></script>
+<script src="js/appUsuario.js"></script>
 </body>
 </html>
