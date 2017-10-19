@@ -104,20 +104,13 @@ class DominoRestAPI {
 		}
 	}
 	
-	@Get("/pedido")
-	def getPedidoPorUsuario(String nick) {
-
-		response.contentType = ContentType.APPLICATION_JSON
-
-		return ok(RepoPedido.getRepo.buscarPorNick(nick).toJson)
-
-	}
-	
 	@Get("/pedidos")
-	def getPedidosPorEstado(String estado) {
+	def getPedidosPorEstado(String estado, String nick) {
 
 		response.contentType = ContentType.APPLICATION_JSON
-
+		
+		if(estado.nullOrEmpty) { return ok(RepoPedido.getRepo.buscarPorNick(nick).toJson) }
+		
 		return ok(RepoPedido.getRepo.buscarPorEstado(estado).toJson)
 
 	}
@@ -199,9 +192,9 @@ class DominoRestAPI {
 			
 		}
 		
-		val nombreNuevo = bodyEditUsuario.getPropertyValue("nombreDe")
-		val emailNuevo = bodyEditUsuario.getPropertyValue("emailDe")
-		val direccionNueva = bodyEditUsuario.getPropertyValue("direccionDe")
+		val nombreNuevo = bodyEditUsuario.getPropertyValue("nombre")
+		val emailNuevo = bodyEditUsuario.getPropertyValue("email")
+		val direccionNueva = bodyEditUsuario.getPropertyValue("direccion")
 		
 		clienteEditado.nombre = nombreNuevo
 		clienteEditado.email = emailNuevo

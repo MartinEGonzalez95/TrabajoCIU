@@ -32,19 +32,19 @@ class Cliente {
 		!nick.nullOrEmpty && !email.nullOrEmpty
 	}
 	
-	@JsonProperty("nombreDe")
+	@JsonProperty("nombre")
 	def getNombre()
 	{
 		nombre
 	}
 	
-	@JsonProperty("emailDe")
+	@JsonProperty("email")
 	def getEmail()
 	{
 		email
 	}
 	
-	@JsonProperty("direccionDe")
+	@JsonProperty("direccion")
 	def getDireccion()
 	{
 		direccion
