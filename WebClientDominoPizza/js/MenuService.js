@@ -2,7 +2,7 @@
 
 
 angular.module('dominosApp').service("MenuService", function () {
-
+    /** Pizzas harcodeadas, deberían de venir del servidor */
     this.pizzas = [
         {
             "nombre": "Muzarella",
@@ -32,11 +32,17 @@ angular.module('dominosApp').service("MenuService", function () {
     };
 
     this.agregarPizzaA = function (pizza) {
+
         this.pizzas.push(pizza);
     };
 
     this.obtenerPizzas = function () {
         return this.pizzas;
+    };
+
+    this.obtenerPizzaPorNombre = function (unNombreDePizza) {
+
+        return _.find(this.pizzas, pizza => pizza.nombre === unNombreDePizza);
     }
 
 
