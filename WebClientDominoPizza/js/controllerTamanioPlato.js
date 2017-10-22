@@ -9,6 +9,7 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function () {
         "tamanio": "Grande"
     };
 
+
     /** Le pido al servidor los tamanios */
     this.tamanios = [
         {
@@ -28,6 +29,14 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function () {
             "valor": 1.25
         }
     ];
+
+
+
+
+
+
+
+
 
 
 });

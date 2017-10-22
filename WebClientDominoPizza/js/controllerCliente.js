@@ -2,7 +2,7 @@
 
 angular.module('dominosApp').controller('controllerCliente', function () {
 
-  this.nick = "Pepito";
+    this.nick = "Pepito";
 
 
 });

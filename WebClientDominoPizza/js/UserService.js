@@ -1,6 +1,7 @@
 /** Este service le va a pegar al servidor para:
- * Buscar usuarios
- * Modificar usuarios
+ * Buscar un usuario
+ * Modificar un usuario
+ *
  * */
 
 angular.module('dominosApp').service("UserService", function () {
@@ -8,7 +9,7 @@ angular.module('dominosApp').service("UserService", function () {
     this.usuarios = [];
 
     this.crearUsuario = function (description) {
-        var cliente = new Cliente(description);
+        let cliente = new Cliente(description);
         this.agregarCliente(cliente);
         return cliente;
     };
@@ -18,7 +19,14 @@ angular.module('dominosApp').service("UserService", function () {
     };
 
     this.buscarUsuario = function (nick) {
-        return _.find(this.usuarios, user => user.nombre === nick)
+        return _.find(this.usuarios, user => user.nick === nick)
     };
 
 });
+
+let Cliente = function (nick) {
+
+    this.nick = nick;
+
+};
+

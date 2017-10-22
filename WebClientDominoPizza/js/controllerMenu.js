@@ -1,6 +1,6 @@
 /** Controlador del Menu*/
 
-angular.module('dominosApp').controller('MenuController', function ($stateParams, $state, MenuService) {
+angular.module('dominosApp').controller('MenuController', function (MenuService) {
 
     /** Lista de promociones a la venta */
     this.promociones = MenuService.obtenerPizzas();
@@ -19,15 +19,21 @@ angular.module('dominosApp').controller('MenuController', function ($stateParams
         *
         * $state.go("menu_tamanio");
         * */
-        let pizza = {
-            "nombre": "Pizza Custom",
-            "precio": 75
-        };
+        let pizza = new Pizza("Pizza Custom", 75, []);
         alert(pizza.nombre);
 
     }
 
 });
+
+let Pizza = function (unNombre, unPrecio, ingredientes) {
+    this.ingredientes = ingredientes || [];
+    this.nombre = unNombre;
+    this.precio = unPrecio;
+
+};
+
+
 
 
 
