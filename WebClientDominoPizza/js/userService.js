@@ -1,8 +1,10 @@
-dominosApp.service("UserService", function () {
 /** Este service le va a pegar al servidor para:
  * Buscar usuarios
  * Modificar usuarios
  * */
+
+angular.module('dominosApp').service("UserService", function () {
+
     this.usuarios = [];
 
     this.crearUsuario = function (description) {
