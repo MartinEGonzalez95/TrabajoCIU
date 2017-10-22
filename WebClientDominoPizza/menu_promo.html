@@ -17,7 +17,7 @@
 </head>
 
 
-<body ng-controller="MenuController as menu">
+<body>
 
 <!--   La parte de arriba que dice "MENU"-->
 <div ng-controller="controllerCliente as user" class="container">
@@ -38,7 +38,7 @@
 </div>
 
 
-<div class="container">
+<div  ng-controller="MenuController as menu" class="container">
     <table class="table table-striped table-hover">
 
         <tbody data-ng-repeat="pizza in menu.promociones">

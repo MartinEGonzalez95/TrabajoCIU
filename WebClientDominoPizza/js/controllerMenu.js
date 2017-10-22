@@ -1,6 +1,6 @@
 /** Controlador del Menu*/
 
-angular.module('dominosApp').controller('MenuController', function ($stateParams, $state, MenuService) {
+angular.module('dominosApp').controller('MenuController', function (MenuService) {
 
     /** Lista de promociones a la venta */
     this.promociones = MenuService.obtenerPizzas();
