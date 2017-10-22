@@ -18,7 +18,7 @@ angular.module('dominosApp').service("UserService", function () {
     };
 
     this.buscarUsuario = function (nick) {
-        return _.find(this.usuarios, user => user.nombre == nick)
+        return _.find(this.usuarios, user => user.nombre === nick)
     };
 
 });

@@ -8,13 +8,20 @@ angular.module('dominosApp').controller('MenuController', function (MenuService)
 
     this.crearPedido = function (pizza) {
         // Ir al siguiente estado
-
+        /*
+        * $state.go("menu_tamanio");
+        * */
         alert(pizza.nombre)
     };
+
     this.crearPizzaCustom = function () {
-        // ir al siguiente estado
+        /* ir al siguiente estado
+        *
+        * $state.go("menu_tamanio");
+        * */
         let pizza = {
-            "nombre":"Pizza Custom"
+            "nombre": "Pizza Custom",
+            "precio": 75
         };
         alert(pizza.nombre);
 

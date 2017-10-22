@@ -1,0 +1,48 @@
+<div ng-controller="MenuController as menu">
+
+    <div class="container">
+        <h1>¡Elige tu pizza ideal!</h1>
+    </div>
+
+    <!-- Listado de Pizzas -->
+    <div class="container">
+        <table class="table table-striped table-hover">
+
+            <tbody data-ng-repeat="pizza in menu.promociones">
+            <tr>
+                <td>
+                    <dl>
+                        <dt>
+                            <h5>{{pizza.nombre}}</h5>
+                        </dt>
+
+                        <dd class="list-inline" data-ng-repeat=" ingrediente in pizza.ingredientes">
+                            <h6> {{ingrediente.nombre}}</h6>
+                        </dd>
+                    </dl>
+                </td>
+                <td>${{pizza.precio}}</td>
+                <td>
+                    <button class="btn btn-default" ng-click="menu.crearPedido(pizza)">
+                        >
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td>
+                    <p>¡Armá tu propia pizza!</p>
+                </td>
+                <td>$75</td>
+                <td>
+                    <button class="btn btn-default" ng-click="menu.crearPizzaCustom()">
+                        >
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

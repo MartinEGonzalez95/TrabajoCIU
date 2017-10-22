@@ -1,17 +1,15 @@
 angular.module('dominosApp').controller('controllerTamanioPlato', function () {
 
-    this.user = {
-        "nick": "Pepito"
-    };
-
+   /** El plato que me pasan por parámetro */
     this.plato = {
         "pizza": {
             "nombre": "Fugazzeta"
         },
         "precio": 75,
         "tamanio": "Grande"
-    }
+    };
 
+    /** Le pido al servidor los tamanios */
     this.tamanios = [
         {
             "nombre": "Porcion",
