@@ -1,7 +1,6 @@
-let app = angular.module('menuApp', []);
 
 
-app.controller('MenuController', function () {
+angular.module('dominosApp').controller('MenuController', function () {
 
 
     this.user = {
@@ -35,16 +34,6 @@ app.controller('MenuController', function () {
         alert(pizza.nombre)
     };
 });
-
-
-irAPizzaCustom = function () {
-    //solo abre la ventana siguiente, aunque no pasa ningun objeto ni nada
-    window.open("pizzaCustom.html");
-
-};
-
-
-
 
 
 

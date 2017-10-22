@@ -1,7 +1,4 @@
-let app = angular.module('pizzaTamanio', []);
-
-
-app.controller('PizzaTamanioController', function () {
+angular.module('dominosApp').controller('controllerTamanioPlato', function () {
 
     this.user = {
         "nick": "Pepito"
@@ -33,6 +30,7 @@ app.controller('PizzaTamanioController', function () {
             "valor": 1.25
         }
     ];
+
 
 });
 

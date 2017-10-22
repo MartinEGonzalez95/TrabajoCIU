@@ -1,6 +1,5 @@
-let app = angular.module('appUsuario', []);
 
-app.controller('UsuarioCtrl', function () {
+dominosApp.controller('UsuarioCtrl', function () {
 
     this.nombre = "juan";
     this.nick = "JuanK-po";

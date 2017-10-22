@@ -1,6 +1,4 @@
-let app = angular.module('appConfirmar', []);
-
-app.controller('MenuConfirmarController', function () {
+dominosApp.controller('MenuConfirmarController', function () {
 
     this.user = {
         "nick": "Juan"
