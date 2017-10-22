@@ -1,12 +1,8 @@
-
+/** Controlador del Menu*/
 
 angular.module('dominosApp').controller('MenuController', function () {
 
-
-    this.user = {
-        "nombre": "Pepito"
-    };
-
+    /** Lista de promociones a la venta */
     this.promociones = [
         {
             "nombre": "Muzarella",
@@ -29,7 +25,8 @@ angular.module('dominosApp').controller('MenuController', function () {
         }
     ];
 
-    this.crearPedido = function(pizza){
+
+    this.crearPedido = function (pizza) {
 
         alert(pizza.nombre)
     };

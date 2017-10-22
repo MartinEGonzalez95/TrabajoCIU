@@ -1,18 +1,15 @@
-
+/** Rutas */
 angular.module('dominosApp').config(function ($stateProvider, $urlRouterProvider) {
 
 
     $stateProvider
         .state('login', {
-            url: "/login",
-            templateUrl: "login.html"
+            url: "/",
+            templateUrl: "index.html"
         })
-        .state('crearPedido', {
-            url: "/menu/crearPedido",
-            templateUrl: "partials/crearPedido.html"
-        });
 
-    $urlRouterProvider.otherwise("/login");
+
+    $urlRouterProvider.otherwise("/");
 
 });
 

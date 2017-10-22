@@ -21,12 +21,16 @@
 
 </head>
 
-<!-- Esto está de prueba-->
 <body>
 
+<!-- Esto está de prueba-->
 <div ng-controller="controllerCliente as usuario">
     <h1>{{usuario.nick}}</h1>
+</div>
 
+<!-- Routing-->
+<div class="container">
+    <div ui-view></div>
 </div>
 
 
@@ -34,7 +38,11 @@
 
 <!-- la aplicación-->
 <script src="js/app.js"></script>
+
 <!-- Los Controladores -->
 <script src="js/controllerCliente.js"></script>
+
+<!--<script src="js/routes.js"></script>-->
+
 
 </html>
