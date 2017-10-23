@@ -1,12 +1,19 @@
-angular.module('dominosApp').controller('controllerTamanioPlato', function () {
+angular.module('dominosApp').controller('controllerTamanioPlato', function (PedidoTemporalService) {
 
-   /** El plato que me pasan por parámetro */
+    const servicePedido = PedidoTemporalService;
+    servicePedido.crearPedido("pepito");
+
+    this.user = servicePedido.getPedido().cliente;
+    /** El plato que me pasan por parámetro */
     this.plato = {
         "pizza": {
             "nombre": "Fugazzeta"
         },
         "precio": 75,
-        "tamanio": "Grande"
+        "tamanio": {
+            "nombre": "",
+            "valor": 1
+        }
     };
 
 
@@ -30,13 +37,20 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function () {
         }
     ];
 
+    this.agregarTamanio = function (unTamanio) {
 
 
+        this.plato.tamanio = unTamanio;
 
+        servicePedido.agregarPlato(this.plato);
 
+        alert((this.plato.pizza.nombre) + " " + (unTamanio.nombre));
 
-
-
+        /* ir al siguiente estado
+        *
+        * $state.go("menu_ingrediente");
+        * */
+    }
 
 
 });

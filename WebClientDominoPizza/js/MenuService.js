@@ -22,19 +22,26 @@ angular.module('dominosApp').service("MenuService", function () {
                 {
                     "nombre": "Muzarella"
                 }]
+        },
+        {
+            "nombre": "Fugazzeta",
+            "precio": 175,
+            "ingredientes": [
+                {
+                    "nombre": "Cebolla"
+                }
+            ]
+
         }
+
     ];
 
     this.crearPizza = function (nombre) {
-        var pizza = new Pizza(nombre);
+        let pizza = new Pizza(nombre);
 
         return pizza;
     };
 
-    this.agregarPizzaA = function (pizza) {
-
-        this.pizzas.push(pizza);
-    };
 
     this.obtenerPizzas = function () {
         return this.pizzas;
