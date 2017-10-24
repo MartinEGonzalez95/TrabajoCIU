@@ -1,4 +1,6 @@
-dominosApp.controller('MenuConfirmarController', function () {
+angular.module('dominosApp').controller('ControllerConfirmar', function () {
+
+    this.montoTotal = 265;
 
     this.user = {
         "nick": "Juan"
@@ -28,10 +30,19 @@ dominosApp.controller('MenuConfirmarController', function () {
 
     this.aclaraciones = '';
 
-    this.envio = true; /*pensar bien     <---------*/
+    this.delivery = {
+        "nombre": "Delivery",
+        "precio": 15
+    };
 
-    cancelarPedido = function(pedido){
-        /*cancelarPedido*/
+    this.retiroPorLocal = {
+        "nombre": "RetiroPorLocal",
+        "precio": 0
+    };
+
+
+    cancelarPizza = function (pizza) {
+        this.pizzas.remove(pizza)
     };
 
     linkAMenuPromo = function () {
