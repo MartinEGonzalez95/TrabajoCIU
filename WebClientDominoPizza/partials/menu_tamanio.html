@@ -1,7 +1,10 @@
 <div ng-controller="controllerTamanioPlato as pizzaController" class="container">
 
 
-    <h1>{{pizzaController.plato.pizza.nombre}}</h1>
+    <label>
+        <h1>{{pizzaController.plato.pizza.nombre}}</h1>
+        <h3>${{pizzaController.plato.pizza.precio}}</h3>
+    </label>
 
     <div class="container">
         <table class="table table-striped table-hover">
@@ -11,7 +14,7 @@
                 <td>
                     {{unTamanio.nombre}}
                 </td>
-                <td>${{unTamanio.valor * pizzaController.plato.precio}}</td>
+                <td>${{unTamanio.valor * pizzaController.plato.pizza.precio}}</td>
                 <td>
                     <button class="btn btn-default" ng-click="pizzaController.crearPedido(pizza)">
                         >

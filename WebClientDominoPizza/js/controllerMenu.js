@@ -1,12 +1,13 @@
 /** Controlador del Menu*/
 
+angular.module('dominosApp').controller('MenuController', function ($state, MenuService,PlatoService, PedidoTemporalService) {
 
-
-angular.module('dominosApp').controller('MenuController', function ($state, MenuService, PedidoTemporalService) {
     /** servicios */
-    const menuService = MenuService;
-    const pedidoService = PedidoTemporalService;
+    let  menuService = MenuService;
 
+    let  pedidoService = PedidoTemporalService;
+
+    let platoService = PlatoService;
 
     /** Lista de promociones a la venta */
     this.promociones = menuService.obtenerPizzas();
@@ -16,8 +17,10 @@ angular.module('dominosApp').controller('MenuController', function ($state, Menu
 
         let pedido = pedidoService.crearPedido(nick);
 
-        pedidoService.agregarPlato(new Plato(pizza));
-
+        let plato = new Plato();
+        plato.pizza = pizza;
+        pedidoService.agregarPlato(plato);
+        platoService.agregarPlato(plato);
 
 
         // Ir al siguiente estado
@@ -26,16 +29,16 @@ angular.module('dominosApp').controller('MenuController', function ($state, Menu
     };
 
     this.crearPizzaCustom = function (nick) {
-        /* ir al siguiente estado
-        *
-        * $state.go("menu_tamanio");
-        * */
+
         let pizza = new Pizza("Pizza Custom", 75, []);
         let pedido = pedidoService.crearPedido(nick);
         let plato = new Plato();
         plato.pizza = pizza;
+
+        platoService.agregarPlato(plato);
         pedidoService.agregarPlato(plato);
 
+         $state.go("tamanio");
 
     };
 
