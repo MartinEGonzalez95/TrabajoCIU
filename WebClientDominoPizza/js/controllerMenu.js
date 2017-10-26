@@ -2,7 +2,7 @@
 
 
 
-angular.module('dominosApp').controller('MenuController', function (MenuService, PedidoTemporalService) {
+angular.module('dominosApp').controller('MenuController', function ($state, MenuService, PedidoTemporalService) {
     /** servicios */
     const menuService = MenuService;
     const pedidoService = PedidoTemporalService;
@@ -19,11 +19,10 @@ angular.module('dominosApp').controller('MenuController', function (MenuService,
         pedidoService.agregarPlato(new Plato(pizza));
 
 
-        alert(`${pizza.nombre} ${pedido.cliente} ${pedido.numero.toString()}`)
+
         // Ir al siguiente estado
-        /*
-        * $state.go("menu_tamanio");
-        * */
+        $state.go("tamanio");
+
     };
 
     this.crearPizzaCustom = function (nick) {
@@ -38,9 +37,9 @@ angular.module('dominosApp').controller('MenuController', function (MenuService,
         pedidoService.agregarPlato(plato);
 
 
-        alert(pizza.nombre + " " + pedido.cliente)
+    };
 
-    }
+
 
 });
 
