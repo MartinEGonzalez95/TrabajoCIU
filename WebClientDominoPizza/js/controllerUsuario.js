@@ -18,12 +18,12 @@ angular.module('dominosApp').controller('ControllerUsuario', function () {
         }
         ];
 
-    linkAPaginaDeConfirmacion = function (pedido) {
+    this.linkAPaginaDeConfirmacion = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
         window.open("menu_confirmar.html");
     };
 
-    setearCambios = function (){
+    this.setearCambios = function (){
         /*post con el servidor rest*/
     };
 

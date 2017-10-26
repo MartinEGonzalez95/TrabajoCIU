@@ -58,10 +58,12 @@
                     <h6>{{ingrediente.nombre}}</h6>
                 </dd>
             </td>
-            <td>	<span class="badge badge-important">${{pizza.precio}}</span></td>
             <td>
+                <span class="badge badge-important">${{pizza.precio}}</span>
+            </td>
+            <td >
                 <button class="btn btn-default" ng-click="controllerConfirmar.cancelarPizza(pizza)">
-                    X
+                    <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>
         </tr>
@@ -69,27 +71,32 @@
 
     </table>
 
-    <a href="linkAMenuPromo()"> Agregar otra pizza </a>
+    <a href="controllerConfirmar.linkAMenuPromo()"> Agregar otra pizza </a>
 
     <h2>Aclaraciones</h2>
 
-    <input type="text" ng-model="appConfirmar.aclaraciones" placeholder="Sin aceitunas por favor!">
+    <input type="text" ng-model="controllerConfirmar.aclaraciones" placeholder="ej: Sin aceitunas por favor!">
 
     <h2>Envío</h2>
 
-    <label><input type="checkbox" id="cbox1" value="appConfirmar.retiroPorLocal">
-        {{controllerConfirmar.retiroPorLocal.nombre}}</label><br>
-
+    <div class="radio">
     <label>
-        <input type="checkbox" id="cbox2" value="appConfirmar.delivery"> {{controllerConfirmar.delivery.nombre}}
+        <input type="radio" ng-model="controllerConfirmar.retiroPorLocal.valor">
+        {{controllerConfirmar.retiroPorLocal.nombre}}
+    </label>
+    </div>
+    <div class="radio">
+    <label>
+        <input type="radio" ng-model="controllerConfirmar.delivery.valor"> {{controllerConfirmar.delivery.nombre}}
         <span class="badge badge-important">  ${{controllerConfirmar.delivery.precio}}</span>
-        <input  type="text" ng-model="appConfirmar.cliente.direccion" placeholder="Indique su direccion">
-    </label><br>
+        <input  type="text" ng-model="controllerConfirmar.cliente.direccion" placeholder="Indique su direccion">
+    </label>
+    </div>
 
     <div>
         <label><h1>Total a pagar:</h1></label>
         <span class="badge badge-important">  <h4>${{controllerConfirmar.montoTotal}}</h4> </span>
-        <button class="btn btn-primary" ng-click="controllerConfirmar.confirmarPedido(pedido)">
+        <button class="btn btn-primary" ng-click="controllerConfirmar.confirmarPedido()">
             Confirmar Pedido
         </button>
 

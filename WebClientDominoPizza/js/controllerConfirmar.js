@@ -32,20 +32,33 @@ angular.module('dominosApp').controller('ControllerConfirmar', function () {
 
     this.delivery = {
         "nombre": "Delivery",
-        "precio": 15
+        "precio": 15,
+        "valor": false
     };
 
     this.retiroPorLocal = {
         "nombre": "RetiroPorLocal",
-        "precio": 0
+        "precio": 0,
+        "valor": false
     };
 
 
-    cancelarPizza = function (pizza) {
-        this.pizzas.remove(pizza)
-    };
 
-    linkAMenuPromo = function () {
-        window.open("menu_promo.html");
+    this.cancelarPizza = function(unaPizza) {
+        for (let i =0; i < this.pizzas.length; i++) {
+            if (this.pizzas[i].nombre === unaPizza.nombre) {
+                this.pizzas.splice(i,1);
+                break;
+            }
+        }
     }
+
+    /*deberia hacerse con ui-sref */
+    this.linkAMenuPromo = function () {
+        window.open("menu_promo.html");
+    };
+
+    this.confirmarPedido = function(){
+
+    };
 });
