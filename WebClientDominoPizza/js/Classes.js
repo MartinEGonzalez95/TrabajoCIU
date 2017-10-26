@@ -18,6 +18,9 @@ let Pizza = function (unNombre, unPrecio, ingredientes) {
 
 let Plato = function () {
     this.pizza;
-    this.tamanio;
-    this.ingredientes = [];
+    this.tamanio = {
+        "nombre":"Grande",
+        "valor":1
+    };
+    this.ingredientesExtras = [];
 };

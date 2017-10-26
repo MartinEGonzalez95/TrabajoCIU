@@ -1,4 +1,4 @@
 'use strict';
 
 /* Se define el modulo de la aplicación */
-let dominosApp = angular.module('dominosApp', []);
+let dominosApp = angular.module('dominosApp', ['ui.router']);
