@@ -1,4 +1,4 @@
-angular.module('dominosApp').controller('controllerTamanioPlato', function (PlatoService,PedidoTemporalService) {
+angular.module('dominosApp').controller('controllerTamanioPlato', function ($state, PlatoService,PedidoTemporalService) {
 
     let pedidoService = PedidoTemporalService;
 
@@ -41,15 +41,6 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function (Plat
         }
     ];
 
-    this.calcularCosto = function (unTamanio) {
-
-
-        return this;
-
-    };
-
-
-
     this.agregarTamanio = function (unTamanio) {
 
 
@@ -57,10 +48,8 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function (Plat
 
         pedidoService.agregarPlato(this.plato);
 
-        alert((this.plato.pizza.nombre) + " " + (unTamanio.nombre));
-
         // ir al siguiente estado
-         $state.go("ingrediente");
+         $state.go("confirmar");
 
     }
 

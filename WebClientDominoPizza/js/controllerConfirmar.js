@@ -1,6 +1,12 @@
-angular.module('dominosApp').controller('ControllerConfirmar', function () {
+angular.module('dominosApp').controller('ControllerConfirmar', function (PedidoTemporalService) {
+
+    this.pedidoService = PedidoTemporalService;
+
+    this.pedido = this.pedidoService.pedido;
 
     this.montoTotal = 265;
+
+    this.platos = this.pedidoService.platos;
 
     this.user = {
         "nick": "Juan"
@@ -42,16 +48,9 @@ angular.module('dominosApp').controller('ControllerConfirmar', function () {
         "valor": false
     };
 
-
-
     this.cancelarPizza = function(unaPizza) {
-        for (let i =0; i < this.pizzas.length; i++) {
-            if (this.pizzas[i].nombre === unaPizza.nombre) {
-                this.pizzas.splice(i,1);
-                break;
-            }
-        }
-    }
+        this.pizzas = _.without(this.pizzas,unaPizza);
+    };
 
     /*deberia hacerse con ui-sref */
     this.linkAMenuPromo = function () {

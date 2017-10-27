@@ -81,13 +81,13 @@
 
     <div class="radio">
     <label>
-        <input type="radio" ng-model="controllerConfirmar.retiroPorLocal.valor">
+        <input type="radio" name="envio" ng-model="controllerConfirmar.retiroPorLocal.valor">
         {{controllerConfirmar.retiroPorLocal.nombre}}
     </label>
     </div>
     <div class="radio">
     <label>
-        <input type="radio" ng-model="controllerConfirmar.delivery.valor"> {{controllerConfirmar.delivery.nombre}}
+        <input type="radio" name="envio" ng-model="controllerConfirmar.delivery.valor"> {{controllerConfirmar.delivery.nombre}}
         <span class="badge badge-important">  ${{controllerConfirmar.delivery.precio}}</span>
         <input  type="text" ng-model="controllerConfirmar.cliente.direccion" placeholder="Indique su direccion">
     </label>
