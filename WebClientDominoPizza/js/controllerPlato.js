@@ -10,7 +10,12 @@ angular.module('dominosApp').controller("controllerPlato", function (MenuService
             "precio": 100,
             "ingredientes": [
                 {
-                    "nombre": "Muzarella"
+                    "nombre": "Muzarella",
+                    "distribucion": "Todo"
+                },
+                {
+                    "nombre": "Oregano",
+                    "distribucion": "Todo"
                 }]
             },
             "tamanio": {
@@ -22,18 +27,28 @@ angular.module('dominosApp').controller("controllerPlato", function (MenuService
 
         this.ingredientesExtras = { "ingredientes": [
             {
-                "nombre": "Jamón"
+                "nombre": "Jamón",
+                "distribucion": "Todo",
+                "precio": 12
             },
             {
-                "nombre": "Morrones"
+                "nombre": "Morrones",
+                "distribucion": "Todo",
+                "precio": 10
             },
             {
-                "nombre": "Anchoas"
+                "nombre": "Anchoas",
+                "distribucion": "Todo",
+                "precio": 7
             },
             {
-                "nombre": "Papitas"
+                "nombre": "Papitas",
+                "distribucion": "Todo",
+                "precio": 5
             }
         
         ]}
+
+        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) }
 
 });

@@ -18,13 +18,13 @@
 
 <div ng-controller="controllerPlato as platoAMostrar">
 
-    <div style="background-color:whitesmoke;">Tamaño > Ingredientes</div>
+    <div style="background-color:whitesmoke;"> Tamaño > Ingredientes</div>
 
     <div>
 
-        <h1>{{ platoAMostrar.plato.pizza.nombre }}</h1>
-        <h3>{{ platoAMostrar.plato.tamanio.nombre }}</h3>
-        <h3>{{ platoAMostrar.plato.pizza.precio }}</h3>
+        <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
+        <label><h3>{{ platoAMostrar.plato.tamanio.nombre }}</h3></label>
+        <label><h3>{{ platoAMostrar.plato.pizza.precio }}</h3></label>
 
     </div>
 
@@ -33,46 +33,52 @@
         <tbody ng-repeat="ingrediente in platoAMostrar.plato.pizza.ingredientes">
             <tr>
                 <td>
-                        <p>{{ ingrediente.nombre }}</p>
-                        <input type="radio" name="distribucion" ng-model="ingrediente.izquierda"> Mitad Izquierda
-                        <input type="radio" name="distribucion" ng-model="ingrediente.toda"> Todo
-                        <input type="radio" name="distribucion" ng-model="ingrediente.derecha"> Mitad Derecha
+
+                        <label><h5>{{ ingrediente.nombre }}</h5></label>
+                        <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
+                        <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
+                        <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
 
                 </td>
             
             </tr>
         </tbody>
 
+        <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
+                <tr>
+                    <td>
+    
+                            <label><h5>{{ ingrediente.nombre }}</h5></label>
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+    
+                    </td>
+                
+                </tr>
+            </tbody>
+
     </table>
 
-    <ul style="list-style-type:none" ng-repeat="ingrediente in platoAMostrar.ingredientesExtras">
-        <li>{{ ingrediente.nombre }}</li>
-        <li>Hola</li>
-    </ul> 
+    <div>
+    
+        <label><h3>Extras:</h3></label>
 
-</div>
-
-<div  align="right">
-    <form>
-        <label><h3>Extras</h3></label>
-        <ul>
-            <li><a href="#Jamon">Jamon</a></li><br>
-            <li><a href="#Morrones">Morrones</a></li><br>
-            <li><a href="#Anchoas">Anchoas</a></li><br>
-            <li><a href="#Anana">Anana</a></li><br>
+        <ul style="list-style-type:none" ng-repeat="ingrediente in platoAMostrar.ingredientesExtras.ingredientes">
+            <li><a href ng-click="platoAMostrar.agregar(ingrediente)">{{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
         </ul>
-    </form>
-</div>
 
-<div align="right">
-        <button class="btn btn-default">
+        <button class="btn btn-primary" ng-click="platoAMostrar.confirmarme">
             Continuar
         </button>
+
     </div>
+
+</div>
 
 <!-- JS -->
 <script src="js/app.js"></script>
-<script src="js/controllerPlato.js"></script>
 <script src="js/MenuService.js"></script>
+<script src="js/controllerPlato.js"></script>
 
 </html>
