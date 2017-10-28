@@ -1,0 +1,62 @@
+<div ng-controller="ControllerConfirmar as controllerConfirmar" class="container">
+
+    <h1>Pedido</h1>
+
+    <h2>Pizzas</h2>
+
+    <table class="table table-striped table-hover">
+
+        <tbody data-ng-repeat="plato in controllerConfirmar.pedido.platos">
+        <tr>
+            <td>
+                <h5>{{plato.pizza.nombre}} </h5>
+                <dd data-ng-repeat=" ingrediente in plato.pizza.ingredientes">
+                    <h6>{{ingrediente.nombre}}</h6>
+                </dd>
+            </td>
+            <td>
+                <span class="badge badge-important">${{plato.precio}}</span>
+            </td>
+            <td >
+                <button class="btn btn-default" ng-click="controllerConfirmar.cancelarPizza(plato)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <a href="controllerConfirmar.linkAMenuPromo()"> Agregar otra pizza </a>
+
+    <h2>Aclaraciones</h2>
+
+    <input type="text" ng-model="controllerConfirmar.pedido.aclaraciones" placeholder="ej: Sin aceitunas por favor!">
+
+    <h2>Envío</h2>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="envio" ng-model="controllerConfirmar.pedido.retiroPorLocal.valor">
+            {{controllerConfirmar.pedido.retiroPorLocal.nombre}}
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="envio" ng-model="controllerConfirmar.pedido.delivery.valor"> {{controllerConfirmar.pedido.delivery.nombre}}
+            <span class="badge badge-important">  ${{controllerConfirmar.pedido.delivery.precio}}</span>
+            <input  type="text" ng-model="controllerConfirmar.pedido.cliente.direccion" placeholder="Indique su direccion">
+        </label>
+    </div>
+
+    <div>
+        <label><h1>Total a pagar:</h1></label>
+        <span class="badge badge-important">  <h4>${{controllerConfirmar.pedido.montoTotal}}</h4> </span>
+        <button class="btn btn-primary" ng-click="controllerConfirmar.confirmarPedido()">
+            Confirmar Pedido
+        </button>
+
+    </div>
+
+
+</div>
