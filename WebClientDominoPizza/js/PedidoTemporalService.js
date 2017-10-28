@@ -14,6 +14,12 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
         return pedido;
     };
 
+    this.estadoDePedidoParaCrear = function (nick) {
+
+
+    };
+
+
     this.agregarPlato = function (plato) {
         this.pedido.platos.push(plato);
     };
@@ -33,4 +39,6 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
     this.nick = function () {
         return this.pedido.cliente
     };
+
+
 });
