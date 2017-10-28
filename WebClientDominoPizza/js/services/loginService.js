@@ -1,19 +1,23 @@
-dominosApp.service('loginService', function() {
-	var service = {};
+dominosApp.service('loginService', function () {
+	var logService = {};
 
-	service.usuarioLogueado = null;
+	logService.usuarioLogueado = null;
 
-	service.yaSeLogueo = function() {
-		return service.usuarioLogueado !== null; 
+	logService.yaSeLogueo = function () {
+		return logService.usuarioLogueado !== null;
 	}
 
-	service.logearUsuario = function(usuario) {
-		service.usuarioLogueado = usuario;
+	logService.logearUsuario = function (usuario) {
+		logService.usuarioLogueado = usuario;
 	}
 
-	service.getUsuarioLogueado = function() {
-		return service.usuarioLogueado;
+	logService.getUsuarioLogueado = function () {
+		return logService.usuarioLogueado;
 	}
 
-	return service;
+	logService.registrarUsuario = function (usuario) {
+		//hacerllamado a api y en respuesta correcta loguear usuario creado
+		logService.usuarioLogueado = usuario;
+	}
+	return logService;
 })

@@ -2,14 +2,6 @@
 dominosApp.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-        .state('login', {
-            url: "/login",
-            templateUrl: "partials/login.html"
-        })
-        .state('registro', {
-            url: "/registro",
-            templateUrl: "partials/registro.html"
-        })
         .state('menu', {
             url: "/menu",
             templateUrl: "partials/menu_promo.html"
@@ -18,17 +10,17 @@ dominosApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/menu/tamanio",
             templateUrl: "partials/menu_tamanio.html"
         })
-        .state('ingrediente',{
+        .state('ingrediente', {
             url: "/menu/ingrediente",
-            templateUrl:"partials/menu_ingrediente.html"
+            templateUrl: "partials/menu_ingrediente.html"
         })
-        .state('confirmar',{
+        .state('confirmar', {
             url: "/menu/confirmar",
-            templateUrl:"partials/menu_confirmar.html"
+            templateUrl: "partials/menu_confirmar.html"
         });
 
 
-    $urlRouterProvider.otherwise("/menu");
+    $urlRouterProvider.otherwise("/");
 
 
 });
