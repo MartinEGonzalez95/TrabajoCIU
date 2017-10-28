@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.4",
-    "angular-ui-router": "^0.2.18",
+    "angular-ui-router": "^0.3.2",
     "angular-animate": "^1.5.8",
     "bootstrap": "^3.3.5",
     "http-server": "^0.8.0",

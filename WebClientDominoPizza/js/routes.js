@@ -6,6 +6,10 @@ dominosApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/login",
             templateUrl: "partials/login.html"
         })
+        .state('registro', {
+            url: "/registro",
+            templateUrl: "partials/registro.html"
+        })
         .state('menu', {
             url: "/menu",
             templateUrl: "partials/menu_promo.html"

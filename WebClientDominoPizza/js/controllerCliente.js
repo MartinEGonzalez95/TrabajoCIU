@@ -1,8 +1,9 @@
 /** Controlador del usuario */
 
-angular.module('dominosApp').controller('controllerCliente', function () {
-
-    this.nick = "Pepito";
+dominosApp.controller('controllerCliente', function (loginService) {
+    this.usuarioLogueado = loginService.getUsuarioLogueado ;
+    this.estaLogueado = loginService.yaSeLogueo;
+    //this.nick = "Pepito";
 
 
 });

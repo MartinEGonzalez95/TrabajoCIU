@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="dominosApp">
+
 <head>
     <meta charset="UTF-8">
     <title>Domino's</title>
@@ -21,34 +22,41 @@
 
 </head>
 
-<body ng-controller="controllerCliente as user">
+<body>
+    <div ng-controller="controllerCliente as ctrl">
+        <div ng-show="{{ctrl.estaLogueado()}}">
+            <ul class="list-inline">
+                <li class="list-group-item"><a ui-sref="#Menu">Menu</a></li>
+                <li class="list-group-item"> {{ctrl.nick}}</li>
+                <a ng-model="ctrl.usuarioLogueado.nick">
+            </ul>
+        </div>
+    </div>
 
-<!-- Esto está de prueba-->
-<div>
-    <h1>{{user.nick}}</h1>
-</div>
-
-<!-- Routing-->
-<div class="well-lg">
-    <div ui-view></div>
-</div>
+    <!-- Routing-->
+    <div class="well-lg">
+        <div ui-view></div>
+    </div>
 
 
-<!-- JS -->
-<script src="js/app.js"></script>
-<script src="js/routes.js"></script>
-<script src="js/Classes.js"></script>
+    <!-- JS -->
+    <script src="js/Classes.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/routes.js"></script>
 
-<!--Controladores -->
-<script src="js/controllerTamanioPlato.js"></script>
-<script src="js/controllerMenu.js"></script>
-<script src="js/controllerCliente.js"></script>
-<script src="js/controllerTamanioPlato.js"></script>
-<script src="js/controllerConfirmar.js"></script>
-<!-- Servicios-->
-<script src="js/PlatoService.js"></script>
-<script src="js/MenuService.js"></script>
-<script src="js/PedidoTemporalService.js"></script>
+    <!-- Servicios-->
+    <script src="js/PlatoService.js"></script>
+    <script src="js/MenuService.js"></script>
+    <script src="js/PedidoTemporalService.js"></script>
+    <script src="js/services/loginService.js"></script>
+
+    <!--Controladores -->
+    <script src="js/controllerLoginReg.js"></script>
+    <script src="js/controllerTamanioPlato.js"></script>
+    <script src="js/controllerMenu.js"></script>
+    <script src="js/controllerCliente.js"></script>
+    <script src="js/controllerTamanioPlato.js"></script>
+    <script src="js/controllerConfirmar.js"></script>
 
 
 </body>

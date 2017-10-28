@@ -1,4 +1,4 @@
-angular.module('dominosApp').controller('ControllerUsuario', function () {
+dominosApp.controller('ControllerUsuario', function () {
 
     this.nombre = "juan";
     this.nick = "JuanK-po";
