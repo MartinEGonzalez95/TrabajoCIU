@@ -23,7 +23,7 @@ angular.module('dominosApp').controller("controllerPlato", function (MenuService
                 "valor": 1
             },
             "ingredientesExtras": []
-        }
+        };
 
         this.ingredientesExtras = { "ingredientes": [
             {
@@ -47,8 +47,13 @@ angular.module('dominosApp').controller("controllerPlato", function (MenuService
                 "precio": 5
             }
         
-        ]}
+        ]};
 
-        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) }
+        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) };
+        this.quitar = function(unIngrediente) { 
+            var index = this.plato.ingredientesExtras.indexOf(unIngrediente);
+            if (index > -1) {
+                this.plato.ingredientesExtras.splice(index, 1);
+            } };
 
 });

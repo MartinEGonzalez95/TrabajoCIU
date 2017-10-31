@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="dominosApp">
+<html lang="en" ng-app="dominosApp">
 
 <head>
     <meta charset="UTF-8">
@@ -23,8 +23,8 @@
     <div>
 
         <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
-        <label><h3>{{ platoAMostrar.plato.tamanio.nombre }}</h3></label>
-        <label><h3>{{ platoAMostrar.plato.pizza.precio }}</h3></label>
+        <label><h4>{{ platoAMostrar.plato.tamanio.nombre }}</h4></label>
+        <label><h4>{{ platoAMostrar.plato.pizza.precio }}</h4></label>
 
     </div>
 
@@ -52,9 +52,9 @@
                             <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
                             <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
                             <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-    
+                            <button class="btn btn-default btn-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
+                    
                     </td>
-                
                 </tr>
             </tbody>
 
