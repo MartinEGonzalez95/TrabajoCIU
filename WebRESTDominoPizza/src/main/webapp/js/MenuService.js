@@ -6,6 +6,7 @@ angular.module('dominosApp').service("MenuService", function ($http) {
         return response.data
     };
     let parsearIngrediente = function (json) {
+
         return new Ingrediente(json)
     };
     let parsearPizza = function (json) {

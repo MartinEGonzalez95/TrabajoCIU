@@ -3,7 +3,7 @@
 
     <label>
         <h1>{{pizzaController.plato.pizza.nombre}}</h1>
-        <h3>${{pizzaController.plato.pizza.precio}}</h3>
+        <h3>${{pizzaController.plato.pizza.precioBase}}</h3>
     </label>
 
     <div class="container">
@@ -14,10 +14,10 @@
                 <td>
                     {{unTamanio.nombre}}
                 </td>
-                <td>${{unTamanio.valor * pizzaController.plato.pizza.precio}}</td>
+                <td>${{pizzaController.calcularTamanio(unTamanio)}}</td>
                 <td>
                     <button class="btn btn-default glyphicon glyphicon-chevron-right"
-                            ng-click="pizzaController.agregarTamanio(unTamanio)"></button>
+                            ng-click="pizzaController.agregarTamanioAlPlato(unTamanio)"></button>
                 </td>
             </tr>
             </tbody>

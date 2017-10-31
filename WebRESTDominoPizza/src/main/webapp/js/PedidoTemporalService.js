@@ -8,7 +8,7 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
     //this.obtenerPedido = function (id) {this.pedido = servidor.getPedido(id);};
 
     this.crearPedido = function (cliente) {
-        let pedido = new Pedido();
+        let pedido = new Pedido(cliente);
         pedido.cliente = cliente;
         this.pedido = pedido;
         return pedido;

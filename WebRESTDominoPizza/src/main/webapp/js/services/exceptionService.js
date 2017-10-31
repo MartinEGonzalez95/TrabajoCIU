@@ -8,7 +8,7 @@ angular.module('dominosApp').service("ExceptionService", function () {
 
     this.capturarError = function (unError) {
         this.errores.push(unError.data);
-       // excepcionHandler.notificarMensaje(unError.data);
+        this.mostrarEnPantalla(unError);
     };
     this.mostrarEnPantalla = function (unData) {
 
@@ -17,7 +17,7 @@ angular.module('dominosApp').service("ExceptionService", function () {
 });
 
 
-let excepcionHandler = angular.module('dominosApp').controller("exceptionController", function ($timeout) {
+let excepcionHandler = angular.module('dominosApp').controller("exceptionController", function ($timeout,ExceptionService) {
 
     this.mensajes = [];
     this.errores = [];
@@ -27,7 +27,7 @@ let excepcionHandler = angular.module('dominosApp').controller("exceptionControl
         this.notificar(this.mensajes);
     };
 
-    function notificarMensaje(mensaje) {
+    function notificarErrores(mensaje) {
         this.errores.push(mensaje);
         this.notificar(this.errores);
 

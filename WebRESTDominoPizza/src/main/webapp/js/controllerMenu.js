@@ -11,10 +11,9 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
 
     const self = this;
 
+    /** Lista de promociones a la venta */
     self.pizzas = [];
 
-
-    /** Lista de promociones a la venta */
     this.cargarPromociones = function () {
         menuService.obtenerPizzas()
             .then(function (data) {
@@ -24,7 +23,7 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
     };
     this.cargarPromociones();
 
-
+    /** Acciones del controlador */
     this.crearPedido = function (pizza, nick) {
 
         let pedido = pedidoService.crearPedido(nick);
@@ -42,7 +41,7 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
 
     this.crearPizzaCustom = function (nick) {
         let pizzaJson = {
-            "nombre": "Pizza Custom", "precio": 75, "ingredientes": []
+            "nombre": "Pizza Custom", "precioBase": 75, "ingredientes": []
         };
         let pizza = new Pizza(pizzaJson);
         let pedido = pedidoService.crearPedido(nick);
@@ -57,6 +56,7 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
     };
 
     function errorHandler(error) {
+        console.log(error);
         ExceptionService.capturarError(error);
     }
 

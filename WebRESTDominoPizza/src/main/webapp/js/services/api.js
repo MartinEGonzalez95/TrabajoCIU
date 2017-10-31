@@ -1,5 +1,5 @@
 dominosApp.module('apiService', function($http) {
-	var getData = function(resp) {return response.data};
+	var getData = function(response) {return response.data};
 	
 	
 	this.pizzas = function(pedido) {

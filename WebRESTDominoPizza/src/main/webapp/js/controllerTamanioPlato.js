@@ -6,17 +6,6 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
     const self = this;
 
-    /** El plato que me pasan por parámetro */
-    this.platoHarcodeado = {
-        "pizza": {
-            "precio": 75,
-            "nombre": "Fugazzeta"
-        },
-        "tamanio": {
-            "nombre": "",
-            "valor": 1
-        }
-    };
 
     this.plato = platoService.plato;
 
@@ -33,18 +22,20 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
     this.cargarTamanios();
 
 
-    this.agregarTamanio = function (unTamanio) {
-
+    this.agregarTamanioAlPlato = function (unTamanio) {
 
         this.plato.tamanio = unTamanio;
-
-        pedidoService.agregarPlato(this.plato);
+        platoService.plato = this.plato;
 
         // ir al siguiente estado
         $state.go("confirmar");
 
     };
 
+    this.calcularTamanio = function (unTamanio) {
+      return (this.plato.pizza.precioBase * unTamanio.valor) || 0
+
+    };
 
 
     function errorHandler(error) {
