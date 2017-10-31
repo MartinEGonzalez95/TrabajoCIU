@@ -17,18 +17,22 @@ let Pedido = function (nick) {
 
 };
 
-let Pizza = function (unNombre, unPrecio, ingredientes) {
-    this.ingredientes = ingredientes || [];
-    this.nombre = unNombre || "";
-    this.precio = unPrecio || 0;
+let Ingrediente = function (json) {
+    angular.extend(this, json);
+
+};
+
+let Pizza = function (json) {
+    angular.extend(this, json);
 };
 
 
 let Plato = function () {
     this.pizza;
-    this.tamanio = {
-        "nombre":"Grande",
-        "valor":1
-    };
+    this.tamanio = new Tamanio("Grande", 1);
     this.ingredientesExtras = [];
+};
+
+let Tamanio = function (json) {
+    angular.extend(this, json);
 };

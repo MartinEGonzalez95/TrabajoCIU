@@ -1,5 +1,13 @@
 <div ng-controller="MenuController as menu" class="container">
 
+
+    <div ng-controller="exceptionController as exception">
+        <p><h6>excepciones </h6></p>
+        <div class="alert alert-danger animate-repeat" ng-repeat="error in exception.errors">{{error}}</div>
+        <div class="alert alert-danger animate-repeat" ng-repeat="mensaje in exception.mensajes">{{mensaje}}</div>
+    </div>
+
+
     <div class="container">
         <h1>¡Elige tu pizza ideal!</h1>
     </div>
@@ -7,7 +15,7 @@
 
     <table class="table table-striped table-hover">
 
-        <tbody data-ng-repeat="pizza in menu.promociones">
+        <tbody data-ng-repeat="pizza in menu.pizzas">
         <tr>
             <td>
                 <dl>
@@ -20,7 +28,7 @@
                     </dd>
                 </dl>
             </td>
-            <td>${{pizza.precio}}</td>
+            <td>${{pizza.precioBase}}</td>
             <td>
                 <button class="btn btn-default glyphicon glyphicon-chevron-right"
                         ng-click="menu.crearPedido(pizza,user.nick)">
@@ -43,4 +51,5 @@
         </tr>
         </tbody>
     </table>
-</div>
+
+    

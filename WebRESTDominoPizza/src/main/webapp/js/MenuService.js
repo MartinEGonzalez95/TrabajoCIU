@@ -1,56 +1,36 @@
 /** Servicio de menu, este tiene las promociones*/
 
+angular.module('dominosApp').service("MenuService", function ($http) {
 
-angular.module('dominosApp').service("MenuService", function () {
-    /** Pizzas harcodeadas, deberían de venir del servidor */
-    this.pizzas = [
-        {
-            "nombre": "Muzarella",
-            "precio": 100,
-            "ingredientes": [
-                {
-                    "nombre": "Muzarella"
-                }]
-        },
-        {
-            "nombre": "MuzzaTomate",
-            "precio": 150,
-            "ingredientes": [
-                {
-                    "nombre": "Tomate"
-                },
-                {
-                    "nombre": "Muzarella"
-                }]
-        },
-        {
-            "nombre": "Fugazzeta",
-            "precio": 175,
-            "ingredientes": [
-                {
-                    "nombre": "Cebolla"
-                }
-            ]
-
-        }
-
-    ];
-
-    this.crearPizza = function (nombre) {
-        let pizza = new Pizza(nombre);
-
-        return pizza;
+    let getData = function (response) {
+        return response.data
+    };
+    let parsearIngrediente = function (json) {
+        return new Ingrediente(json)
+    };
+    let parsearPizza = function (json) {
+        return new Pizza(json)
     };
 
 
-    this.obtenerPizzas = function () {
-        return this.pizzas;
+
+    return {
+        obtenerPizzas: function () {
+            return $http.get("promos")
+                .then(getData)
+                .then(function (pizzasJson) {
+                    return pizzasJson.map(parsearPizza)
+                })
+        },
+        obtenerIngredientes: function () {
+            return $http.get("ingredientes")
+                .then(getData)
+                .then(function (ingredientesJson) {
+                    return ingredientesJson.map(parsearIngrediente)
+                })
+        },
+
     };
-
-    this.obtenerPizzaPorNombre = function (unNombreDePizza) {
-
-        return _.find(this.pizzas, pizza => pizza.nombre === unNombreDePizza);
-    }
 
 
 });

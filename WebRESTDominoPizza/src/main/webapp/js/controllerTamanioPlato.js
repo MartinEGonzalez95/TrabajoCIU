@@ -1,9 +1,10 @@
-angular.module('dominosApp').controller('controllerTamanioPlato', function ($state, PlatoService,PedidoTemporalService) {
+angular.module('dominosApp').controller('controllerTamanioPlato', function ($state, TamanioService, PlatoService, PedidoTemporalService) {
 
     let pedidoService = PedidoTemporalService;
 
     let platoService = PlatoService;
 
+    const self = this;
 
     /** El plato que me pasan por parámetro */
     this.platoHarcodeado = {
@@ -16,30 +17,21 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
             "valor": 1
         }
     };
-    
-    this.plato = platoService.plato;
-    
 
+    this.plato = platoService.plato;
+
+    this.tamanios = [];
 
     /** Le pido al servidor los tamanios */
-    this.tamanios = [
-        {
-            "nombre": "Porcion",
-            "valor": 0.125
-        },
-        {
-            "nombre": "Chica",
-            "valor": 0.50
-        },
-        {
-            "nombre": "Grande",
-            "valor": 1
-        },
-        {
-            "nombre": "Familiar",
-            "valor": 1.25
-        }
-    ];
+    this.cargarTamanios = function () {
+        TamanioService.obtenerTamanios()
+            .then(function (data) {
+                self.tamanios = data;
+            })
+            .catch(errorHandler);
+    };
+    this.cargarTamanios();
+
 
     this.agregarTamanio = function (unTamanio) {
 
@@ -49,10 +41,15 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
         pedidoService.agregarPlato(this.plato);
 
         // ir al siguiente estado
-         $state.go("confirmar");
+        $state.go("confirmar");
 
+    };
+
+
+
+    function errorHandler(error) {
+        ExceptionService.capturarError(error);
     }
-
 
 });
 
