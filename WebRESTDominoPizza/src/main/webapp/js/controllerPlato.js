@@ -1,54 +1,42 @@
-angular.module('dominosApp').controller("controllerPlato", function (MenuService) {
+angular.module('dominosApp').controller("controllerPlato", function ($state, MenuService, PedidoTemporalService, PlatoService) {
     
-        //this.pizza = PlatoService.plato;
-        //this.ingredientes = PlatoService.ingredientes
-        //this.ingredientesExtras = MenuService.ingredientes
+        const self = this;
 
-        this.plato = { "pizza": {
+        this.plato = PlatoService.plato;
 
-            "nombre": "Muzarella",
-            "precio": 100,
-            "ingredientes": [
-                {
-                    "nombre": "Muzarella",
-                    "distribucion": "Todo"
-                },
-                {
-                    "nombre": "Oregano",
-                    "distribucion": "Todo"
-                }]
-            },
-            "tamanio": {
-                "nombre":"Grande",
-                "valor": 1
-            },
-            "ingredientesExtras": []
+        this.ingredientes = PlatoService.plato.pizza.ingredientes;
+
+        this.ingredientesExtras = []
+
+        this.obtenerIngredientes = function(){
+
+            MenuService.obtenerIngredientes()
+                .then(function(data){
+                    
+                    self.ingredientesExtras = data;
+    
+                })
+               // .catch(errorHandler);
         }
 
-        this.ingredientesExtras = { "ingredientes": [
-            {
-                "nombre": "Jamón",
-                "distribucion": "Todo",
-                "precio": 12
-            },
-            {
-                "nombre": "Morrones",
-                "distribucion": "Todo",
-                "precio": 10
-            },
-            {
-                "nombre": "Anchoas",
-                "distribucion": "Todo",
-                "precio": 7
-            },
-            {
-                "nombre": "Papitas",
-                "distribucion": "Todo",
-                "precio": 5
-            }
-        
-        ]}
+        this.obtenerIngredientes();
 
-        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) }
+        function errorHandler(error) {
+            console.log(error);
+            ExceptionService.capturarError(error);
+        }
+
+        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) };
+        this.quitar = function(unIngrediente)
+        {
+            var index = this.plato.ingredientesExtras.indexOf(unIngrediente);
+            if (index > -1)
+            {
+                this.plato.ingredientesExtras.splice(index, 1);
+            } 
+
+        };
+
+        this.confirmarme = function() {$state.go("confirmar")}
 
 });

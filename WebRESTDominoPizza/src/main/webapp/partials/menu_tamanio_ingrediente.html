@@ -1,0 +1,59 @@
+<div ng-controller="controllerPlato as platoAMostrar">
+    
+        <div style="background-color:whitesmoke;"> Tamaño > Ingredientes</div>
+    
+        <div>
+    
+            <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
+            <label><h4>{{ platoAMostrar.plato.tamanio.nombre }}</h4></label>
+            <label><h4>{{ platoAMostrar.plato.pizza.precio }}</h4></label>
+    
+        </div>
+    
+        <table class="table table-striped table-hover">
+    
+            <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
+                <tr>
+                    <td>
+    
+                            <label><h5>{{ ingrediente.nombre }}</h5></label>
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+    
+                    </td>
+                
+                </tr>
+            </tbody>
+    
+            <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
+                    <tr>
+                        <td>
+        
+                                <label><h5>{{ ingrediente.nombre }}</h5></label>
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+                                <button class="btn btn-default btn-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
+                        
+                        </td>
+                    </tr>
+                </tbody>
+    
+        </table>
+    
+        <div>
+        
+            <label><h3>Extras:</h3></label>
+    
+            <ul style="list-style-type:none" ng-repeat="ingrediente in platoAMostrar.ingredientesExtras">
+                <li><a href ng-click="platoAMostrar.agregar(ingrediente)">{{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
+            </ul>
+    
+            <button class="btn btn-primary" ng-click="platoAMostrar.confirmarme()">
+                Continuar
+            </button>
+    
+        </div>
+    
+    </div>
