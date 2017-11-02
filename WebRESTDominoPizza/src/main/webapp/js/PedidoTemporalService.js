@@ -27,6 +27,10 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
     };
 
 
+    this.platos = function(){
+    	this.pedido.platos;
+    }
+    
     this.agregarPlato = function (plato) {
         this.pedido.platos.push(plato);
     };

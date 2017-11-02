@@ -1,7 +1,15 @@
 let Pedido = function (nick) {
     this.numero = 0;
     this.cliente = nick || "sinNombre";
-    this.platos = [];
+    this.platos = [{
+        "nombre": "Muzarella",
+        "precio": 100,
+        "ingredientes": [
+            {
+                "nombre": "Muzarella"
+            }]
+    }
+    ];
     this.horaDeCreacion = Date.now();
     this.aclaraciones = "";
     this.envio;
@@ -21,7 +29,7 @@ let Pizza = function (json) {
 
 let Plato = function () {
     this.pizza;
-    this.tamanio;
+    this.tamanio = new Tamanio("Grande", 1);
     this.ingredientesExtras = [];
 };
 
