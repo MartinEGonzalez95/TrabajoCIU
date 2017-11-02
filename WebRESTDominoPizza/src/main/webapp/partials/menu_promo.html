@@ -3,13 +3,21 @@
 
     <div ng-controller="exceptionController as exception">
         <p><h6>excepciones </h6></p>
-        <div class="alert alert-danger animate-repeat" ng-repeat="error in exception.errors">{{error}}</div>
+        <div>
+            <button ng-click="exception.notificarErrores(123123)"></button>
+        </div>
+
+        <div class="text-info animate-repeat" ng-repeat="error in exception.errores">{{error}}</div>
         <div class="alert alert-danger animate-repeat" ng-repeat="mensaje in exception.mensajes">{{mensaje}}</div>
     </div>
 
 
     <div class="container">
         <h1>¡Elige tu pizza ideal!</h1>
+    </div>
+
+    <div class="container">
+        <button ng-click="menu.errorHandler(123123)"></button>
     </div>
 
 
@@ -53,4 +61,3 @@
     </table>
 
 </div>
-    

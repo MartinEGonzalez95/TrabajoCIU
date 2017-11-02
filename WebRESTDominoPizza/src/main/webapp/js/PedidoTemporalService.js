@@ -2,21 +2,28 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
 
     this.pedido;
 
-    this.getPedido = function () {
-        return this.pedido;
+    /** Este metodo permite dos cosas, obtener un pedido activo temporal o crear uno nuevo*/
+    this.getPedido = function (user) {
+
+        if (this.hayPedidoActivo(user)) {
+            return this.pedido;
+        } else {
+            return this.crearPedido(user);
+        }
+
     };
-    //this.obtenerPedido = function (id) {this.pedido = servidor.getPedido(id);};
+
+    this.hayPedidoActivo = function(user){
+        //si no es null el pedido y tiene el mismo usuario
+        return this.pedido && this.pedido.cliente == user;
+    };
+
 
     this.crearPedido = function (cliente) {
         let pedido = new Pedido(cliente);
         pedido.cliente = cliente;
         this.pedido = pedido;
         return pedido;
-    };
-
-    this.estadoDePedidoParaCrear = function (nick) {
-
-
     };
 
 
