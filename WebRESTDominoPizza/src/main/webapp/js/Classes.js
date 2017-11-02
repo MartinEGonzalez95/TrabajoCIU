@@ -3,7 +3,7 @@ let Pedido = function (nick) {
     this.cliente = nick || "sinNombre";
     this.platos = [{
         "nombre": "Muzarella",
-        "precio": 100,
+        "precioBase": 100,
         "ingredientes": [
             {
                 "nombre": "Muzarella"
@@ -12,9 +12,23 @@ let Pedido = function (nick) {
     ];
     this.horaDeCreacion = Date.now();
     this.aclaraciones = "";
-    this.envio;
-    this.montoFinal = 0;
+    this.delivery = {
+        "nombre": "Delivery",
+        "precio": 15,
+        "valor": false
+    };
 
+    this.retiroPorLocal = {
+        "nombre": "RetiroPorLocal",
+        "precio": 0,
+        "valor": false
+    };
+    this.montoFinal = 555;
+
+    this.calcularMontoFinal = function(){
+
+    }
+    
 };
 
 let Ingrediente = function (json) {
