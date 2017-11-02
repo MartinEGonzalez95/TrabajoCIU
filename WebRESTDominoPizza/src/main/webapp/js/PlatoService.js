@@ -9,8 +9,5 @@ angular.module('dominosApp').service('PlatoService', function () {
         return this;
 
     }
-
-
-
-
+    
 });

@@ -25,7 +25,10 @@ angular.module('dominosApp').controller("controllerPlato", function (MenuService
             "ingredientesExtras": []
         };
 
-        this.ingredientesExtras = { "ingredientes": [
+        this.ingredientesExtras = { 
+            
+            "ingredientes": [
+            
             {
                 "nombre": "Jamón",
                 "distribucion": "Todo",
