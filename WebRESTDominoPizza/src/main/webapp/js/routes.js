@@ -14,6 +14,10 @@ dominosApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/menu/ingredientes",
             templateUrl: "partials/menu_tamanio_ingrediente.html"
         })
+        .state('modificarUsuario', {
+            url: "/usuario",
+            templateUrl: "partials/editar_usuario.html"
+        })
         .state('confirmar', {
             url: "/menu/confirmar",
             templateUrl: "partials/menu_confirmar.html"

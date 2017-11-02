@@ -42,3 +42,34 @@ let excepcionHandler = angular.module('dominosApp').controller("exceptionControl
 
 
 });
+
+class ExceptionHandler{
+    constructor($timeout);
+
+    mensajes = [];
+    errores = [];
+
+    mostrarAlgo = function (listaDeObjetos) {
+        this.mensajes = listaDeObjetos.map(object => object.nombre);
+        this.notificar(this.mensajes);
+    };
+
+    notificarErrores = function (mensaje) {
+        this.errores.push(mensaje);
+        this.notificar(this.errores);
+
+    };
+
+
+    notificar = function (mensajes) {
+        $timeout(function () {
+            while (mensajes.length > 0) mensajes.pop();
+        }, 3000);
+    }
+}
+
+
+
+
+
+

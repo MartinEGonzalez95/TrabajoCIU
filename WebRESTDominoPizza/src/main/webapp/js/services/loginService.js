@@ -13,6 +13,7 @@ dominosApp.service('loginService', function () {
 
 	logService.getUsuarioLogueado = function () {
 		return logService.usuarioLogueado;
+
     };
 
 	logService.registrarUsuario = function (usuario) {

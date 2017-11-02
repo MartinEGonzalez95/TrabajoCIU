@@ -26,9 +26,9 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
         this.plato.tamanio = unTamanio;
         platoService.plato = this.plato;
-
+        pedidoService.agregarPlato(this.plato);
         // ir al siguiente estado
-        $state.go("confirmar");
+        $state.go("ingrediente");
 
     };
 
