@@ -24,7 +24,7 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, Pedidos
 
     this.repetirPedido = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
-        PedidoTemporalService.pedido.pedido;
+        PedidoTemporalService.pedido = pedido;
         $state('confirmar');
 
     };

@@ -1,29 +1,23 @@
-<div ng-controller="MenuController as menu" class="container">
+<div ng-controller="controllerPromocion as menuDePromociones" class="container">
 
-
-    <div ng-controller="exceptionController as exception">
-        <p><h6>excepciones </h6></p>
-        <div>
-            <button ng-click="exception.notificarErrores(123123)"></button>
-        </div>
-
-        <div class="text-info animate-repeat" ng-repeat="error in exception.errores">{{error}}</div>
-        <div class="alert alert-danger animate-repeat" ng-repeat="mensaje in exception.mensajes">{{mensaje}}</div>
+    <div>
+        <dl ng-repeat="mensaje in menuDePromociones.excepciones">
+            <p> {{mensaje}} </p>
+        </dl>
     </div>
-
 
     <div class="container">
         <h1>¡Elige tu pizza ideal!</h1>
     </div>
 
     <div class="container">
-        <button ng-click="menu.errorHandler(123123)"></button>
+        <button ng-click="menuDePromociones.errorHandler(123123)"></button>
     </div>
 
 
     <table class="table table-striped table-hover">
 
-        <tbody data-ng-repeat="pizza in menu.pizzas">
+        <tbody data-ng-repeat="pizza in menuDePromociones.pizzas">
         <tr>
             <td>
                 <dl>
@@ -39,7 +33,7 @@
             <td>${{pizza.precioBase}}</td>
             <td>
                 <button class="btn btn-default glyphicon glyphicon-chevron-right"
-                        ng-click="menu.crearPedido(pizza,user.nick)">
+                        ng-click="menuDePromociones.crearPedido(pizza,user.nick)">
                 </button>
             </td>
         </tr>
@@ -53,8 +47,7 @@
             <td>$75</td>
             <td>
                 <button class="btn btn-default glyphicon glyphicon-chevron-right"
-                        ng-click="menu.crearPizzaCustom(user.nick)"></button>
-
+                        ng-click="menuDePromociones.crearPizzaCustom(user.nick)"></button>
             </td>
         </tr>
         </tbody>
