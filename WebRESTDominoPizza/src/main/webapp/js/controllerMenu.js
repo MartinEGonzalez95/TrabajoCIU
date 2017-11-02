@@ -26,7 +26,7 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
     /** Acciones del controlador */
     this.crearPedido = function (pizza, nick) {
 
-        let pedido = pedidoService.crearPedido(nick);
+        let pedido = pedidoService.getPedido(nick);
 
         let plato = new Plato();
         plato.pizza = pizza;
@@ -44,7 +44,7 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
             "nombre": "Pizza Custom", "precioBase": 75, "ingredientes": []
         };
         let pizza = new Pizza(pizzaJson);
-        let pedido = pedidoService.crearPedido(nick);
+        let pedido = pedidoService.getPedido(nick);
         let plato = new Plato();
         plato.pizza = pizza;
 

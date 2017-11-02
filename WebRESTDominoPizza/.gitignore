@@ -1,6 +1,15 @@
 /target/
+
 .classpath
+
 .project
+
 bin
+
 generated*
+
 .settings
+
+node_modules/
+.project
+.idea/

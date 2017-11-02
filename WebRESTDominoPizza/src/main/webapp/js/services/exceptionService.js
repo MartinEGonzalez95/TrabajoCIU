@@ -17,21 +17,22 @@ angular.module('dominosApp').service("ExceptionService", function () {
 });
 
 
-let excepcionHandler = angular.module('dominosApp').controller("exceptionController", function ($timeout,ExceptionService) {
+let excepcionHandler = angular.module('dominosApp').controller("exceptionController", function ($timeout, ExceptionService) {
 
     this.mensajes = [];
     this.errores = [];
 
-    this.mostrarAlgo = function(listaDeObjetos) {
+    this.mostrarAlgo = function (listaDeObjetos) {
         this.mensajes = listaDeObjetos.map(object => object.nombre);
         this.notificar(this.mensajes);
     };
 
-    function notificarErrores(mensaje) {
+    this.notificarErrores = function (mensaje) {
         this.errores.push(mensaje);
         this.notificar(this.errores);
 
-    }
+    };
+
 
     this.notificar = function (mensajes) {
         $timeout(function () {
