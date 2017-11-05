@@ -25,94 +25,94 @@
 <body>
     <div ng-controller="controllerLoginReg as ctrl">
         <!--ENCABEZADO solo se muestra si hay ususario logueado-->
-        <div ng-show="ctrl.estaLogueado">
-            <ul class="list-inline">
-                <li class="list-group-item"><a ui-sref="#Menu">Menu</a></li>
-                <li class="list-group-item"> {{ctrl.usuarioLogueado.nick}}</li>
-            </ul>
-        </div>
+        <nav>
+            <div ng-if="ctrl.estaLogueado">
+                <ul class="list-inline">
+                    <li class="list-group-item"><a ui-sref="menu">Menu</a></li>
+                    <li class="list-group-item"><a ui-sref="modificarUsuario">{{ctrl.usuarioLogueado.nick}}</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <!--Login SOLO SE MUESTRA SI NO HAY USUARIO LOGUEADO NI SE QUIERE REGISTRAR USUARIO-->
-        <div ng-show="ctrl.login">
-            <form class="form-signin">
-                <h2 class="form-signin-heading">Iniciar sesion</h2>
-                <div class="row">
-                    <div class=".col-md-4 .col-md-offset-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-5" for="username">Usuario</label>
-                                <input class="col-md-7" type="text" class="form-control" name="username" ng-model="ctrl.nick" placeholder="Nombre de usuario"
-                                    required="" autofocus="" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="username">Contrasena</label>
-                                <input class="col-md-7" type="password" class="form-control" name="pass" ng-model="ctrl.pass" placeholder="contrasena" required=""
-                                />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button class="col-md-6 btn btn-lg btn-primary" ng-click="ctrl.loguear()">Login</button>
-                            <a class="col-md-6" ng-click="ctrl.toogleRegistrar()">Registrarse</a>
+        <div class="row" ng-if="ctrl.login">
+            <form class="form-signin col-lg-6 col-lg-offset-3 text-center">
+                <h2 class="form-signin-heading bg-primary">Iniciar sesion</h2>
+                <div class="col-md-12">
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="nick">Usuario</label>
+                        <input class="col-md-6" type="text" class="form-control" name="nick" ng-model="ctrl.nick" placeholder="Nombre de usuario"
+                            required="" autofocus="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="pass">Contrasena</label>
+                        <input class="col-md-6" type="password" class="form-control" name="pass" ng-model="ctrl.pass" placeholder="contrasena" required=""
+                        />
+                    </div>
+                    <div class="row">
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-offset-3 text-center">
+                            <button class="btn btn-lg btn-primary" ng-click="ctrl.loguear()">Login</button>
+                            <a ng-click="ctrl.toogleRegistrar()">Registrarse</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-
         <!--SOLO SE MUESTRA SIS SE QUIERE REGISTRAR UN USUARIO-->
 
-        <div ng-show="ctrl.registro">
-            <form class="form-signin">
+        <div class="row" ng-if="ctrl.registro">
+            <form class="form-signin col-lg-6 col-lg-offset-3 text-center">
                 <h2 class="form-signin-heading bg-primary">Registrarse</h2>
-                <div class="row">
-                    <div class=".col-md-4 .col-md-offset-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-5" for="username">Usuario</label>
-                                <input class="col-md-7" type="text" class="form-control" name="username" ng-model="ctrl.nick" placeholder="Nombre de usuario"
-                                    required="" autofocus="" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="pass">Contrasena</label>
-                                <input class="col-md-7" type="password" class="form-control" name="pass" ng-model="ctrl.reg.pass" placeholder="contrasena" required=""
-                                />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="passrep">Repita la contrasena</label>
-                                <input class="col-md-7" type="password" class="form-control" name="passrep" ng-model="ctrl.reg.passrep" placeholder="contrasena" required=""
-                                />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="nombre">Nombre</label>
-                                <input class="col-md-7" type="text" class="form-control" name="nombre" ng-model="ctrl.reg.nombre" placeholder="Ingrese la direccion"
-                                    required="" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="mail">Mail</label>
-                                <input class="col-md-7" type="email" class="form-control" name="mail" ng-model="ctrl.reg.mail" placeholder="Ingrese el mail" required=""
-                                />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-md-6" for="direccion">Direccion</label>
-                                <input class="col-md-7" type="text" class="form-control" name="direccion" ng-model="ctrl.reg.direccion" placeholder="Ingrese la direccion"
-                                    required="" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button class="col-md-6 btn btn-lg btn-primary" type="submit" ng-click="ctrl.registrar()" >Registrarse</button>
-                            <a class="col-md-6" ng-click="ctrl.invitado()">Ingresar como INVITADO</a>
+                <div class="col-md-12">
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="username">Usuario</label>
+                        <input class="col-md-6" type="text" class="form-control" name="username"
+                        ng-model="ctrl.reg.nick" placeholder="Nombre de usuario" required="" autofocus="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="pass">Contrasena</label>
+                        <input class="col-md-6" type="password" class="form-control" name="pass"
+                        ng-model="ctrl.reg.pass" placeholder="contrasena" required="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="passrep">Repita la contrasena</label>
+                        <input class="col-md-6" type="password" class="form-control" name="passrep"
+                        ng-model="ctrl.reg.passrep" placeholder="contrasena" required="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="nombre">Nombre</label>
+                        <input class="col-md-6" type="text" class="form-control" name="nombre"
+                        ng-model="ctrl.reg.nombre" placeholder="Ingrese la direccion" required="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="mail">Mail</label>
+                        <input class="col-md-6" type="email" class="form-control" name="mail"
+                        ng-model="ctrl.reg.mail" placeholder="Ingrese el mail" required="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-md-5" for="direccion">Direccion</label>
+                        <input class="col-md-6" type="text" class="form-control" name="direccion"
+                        ng-model="ctrl.reg.direccion" placeholder="Ingrese la direccion" required="" />
+                    </div>
+                    <br>
+                    <div class="row">
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-offset-3 text-center">
+                            <button class="btn btn-lg btn-primary" type="submit" ng-click="ctrl.registrar()">Registrarse</button>
+                            <a ng-click="ctrl.invitado()">Ingresar como INVITADO</a>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
     <script src="js/PlatoService.js"></script>
     <script src="js/MenuService.js"></script>
     <script src="js/PedidoTemporalService.js"></script>
-    <script src="js/services/loginService.js"></script>
+    <script src="js/UserService.js"></script>
     <script src="js/services/exceptionService.js"></script>
     <script src="js/services/tamanioService.js"></script>
     <!--Controladores -->
@@ -148,6 +148,7 @@
     <script src="js/controllerTamanioPlato.js"></script>
     <script src="js/controllerConfirmar.js"></script>
     <script src="js/controllerPlato.js"></script>
+    <script src="js/controllerUsuario.js"></script>
 
 </body>
 

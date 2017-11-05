@@ -1,41 +1,41 @@
 dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidosService,PedidoTemporalService) {
 
-    const self = this;
+    var self = this;
 
-    this.usuario = UserService.user;
+    self.usuario = UserService.usuarioLogueado();
 
 
-    this.nombre = "";
-    this.email = "";
-    this.direccion = "";
+    self.nombre = "";
+    self.email = "";
+    self.direccion = "";
 
-    this.pedidosAnteriores = [];
-    this.obtenerPedidos = function(){
+    self.pedidosAnteriores = [];
+    self.obtenerPedidos = function(){
 
-        PedidosService.obtenerPedidosAnterioresDe(this.usuario.nick)
+        PedidosService.obtenerPedidosAnterioresDe(self.usuario.nick)
             .then(function (data) {
                 self.pedidosAnteriores = data;
             })
             .catch(console.log("un error :D "))
     };
 
-    this.obtenerPedidos();
+    self.obtenerPedidos();
 
 
-    this.repetirPedido = function (pedido) {
+    self.repetirPedido = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
         PedidoTemporalService.pedido = pedido;
         $state('confirmar');
 
     };
 
-    this.setearCambios = function (){
+    self.setearCambios = function (){
 
         let jsonUsuario = {
-            "nick": this.usuario.nick,
-            "nombre":this.nombre,
-            "email":this.email,
-            "direccion":this.direccion
+            "nick": self.usuario.nick,
+            "nombre":self.nombre,
+            "email":self.email,
+            "direccion":self.direccion
         };
 
         UserService.modificarUsuario(jsonUsuario);

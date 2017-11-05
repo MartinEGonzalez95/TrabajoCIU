@@ -4,16 +4,16 @@
  * */
 
 angular.module('dominosApp').service("UserService", function ($http) {
-
-    this.usuario;
+    var self = this;
+    self.usuario = null;
 
     let getData = function (response) {
         return response.data
     };
     let parsearUsuario = function (json) {
-        this.usuario =  new Cliente(json);
+        self.usuario =  new Cliente(json);
 
-        return this.usuario
+        return self.usuario
     };
 
     return {
@@ -21,10 +21,29 @@ angular.module('dominosApp').service("UserService", function ($http) {
             return $http.get("usuarios/"+ nick)
                 .then(getData)
                 .then(parsearUsuario)
-
         },
-        modificarUsuario:function (usuario) {
+        modificarUsuario: function (usuario) {
             return $http.put("usuarios/"+usuario.nick, usuario)
+        },
+        logearUsuario: function (usuario) {
+            if (!self.usuario) {
+                return $http.post('/login', usuario)
+                .then(function (response) {
+                    parsearUsuario(response.data);
+                })
+		    }
+        },
+        yaSeLogueo: function () {
+		    return self.usuario !== null;
+	    },
+        usuarioLogueado: function() {
+            return self.usuario;
+        },
+        registrarUsuario: function(usuario) {
+            return $http.post('/usuarios', usuario)
+            .then(function(response) {
+                return response;
+            })
         }
     }
 });

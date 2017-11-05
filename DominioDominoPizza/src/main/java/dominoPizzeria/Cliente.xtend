@@ -25,25 +25,36 @@ class Cliente {
 		password = passwordCliente
 		email = emailCliente
 		direccion = direccionCliente
-
 	}
 
 	def esValido() {
 		!nick.nullOrEmpty && !email.nullOrEmpty
 	}
-	
+
 	@JsonProperty("nombre")
 	def getNombre()
 	{
 		nombre
 	}
-	
+
+	@JsonProperty("nick")
+	def getNick()
+	{
+		nick
+	}
+
+	@JsonProperty("password")
+	def getPassword()
+	{
+		password
+	}
+
 	@JsonProperty("email")
 	def getEmail()
 	{
 		email
 	}
-	
+
 	@JsonProperty("direccion")
 	def getDireccion()
 	{
