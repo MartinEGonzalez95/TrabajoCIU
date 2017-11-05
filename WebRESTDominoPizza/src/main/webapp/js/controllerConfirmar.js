@@ -1,14 +1,16 @@
-angular.module('dominosApp').controller('ControllerConfirmar', function ($state, PedidoTemporalService) {
+angular.module('dominosApp').controller('ControllerConfirmar', function ($state, PedidoTemporalService, PedidoService) {
 
     this.pedidoService = PedidoTemporalService;
 
     this.pedido = this.pedidoService.pedido;
 
     this.cancelarPizza = function(unaPizza) {
-        this.pedido.pizzas = _.without(this.pedido.pizzas,unaPizza);
+        this.pedido.platos = _.without(this.pedido.platos,unaPizza);
     };
 
     this.confirmarPedido = function(){
+
+        PedidoService.confirmarPedido(this.pedido);
 
     };
     this.linkAMenuPromo = function () {

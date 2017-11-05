@@ -18,14 +18,12 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
         return this.pedido && this.pedido.cliente == user;
     };
 
-
     this.crearPedido = function (cliente) {
         let pedido = new Pedido(cliente);
         pedido.cliente = cliente;
         this.pedido = pedido;
         return pedido;
     };
-
 
     this.platos = function(){
     	this.pedido.platos;
@@ -50,6 +48,5 @@ angular.module('dominosApp').service('PedidoTemporalService', function () {
     this.nick = function () {
         return this.pedido.cliente
     };
-
 
 });

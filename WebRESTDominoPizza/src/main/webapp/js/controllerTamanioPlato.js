@@ -28,7 +28,7 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
         platoService.plato = this.plato;
 
         // ir al siguiente estado
-        $state.go("confirmar");
+        $state.go("ingredientes");
 
     };
 
