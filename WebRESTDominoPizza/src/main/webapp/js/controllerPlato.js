@@ -37,6 +37,9 @@ angular.module('dominosApp').controller("controllerPlato", function ($state, Men
 
         };
 
-        this.confirmarme = function() {$state.go("confirmar")}
+    this.confirmarme = function() {
+        PedidoTemporalService.agregarPlato(this.plato);
+        $state.go("confirmar")
+    }
 
 });
