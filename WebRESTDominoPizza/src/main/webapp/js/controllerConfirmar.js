@@ -12,6 +12,8 @@ angular.module('dominosApp').controller('ControllerConfirmar', function ($state,
 
         PedidoService.confirmarPedido(this.pedido);
 
+        //$state.go("menu");
+
     };
     this.linkAMenuPromo = function () {
     	$state.go("menu");
