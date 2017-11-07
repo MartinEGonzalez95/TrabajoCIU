@@ -1,4 +1,4 @@
-angular.module('dominosApp').controller('ControllerConfirmar', function ($state, PedidoTemporalService, PedidoService) {
+angular.module('dominosApp').controller('ControllerConfirmar', function (ExceptionService, $state, PedidoTemporalService, PedidoService) {
 
     this.pedidoService = PedidoTemporalService;
 
@@ -10,13 +10,27 @@ angular.module('dominosApp').controller('ControllerConfirmar', function ($state,
 
     this.confirmarPedido = function(){
 
-        PedidoService.confirmarPedido(this.pedido);
+        PedidoService.confirmarPedido(this.pedido, excepciones);
 
         //$state.go("menu");
 
     };
+
+    function errorHandler(error) {
+        ExceptionService.capturarError(error);
+    }
+
+    this.excepciones = ExceptionService.errores;
+
     this.linkAMenuPromo = function () {
     	$state.go("menu");
     };
+
+    this.delivery = function(){
+        return new Delivery()
+    }
+    this.retiroPorLocal = function(){
+        return new RetiroPorLocal()
+    }
 
 });
