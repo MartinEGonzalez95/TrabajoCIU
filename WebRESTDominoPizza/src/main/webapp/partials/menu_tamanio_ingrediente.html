@@ -9,24 +9,12 @@
             <label><h4>{{ platoAMostrar.plato.pizza.precio }}</h4></label>
     
         </div>
+
+        <div class="col-md-6">
     
-        <table class="table table-striped table-hover">
-    
-            <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
-                <tr>
-                    <td>
-    
-                            <label><h5>{{ ingrediente.nombre }}</h5></label>
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-    
-                    </td>
-                
-                </tr>
-            </tbody>
-    
-            <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
+            <table class="table table-striped table-hover">
+        
+                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
                     <tr>
                         <td>
         
@@ -34,19 +22,35 @@
                                 <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
                                 <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
                                 <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-                                <button class="btn btn-default btn-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
-                        
+        
                         </td>
+                    
                     </tr>
                 </tbody>
-    
-        </table>
-    
-        <div>
+        
+                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
+                        <tr>
+                            <td>
+            
+                                    <label><h5>{{ ingrediente.nombre }}</h5></label>
+                                    <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda
+                                    <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo
+                                    <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+                                    <button class="btn btn-default btn-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
+                            
+                            </td>
+                        </tr>
+                    </tbody>
+        
+            </table>
+
+        </div>
+
+        <div class="col-md-6">
         
             <label><h3>Extras:</h3></label>
     
-            <ul style="list-style-type:none" ng-repeat="ingrediente in platoAMostrar.ingredientesExtras">
+            <ul style="list-style-type:none" ng-repeat="ingrediente in platoAMostrar.ingredientesExtras" ng-class="ng-isolate-scope">
                 <li><a href ng-click="platoAMostrar.agregar(ingrediente)">{{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
             </ul>
     
