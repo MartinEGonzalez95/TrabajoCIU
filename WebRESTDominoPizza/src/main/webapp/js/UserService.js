@@ -1,32 +1,31 @@
 /** Este service le va a pegar al servidor para:
  * Buscar un usuario
  * Modificar un usuario
- *
  * */
 
-angular.module('dominosApp').service("UserService", function () {
+angular.module('dominosApp').service("UserService", function ($http) {
 
-    this.usuarios = [];
+    this.usuario;
 
-    this.crearUsuario = function (description) {
-        let cliente = new Cliente(description);
-        this.agregarCliente(cliente);
-        return cliente;
+    let getData = function (response) {
+        return response.data
+    };
+    let parsearUsuario = function (json) {
+        this.usuario =  new Cliente(json);
+
+        return this.usuario
     };
 
-    this.agregarCliente = function (cliente) {
-        this.usuarios.push(cliente);
-    };
+    return {
+        obtenerUsuario: function (nick) {
+            return $http.get("usuarios/"+ nick)
+                .then(getData)
+                .then(parsearUsuario)
 
-    this.buscarUsuario = function (nick) {
-        return _.find(this.usuarios, user => user.nick === nick)
-    };
-
+        },
+        modificarUsuario:function (usuario) {
+            return $http.put("usuarios/"+usuario.nick, usuario)
+        }
+    }
 });
-
-let Cliente = function (nick) {
-
-    this.nick = nick;
-
-};
 

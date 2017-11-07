@@ -26,8 +26,8 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
         this.plato.tamanio = unTamanio;
         platoService.plato = this.plato;
+        pedidoService.agregarPlato(this.plato);
 
-        // ir al siguiente estado
         $state.go("ingredientes");
 
     };
@@ -36,7 +36,6 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
       return (this.plato.pizza.precioBase * unTamanio.valor) || 0
 
     };
-
 
     function errorHandler(error) {
         ExceptionService.capturarError(error);

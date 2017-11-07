@@ -1,12 +1,10 @@
 /** Controlador del Menu*/
 
-angular.module('dominosApp').controller('MenuController', function (ExceptionService, $state, MenuService, PlatoService, PedidoTemporalService) {
+angular.module('dominosApp').controller('controllerPromocion', function (ExceptionService, $state, MenuService, PlatoService, PedidoTemporalService) {
 
     /** servicios */
     let menuService = MenuService;
-
     let pedidoService = PedidoTemporalService;
-
     let platoService = PlatoService;
 
     const self = this;
@@ -23,42 +21,42 @@ angular.module('dominosApp').controller('MenuController', function (ExceptionSer
     };
     this.cargarPromociones();
 
-    /** Acciones del controlador */
+
     this.crearPedido = function (pizza, nick) {
 
-        let pedido = pedidoService.getPedido(nick);
+        this.agregarPlatoAlPedido(pizza,nick);
 
-        let plato = new Plato();
-        plato.pizza = pizza;
-        pedidoService.agregarPlato(plato);
-        platoService.agregarPlato(plato);
-
-
-        // Ir al siguiente estado
         $state.go("tamanio");
 
     };
 
+    this.agregarPlatoAlPedido = function(pizza,nick){
+
+        pedidoService.getPedido(nick);
+        let plato = new Plato();
+        plato.pizza = pizza;
+        pedidoService.agregarPlato(plato);
+        platoService.agregarPlato(plato);
+    };
+
     this.crearPizzaCustom = function (nick) {
+
         let pizzaJson = {
             "nombre": "Pizza Custom", "precioBase": 75, "ingredientes": []
         };
         let pizza = new Pizza(pizzaJson);
-        let pedido = pedidoService.getPedido(nick);
-        let plato = new Plato();
-        plato.pizza = pizza;
 
-        platoService.agregarPlato(plato);
-        pedidoService.agregarPlato(plato);
+        this.agregarPlatoAlPedido(pizzaJson,nick);
 
         $state.go("tamanio");
 
     };
 
     function errorHandler(error) {
-        console.log(error);
         ExceptionService.capturarError(error);
     }
+
+    this.excepciones = ExceptionService.errores;
 
 
 });

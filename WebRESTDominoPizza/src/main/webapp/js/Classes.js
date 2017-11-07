@@ -58,3 +58,8 @@ let Plato = function () {
 let Tamanio = function (json) {
     angular.extend(this, json);
 };
+
+
+let Cliente = function(json){
+    angular.extend(this, json);
+};

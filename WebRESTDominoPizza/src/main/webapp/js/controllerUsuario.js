@@ -1,30 +1,45 @@
-dominosApp.controller('ControllerUsuario', function () {
+dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidosService,PedidoTemporalService) {
 
-    this.nombre = "juan";
-    this.nick = "JuanK-po";
-    this.email = "juanemail@email.com";
-    this.direccion = "una calle";
+    const self = this;
 
-    this.pedidosAnteriores = [
-        {
-            "pizza": "Muzarella",
-            "direccion": "calle123",
-            "monto": "123"
-        },
-        {
-            "pizza": "Tomaco",
-            "direccion": "calle321",
-            "monto": "321"
-        }
-        ];
+    this.usuario = UserService.user;
 
-    this.linkAPaginaDeConfirmacion = function (pedido) {
+
+    this.nombre = "";
+    this.email = "";
+    this.direccion = "";
+
+    this.pedidosAnteriores = [];
+    this.obtenerPedidos = function(){
+
+        PedidosService.obtenerPedidosAnterioresDe(this.usuario.nick)
+            .then(function (data) {
+                self.pedidosAnteriores = data;
+            })
+            .catch(console.log("un error :D "))
+    };
+
+    this.obtenerPedidos();
+
+
+    this.repetirPedido = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
-        window.open("menu_confirmar.html");
+        PedidoTemporalService.pedido = pedido;
+        $state('confirmar');
+
     };
 
     this.setearCambios = function (){
-        /*post con el servidor rest*/
+
+        let jsonUsuario = {
+            "nick": this.usuario.nick,
+            "nombre":this.nombre,
+            "email":this.email,
+            "direccion":this.direccion
+        };
+
+        UserService.modificarUsuario(jsonUsuario);
+
     };
 
 });
