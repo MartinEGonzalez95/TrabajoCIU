@@ -1,5 +1,7 @@
-dominosApp.controller('controllerLoginReg', function ($state, loginService) {
+dominosApp.controller('controllerLoginReg', function ($state, ExceptionService, UserService) {
 	var self = this;
+	var errors = ExceptionService;
+
 	self.reg = {
 		nick: null,
 		pass: null,
@@ -18,16 +20,22 @@ dominosApp.controller('controllerLoginReg', function ($state, loginService) {
 
 
 	self.userUpdate = function () {
-		self.estaLogueado = loginService.yaSeLogueo();
-		self.usuarioLogueado = loginService.getUsuarioLogueado();
+		self.estaLogueado = UserService.yaSeLogueo();
+		self.usuarioLogueado = UserService.usuarioLogueado();
 		self.login = !self.estaLogueado && !self.registro;
 	}
+
 	self.userUpdate();
 
 	self.loguear = function () {
-		loginService.logearUsuario({ nick: self.nick, pass: self.pass });
-		self.userUpdate();
-		$state.go('menu');
+		UserService.logearUsuario({ nick: self.nick, password: self.pass })
+			.then(function (resp) {
+				self.userUpdate();
+				$state.go('menu');
+			})
+			.catch(function (error) {
+				errors.capturarError(error);
+			})
 	}
 
 	self.toogleRegistrar = function () {
@@ -36,22 +44,25 @@ dominosApp.controller('controllerLoginReg', function ($state, loginService) {
 	};
 
 	self.registrar = function () {
-
 		if (self.reg.pass !== null && self.reg.pass === self.reg.passrep) {
-			loginService.registrarUsuario({
+			UserService.registrarUsuario({
 				nick: self.reg.nick,
-				pass: self.reg.pass,
+				password: self.reg.pass,
 				nombre: self.reg.nombre,
-				mail: self.reg.mail,
+				email: self.reg.mail,
 				direccion: self.reg.direccion
-			});
-			self.toogleRegistrar();
+			}).then(function (data) {
+				UserService.logearUsuario({ nick: self.reg.nick, password: self.reg.pass })
+					.then(function (res) {
+						self.toogleRegistrar();
+						self.userUpdate();
+						$state.go('menu');
+					})
+			}).catch(function (error) {
+					errors.capturarError(error);
+				});
 		} else {
-			alert('Las contrasenas no coinciden o son nulas');
-		}
-		self.userUpdate();
-		if (self.estaLogueado) {
-			$state.go('menu');
+			errors.capturarError({ data: 'Las contrasenas no coinciden o son nulas' });
 		}
 	}
 });

@@ -1,17 +1,15 @@
-angular.module('dominosApp').controller('controllerTamanioPlato', function ($state, TamanioService, PlatoService, PedidoTemporalService) {
+angular.module('dominosApp').controller('controllerTamanioPlato', function ($state,ExceptionService, TamanioService, PlatoService) {
 
-    let pedidoService = PedidoTemporalService;
 
     let platoService = PlatoService;
 
     const self = this;
 
-
     this.plato = platoService.plato;
 
     this.tamanios = [];
 
-    /** Le pido al servidor los tamanios */
+
     this.cargarTamanios = function () {
         TamanioService.obtenerTamanios()
             .then(function (data) {
@@ -25,13 +23,14 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
     this.agregarTamanioAlPlato = function (unTamanio) {
 
         this.plato.tamanio = unTamanio;
-        platoService.plato = this.plato;
-        pedidoService.agregarPlato(this.plato);
+        platoService.agregarPlato(this.plato);
+
 
         $state.go("ingredientes");
 
     };
 
+    //Logica en el controler que le pertenece al plato, modificar esto cuando terminen todos el plato.
     this.calcularTamanio = function (unTamanio) {
       return (this.plato.pizza.precioBase * unTamanio.valor) || 0
 
@@ -40,6 +39,8 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
     function errorHandler(error) {
         ExceptionService.capturarError(error);
     }
+
+    this.excepciones = ExceptionService.errores;
 
 });
 

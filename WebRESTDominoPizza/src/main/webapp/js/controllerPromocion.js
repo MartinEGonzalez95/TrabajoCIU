@@ -1,15 +1,15 @@
 /** Controlador del Menu*/
 
-angular.module('dominosApp').controller('controllerPromocion', function (ExceptionService, $state, MenuService, PlatoService, PedidoTemporalService) {
+angular.module('dominosApp').controller('controllerPromocion', function (ExceptionService, $state, MenuService, PlatoService, PedidoTemporalService, UserService) {
 
     /** servicios */
     let menuService = MenuService;
     let pedidoService = PedidoTemporalService;
     let platoService = PlatoService;
+    let usuarioDelPedido = UserService.usuarioLogueado();
 
     const self = this;
 
-    /** Lista de promociones a la venta */
     self.pizzas = [];
 
     this.cargarPromociones = function () {
@@ -22,31 +22,32 @@ angular.module('dominosApp').controller('controllerPromocion', function (Excepti
     this.cargarPromociones();
 
 
-    this.crearPedido = function (pizza, nick) {
+    this.agregarPlatoAlPedido = function (pizza) {
 
-        this.agregarPlatoAlPedido(pizza,nick);
+        pedidoService.getPedido(usuarioDelPedido.nick);
+        let plato = new Plato();
+        plato.pizza = pizza;
+
+        platoService.agregarPlato(plato);
+    };
+
+    this.crearPedido = function (pizza) {
+
+        this.agregarPlatoAlPedido(pizza, usuarioDelPedido.nick);
 
         $state.go("tamanio");
 
     };
 
-    this.agregarPlatoAlPedido = function(pizza,nick){
 
-        pedidoService.getPedido(nick);
-        let plato = new Plato();
-        plato.pizza = pizza;
-        pedidoService.agregarPlato(plato);
-        platoService.agregarPlato(plato);
-    };
-
-    this.crearPizzaCustom = function (nick) {
+    this.crearPizzaCustom = function () {
 
         let pizzaJson = {
             "nombre": "Pizza Custom", "precioBase": 75, "ingredientes": []
         };
         let pizza = new Pizza(pizzaJson);
 
-        this.agregarPlatoAlPedido(pizzaJson,nick);
+        this.agregarPlatoAlPedido(pizza, usuarioDelPedido.nick);
 
         $state.go("tamanio");
 

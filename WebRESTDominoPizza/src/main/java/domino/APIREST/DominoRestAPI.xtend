@@ -32,7 +32,7 @@ class DominoRestAPI {
 
 	extension JSONUtils = new JSONUtils
 	
-	Class<Object> Login
+	//Class<Object> Login
 
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
@@ -222,20 +222,23 @@ class DominoRestAPI {
 		}
 
 	}
-	
+
 	@Post("/login")
-	def postLogin(@Body String bodyConLogin) {
-
+	def postLogin(@Body String usrData) {
+		
 		response.contentType = ContentType.APPLICATION_JSON
-		
-		val login = bodyConLogin.fromJson(Login)
-		
-		try {
-			return ok()
-		} catch (RuntimeException e) {
-			return badRequest()
-		}
 
+		val cliente = RepoCliente.getRepo.buscar(getPropertyValue(usrData, "nick"))
+
+		try {
+			if( cliente.password == getPropertyValue(usrData, "password")){
+				return ok(cliente.toJson)
+			} else {
+				return badRequest("Usuario o password erroneos, Por favor vuelva a intentarlo")
+			}
+		} catch (RuntimeException e) {
+			return badRequest("Usuario o password erroneos, Por favor vuelva a intentarlo")
+		}
 	}
 
 }
