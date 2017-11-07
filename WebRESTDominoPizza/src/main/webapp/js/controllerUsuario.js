@@ -1,4 +1,4 @@
-dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidosService,PedidoTemporalService) {
+dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoService,PedidoTemporalService) {
 
     var self = this;
 
@@ -12,7 +12,7 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, Pedidos
     self.pedidosAnteriores = [];
     self.obtenerPedidos = function(){
 
-        PedidosService.obtenerPedidosAnterioresDe(self.usuario.nick)
+        PedidoService.obtenerPedidosAnterioresDe(self.usuario.nick)
             .then(function (data) {
                 self.pedidosAnteriores = data;
             })
