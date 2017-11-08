@@ -39,20 +39,6 @@ angular.module('dominosApp').controller('controllerPromocion', function (Excepti
 
     };
 
-
-    this.crearPizzaCustom = function () {
-
-        let pizzaJson = {
-            "nombre": "Pizza Custom", "precioBase": 75, "ingredientes": []
-        };
-        let pizza = new Pizza(pizzaJson);
-
-        this.agregarPlatoAlPedido(pizza, usuarioDelPedido.nick);
-
-        $state.go("tamanio");
-
-    };
-
     function errorHandler(error) {
         ExceptionService.capturarError(error);
     }
