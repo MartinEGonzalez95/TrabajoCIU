@@ -30,10 +30,10 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
     };
 
-    //Logica en el controler que le pertenece al plato, modificar esto cuando terminen todos el plato.
-    this.calcularTamanio = function (unTamanio) {
-      return (this.plato.pizza.precioBase * unTamanio.valor) || 0
 
+    this.calcularTamanio = function (unTamanio) {
+        this.plato.tamanio = unTamanio;
+        return this.plato.precioPlato() || 0
     };
 
     function errorHandler(error) {
