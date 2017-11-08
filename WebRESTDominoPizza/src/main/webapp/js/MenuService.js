@@ -9,26 +9,27 @@ angular.module('dominosApp').service("MenuService", function ($http) {
 
         return new Ingrediente(json)
     };
+    let parsearListaDeIngredientes = function (jsonDeIngredientes) {
+        return jsonDeIngredientes.map(parsearIngrediente)
+    };
+
     let parsearPizza = function (json) {
         return new Pizza(json)
     };
-
-
+    let parsearListaDePizzas = function (jsonDePizzas) {
+        return jsonDePizzas.map(parsearPizza)
+    };
 
     return {
         obtenerPizzas: function () {
             return $http.get("promos")
                 .then(getData)
-                .then(function (pizzasJson) {
-                    return pizzasJson.map(parsearPizza)
-                })
+                .then(parsearListaDePizzas)
         },
         obtenerIngredientes: function () {
             return $http.get("ingredientes")
                 .then(getData)
-                .then(function (ingredientesJson) {
-                    return ingredientesJson.map(parsearIngrediente)
-                })
+                .then(parsearListaDeIngredientes)
         },
 
     };

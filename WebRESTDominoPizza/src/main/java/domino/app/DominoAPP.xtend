@@ -8,17 +8,11 @@ class DominoAPP {
 
 	def static void main(String[] args) {
 	
-	val nombre = new Delivery()
-	
-	System.out.println(nombre.nombre)
+	System.out.println("Servidor Domino's Pizzería.")
 	
 		val bootstrap = new BootstrapWeb
 		bootstrap.run
 
 		XTRest.startInstance(9100, new DominoRestAPI())
-	
-	
-	
 	}
-
 }
