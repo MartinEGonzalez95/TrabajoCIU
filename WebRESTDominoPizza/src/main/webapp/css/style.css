@@ -1,35 +1,45 @@
 h4.gray {
-    color: #787878;
+    color: rgb(120, 120, 120);
+}
+
+h4.green {
+    color: rgb(20, 120, 30);
 }
 
 tr.ingredientesExtras {
     background-color: rgb(240, 240, 240);
-    padding-top: 15em;
-    padding-bottom: 15em;
+    font-size: 15px;
 }
 
 tr.ingredientes {
     background-color: rgb(200, 200, 200);
-    padding-top: 15em;
-    padding-bottom: 15em;
+    font-size: 15px;
 }
 
 div.roundedGreen {
     border-radius: 5px;
-    border: 2px solid rgb(170, 230, 75);
+    border: 2px solid rgb(155, 225, 120);
     padding:5px;
 }
 
 div.roundedGray {
-    border-radius: 2px;
+    clear: both;
+    border-radius: 5px;
     border: 2px solid rgb(220, 220, 220);
     padding: 5px;
-    clear: both;
+    margin: 5px;
 }
 
 div.bigRoundedGray {
     clear: both;
-    border-radius: 2px;
+    border-radius: 5px;
     border: 2px solid rgb(220, 220, 220);
     padding: 10px;
+    margin: 5px;
+}
+
+ul {
+    padding: 5px;
+    margin: 0;
+    list-style-type: none;
 }
