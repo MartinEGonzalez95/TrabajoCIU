@@ -18,6 +18,20 @@
     div.roundedGreen {
         border-radius: 5px;
         border: 2px solid rgb(170, 230, 75);
+        padding:5px;
+    }
+
+    div.roundedGray {
+        border-radius: 2px;
+        border: 2px solid rgb(220, 220, 220);
+        padding: 5px;
+        clear: both;
+    }
+
+    div.bigRoundedGray {
+        clear: both;
+        border-radius: 2px;
+        border: 2px solid rgb(220, 220, 220);
         padding: 10px;
     }
 
@@ -26,8 +40,10 @@
 
 <div ng-controller="controllerPlato as platoAMostrar">
     
-        <div style="background-color:whitesmoke;"> Tamaño > Ingredientes</div>
-    
+    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes</div>
+
+    <div class="bigRoundedGray col-md-5">
+
         <div>
     
             <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
@@ -36,19 +52,19 @@
     
         </div>
 
-        <div class="col-md-5 table-responsive">
+        <div class="col-md-8 table-responsive">
     
             <table class="table" style="border-collapse: collapse">
         
                 <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
                     <tr class="ingredientes">
                         <td>
-                                <label class="col-md-4"><h5>{{ ingrediente.nombre }}</h5></label>
-                                    <div class="col-md-8">                         
-                                        <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda <br>
-                                        <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo <br>
-                                        <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-                                    </div>
+                            <label class="col-md-4"><h5>{{ ingrediente.nombre }}</h5></label>   
+                            <div class="col-md-7">                         
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda <br>
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo <br>
+                                <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -73,7 +89,7 @@
 
         </div>
 
-        <div class="col-md-2 roundedGreen">
+        <div class="col-md-4 roundedGreen">
         
             <label><h3>Extras:</h3></label>
     
@@ -86,5 +102,7 @@
             </button>
     
         </div>
-    
+
     </div>
+    
+</div>
