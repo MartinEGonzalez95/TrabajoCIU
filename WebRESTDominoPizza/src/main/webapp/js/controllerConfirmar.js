@@ -1,8 +1,10 @@
-angular.module('dominosApp').controller('ControllerConfirmar', function (ExceptionService, $state, PedidoTemporalService, PedidoService) {
+angular.module('dominosApp').controller('ControllerConfirmar', function (ExceptionService, $state, PedidoTemporalService, PedidoService, UserService) {
 
     this.pedidoService = PedidoTemporalService;
 
     this.pedido = this.pedidoService.pedido;
+
+    this.usuarioDelPedido = UserService.usuarioLogueado();
 
     this.cancelarPizza = function(unaPizza) {
         this.pedido.platos = _.without(this.pedido.platos,unaPizza);
@@ -10,7 +12,9 @@ angular.module('dominosApp').controller('ControllerConfirmar', function (Excepti
 
     this.confirmarPedido = function(){
 
-        PedidoService.confirmarPedido(this.pedido, excepciones);
+        this.pedido.cliente = this.usuarioDelPedido;
+
+        PedidoService.confirmarPedido(this.pedido);
 
         //$state.go("menu");
 

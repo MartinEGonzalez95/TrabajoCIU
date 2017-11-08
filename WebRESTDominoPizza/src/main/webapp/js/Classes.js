@@ -1,26 +1,33 @@
 let Pedido = function (nick) {
     this.numero = 0;
-    this.cliente = nick || "sinNombre";
     this.platos = [];
-    this.horaDeCreacion = Date.now();
+    this.cliente = nick || "sinNombre";
+    //this.horaDeCreacion = Date.now();
     this.aclaraciones = "";
-    this.montoFinal = 0;
+    //this.montoFinal = 0;
     this.formaDeEnvio = new RetiroPorLocal();
 
     this.montoFinalPedido = function(){
         let precio = this.platos.map(plato => plato.precioPlato()).reduce((a, b) => a + b, 0) || 0;
-        return this.formaDeEnvio.precio + precio
-    }
+        return this.precioDeEnvio() + precio
+    };
+
+    this.precioDeEnvio = function(){
+        if(this.formaDeEnvio.tipo === "RetiroPorLocal"){
+            return 0
+        }else{
+            return 15
+        }
+    };
 };
 
 let Delivery = function(){
-    this.nombre = "Delivery";
-    this.precio = 15;
+    this.tipo = "Delivery";
+    this.direccion = "";
 };
 
 let RetiroPorLocal = function(){
-    this.nombre = "RetiroPorLocal";
-    this.precio = 0;
+    this.tipo = "RetiroPorLocal";
 };
 
 let Ingrediente = function (json) {
