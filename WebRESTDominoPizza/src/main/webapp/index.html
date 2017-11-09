@@ -26,16 +26,16 @@
 </head>
 
 <body>
-    <div ng-controller="controllerLoginReg as ctrl">
+    <div class="col-md-5 roundedGray" ng-controller="controllerLoginReg as ctrl">
         <!--ENCABEZADO solo se muestra si hay ususario logueado-->
-        <nav>
+
             <div ng-if="ctrl.estaLogueado">
                 <ul class="list-inline">
                     <li class="list-group-item"><a ui-sref="menu">Menu</a></li>
                     <li class="list-group-item"><a ui-sref="modificarUsuario">{{ctrl.usuarioLogueado.nick}}</a></li>
                 </ul>
             </div>
-        </nav>
+
 
         <!--Login SOLO SE MUESTRA SI NO HAY USUARIO LOGUEADO NI SE QUIERE REGISTRAR USUARIO-->
         <div class="row" ng-if="ctrl.login">
