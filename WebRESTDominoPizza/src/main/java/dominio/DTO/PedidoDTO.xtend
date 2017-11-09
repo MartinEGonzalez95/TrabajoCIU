@@ -32,7 +32,10 @@ class PedidoDTO {
 		fechaDeCreacion = pedido.fechaDeCreacion
 		aclaraciones = pedido.aclaraciones
 		estadoDePedido = pedido.estadoDePedido
-		formaDeEnvio = new FormaDeEnvioDTO => [ nombre = pedido.formaDeEnvio.nombre ]
+		formaDeEnvio = new FormaDeEnvioDTO => [ 
+			nombre = pedido.formaDeEnvio.nombre
+			costo = pedido.formaDeEnvio.costo
+		]
 		numero = pedido.numero
 	}
 	

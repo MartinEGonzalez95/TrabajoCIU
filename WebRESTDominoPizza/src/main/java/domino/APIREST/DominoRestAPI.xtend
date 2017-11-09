@@ -21,6 +21,7 @@ import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
 import repositorios.RepoTamanio
+import formaDeEnvioPedido.FormaDeEnvio
 
 @Controller
 class DominoRestAPI {
@@ -248,7 +249,7 @@ class EstadoDePedidoDTO {
 @Accessors
 class FormaDeEnvioDTO {
 	String nombre
-	int coste = 0;
-
-
+	int costo = 0;
+	
+	
 }
