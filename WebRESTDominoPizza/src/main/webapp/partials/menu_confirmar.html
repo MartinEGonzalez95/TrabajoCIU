@@ -44,14 +44,14 @@
 
         <div class="radio">
             <label>
-                <input type="radio" name="envio" ng-model="controllerConfirmar.pedido.formaDeEnvio"
-                    ng-value="controllerConfirmar.retiroPorLocal" checked> Retiro por local
+                <input type="radio" ng-model="controllerConfirmar.pedido.formaDeEnvio"
+                     ng-value="controllerConfirmar.retiroPorLocal()"> Retiro por local
             </label>
         </div>
         <div class="radio">
             <label>
-                <input type="radio" name="envio" ng-model="controllerConfirmar.pedido.formaDeEnvio"
-                    ng-value="controllerConfirmar.delivery" > Delivery
+                <input type="radio" ng-model="controllerConfirmar.pedido.formaDeEnvio"
+                    ng-value="controllerConfirmar.delivery()"> Delivery
                 <span class="badge badge-important">  ${{controllerConfirmar.delivery.costo}}</span>
                 <input  type="text" ng-model="controllerConfirmar.delivery.direccion" placeholder="Indique su direccion">
             </label>

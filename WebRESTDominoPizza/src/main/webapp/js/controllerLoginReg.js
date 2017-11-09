@@ -39,7 +39,7 @@ dominosApp.controller('controllerLoginReg', function ($state, ExceptionService, 
 	}
 
 	self.toogleRegistrar = function () {
-        $state.go('registrar');
+        $state.go('registro');
 	};
 
 	self.registrar = function () {

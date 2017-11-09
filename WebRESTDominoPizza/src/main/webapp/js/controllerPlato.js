@@ -16,7 +16,7 @@ angular.module('dominosApp').controller("controllerPlato", function ($state, Men
                             self.ingredientesExtras = data;
             
                         })
-                    // .catch(errorHandler);
+                    .catch(errorHandler);
                 };
 
         this.obtenerIngredientes();

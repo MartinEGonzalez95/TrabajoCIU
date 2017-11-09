@@ -30,10 +30,7 @@ let Ingrediente = function (json) {
 
     this.precioFinal = function () {
 
-        if (this.distribucion == "Todo") {
-            return this.precio
-        }
-        return this.precio / 2
+        return this.precio
     }
 
 };
