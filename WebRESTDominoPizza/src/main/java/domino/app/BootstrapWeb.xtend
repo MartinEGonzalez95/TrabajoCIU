@@ -116,14 +116,14 @@ class BootstrapWeb implements Bootstrap {
 		])
 
 		repo.agregar(new Pizza => [
-			it.precioBase = 75
+			it.precioBase = 200
 			it.nombre = "Fugazzeta Rellena"
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Cebolla"))
 		])
 
 		repo.agregar(new Pizza => [
-			it.precioBase = 75
+			it.precioBase = 70
 			it.nombre = "Pizza Custom"
 		])
 

@@ -50,10 +50,7 @@ let Plato = function () {
 
     this.precioEnBaseAlTamanio = function (unTamanio) {
 
-        if (this.ingredientesExtras.isEmpty) {
             return this.pizzaBase.precioBase * unTamanio.valor
-        }
-        return 70 * unTamanio.valor
     };
 
     this.precioIngredientesExtras = function () {
