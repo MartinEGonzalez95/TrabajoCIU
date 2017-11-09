@@ -77,9 +77,11 @@ class DominoRestAPI {
 	def postPedido(@Body String bodyConPedido) {
 
 		response.contentType = ContentType.APPLICATION_JSON
-
+		
 		val pedidoDTO = bodyConPedido.fromJson(PedidoDTO)
-
+//		val formaDeEnvioDTO = bodyConPedido.getPropertyValue("formaDeEnvio")
+//		val formaDeEnvioParseada = this.transfomarFormaDeEnvio(formaDeEnvioDTO)
+		
 		try {
 			var pedido = this.armarPedido(pedidoDTO)
 
@@ -100,6 +102,7 @@ class DominoRestAPI {
 			it.aclaraciones = dto.aclaraciones
 			it.estadoDePedido = dto.estadoDePedido
 			it.numero = dto.numero
+			it.estadoDePedido = new Preparando
 		]
 	}
 

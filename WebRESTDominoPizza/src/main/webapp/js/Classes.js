@@ -8,7 +8,7 @@ let Pedido = function (nick) {
 
     this.fechaDeCreacion;
     this.montoFinalPedido = function () {
-        let precio = this.platos.map(plato => plato.precioPlato()).reduce((a, b) => a + b, 0) || 0;
+        let precio = this.platos.map(plato => plato.precioTotal()).reduce((a, b) => a + b, 0) || 0;
         return this.formaDeEnvio.costo + precio
     };
 
@@ -30,11 +30,11 @@ let Ingrediente = function (json) {
 
     this.precioFinal = function () {
 
-		if (this.distribucion == "Todo") {
-			return this.precio
-		}
-		return this.precio / 2
-	}
+        if (this.distribucion == "Todo") {
+            return this.precio
+        }
+        return this.precio / 2
+    }
 
 };
 
@@ -48,28 +48,31 @@ let Plato = function () {
     this.tamanioPizza = new Tamanio("Grande", 1);
     this.ingredientesExtras = [];
 
-    this.precioEnBaseAlTamanio = function () {
+    this.precioEnBaseAlTamanio = function (unTamanio) {
 
         if (this.ingredientesExtras.isEmpty) {
-            return this.pizzaBase.precioBase * this.tamanioPizza.valor
+            return this.pizzaBase.precioBase * unTamanio.valor
         }
-        return 70 * this.tamanioPizza.valor
+        return 70 * unTamanio.valor
     };
 
     this.precioIngredientesExtras = function () {
         return this.ingredientesExtras.map(ingrediente => ingrediente.precioFinal()).reduce((a, b) => a + b, 0)
     };
 
-    this.precioPlato = function () {
-        return this.precioEnBaseAlTamanio() + this.precioIngredientesExtras()
+    this.precioTotal = function () {
+        return this.calcularPrecioFinalEnBaseTamanio(this.tamanioPizza);
     };
+
+    this.calcularPrecioFinalEnBaseTamanio = function (unTamanio) {
+        return this.precioEnBaseAlTamanio(unTamanio) + this.precioIngredientesExtras()
+    }
 
 };
 
 let Tamanio = function (json) {
     angular.extend(this, json);
 };
-
 
 let Cliente = function (json) {
     angular.extend(this, json);

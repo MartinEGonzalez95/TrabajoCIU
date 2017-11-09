@@ -1,11 +1,9 @@
 angular.module('dominosApp').controller('controllerTamanioPlato', function ($state,ExceptionService, TamanioService, PlatoService) {
 
 
-    let platoService = PlatoService;
-
     const self = this;
 
-    this.plato = platoService.plato;
+    this.plato = PlatoService.plato;
 
     this.tamanios = [];
 
@@ -20,23 +18,21 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
     
     this.cargarTamanios();
 
+    this.calcularTamanio = function (unTamanio) {
+
+        return this.plato.calcularPrecioFinalEnBaseTamanio(unTamanio)
+    };
 
     this.agregarTamanioAlPlato = function (unTamanio) {
 
         this.plato.tamanioPizza = unTamanio;
-        platoService.agregarPlato(this.plato);
+        PlatoService.agregarPlato(this.plato);
 
 
         $state.go("ingredientes");
 
     };
-
-
-    this.calcularTamanio = function (unTamanio) {
-        this.plato.tamanioPizza = unTamanio;
-        return this.plato.precioPlato() || 0
-    };
-
+    
     function errorHandler(error) {
         ExceptionService.capturarError(error);
     }

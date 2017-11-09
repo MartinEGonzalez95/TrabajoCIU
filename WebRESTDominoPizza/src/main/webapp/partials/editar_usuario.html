@@ -1,21 +1,21 @@
-<div ng-controller="ControllerUsuario as usuario">
+<div ng-controller="ControllerUsuario as ctrlUsuario">
 
-    <h1> {{usuario.nick}} </h1>
+    <h1> {{ctrlUsuario.usuario.nick}} </h1>
 
     <div class="container">
         <label>Nombre</label>
-        <input type="text" ng-model="usuario.nombre" placeholder={{usuario.nombre}}>
+        <input type="text" ng-model="ctrlUsuario.nombre" placeholder="{{ctrlUsuario.usuario.nombre}}">
     </div>
     <div class="container">
         <label>Mail</label>
-        <input type="text" ng-model="usuario.email" placeholder={{usuario.email}}>
+        <input type="text" ng-model="ctrlUsuario.email" placeholder={{ctrlUsuario.usuario.email}}>
     </div>
     <div class="container"  >
         <label>Direccion</label>
-        <input type="text" ng-model="usuario.direccion" placeholder={{usuario.direccion}}>
+        <input type="text" ng-model="ctrlUsuario.direccion" placeholder={{ctrlUsuario.usuario.direccion}}>
     </div>
     <div align="right">
-        <button class="btn btn-default" ng-click="usuario.setearCambios()">
+        <button class="btn btn-default" ng-click="ctrlUsuario.setearCambios()">
             Guardar
         </button>
     </div>
@@ -32,11 +32,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="pedido in usuario.pedidosAnteriores">
+        <tr ng-repeat="pedido in ctrlUsuario.usuario.pedidosAnteriores">
             <td>{{pedido.pizza}}</td>
             <td>{{pedido.direccion}}</td>
             <td>{{pedido.monto}}</td>
-            <td> <a ng-click="usuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
+            <td> <a ng-click="ctrlUsuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
         </tr>
         </tbody>
     </table>

@@ -8,7 +8,7 @@
     
             <label><h1>{{ platoAMostrar.plato.pizzaBase.nombre }}</h1></label>
             <label><h4 class="gray">{{ platoAMostrar.plato.tamanioPizza.nombre }}</h4></label>
-            <span class="label label-danger">${{ platoAMostrar.plato.precioPlato() }}</span>
+            <span class="label label-danger">${{ platoAMostrar.plato.precioTotal() }}</span>
             <label><h4>{{ platoAMostrar.plato.pizzaBase.precio }}</h4></label>
     
         </div>
@@ -65,7 +65,7 @@
                 <li><a href ng-click="platoAMostrar.agregar(ingrediente)"> + {{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
             </ul>
     
-            <button class="btn btn-primary float-right" ng-click="platoAMostrar.confirmarme()" ">
+            <button class="btn btn-primary float-right" ng-click="platoAMostrar.confirmarme()" >
                 Continuar
             </button>
     
