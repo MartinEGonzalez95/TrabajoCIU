@@ -1,43 +1,44 @@
 angular.module('dominosApp').controller("controllerPlato", function ($state, MenuService, PedidoTemporalService, PlatoService) {
-    
-        const self = this;
 
-        this.plato = PlatoService.plato;
+    const self = this;
 
-        this.ingredientes = PlatoService.plato.pizza.ingredientes;
+    this.plato = PlatoService.plato;
 
-        this.ingredientesExtras = []
+    this.ingredientes = PlatoService.plato.pizzaBase.ingredientes;
 
-        this.obtenerIngredientes = function(){
+    this.ingredientesExtras = [];
 
-            MenuService.obtenerIngredientes()
-                .then(function(data){
-                    
-                    self.ingredientesExtras = data;
-    
-                })
-               // .catch(errorHandler);
+    this.obtenerIngredientes = function () {
+
+        MenuService.obtenerIngredientes()
+            .then(function (data) {
+
+                self.ingredientesExtras = data;
+
+            })
+        // .catch(errorHandler);
+    };
+
+    this.obtenerIngredientes();
+
+    function errorHandler(error) {
+        console.log(error);
+        ExceptionService.capturarError(error);
+    }
+
+    this.agregar = function (unIngrediente) {
+        this.plato.ingredientesExtras.push(unIngrediente)
+    };
+
+    this.quitar = function (unIngrediente) {
+        var index = this.plato.ingredientesExtras.indexOf(unIngrediente);
+        if (index > -1) {
+            this.plato.ingredientesExtras.splice(index, 1);
         }
 
-        this.obtenerIngredientes();
+    };
 
-        function errorHandler(error) {
-            console.log(error);
-            ExceptionService.capturarError(error);
-        }
-
-        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) };
-        this.quitar = function(unIngrediente)
-        {
-            var index = this.plato.ingredientesExtras.indexOf(unIngrediente);
-            if (index > -1)
-            {
-                this.plato.ingredientesExtras.splice(index, 1);
-            } 
-
-        };
-
-    this.confirmarme = function() {
+    this.confirmarme = function () {
         PedidoTemporalService.agregarPlato(this.plato);
         $state.go("confirmar")
     }

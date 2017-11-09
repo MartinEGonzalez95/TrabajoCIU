@@ -36,16 +36,16 @@ let Pizza = function (json) {
 
 
 let Plato = function () {
-    this.pizza;
-    this.tamanio = new Tamanio("Grande", 1);
+    this.pizzaBase;
+    this.tamanioPizza = new Tamanio("Grande", 1);
     this.ingredientesExtras = [];
 
     this.precioEnBaseAlTamanio = function () {
 
         if (this.ingredientesExtras.isEmpty) {
-            return this.pizza.precioBase * this.tamanio.valor
+            return this.pizzaBase.precioBase * this.tamanioPizza.valor
         }
-        return 70 * this.tamanio.valor
+        return 70 * this.tamanioPizza.valor
     };
 
     this.precioIngredientesExtras = function () {

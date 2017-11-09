@@ -7,7 +7,7 @@ dominosApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "partials/menu_promo.html"
         })
         .state('tamanio', {
-            url: "/menu/tamanio",
+            url: "/menu/tamanioPizza",
             templateUrl: "partials/menu_tamanio.html"
         })
         .state('ingredientes', {

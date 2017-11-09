@@ -71,11 +71,11 @@ class TestPedido
 		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
 		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
 		
-		val Tamanio tamañoGrande = new Tamanio("Grande")
+		val Tamanio tamañoGrande = new Tamanio("Grande",1)
 		
 		val Plato unPlatoDeCostoCienPesos = new Plato()
 		unPlatoDeCostoCienPesos.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
-		unPlatoDeCostoCienPesos.tamañoPizza = tamañoGrande
+		unPlatoDeCostoCienPesos.tamanioPizza = tamañoGrande
 
 		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
 		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
@@ -97,11 +97,11 @@ class TestPedido
 		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
 		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
 		
-		val Tamanio tamañoGrande = new Tamanio("Grande")
+		val Tamanio tamañoGrande = new Tamanio("Grande",1)
 		
 		val Plato unPlatoDeCostoCienPesos = new Plato()
 		unPlatoDeCostoCienPesos.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
-		unPlatoDeCostoCienPesos.tamañoPizza = tamañoGrande
+		unPlatoDeCostoCienPesos.tamanioPizza = tamañoGrande
 
 		unPedido.agregarPlato(unPlatoDeCostoCienPesos)
 		unPedido.agregarPlato(unPlatoDeCostoCienPesos)

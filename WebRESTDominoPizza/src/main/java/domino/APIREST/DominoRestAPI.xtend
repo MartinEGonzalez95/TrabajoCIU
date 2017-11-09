@@ -56,10 +56,10 @@ class DominoRestAPI {
 		response.contentType = ContentType.APPLICATION_JSON
 
 		val tamanios = new ArrayList<Tamanio>
-		tamanios.add(new Tamanio("Porcion"))
-		tamanios.add(new Tamanio("Chica"))
-		tamanios.add(new Tamanio("Grande"))
-		tamanios.add(new Tamanio("Familiar"))
+		tamanios.add(new Tamanio("Porcion",0.125))
+		tamanios.add(new Tamanio("Chica",0.5))
+		tamanios.add(new Tamanio("Grande",1))
+		tamanios.add(new Tamanio("Familiar",1.25))
 
 		return ok(tamanios.toJson)
 	}

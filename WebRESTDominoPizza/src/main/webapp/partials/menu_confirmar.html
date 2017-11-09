@@ -11,12 +11,12 @@
         <tbody data-ng-repeat="plato in controllerConfirmar.pedido.platos">
         <tr>
             <td>
-                <h5>{{plato.pizza.nombre}} </h5>
-                <dd data-ng-repeat=" ingrediente in plato.pizza.ingredientes">
+                <h5>{{plato.pizzaBase.nombre}} </h5>
+                <dd data-ng-repeat=" ingrediente in plato.pizzaBase.ingredientes">
                     <h6>{{ingrediente.nombre}}</h6>
                 </dd>
-                <dd data-ng-repeat=" ingredienteE in plato.ingredientesExtras">
-                    <h6>{{ingredienteE.nombre}}</h6>
+                <dd data-ng-repeat=" ingredienteExtra in plato.ingredientesExtras">
+                    <h6>{{ingredienteExtra.nombre}}</h6>
                 </dd>
             </td>
             <td>

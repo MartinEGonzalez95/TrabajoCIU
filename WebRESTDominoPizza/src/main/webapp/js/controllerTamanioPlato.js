@@ -22,7 +22,7 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
     this.agregarTamanioAlPlato = function (unTamanio) {
 
-        this.plato.tamanio = unTamanio;
+        this.plato.tamanioPizza = unTamanio;
         platoService.agregarPlato(this.plato);
 
 
@@ -32,7 +32,7 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
 
 
     this.calcularTamanio = function (unTamanio) {
-        this.plato.tamanio = unTamanio;
+        this.plato.tamanioPizza = unTamanio;
         return this.plato.precioPlato() || 0
     };
 
