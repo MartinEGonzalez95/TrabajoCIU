@@ -11,16 +11,13 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoS
 
     this.pedidosAnteriores = [];
 
-    this.obtenerPedidos = function () {
 
-        PedidoService.obtenerPedidosAnterioresDe(this.usuario.nick)
-            .then(function (data) {
-                self.pedidosAnteriores = data;
-            })
-            .catch(errorHandler)
-    };
+    PedidoService.obtenerPedidosAnterioresDe(this.usuario.nick)
+        .then(function (data) {
+            self.pedidosAnteriores = data;
+        })
+        .catch(errorHandler)
 
-    this.obtenerPedidos();
 
     this.repetirPedido = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
