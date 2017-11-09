@@ -7,7 +7,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 abstract class FormaDeEnvio {
 
 	String nombre = class.simpleName
-
+	String direccion
 	def int costo()
 
 	def void avanzar(Pedido unPedido)

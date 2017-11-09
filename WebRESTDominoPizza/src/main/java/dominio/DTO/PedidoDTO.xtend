@@ -35,6 +35,7 @@ class PedidoDTO {
 		formaDeEnvio = new FormaDeEnvioDTO => [ 
 			nombre = pedido.formaDeEnvio.nombre
 			costo = pedido.formaDeEnvio.costo
+			direccion = pedido.formaDeEnvio.direccion
 		]
 		numero = pedido.numero
 	}

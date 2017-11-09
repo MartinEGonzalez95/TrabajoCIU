@@ -250,6 +250,8 @@ class EstadoDePedidoDTO {
 class FormaDeEnvioDTO {
 	String nombre
 	int costo = 0;
+	String direccion= "RetiroPorLocal";
+	
 	
 	
 }

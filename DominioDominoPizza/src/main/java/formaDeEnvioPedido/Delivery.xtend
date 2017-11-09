@@ -10,8 +10,7 @@ import org.uqbar.commons.model.annotations.Observable
 class Delivery extends FormaDeEnvio {
 
 	int costo = 15 // pesos //
-	String direccion
-
+	
 	new() {
 	}
 

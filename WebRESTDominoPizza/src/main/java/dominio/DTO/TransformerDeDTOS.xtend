@@ -12,6 +12,8 @@ import dominoPizzeria.Cliente
 import dominoPizzeria.Pedido
 import repositorios.RepoCliente
 
+import domino.APIREST.FormaDeEnvioDTO
+
 class TransformerDeDTOS {
 	
 	
@@ -32,11 +34,14 @@ class TransformerDeDTOS {
 	}
 	
 	
-	def transfomarFormaDeEnvio(String formaDeEnvio) {
-		switch (formaDeEnvio) {
+	def transfomarFormaDeEnvio(FormaDeEnvioDTO formaDeEnvio) {
+		switch (formaDeEnvio.nombre) {
 			case "RetiroPorLocal": return new RetiroPorLocal()
 			,
-			case "Delivery": return new Delivery() //TODO: PRecio dirección
+			case "Delivery": return new Delivery() =>[
+				it.direccion = formaDeEnvio.direccion
+				
+			] 
 		}
 	}
 	
@@ -59,7 +64,7 @@ class TransformerDeDTOS {
 			it.estadoDePedido = dto.estadoDePedido
 			it.numero = dto.numero
 			it.estadoDePedido = new Preparando
-			formaDeEnvio = transfomarFormaDeEnvio(dto.formaDeEnvio.nombre)
+			it.formaDeEnvio = transfomarFormaDeEnvio(dto.formaDeEnvio)
 		]
 	}
 	
