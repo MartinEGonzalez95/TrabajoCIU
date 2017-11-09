@@ -6,7 +6,13 @@ angular.module('dominosApp').service('PedidoService', function($http){
 
 
     let parsearPedido = function (json) {
-        return new Pedido(json)
+        let pedido = new Pedido(json.cliente);
+        pedido.numero = json.numero;
+        pedido.aclaraciones = json.aclaraciones;
+        pedido.platos = json.platos;
+        pedido.formaDeEnvio = json.formaDeEnvio;
+
+        return pedido
     };
 
     let parsearListaDePedidos = function (jsonDePedidos) {
@@ -22,8 +28,8 @@ angular.module('dominosApp').service('PedidoService', function($http){
 
             return $http.post("pedidos",pedidoAConfirmar).then(getData).catch(errorHandler);
         },
-        obtenerPedidosAnterioresDe: function (pedido) {
-            return $http.get("pedidos?nick=" + pedido.cliente.nick).then(getData).then(parsearListaDePedidos);
+        obtenerPedidosAnterioresDe: function (nick) {
+            return $http.get("pedidos?nick=" + nick).then(getData).then(parsearListaDePedidos);
         }
     };
 

@@ -1,21 +1,24 @@
-<div ng-controller="ControllerUsuario as usuario">
+<div ng-controller="ControllerUsuario as ctrlUsuario">
 
-    <h1> {{usuario.nick}} </h1>
+    <h1> {{ctrlUsuario.usuario.nick}} </h1>
 
     <div class="container">
-        <label>Nombre</label>
-        <input type="text" ng-model="usuario.nombre" placeholder={{usuario.nombre}}>
+        <label><h3>Nombre</h3>
+        <input class="form-control" type="text" ng-model="usuario.nombre" placeholder={{ctrlUsuario.usuario.nombre}}>
+        </label>
     </div>
     <div class="container">
-        <label>Mail</label>
-        <input type="text" ng-model="usuario.email" placeholder={{usuario.email}}>
+        <label><h3>Mail</h3>
+        <input class="form-control" type="text" ng-model="usuario.email" placeholder={{ctrlUsuario.usuario.email}}>
+        </label>
     </div>
     <div class="container"  >
-        <label>Direccion</label>
-        <input type="text" ng-model="usuario.direccion" placeholder={{usuario.direccion}}>
+        <label><h3>Direccion</h3>
+        <input class="form-control" type="text" ng-model="usuario.direccion" placeholder={{ctrlUsuario.usuario.direccion}}>
+        </label>
     </div>
     <div align="right">
-        <button class="btn btn-default" ng-click="usuario.setearCambios()">
+        <button class="btn btn-default" ng-click="ctrlUsuario.setearCambios()">
             Guardar
         </button>
     </div>
@@ -32,11 +35,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="pedido in usuario.pedidosAnteriores">
-            <td>{{pedido.pizza}}</td>
-            <td>{{pedido.direccion}}</td>
-            <td>{{pedido.monto}}</td>
-            <td> <a ng-click="usuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
+        <tr data-ng-repeat="pedido in ctrlUsuario.pedidosAnteriores">
+            <td>
+                <dd data-ng-repeat=" plato in pedido.platos">
+                    <h6>{{plato.pizza.nombre}}</h6>
+                </dd>
+            </td>
+            <td>{{pedido.montoFinalPedido()}}</td>
+            <td> <a ng-click="ctrlUsuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
         </tr>
         </tbody>
     </table>
