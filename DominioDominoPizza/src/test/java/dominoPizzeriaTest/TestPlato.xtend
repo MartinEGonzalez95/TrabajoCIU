@@ -18,11 +18,11 @@ class TestPlato
 		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
 		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
 		
-		val Tamanio tamañoGrande = new Tamanio("Grande")
+		val Tamanio tamañoGrande = new Tamanio("Grande",1)
 		
 		val Plato unPlatoNuevo = new Plato()
 		unPlatoNuevo.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
-		unPlatoNuevo.tamañoPizza = tamañoGrande
+		unPlatoNuevo.tamanioPizza = tamañoGrande
 		
 		// $100 * 1 + $0 //
 		assertEquals(unPlatoNuevo.precio, 100 /* pesos */, 0)
@@ -36,7 +36,7 @@ class TestPlato
 		val Pizza unaPizzaDeMuzarellaDeCienPesos = new Pizza()
 		unaPizzaDeMuzarellaDeCienPesos.precioBase = 100 // pesos //
 		
-		val Tamanio tamañoChica = new Tamanio("Chica")
+		val Tamanio tamañoChica = new Tamanio("Chica",1)
 		
 		val Ingrediente jamonExtra = new Ingrediente()
 		jamonExtra.distribucion = "Toda"
@@ -44,7 +44,7 @@ class TestPlato
 		
 		val Plato unPlatoNuevo = new Plato()
 		unPlatoNuevo.pizzaBase = unaPizzaDeMuzarellaDeCienPesos
-		unPlatoNuevo.tamañoPizza = tamañoChica
+		unPlatoNuevo.tamanioPizza = tamañoChica
 		unPlatoNuevo.agregarAdicional(jamonExtra)
 		
 		// $70 * 0.5 + $20 //

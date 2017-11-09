@@ -5,36 +5,23 @@ import java.util.HashMap
 import java.util.Map
 
 @Accessors
-class Tamanio
-{
+class Tamanio {
+	new() {
+	}
 
 	String nombre
-	Map<String, Double> valor = new HashMap<String, Double>()
-	
-	new(String nombreTamaño)
-	{
-		
-		nombre = nombreTamaño
-		
-		valor.put("Porcion", 0.125)
-		valor.put("Chica", 0.5)
-		valor.put("Grande", 1.0)
-		valor.put("Familiar", 1.25)
-		
+	double valor
+
+	new(String nombreTamaño, double valor) {
+
+		this.nombre = nombreTamaño
+		this.valor = valor
 	}
 
-	def double getValor()
-	{
-		
-		valor.get(nombre)
-		
-	}
-	
-	override toString()
-	{
-		
+	override toString() {
+
 		nombre
-		
+
 	}
 
 }

@@ -8,9 +8,6 @@ abstract class FormaDeEnvio {
 
 	String nombre = class.simpleName
 
-	new() {
-	}
-
 	def int costo()
 
 	def void avanzar(Pedido unPedido)

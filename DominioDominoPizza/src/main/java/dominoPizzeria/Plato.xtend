@@ -9,7 +9,7 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 class Plato {
 
 	Pizza pizzaBase
-	Tamanio tamañoPizza
+	Tamanio tamanioPizza
 	List<Ingrediente> ingredientesExtras = newArrayList
 
 	def double precio() {
@@ -22,11 +22,11 @@ class Plato {
 
 		if (ingredientesExtras.isEmpty) {
 
-			return pizzaBase.precioBase * tamañoPizza.getValor 
+			return pizzaBase.precioBase * tamanioPizza.getValor 
 
 		}
 
-		70 * tamañoPizza.getValor
+		70 * tamanioPizza.getValor
 
 	}
 
@@ -51,7 +51,7 @@ class Plato {
 	def verificar()
 	{
 		
-		pizzaBase !== null && tamañoPizza !== null
+		pizzaBase !== null && tamanioPizza !== null
 		
 	}
 

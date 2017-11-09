@@ -47,7 +47,7 @@ class BootstrapWeb implements Bootstrap {
 				it.precioBase = 100
 				it.nombre = "Muzarella"
 			]
-			tamañoPizza = new Tamanio("Grande")
+			tamanioPizza = new Tamanio("Grande",1)
 			ingredientesExtras = ingredientes
 		]
 		unosPlatos.add(plato)
