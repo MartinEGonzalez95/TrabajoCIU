@@ -15,6 +15,7 @@ import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
 import estadosDePedido.Cerrado
+import repositorios.RepoTamanio
 
 class BootstrapWeb implements Bootstrap {
 
@@ -27,7 +28,20 @@ class BootstrapWeb implements Bootstrap {
 		this.cargarPizzas()
 		this.cargarClientes()
 		this.cargarPedidos()
+		this.cargarTamanios()
 	}
+	
+	def cargarTamanios(){
+		
+		val repo = RepoTamanio.getRepo
+		
+		repo.agregar(new Tamanio("Porcion", 0.125))
+		repo.agregar(new Tamanio("Chica", 0.5))
+		repo.agregar(new Tamanio("Grande", 1))
+		repo.agregar(new Tamanio("Familiar", 1.25))
+	}
+	
+	
 
 	def cargarPedidos() {
 

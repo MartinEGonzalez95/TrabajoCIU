@@ -20,6 +20,8 @@ import repositorios.RepoCliente
 import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
+import repositorios.RepoTamanio
+import formaDeEnvioPedido.FormaDeEnvio
 
 @Controller
 class DominoRestAPI {
@@ -28,8 +30,8 @@ class DominoRestAPI {
 	TransformerDeDTOS transformer = new TransformerDeDTOS
 
 	val repo = RepoCliente.repo
-	
-	
+
+
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
 	}
@@ -48,14 +50,9 @@ class DominoRestAPI {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		//TODO: Forma parte del dominio
-		val tamanios = new ArrayList<Tamanio>
-		tamanios.add(new Tamanio("Porcion", 0.125))
-		tamanios.add(new Tamanio("Chica", 0.5))
-		tamanios.add(new Tamanio("Grande", 1))
-		tamanios.add(new Tamanio("Familiar", 1.25))
 
-		return ok(tamanios.toJson)
+
+		return ok(RepoTamanio.repo.cargar.toJson)
 	}
 
 	@Get("/ingredientes")
@@ -252,4 +249,7 @@ class EstadoDePedidoDTO {
 @Accessors
 class FormaDeEnvioDTO {
 	String nombre
+	int costo = 0;
+	
+	
 }
