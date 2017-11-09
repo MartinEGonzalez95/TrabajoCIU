@@ -23,7 +23,7 @@ angular.module('dominosApp').service("UserService", function ($http) {
                 .then(parsearUsuario)
         },
         modificarUsuario: function (usuario) {
-            return $http.put("usuarios/"+usuario.nick, usuario)
+            return $http.put("usuarios/"+usuario.nick, usuario).then(getData).then(parsearUsuario)
         },
         logearUsuario: function (usuario) {
             if (!self.usuario) {

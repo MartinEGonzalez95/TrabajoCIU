@@ -4,17 +4,17 @@
 
     <div class="container">
         <label><h3>Nombre</h3>
-        <input class="form-control" type="text" ng-model="usuario.nombre" placeholder={{ctrlUsuario.usuario.nombre}}>
+        <input class="form-control" type="text" ng-model="ctrlUsuario.nombre" placeholder={{ctrlUsuario.usuario.nombre}}>
         </label>
     </div>
     <div class="container">
         <label><h3>Mail</h3>
-        <input class="form-control" type="text" ng-model="usuario.email" placeholder={{ctrlUsuario.usuario.email}}>
+        <input class="form-control" type="text" ng-model="ctrlUsuario.email" placeholder={{ctrlUsuario.usuario.email}}>
         </label>
     </div>
     <div class="container"  >
         <label><h3>Direccion</h3>
-        <input class="form-control" type="text" ng-model="usuario.direccion" placeholder={{ctrlUsuario.usuario.direccion}}>
+        <input class="form-control" type="text" ng-model="ctrlUsuario.direccion" placeholder={{ctrlUsuario.usuario.direccion}}>
         </label>
     </div>
     <div align="right">
@@ -41,7 +41,7 @@
                     <h6>{{plato.pizzaBase.nombre}}</h6>
                 </dd>
             </td>
-            <td></td>
+            <td>{{ctrlUsuario.direccionDelPedido(pedido)}}</td>
             <td>{{pedido.montoFinalPedido()}}</td>
             <td> <a ng-click="ctrlUsuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
         </tr>

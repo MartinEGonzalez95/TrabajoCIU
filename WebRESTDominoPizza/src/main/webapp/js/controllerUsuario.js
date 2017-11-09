@@ -38,6 +38,16 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoS
             "direccion": self.direccion
         };
 
+        this.usuario = UserService.modificarUsuario(jsonUsuario)
+
+    };
+
+    this.direccionDelPedido = function(pedido){
+        if(pedido.formaDeEnvio.nombre === "Delivery"){
+            return pedido.formaDeEnvio.direccion
+        }else{
+            return ""
+        }
     };
 
     function errorHandler(error) {
