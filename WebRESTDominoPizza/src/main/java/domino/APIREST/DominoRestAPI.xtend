@@ -1,42 +1,31 @@
 package domino.APIREST
 
-import dominoPizzeria.Cliente
+import dominio.DTO.ClienteDTO
+import dominio.DTO.PedidoDTO
+import dominio.DTO.TransformerDeDTOS
 import dominoPizzeria.Pedido
 import dominoPizzeria.Tamanio
 import java.util.ArrayList
-
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
+import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
-
 import repositorios.RepoCliente
 import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
-import estadosDePedido.EstadoDePedido
-import org.uqbar.xtrest.api.annotation.Put
-import org.eclipse.xtend.lib.annotations.Accessors
-import estadosDePedido.Cerrado
-import estadosDePedido.Entregado
-import estadosDePedido.EnViaje
-import estadosDePedido.ListoParaEnviar
-import estadosDePedido.ListoParaRetirar
-import estadosDePedido.Preparando
-import dominio.DTO.PedidoDTO
-import java.util.List
-import formaDeEnvioPedido.RetiroPorLocal
-import formaDeEnvioPedido.Delivery
-import dominio.DTO.ClienteDTO
 
 @Controller
 class DominoRestAPI {
 
 	extension JSONUtils = new JSONUtils
-
+	TransformerDeDTOS transformer = new TransformerDeDTOS
 	// Class<Object> Login
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
@@ -83,7 +72,7 @@ class DominoRestAPI {
 //		val formaDeEnvioDTO = bodyConPedido.getPropertyValue("formaDeEnvio")
 //		val formaDeEnvioParseada = this.transfomarFormaDeEnvio(formaDeEnvioDTO)
 		try {
-			var pedido = this.armarPedido(pedidoDTO)
+			var pedido = transformer.armarPedido(pedidoDTO)
 
 			RepoPedido.getRepo.agregar(pedido)
 			return ok()
@@ -93,18 +82,7 @@ class DominoRestAPI {
 
 	}
 
-	def armarPedido(PedidoDTO dto) {
-
-		new Pedido() => [
-			it.platos = dto.platos
-			it.cliente = RepoCliente.repo.buscar(dto.cliente)
-			it.fechaDeCreacion = dto.fechaDeCreacion
-			it.aclaraciones = dto.aclaraciones
-			it.estadoDePedido = dto.estadoDePedido
-			it.numero = dto.numero
-			it.estadoDePedido = new Preparando
-		]
-	}
+	
 
 	@Get("/pedidos/:numero")
 	def getPedidoConNumero() {
@@ -154,36 +132,13 @@ class DominoRestAPI {
 
 		val estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedidoDTO)
 
-		pedido.estadoDePedido = transformarEstadoDePedido(estadoNuevo.nombre)
+		pedido.estadoDePedido = transformer.transformarEstadoDePedido(estadoNuevo.nombre)
 
 		return ok()
 
 	}
 
-	def transformarEstadoDePedido(String estado) {
-		switch (estado) {
-			case "Cerrado": return new Cerrado()
-			,
-			case "Entregado": return new Entregado()
-			,
-			case "EnViaje": return new EnViaje()
-			,
-			case "ListoParaEnviar": return new ListoParaEnviar()
-			,
-			case "ListoParaRetirar": return new ListoParaRetirar()
-			,
-			case "Preparando": return new Preparando()
-		}
-	}
-
-	def transfomarFormaDeEnvio(String formaDeEnvio) {
-		switch (formaDeEnvio) {
-			case "RetiroPorLocal": return new RetiroPorLocal()
-			,
-			case "Delivery": return new Delivery()
-		}
-	}
-
+	
 	@Get("/pedidos/:numero/estado")
 	def getEstadoDePedidoPorNumero() {
 
@@ -216,9 +171,8 @@ class DominoRestAPI {
 		} else {
 			return ok(
 				usuario.map[it | new ClienteDTO(it)].toJson
-				
 			)
-			//return ok(usuario.toJson)
+			
 
 		}
 	}
@@ -254,7 +208,7 @@ class DominoRestAPI {
 		val ClienteDTO clienteDTO = body.fromJson(ClienteDTO)
 		try {
 			
-			val unCliente = this.parsearClienteDTOACliente(clienteDTO);
+			val unCliente = transformer.parsearClienteDTOACliente(clienteDTO);
 			
 			RepoCliente.repo.agregar(unCliente)
 			return ok()
@@ -266,15 +220,7 @@ class DominoRestAPI {
 
 	}
 	
-	def parsearClienteDTOACliente(ClienteDTO dto) {
-		new Cliente()=>[
-			it.nick = dto.nick
-			it.nombre = dto.nombre
-			it.direccion = dto.direccion
-			it.password = dto.password
-			it.email = dto.email
-		]
-	}
+
 
 	@Post("/login")
 	def postLogin(@Body String usrData) {
