@@ -8,52 +8,28 @@
 
         <h2>Pizzas</h2>
 
-<<<<<<< HEAD
-        <table class="table table-striped table-hover">
-=======
-        <tbody data-ng-repeat="plato in controllerConfirmar.pedido.platos">
-        <tr>
-            <td>
-                <h5>{{plato.pizzaBase.nombre}} </h5>
-                <dd data-ng-repeat=" ingrediente in plato.pizzaBase.ingredientes">
-                    <h6>{{ingrediente.nombre}}</h6>
-                </dd>
-                <dd data-ng-repeat=" ingredienteExtra in plato.ingredientesExtras">
-                    <h6>{{ingredienteExtra.nombre}}</h6>
-                </dd>
-            </td>
-            <td>
-                <span class="badge badge-important">${{plato.precioPlato()}}</span>
-            </td>
-            <td>
-                <button class="btn btn-default" ng-click="controllerConfirmar.cancelarPizza(plato)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </td>
-        </tr>
-        </tbody>
->>>>>>> origin/dev_Web
+        <table>
 
             <tbody data-ng-repeat="plato in controllerConfirmar.pedido.platos">
-            <tr>
-                <td>
-                    <h5>{{plato.pizza.nombre}} </h5>
-                    <dd data-ng-repeat=" ingrediente in plato.pizza.ingredientes">
-                        <h6>{{ingrediente.nombre}}</h6>
-                    </dd>
-                    <dd data-ng-repeat=" ingredienteE in plato.ingredientesExtras">
-                        <h6>{{ingredienteE.nombre}}</h6>
-                    </dd>
-                </td>
-                <td>
-                    <span class="badge badge-important">${{plato.precioPlato()}}</span>
-                </td>
-                <td>
-                    <button class="btn btn-default" ng-click="controllerConfirmar.cancelarPizza(plato)">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
+
+                <tr>
+                    <td>
+                        <h5>{{plato.pizzaBase.nombre}} </h5>
+                        <dd data-ng-repeat=" ingrediente in plato.pizzaBase.ingredientes">
+                            <h6>{{ingrediente.nombre}}</h6>
+                        </dd>
+                        <dd data-ng-repeat=" ingredienteExtra in plato.ingredientesExtras">
+                            <h6>{{ingredienteExtra.nombre}}</h6>
+                        </dd>
+                    </td>
+                    <td><span class="badge badge-important">${{plato.precioPlato()}}</span></td>
+                    <td>
+                        <button class="btn btn-default" ng-click="controllerConfirmar.cancelarPizza(plato)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+
             </tbody>
 
         </table>

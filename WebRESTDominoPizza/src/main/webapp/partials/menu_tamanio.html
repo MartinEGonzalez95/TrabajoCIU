@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div ng-controller="controllerTamanioPlato as tamanioController">
 
     <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño </div>
@@ -6,7 +5,7 @@
     <div class="col-md-5 bigRoundedGray">
 
         <label>
-            <h1>{{tamanioController.plato.pizza.nombre}}</h1>
+            <h1>{{tamanioController.plato.pizzaBase.nombre}}</h1>
         </label>
 
         <div>
@@ -39,37 +38,4 @@
         </dl>
     </div>
 
-=======
-<div ng-controller="controllerTamanioPlato as tamanioController" class="container">
-    <div>
-        <dl ng-repeat="mensaje in tamanioController.excepciones">
-            <dd> {{mensaje}} </dd>
-        </dl>
-    </div>
-
-    <label>
-        <h1>{{tamanioController.plato.pizzaBase.nombre}}</h1>
-        <h3>${{tamanioController.plato.pizzaBase.precioBase}}</h3>
-    </label>
-
-    <div class="container">
-        <table class="table table-striped table-hover">
-
-            <tbody data-ng-repeat="unTamanio in tamanioController.tamanios">
-            <tr>
-                <td>
-                    {{unTamanio.nombre}}
-                </td>
-                <td>${{tamanioController.calcularTamanio(unTamanio)}}</td>
-                <td>
-                    <button class="btn btn-default glyphicon glyphicon-chevron-right"
-                            ng-click="tamanioController.agregarTamanioAlPlato(unTamanio)"></button>
-                </td>
-            </tr>
-            </tbody>
-
-
-        </table>
-    </div>
->>>>>>> origin/dev_Web
 </div>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div ng-controller="controllerPlato as platoAMostrar">
     
     <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes </div>
@@ -7,10 +6,10 @@
 
         <div>
     
-            <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
-            <label><h4 class="gray">{{ platoAMostrar.plato.tamanio.nombre }}</h4></label>
+            <label><h1>{{ platoAMostrar.plato.pizzaBase.nombre }}</h1></label>
+            <label><h4 class="gray">{{ platoAMostrar.plato.tamanioPizza.nombre }}</h4></label>
             <span class="label label-danger">${{ platoAMostrar.plato.precioPlato() }}</span>
-            <label><h4>{{ platoAMostrar.plato.pizza.precio }}</h4></label>
+            <label><h4>{{ platoAMostrar.plato.pizzaBase.precio }}</h4></label>
     
         </div>
 
@@ -74,81 +73,4 @@
 
     </div>
     
-=======
-<div ng-controller="controllerPlato as platoAMostrar">
-    
-    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes</div>
-
-    <div class="bigRoundedGray col-md-5">
-
-        <div>
-    
-            <label><h1>{{ platoAMostrar.plato.pizzaBase.nombre }}</h1></label>
-            <label><h4 class="gray">{{ platoAMostrar.plato.tamanioPizza.nombre }}</h4></label>
-            <span class="badge badge-important">${{ platoAMostrar.plato.precio }}</span>
-            <label><h4>{{ platoAMostrar.plato.pizzaBase.precio }}</h4></label>
-    
-        </div>
-
-        <div class="col-md-8">
-    
-            <table class="table table-responsive">
-        
-                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes" class="space">
-                    <tr class="ingredientes">
-                        <td>
-                            <br>
-                            <label>{{ ingrediente.nombre }}</label>
-                        </td>
-                        <td>    
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda <br>
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo <br>
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-                        </td>
-                        <td>
-                            <br>
-                            <button disabled">X</button>
-                        </td>  
-                    </tr>
-                </tbody>
-        
-                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras" class="space">
-                        <tr class="ingredientesExtras">
-                            <td>
-                                <br>
-                                <label>{{ ingrediente.nombre }}</label>
-                            </td>
-                            <td>                     
-                                <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda <br>
-                                <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo <br>
-                                <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
-                            </td>
-                            <td>
-                                <br>
-                                <button class="btn-group btn-group-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
-                            </td>   
-                        </tr>
-                </tbody>
-        
-            </table>
-
-        </div>
-
-        <div class="col-md-4 roundedGreen">
-        
-            <h4 class="green">Extras:</h4>
-    
-            <ul ng-repeat="ingrediente in platoAMostrar.ingredientesExtras">
-                <li><a href ng-click="platoAMostrar.agregar(ingrediente)"> + {{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
-            </ul>
-    
-            <button class="btn btn-primary float-right" ng-click="platoAMostrar.confirmarme()" ">
-                Continuar
-            </button>
-    
-        </div>
-
-    </div>
-
->>>>>>> origin/dev_Web
 </div>
