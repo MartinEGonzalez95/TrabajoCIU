@@ -13,22 +13,26 @@ import estadosDePedido.EstadoDePedido
 @Accessors
 class PedidoDTO {
 	List<Plato> platos = newArrayList
-	String nickCliente
+	String cliente
 	Date fechaDeCreacion = new Date()
 	String aclaraciones = " "
 	EstadoDePedido estadoDePedido
 	FormaDeEnvio formaDeEnvio
 	Integer numero // Clave para el pedido //
 	
+	new(){
+		
+	}
+	
 	new(Pedido pedido){
 		
 		platos = pedido.platos
-		nickCliente = pedido.cliente.nick
+		cliente = pedido.cliente.nick
 		fechaDeCreacion = pedido.fechaDeCreacion
 		aclaraciones = pedido.aclaraciones
 		estadoDePedido = pedido.estadoDePedido
 		formaDeEnvio = pedido.formaDeEnvio
-		
+		numero = pedido.numero
 	}
 	
 	

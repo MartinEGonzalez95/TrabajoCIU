@@ -1,19 +1,5 @@
 angular.module('dominosApp').service('PedidoService', function($http){
 
-    return{
-        confirmarPedido: function (pedido){
-
-            var pedidoAConfirmar = pedido;
-
-            pedido = null;
-
-            return $http.post("pedidos",pedidoAConfirmar)//.then(getData).catch(errorHandler);
-        },
-        obtenerPedidosAnterioresDe: function (pedido) {
-            return $http.get("pedidos?nick=" + pedido.cliente.nick).then(getData).then(parsearListaDePedidos);
-        }
-    };
-
     let getData = function (response) {
         return response.data
     };
@@ -26,5 +12,21 @@ angular.module('dominosApp').service('PedidoService', function($http){
     let parsearListaDePedidos = function (jsonDePedidos) {
         return jsonDePedidos.map(parsearPedido)
     };
+
+    return{
+        confirmarPedido: function (pedido,errorHandler){
+
+            var pedidoAConfirmar = pedido;
+
+            pedido = null;
+
+            return $http.post("pedidos",pedidoAConfirmar).then(getData).catch(errorHandler);
+        },
+        obtenerPedidosAnterioresDe: function (pedido) {
+            return $http.get("pedidos?nick=" + pedido.cliente.nick).then(getData).then(parsearListaDePedidos);
+        }
+    };
+
+
 
 });

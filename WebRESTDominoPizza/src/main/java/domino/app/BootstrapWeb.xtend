@@ -82,7 +82,7 @@ class BootstrapWeb implements Bootstrap {
 		repo.agregar(new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa"))
 
 		repo.agregar(new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa"))
-
+		repo.agregar(new Cliente("Admin", "Admin", "1234", "admin@gmail.com", "Domino's"))
 	}
 
 	def cargarPizzas() {
@@ -97,11 +97,20 @@ class BootstrapWeb implements Bootstrap {
 		repo.agregar(new Pizza => [
 			it.precioBase = 150
 			it.nombre = "Tomate"
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Muzzarella"))
 		])
 
 		repo.agregar(new Pizza => [
-			it.precioBase = 50
-			it.nombre = "PrePizza"
+			it.precioBase = 75
+			it.nombre = "Fugazzeta Rellena"
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Cebolla"))
+		])
+
+		repo.agregar(new Pizza => [
+			it.precioBase = 75
+			it.nombre = "Pizza Custom"
 		])
 
 	}
@@ -123,8 +132,13 @@ class BootstrapWeb implements Bootstrap {
 		])
 
 		repo.agregar(new Ingrediente => [
-			it.precio = 5
+			it.precio = 15
 			it.nombre = "Cebolla"
+			it.distribucion = "Todo"
+		])
+		repo.agregar(new Ingrediente => [
+			it.precio = 5
+			it.nombre = "Aceitunas"
 			it.distribucion = "Todo"
 		])
 
