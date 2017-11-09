@@ -10,6 +10,7 @@ class RepoPedido implements Repo<Pedido> {
 	Map<Integer, Pedido> repositorio = new HashMap<Integer, Pedido>()
 
 	static RepoPedido instance
+	Integer contador = 0 ;
 
 	def static getRepo() {
 		if (instance === null) {
@@ -20,7 +21,8 @@ class RepoPedido implements Repo<Pedido> {
 	}
 
 	override agregar(Pedido pedido) {
-
+		pedido.numero = contador
+		contador++
 		repositorio.put(pedido.numero, pedido)
 
 	}
@@ -28,7 +30,7 @@ class RepoPedido implements Repo<Pedido> {
 	override eliminar(Pedido pedido) {
 
 		repositorio.remove(pedido.numero)
-
+		
 	}
 
 	override Pedido buscar(Integer numero) {
@@ -63,25 +65,23 @@ class RepoPedido implements Repo<Pedido> {
 
 	}
 
-	def buscarPorEstado(String estado)
-	{
-		
+	def buscarPorEstado(String estado) {
+
 		if (StringUtils.isBlank(estado)) {
 			repositorio.values.toList
 		} else {
-			repositorio.values.filter[ it.estadoDePedido.toString.toLowerCase.contains(estado.toLowerCase) ].toList
+			repositorio.values.filter[it.estadoDePedido.toString.toLowerCase.contains(estado.toLowerCase)].toList
 		}
-				
+
 	}
-	
-	def buscarPorNick(String nick)
-	{
-		
+
+	def buscarPorNick(String nick) {
+
 		if (StringUtils.isBlank(nick)) {
 			repositorio.values.toList
 		} else {
-			repositorio.values.filter[ it.cliente.nick.toLowerCase.contains(nick.toLowerCase) ].toList
+			repositorio.values.filter[it.cliente.nick.toLowerCase.contains(nick.toLowerCase)].toList
 		}
-				
+
 	}
 }

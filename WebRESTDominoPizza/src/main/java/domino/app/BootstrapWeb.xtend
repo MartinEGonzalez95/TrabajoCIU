@@ -97,6 +97,7 @@ class BootstrapWeb implements Bootstrap {
 		repo.agregar(new Pizza => [
 			it.precioBase = 150
 			it.nombre = "Tomate"
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
 		])
 
 		repo.agregar(new Pizza => [

@@ -10,7 +10,8 @@ import org.uqbar.commons.model.annotations.Observable
 class RetiroPorLocal extends FormaDeEnvio {
 
 	int costo = 0 // pesos //
-	
+	new() {
+	}
 	override int costo()
 	{
 		

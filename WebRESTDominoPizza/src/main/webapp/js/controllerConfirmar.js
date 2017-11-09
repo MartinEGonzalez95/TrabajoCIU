@@ -6,15 +6,14 @@ angular.module('dominosApp').controller('ControllerConfirmar', function (Excepti
 
     this.usuarioDelPedido = UserService.usuarioLogueado();
 
-    this.cancelarPizza = function(unaPizza) {
-        this.pedido.platos = _.without(this.pedido.platos,unaPizza);
+    this.cancelarPizza = function (unaPizza) {
+        this.pedido.platos = _.without(this.pedido.platos, unaPizza);
     };
 
-    this.confirmarPedido = function(){
+    this.confirmarPedido = function () {
 
-        this.pedido.cliente = this.usuarioDelPedido;
-
-        PedidoService.confirmarPedido(this.pedido);
+        this.pedido.fechaDeCreacion = Date.now();
+        PedidoService.confirmarPedido(this.pedido,errorHandler);
 
         //$state.go("menu");
 
@@ -27,14 +26,13 @@ angular.module('dominosApp').controller('ControllerConfirmar', function (Excepti
     this.excepciones = ExceptionService.errores;
 
     this.linkAMenuPromo = function () {
-    	$state.go("menu");
+        $state.go("menu");
     };
 
-    this.delivery = function(){
-        return new Delivery()
-    }
-    this.retiroPorLocal = function(){
-        return new RetiroPorLocal()
-    }
+
+    this.delivery = new Delivery();
+
+    this.retiroPorLocal = new RetiroPorLocal()
+
 
 });
