@@ -1,6 +1,6 @@
 <div ng-controller="controllerPlato as platoAMostrar">
     
-    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes</div>
+    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes </div>
 
     <div class="bigRoundedGray col-md-5">
 
@@ -15,9 +15,9 @@
 
         <div class="col-md-8">
     
-            <table class="table table-responsive space">
+            <table class="table table-responsive">
         
-                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes" class="space">
+                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
                     <tr class="ingredientes">
                         <td>
                             <br>
@@ -35,7 +35,7 @@
                     </tr>
                 </tbody>
         
-                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras" class="space">
+                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
                         <tr class="ingredientesExtras">
                             <td>
                                 <br>

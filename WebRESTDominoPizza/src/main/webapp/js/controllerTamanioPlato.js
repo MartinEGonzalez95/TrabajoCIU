@@ -17,6 +17,7 @@ angular.module('dominosApp').controller('controllerTamanioPlato', function ($sta
             })
             .catch(errorHandler);
     };
+
     this.cargarTamanios();
 
 

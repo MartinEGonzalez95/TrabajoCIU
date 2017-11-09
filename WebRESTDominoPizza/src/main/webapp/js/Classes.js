@@ -28,6 +28,14 @@ let RetiroPorLocal = function () {
 let Ingrediente = function (json) {
     angular.extend(this, json);
 
+    this.precioFinal = function () {
+
+		if (this.distribucion == "Todo") {
+			return this.precio
+		}
+		return this.precio / 2
+	}
+
 };
 
 let Pizza = function (json) {
@@ -49,7 +57,7 @@ let Plato = function () {
     };
 
     this.precioIngredientesExtras = function () {
-        return this.ingredientesExtras.map(ingrediente => ingrediente.precio).reduce((a, b) => a + b, 0)
+        return this.ingredientesExtras.map(ingrediente => ingrediente.precioFinal()).reduce((a, b) => a + b, 0)
     };
 
     this.precioPlato = function () {

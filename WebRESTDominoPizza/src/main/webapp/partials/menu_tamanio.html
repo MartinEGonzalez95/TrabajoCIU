@@ -8,20 +8,23 @@
             <h1>{{tamanioController.plato.pizza.nombre}}</h1>
         </label>
 
-        <div class="container">
-            <table class="space">
+        <div>
+            <table class="table table-responsive">
 
-                <tbody data-ng-repeat="unTamanio in tamanioController.tamanios">
-                <tr class="tamanios">
-                    <td style="width:70%">
-                        {{unTamanio.nombre}}
-                    </td>
-                    <td style="width:20%"><span class="label label-danger">${{tamanioController.calcularTamanio(unTamanio)}}</span></td>
-                    <td style="width:10%">
-                        <button class="btn btn-default glyphicon glyphicon-chevron-right"
-                                ng-click="tamanioController.agregarTamanioAlPlato(unTamanio)"></button>
-                    </td>
-                </tr>
+                <tbody ng-repeat="unTamanio in tamanioController.tamanios">
+
+                    <tr class="tamanios">
+                        <td style="width:70%">{{ unTamanio.nombre }}</td>
+                        <td style="width:20%">
+                            <span class="label label-danger">${{ tamanioController.calcularTamanio(unTamanio) }}</span>
+                        </td>
+                        <td style="width:10%">
+                            <button class="btn btn-default glyphicon glyphicon-chevron-right"
+                                    ng-click="tamanioController.agregarTamanioAlPlato(unTamanio)">
+                            </button>
+                        </td>
+                    </tr>
+
                 </tbody>
 
             </table>

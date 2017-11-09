@@ -26,7 +26,14 @@ angular.module('dominosApp').controller("controllerPlato", function ($state, Men
             ExceptionService.capturarError(error);
         }
 
-        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) };
+        this.agregar = function(unIngrediente){ 
+            
+            if (!this.plato.ingredientesExtras.includes(unIngrediente)) {
+                this.plato.ingredientesExtras.push(unIngrediente)
+            }
+             
+        };
+
         this.quitar = function(unIngrediente)
         {
             var index = this.plato.ingredientesExtras.indexOf(unIngrediente);
