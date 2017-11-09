@@ -2,6 +2,14 @@
 dominosApp.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+        .state('login', {
+            url: "/login",
+            templateUrl: "partials/login.html"
+        })
+        .state('registro', {
+            url: "/registro",
+            templateUrl: "partials/registro.html"
+        })
         .state('menu', {
             url: "/menu",
             templateUrl: "partials/menu_promo.html"
@@ -24,7 +32,7 @@ dominosApp.config(function ($stateProvider, $urlRouterProvider) {
         });
 
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/login");
 
 
 });

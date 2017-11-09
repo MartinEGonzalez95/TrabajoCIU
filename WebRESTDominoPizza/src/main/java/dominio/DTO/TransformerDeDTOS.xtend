@@ -36,7 +36,7 @@ class TransformerDeDTOS {
 		switch (formaDeEnvio) {
 			case "RetiroPorLocal": return new RetiroPorLocal()
 			,
-			case "Delivery": return new Delivery()
+			case "Delivery": return new Delivery() //TODO: PRecio dirección
 		}
 	}
 	
@@ -59,6 +59,7 @@ class TransformerDeDTOS {
 			it.estadoDePedido = dto.estadoDePedido
 			it.numero = dto.numero
 			it.estadoDePedido = new Preparando
+			formaDeEnvio = transfomarFormaDeEnvio(dto.formaDeEnvio.nombre)
 		]
 	}
 	

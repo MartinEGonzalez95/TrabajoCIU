@@ -26,7 +26,10 @@ class DominoRestAPI {
 
 	extension JSONUtils = new JSONUtils
 	TransformerDeDTOS transformer = new TransformerDeDTOS
-	// Class<Object> Login
+
+	val repo = RepoCliente.repo
+	
+	
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
 	}
@@ -45,6 +48,7 @@ class DominoRestAPI {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
+		//TODO: Forma parte del dominio
 		val tamanios = new ArrayList<Tamanio>
 		tamanios.add(new Tamanio("Porcion", 0.125))
 		tamanios.add(new Tamanio("Chica", 0.5))
@@ -69,8 +73,6 @@ class DominoRestAPI {
 		response.contentType = ContentType.APPLICATION_JSON
 
 		val pedidoDTO = bodyConPedido.fromJson(PedidoDTO)
-//		val formaDeEnvioDTO = bodyConPedido.getPropertyValue("formaDeEnvio")
-//		val formaDeEnvioParseada = this.transfomarFormaDeEnvio(formaDeEnvioDTO)
 		try {
 			var pedido = transformer.armarPedido(pedidoDTO)
 
@@ -210,7 +212,7 @@ class DominoRestAPI {
 			
 			val unCliente = transformer.parsearClienteDTOACliente(clienteDTO);
 			
-			RepoCliente.repo.agregar(unCliente)
+			(repo).agregar(unCliente)
 			return ok()
 
 		} catch (UserException exception) {

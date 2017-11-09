@@ -3,6 +3,7 @@ package repositorios
 import dominoPizzeria.Cliente
 import java.util.HashMap
 import java.util.Map
+import org.uqbar.commons.model.exceptions.UserException
 
 class RepoCliente implements Repo<Cliente> {
 
@@ -23,7 +24,7 @@ class RepoCliente implements Repo<Cliente> {
 		if (cliente.esValido) {
 			repositorio.put(cliente.nick, cliente)
 		} else {
-			throw new RuntimeException("Los datos no son suficientes")
+			throw new UserException("Los datos no son suficientes")
 		}
 
 	}

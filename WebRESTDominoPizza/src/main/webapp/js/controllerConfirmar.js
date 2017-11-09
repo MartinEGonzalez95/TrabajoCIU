@@ -15,7 +15,7 @@ angular.module('dominosApp').controller('ControllerConfirmar', function (Excepti
         this.pedido.fechaDeCreacion = Date.now();
         PedidoService.confirmarPedido(this.pedido,errorHandler);
 
-       // $state.go("menu");
+        $state.go("menu");
 
     };
 
@@ -31,6 +31,7 @@ angular.module('dominosApp').controller('ControllerConfirmar', function (Excepti
 
 
     this.delivery = new Delivery();
+    this.delivery.direccion = this.usuarioDelPedido.direccion;
 
     this.retiroPorLocal = new RetiroPorLocal()
 

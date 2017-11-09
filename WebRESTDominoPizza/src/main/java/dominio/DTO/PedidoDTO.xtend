@@ -9,6 +9,7 @@ import dominoPizzeria.MailSender
 import dominoPizzeria.Pedido
 import org.eclipse.xtend.lib.annotations.Accessors
 import estadosDePedido.EstadoDePedido
+import domino.APIREST.FormaDeEnvioDTO
 
 @Accessors
 class PedidoDTO {
@@ -17,7 +18,7 @@ class PedidoDTO {
 	Date fechaDeCreacion = new Date()
 	String aclaraciones = " "
 	EstadoDePedido estadoDePedido
-	FormaDeEnvio formaDeEnvio
+	FormaDeEnvioDTO formaDeEnvio
 	Integer numero // Clave para el pedido //
 	
 	new(){
@@ -31,7 +32,7 @@ class PedidoDTO {
 		fechaDeCreacion = pedido.fechaDeCreacion
 		aclaraciones = pedido.aclaraciones
 		estadoDePedido = pedido.estadoDePedido
-		formaDeEnvio = pedido.formaDeEnvio
+		formaDeEnvio = new FormaDeEnvioDTO => [ nombre = pedido.formaDeEnvio.nombre ]
 		numero = pedido.numero
 	}
 	
