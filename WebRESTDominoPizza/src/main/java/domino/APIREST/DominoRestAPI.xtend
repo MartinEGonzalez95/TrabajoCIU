@@ -56,10 +56,10 @@ class DominoRestAPI {
 		response.contentType = ContentType.APPLICATION_JSON
 
 		val tamanios = new ArrayList<Tamanio>
-		tamanios.add(new Tamanio("Porcion"))
-		tamanios.add(new Tamanio("Chica"))
-		tamanios.add(new Tamanio("Grande"))
-		tamanios.add(new Tamanio("Familiar"))
+		tamanios.add(new Tamanio("Porcion",0.125))
+		tamanios.add(new Tamanio("Chica",0.5))
+		tamanios.add(new Tamanio("Grande",1))
+		tamanios.add(new Tamanio("Familiar",1.25))
 
 		return ok(tamanios.toJson)
 	}
@@ -77,9 +77,11 @@ class DominoRestAPI {
 	def postPedido(@Body String bodyConPedido) {
 
 		response.contentType = ContentType.APPLICATION_JSON
-
+		
 		val pedidoDTO = bodyConPedido.fromJson(PedidoDTO)
-
+//		val formaDeEnvioDTO = bodyConPedido.getPropertyValue("formaDeEnvio")
+//		val formaDeEnvioParseada = this.transfomarFormaDeEnvio(formaDeEnvioDTO)
+		
 		try {
 			var pedido = this.armarPedido(pedidoDTO)
 
@@ -100,6 +102,7 @@ class DominoRestAPI {
 			it.aclaraciones = dto.aclaraciones
 			it.estadoDePedido = dto.estadoDePedido
 			it.numero = dto.numero
+			it.estadoDePedido = new Preparando
 		]
 	}
 

@@ -4,20 +4,20 @@ angular.module('dominosApp').controller("controllerPlato", function ($state, Men
 
         this.plato = PlatoService.plato;
 
-        this.ingredientes = PlatoService.plato.pizza.ingredientes;
+        this.ingredientes = PlatoService.plato.pizzaBase.ingredientes;
 
-        this.ingredientesExtras = []
+        this.ingredientesExtras = [];
 
-        this.obtenerIngredientes = function(){
-
-            MenuService.obtenerIngredientes()
-                .then(function(data){
-                    
-                    self.ingredientesExtras = data;
-    
-                })
-               // .catch(errorHandler);
-        }
+        this.obtenerIngredientes = function () {
+            
+                    MenuService.obtenerIngredientes()
+                        .then(function (data) {
+            
+                            self.ingredientesExtras = data;
+            
+                        })
+                    // .catch(errorHandler);
+                };
 
         this.obtenerIngredientes();
 
@@ -26,7 +26,14 @@ angular.module('dominosApp').controller("controllerPlato", function ($state, Men
             ExceptionService.capturarError(error);
         }
 
-        this.agregar = function(unIngrediente) { this.plato.ingredientesExtras.push(unIngrediente) };
+        this.agregar = function(unIngrediente){ 
+            
+            if (!this.plato.ingredientesExtras.includes(unIngrediente)) {
+                this.plato.ingredientesExtras.push(unIngrediente)
+            }
+             
+        };
+
         this.quitar = function(unIngrediente)
         {
             var index = this.plato.ingredientesExtras.indexOf(unIngrediente);

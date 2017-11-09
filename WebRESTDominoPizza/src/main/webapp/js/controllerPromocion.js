@@ -26,7 +26,7 @@ angular.module('dominosApp').controller('controllerPromocion', function (Excepti
 
         pedidoService.getPedido(usuarioDelPedido.nick);
         let plato = new Plato();
-        plato.pizza = pizza;
+        plato.pizzaBase = pizza;
 
         platoService.agregarPlato(plato);
     };

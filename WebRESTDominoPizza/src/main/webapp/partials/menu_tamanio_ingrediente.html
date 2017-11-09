@@ -1,15 +1,15 @@
 <div ng-controller="controllerPlato as platoAMostrar">
     
-    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes</div>
+    <div style="background-color:whitesmoke;" class="col-md-5 roundedGray"> Tamaño > Ingredientes </div>
 
     <div class="bigRoundedGray col-md-5">
 
         <div>
     
-            <label><h1>{{ platoAMostrar.plato.pizza.nombre }}</h1></label>
-            <label><h4 class="gray">{{ platoAMostrar.plato.tamanio.nombre }}</h4></label>
-            <span class="badge badge-important">${{ platoAMostrar.plato.precio }}</span>
-            <label><h4>{{ platoAMostrar.plato.pizza.precio }}</h4></label>
+            <label><h1>{{ platoAMostrar.plato.pizzaBase.nombre }}</h1></label>
+            <label><h4 class="gray">{{ platoAMostrar.plato.tamanioPizza.nombre }}</h4></label>
+            <span class="label label-danger">${{ platoAMostrar.plato.precioTotal() }}</span>
+            <label><h4>{{ platoAMostrar.plato.pizzaBase.precio }}</h4></label>
     
         </div>
 
@@ -17,25 +17,25 @@
     
             <table class="table table-responsive">
         
-                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes" class="space">
+                <tbody ng-repeat="ingrediente in platoAMostrar.ingredientes">
                     <tr class="ingredientes">
                         <td>
                             <br>
                             <label>{{ ingrediente.nombre }}</label>
                         </td>
                         <td>    
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda"> Mitad Izquierda <br>
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo"> Todo <br>
-                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha"> Mitad Derecha
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Izquierda" disabled> Mitad Izquierda <br>
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Todo" disabled> Todo <br>
+                            <input type="radio" ng-model="ingrediente.distribucion" value="Derecha" disabled> Mitad Derecha
                         </td>
                         <td>
                             <br>
-                            <button disabled">X</button>
+                            <button disabled>X</button>
                         </td>  
                     </tr>
                 </tbody>
         
-                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras" class="space">
+                <tbody ng-repeat="ingrediente in platoAMostrar.plato.ingredientesExtras">
                         <tr class="ingredientesExtras">
                             <td>
                                 <br>
@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <br>
-                                <button class="btn-group btn-group-sm" ng-click="platoAMostrar.quitar(ingrediente)">X</button>
+                                <button class="btn-group btn-group-sm" ng-click="platoAMostrar.quitar(ingrediente)" style="color:red">X</button>
                             </td>   
                         </tr>
                 </tbody>
@@ -65,7 +65,7 @@
                 <li><a href ng-click="platoAMostrar.agregar(ingrediente)"> + {{ ingrediente.nombre }} {{ ingrediente.precio }}</a></li><br>
             </ul>
     
-            <button class="btn btn-primary float-right" ng-click="platoAMostrar.confirmarme()" ">
+            <button class="btn btn-primary float-right" ng-click="platoAMostrar.confirmarme()" >
                 Continuar
             </button>
     

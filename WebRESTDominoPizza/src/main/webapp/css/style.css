@@ -16,6 +16,11 @@ tr.ingredientes {
     font-size: 15px;
 }
 
+tr.tamanios {
+    background-color: rgb(240, 240, 240);
+    font-size: 15px;
+}
+
 div.roundedGreen {
     border-radius: 5px;
     border: 2px solid rgb(155, 225, 120);
