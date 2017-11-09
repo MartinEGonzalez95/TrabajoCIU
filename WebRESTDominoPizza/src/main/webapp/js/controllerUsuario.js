@@ -1,4 +1,4 @@
-dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoService,PedidoTemporalService) {
+dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoService,PedidoTemporalService, ExceptionService) {
 
     let self = this;
 
@@ -17,7 +17,7 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoS
             .then(function (data) {
                 self.pedidosAnteriores = data;
             })
-            .catch(console.log("un error :D "))
+            .catch(errorHandler)
     };
 
     this.obtenerPedidos();
@@ -25,7 +25,7 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoS
     this.repetirPedido = function (pedido) {
         /*ir a la ventana confirmacionPedido*/
         PedidoTemporalService.pedido = pedido;
-        $state('confirmar');
+        $state.go('confirmar');
 
     };
 
@@ -39,5 +39,11 @@ dominosApp.controller('ControllerUsuario', function ($state,UserService, PedidoS
         };
 
     };
+
+    function errorHandler(error) {
+        ExceptionService.capturarError(error);
+    }
+
+    this.excepciones = ExceptionService.errores;
 
 });

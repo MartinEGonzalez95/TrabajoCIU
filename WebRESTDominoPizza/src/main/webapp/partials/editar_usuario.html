@@ -35,17 +35,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="pedido in ctrlUsuario.pedidosAnteriores">
+        <tr ng-repeat="pedido in ctrlUsuario.pedidosAnteriores">
             <td>
                 <dd data-ng-repeat=" plato in pedido.platos">
-                    <h6>{{plato.pizza.nombre}}</h6>
+                    <h6>{{plato.pizzaBase.nombre}}</h6>
                 </dd>
             </td>
+            <td></td>
             <td>{{pedido.montoFinalPedido()}}</td>
             <td> <a ng-click="ctrlUsuario.repetirPedido(pedido)"> Repetir Pedido </a> </td>
         </tr>
         </tbody>
     </table>
+
+    <div>
+        <dl ng-repeat="mensaje in menuDePromociones.excepciones">
+            <dd> {{mensaje}} </dd>
+        </dl>
+    </div>
 
 
 </div>
