@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ClienteDominosAndroid</string>
+    <string name="title_pedido_detail">Pedido Detail</string>
+</resources>
