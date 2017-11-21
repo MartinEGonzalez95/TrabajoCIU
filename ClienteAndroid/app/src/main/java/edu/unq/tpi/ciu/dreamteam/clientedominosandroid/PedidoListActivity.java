@@ -9,14 +9,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.dummy.DummyContent;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +52,10 @@ public class PedidoListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        View recyclerView = findViewById(R.id.pedido_list);
+        assert recyclerView != null;
+        setupRecyclerView((RecyclerView) recyclerView);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +73,30 @@ public class PedidoListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.pedido_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        final String BASE_URL = "http://192.168.0.104:9100";
+        final LoginBody usr = new LoginBody("Fperez","1234");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final PedidoService service = retrofit.create(PedidoService.class);
+
+        Call<Usuario> call = service.login(usr);
+
+        call.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Response<Usuario> response, Retrofit retrofit) {
+                Usuario usuario = response.body();
+                setTitle(usuario.getNick());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("HelloWorld", t.getMessage());
+                Toast.makeText(PedidoListActivity.this, "Ha ocurrido un error al llamar al servicio", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -133,7 +166,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
+                mIdView = (TextView) view.findViewById(R.id.nick);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
         }
