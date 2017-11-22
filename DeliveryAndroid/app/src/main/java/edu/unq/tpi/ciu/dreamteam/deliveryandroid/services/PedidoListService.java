@@ -13,18 +13,11 @@ import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
 
 public class PedidoListService {
 
+    public static List<Pedido> pedidos = new ArrayList<>();
 
-    /**
-     * An array of sample (dummy) items.
-     */
-    public static List<Pedido> PEDIDOS = new ArrayList<>();
+    public static Map<Integer, Pedido> pedidoMap = new HashMap<>();
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<Integer, Pedido> PEDIDO_MAP = new HashMap<>();
-
-    private static final int COUNT = 4;
+    private static int count = 0;
 
     public static void addAll(List<Pedido> pedidos) {
 
@@ -34,18 +27,19 @@ public class PedidoListService {
     }
 
     private static void addItem(Pedido pedido) {
-        PEDIDOS.add(pedido);
-        PEDIDO_MAP.put(pedido.getNumero(), pedido);
+        pedidos.add(pedido);
+        pedidoMap.put(pedido.getNumero(), pedido);
     }
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyPedido(i));
-        }
-    }
+
     private static Pedido createDummyPedido(int position) {
-        return new Pedido("cliente: " + String.valueOf(position) + " ", "EnViaje " + position, position);
+        return new Pedido("cliente: " + String.valueOf(position) + " ", "EnViaje ", position);
     }
 
+    public static void clear() {
+        count++;
+        pedidos.clear();
+        pedidoMap.clear();
+        addItem(createDummyPedido(count));
 
+    }
 }

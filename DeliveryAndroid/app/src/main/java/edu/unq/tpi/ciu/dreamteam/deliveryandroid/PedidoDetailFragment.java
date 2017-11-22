@@ -21,7 +21,7 @@ import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
  */
 public class PedidoDetailFragment extends Fragment {
 
-    public static final String PEDIDO_ID = "pedido_id";
+    public static final String PEDIDO_ID = "pedido_numero";
 
     private Pedido pedido;
 
@@ -36,7 +36,7 @@ public class PedidoDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            pedido = PedidoListService.PEDIDO_MAP.get(getArguments().getString(PEDIDO_ID));
+            pedido = PedidoListService.pedidoMap.get(getArguments().getString(PEDIDO_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);

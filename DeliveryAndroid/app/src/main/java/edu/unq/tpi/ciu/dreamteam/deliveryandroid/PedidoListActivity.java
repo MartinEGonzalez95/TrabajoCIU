@@ -17,8 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import org.w3c.dom.Text;
-
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoService;
@@ -50,7 +48,7 @@ public class PedidoListActivity extends AppCompatActivity {
         setModoTableta();
 
 
-        final String BASE_URL = "http://192.168.1.39:9100";
+        final String BASE_URL = "http://10.12.5.96:9100";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -60,17 +58,20 @@ public class PedidoListActivity extends AppCompatActivity {
 
         obtenerPedidosAPI(service);
 
-        setUpReciclerView();
     }
 
     private void obtenerPedidosAPI(PedidoService service) {
+
         Call<List<Pedido>> call = service.pedidosPorEstado("Preparando");
 
         call.enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Response<List<Pedido>> response, Retrofit retrofit) {
+
+                PedidoListService.clear();
                 PedidoListService.addAll(response.body());
-                for (Pedido pedido : PedidoListService.PEDIDOS) {
+                setUpReciclerView();
+                for (Pedido pedido : PedidoListService.pedidos) {
                     System.out.println(pedido.getNumero() + pedido.getCliente() + pedido.getEstadoDePedido().getNombre());
 
                 }
@@ -128,7 +129,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
     private List<Pedido> obtenerPedidos() {
 
-        return PedidoListService.PEDIDOS;
+        return PedidoListService.pedidos;
     }
 
     public static class SimplePedidoRecyclerViewAdapter
@@ -168,7 +169,7 @@ public class PedidoListActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, PedidoDetailActivity.class);
 
                     intent.putExtra(PedidoDetailFragment.PEDIDO_ID, unPedido.getNumero());
-
+                    System.out.println(intent.getDataString());
                     context.startActivity(intent);
                 }
             }
@@ -200,9 +201,9 @@ public class PedidoListActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView pedidoIDNumero;
-            final TextView clienteNombrePedido;
-            final TextView estadoActualDePedido;
+            public TextView pedidoIDNumero;
+            public TextView clienteNombrePedido;
+            public TextView estadoActualDePedido;
 
             ViewHolder(View view) {
                 super(view);
