@@ -4,20 +4,45 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <!--<TextView label cliente
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="@string/cliente_nombre"
+        android:textAppearance="?attr/textAppearanceListItem" />-->
+
     <TextView
         android:id="@+id/cliente_nick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/cliente_nombre"
+
         android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!--
+    <TextView label numero de pedido
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="@string/pedido_numero"
+        android:textAppearance="?attr/textAppearanceListItem" />-->
 
     <TextView
         android:id="@+id/id_pedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/pedido_numero"
+
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+
+    <TextView
+        android:id="@+id/estadoPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
 
 </LinearLayout>

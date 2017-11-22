@@ -17,7 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.w3c.dom.Text;
+
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoService;
 import retrofit.Call;
 import retrofit.Callback;
@@ -33,7 +36,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
 
     private boolean modoTablet;
-    List<Pedido> pedidos = new ArrayList<>();
+
     private PedidoService service;
 
     @Override
@@ -42,7 +45,7 @@ public class PedidoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pedido_list);
         setUpToolbar();
 
-        setUpFloatingButton();
+        botonFlotanteRecargarPedidos();
 
         setModoTableta();
 
@@ -66,9 +69,12 @@ public class PedidoListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Response<List<Pedido>> response, Retrofit retrofit) {
-                pedidos = response.body();
+                PedidoListService.addAll(response.body());
+                for (Pedido pedido : PedidoListService.PEDIDOS) {
+                    System.out.println(pedido.getNumero() + pedido.getCliente() + pedido.getEstadoDePedido().getNombre());
 
-                //Toast.makeText(PedidoListActivity.this, response.message(), Toast.LENGTH_LONG).show();
+                }
+
                 setTitle("Pedidos");
             }
 
@@ -80,7 +86,7 @@ public class PedidoListActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpFloatingButton() {
+    private void botonFlotanteRecargarPedidos() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
@@ -122,7 +128,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
     private List<Pedido> obtenerPedidos() {
 
-        return this.pedidos;
+        return PedidoListService.PEDIDOS;
     }
 
     public static class SimplePedidoRecyclerViewAdapter
@@ -138,7 +144,7 @@ public class PedidoListActivity extends AppCompatActivity {
         }
 
         private final PedidoListActivity mParentActivity;
-        private final List<Pedido> pedidos;
+        private List<Pedido> pedidos = new ArrayList<>();
         private final boolean modoTablet;
 
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -147,7 +153,7 @@ public class PedidoListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Pedido unPedido = (Pedido) view.getTag();
-
+                System.out.println(unPedido.getNumero() + unPedido.getCliente() + unPedido.getEstadoDePedido().getNombre());
                 if (modoTablet) {
                     Bundle arguments = new Bundle();
                     arguments.putString(PedidoDetailFragment.PEDIDO_ID, unPedido.getCliente());
@@ -178,24 +184,29 @@ public class PedidoListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.pedidoIDNumero.setText(pedidos.get(position).getCliente());
-            holder.clienteNombrePedido.setText(pedidos.get(position).getEstadoDePedido().getNombre());
+            Pedido pedidoActual = pedidos.get(position);
 
-            holder.itemView.setTag(pedidos.get(position));
+            holder.pedidoIDNumero.setText(String.valueOf(pedidoActual.getNumero()));
+            holder.clienteNombrePedido.setText(pedidoActual.getCliente());
+            holder.estadoActualDePedido.setText(pedidoActual.getEstadoDePedido().getNombre());
+
+            holder.itemView.setTag(pedidoActual);
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 
         @Override
         public int getItemCount() {
-            return this.pedidos.size();
+            return pedidos.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView pedidoIDNumero;
             final TextView clienteNombrePedido;
+            final TextView estadoActualDePedido;
 
             ViewHolder(View view) {
                 super(view);
+                estadoActualDePedido = (TextView) view.findViewById(R.id.estadoPedido);
                 pedidoIDNumero = (TextView) view.findViewById(R.id.id_pedido);
                 clienteNombrePedido = (TextView) view.findViewById(R.id.cliente_nick);
             }
