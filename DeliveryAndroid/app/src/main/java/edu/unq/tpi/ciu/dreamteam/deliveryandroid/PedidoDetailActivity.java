@@ -16,6 +16,9 @@ import android.view.MenuItem;
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
  * in a {@link PedidoListActivity}.
+ *
+ * Acá vamos a poner el detalle del pedido y varios botones
+ * Cancelar, Entregar.
  */
 public class PedidoDetailActivity extends AppCompatActivity {
 
@@ -54,9 +57,11 @@ public class PedidoDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(PedidoDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(PedidoDetailFragment.ARG_ITEM_ID));
             PedidoDetailFragment fragment = new PedidoDetailFragment();
+            arguments.putString(PedidoDetailFragment.PEDIDO_ID,
+                    getIntent().getStringExtra(PedidoDetailFragment.PEDIDO_ID));
+
+
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.pedido_detail_container, fragment)

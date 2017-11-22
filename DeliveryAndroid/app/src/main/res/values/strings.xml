@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Delivery Android</string>
-    <string name="title_pedido_detail">Pedido Detail</string>
+    <string name="title_pedido_detail">Detalle del pedido</string>
+
+    <string name="cliente_nombre">Cliente: </string>
+    <string name="pedido_numero">Pedido n°: </string>
+
+    <string name="estado_cancelar"> Cancelar pedido </string>
+    <string name="estado_siguiente">Avanzar pedido </string>
 </resources>

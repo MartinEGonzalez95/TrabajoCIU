@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.unq.tpi.ciu.dreamteam.deliveryandroid.dummy.DummyContent;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
+
 
 /**
  * A fragment representing a single Pedido detail screen.
@@ -18,21 +20,11 @@ import edu.unq.tpi.ciu.dreamteam.deliveryandroid.dummy.DummyContent;
  * on handsets.
  */
 public class PedidoDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
-    public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private DummyContent.DummyItem mItem;
+    public static final String PEDIDO_ID = "pedido_id";
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private Pedido pedido;
+
     public PedidoDetailFragment() {
     }
 
@@ -40,16 +32,16 @@ public class PedidoDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey(PEDIDO_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            pedido = PedidoListService.PEDIDO_MAP.get(getArguments().getString(PEDIDO_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(pedido.getCliente());
             }
         }
     }
@@ -60,8 +52,9 @@ public class PedidoDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.pedido_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.pedido_detail)).setText(mItem.details);
+        if (pedido != null) {
+            String estado = pedido.getEstadoDePedido().getNombre();
+            ((TextView) rootView.findViewById(R.id.pedido_detail)).setText(estado);
         }
 
         return rootView;
