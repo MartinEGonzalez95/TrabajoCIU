@@ -15,8 +15,8 @@ import retrofit.http.Query;
 
 public interface PedidoService {
 
-    @GET("/pedidos")
-    Call<List<Pedido>> pedidosPorEstado(@Query("estado") String estado);
+    @GET("/pedidos/delivery")
+    Call<List<Pedido>> getPedidosParaDelivery();
 
     @GET("/pedidos/{numero}")
     Call<Pedido> pedidoPorNumero(@Path("numero") int numero);

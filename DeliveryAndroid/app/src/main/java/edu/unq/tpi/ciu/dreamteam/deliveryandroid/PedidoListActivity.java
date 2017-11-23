@@ -62,7 +62,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
     private void obtenerPedidosAPI(PedidoService service) {
 
-        Call<List<Pedido>> call = service.pedidosPorEstado("Preparando");
+        Call<List<Pedido>> call = service.getPedidosParaDelivery();
 
         call.enqueue(new Callback<List<Pedido>>() {
             @Override
