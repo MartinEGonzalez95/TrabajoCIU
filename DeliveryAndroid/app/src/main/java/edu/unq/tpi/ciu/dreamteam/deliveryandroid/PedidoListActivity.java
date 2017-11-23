@@ -154,10 +154,9 @@ public class PedidoListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Pedido unPedido = (Pedido) view.getTag();
-                System.out.println(unPedido.getNumero() + unPedido.getCliente() + unPedido.getEstadoDePedido().getNombre());
                 if (modoTablet) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(PedidoDetailFragment.PEDIDO_ID, unPedido.getCliente());
+                    arguments.putString(PedidoDetailFragment.PEDIDO_ID,  Integer.toString(unPedido.getNumero()));
 
                     PedidoDetailFragment fragment = new PedidoDetailFragment();
                     fragment.setArguments(arguments);
@@ -168,7 +167,7 @@ public class PedidoListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, PedidoDetailActivity.class);
 
-                    intent.putExtra(PedidoDetailFragment.PEDIDO_ID, unPedido.getNumero());
+                    intent.putExtra(PedidoDetailFragment.PEDIDO_ID, Integer.toString(unPedido.getNumero()));
                     System.out.println(intent.getDataString());
                     context.startActivity(intent);
                 }
