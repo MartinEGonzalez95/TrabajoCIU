@@ -73,7 +73,7 @@ public class PedidoListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        final String BASE_URL = "http://localhost:9100";
+        final String BASE_URL = "http://10.12.5.96:9100/";
         final LoginBody usr = new LoginBody("Fperez","1234");
 
         Retrofit retrofit = new Retrofit.Builder()

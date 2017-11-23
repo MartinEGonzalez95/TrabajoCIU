@@ -1,5 +1,7 @@
 package edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain;
 
+import java.util.List;
+
 /**
  * Created by Gaston on 21/11/2017.
  */
@@ -9,6 +11,7 @@ public class Pedido {
     private String cliente;
     private EstadoDTO estadoDePedido;
     private int numero;
+    private List<Plato> platos;
 
     public Pedido() {
 
@@ -43,5 +46,13 @@ public class Pedido {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public List<Plato> getPlatos() {
+        return platos;
+    }
+
+    public void setPlatos(List<Plato> platos) {
+        this.platos = platos;
     }
 }
