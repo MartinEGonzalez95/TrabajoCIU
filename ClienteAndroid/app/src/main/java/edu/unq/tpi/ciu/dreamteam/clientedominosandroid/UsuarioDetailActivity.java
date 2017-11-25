@@ -15,14 +15,14 @@ import android.view.MenuItem;
  * An activity representing a single Pedido detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link PedidoListActivity}.
+ * in a {@link UsuarioPedidosListActivity}.
  */
-public class PedidoDetailActivity extends AppCompatActivity {
+public class UsuarioDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pedido_detail);
+        setContentView(R.layout.activity_usuario_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,9 +54,9 @@ public class PedidoDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(PedidoDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(PedidoDetailFragment.ARG_ITEM_ID));
-            PedidoDetailFragment fragment = new PedidoDetailFragment();
+            arguments.putString(UsuarioDetailFragment.USER_ID,
+                    getIntent().getStringExtra(UsuarioDetailFragment.USER_ID));
+            UsuarioDetailFragment fragment = new UsuarioDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.pedido_detail_container, fragment)
@@ -75,7 +75,7 @@ public class PedidoDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, PedidoListActivity.class));
+            NavUtils.navigateUpTo(this, new Intent(this, UsuarioPedidosListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.PedidoListActivity"
-    tools:listitem="@layout/pedido_list_content" />
+    tools:context="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.UsuarioPedidosListActivity"
+    tools:listitem="@layout/usuario_pedidos_list_content" />

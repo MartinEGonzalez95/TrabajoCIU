@@ -1,4 +1,4 @@
-package edu.unq.tpi.ciu.dreamteam.clientedominosandroid;
+package edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain;
 
 /**
  * Created by mariano on 20/11/17.

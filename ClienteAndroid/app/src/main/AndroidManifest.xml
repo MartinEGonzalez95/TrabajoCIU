@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PedidoListActivity"
+            android:name=".UsuarioPedidosListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PedidoDetailActivity"
+            android:name=".UsuarioDetailActivity"
             android:label="@string/title_pedido_detail"
-            android:parentActivityName=".PedidoListActivity"
+            android:parentActivityName=".UsuarioPedidosListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.PedidoListActivity" />
+                android:value="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.UsuarioPedidosListActivity" />
         </activity>
     </application>
 
