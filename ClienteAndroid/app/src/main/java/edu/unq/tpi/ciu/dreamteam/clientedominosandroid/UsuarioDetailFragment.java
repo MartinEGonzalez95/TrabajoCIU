@@ -3,11 +3,14 @@ package edu.unq.tpi.ciu.dreamteam.clientedominosandroid;
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.LoginBody;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.ServiceProvider;
+import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserService;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -33,8 +37,6 @@ public class UsuarioDetailFragment extends Fragment {
      */
     public static final String USER_ID = "nick";
 
-    private String mItem;
-
     private Usuario usrLogueado;
 
     private PedidoAPI service;
@@ -49,24 +51,41 @@ public class UsuarioDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        service = new ServiceProvider().getService();
+        service = ServiceProvider.getInstance().getService();
+        usrLogueado = UserService.getInstance().getUsuario();
 
-        if (getArguments().containsKey(USER_ID)) {
-            mItem = getArguments().getString(USER_ID);
-            final LoginBody usr = new LoginBody("Fperez","1234");
-
-            obtenerUsuarioAPI(usr);
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem);
-            }
+        Activity activity = this.getActivity();
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(usrLogueado.getNick());
         }
     }
 
-    private void obtenerUsuarioAPI(LoginBody usr) {
-        Call<Usuario> call = service.login(usr);
+    private void mostrarUsuario(View view) {
+        EditText name = view.findViewById(R.id.usr_name);
+        name.setText(this.usrLogueado.getNombre());
+        EditText email = view.findViewById(R.id.usr_email);
+        email.setText(this.usrLogueado.getEmail());
+        EditText direccion = view.findViewById(R.id.usr_direccion);
+        direccion.setText(this.usrLogueado.getDireccion());
+
+
+    }
+
+    private void botonEditarUsuario(View view) {
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.modificar_usuario);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modificarUsuario();
+                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+    private void modificarUsuario() {
+        Call<Usuario> call = service.modificarUsuario(usrLogueado.getNick(), usrLogueado);
 
         call.enqueue(new Callback<Usuario>() {
             @Override
@@ -86,12 +105,8 @@ public class UsuarioDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.usuario_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.pedido_detail)).setText(mItem);
-        }
-
+        mostrarUsuario(rootView);
+        botonEditarUsuario(rootView);
         return rootView;
     }
 }

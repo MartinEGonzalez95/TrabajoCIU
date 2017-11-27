@@ -8,8 +8,13 @@ import retrofit.Retrofit;
  */
 
 public class ServiceProvider {
+    private static ServiceProvider service = null;
+    private ServiceProvider() {
 
-    final String BASE_URL = "http://192.168.0.104:9100";
+    }
+
+    //HARDCODED url
+    final String BASE_URL = "http://192.168.43.194:9100";
 
     public PedidoAPI getService() {
 
@@ -18,5 +23,12 @@ public class ServiceProvider {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(PedidoAPI.class);
+    }
+
+    public static ServiceProvider getInstance() {
+        if(service == null ) {
+            service = new ServiceProvider();
+        }
+        return service;
     }
 }

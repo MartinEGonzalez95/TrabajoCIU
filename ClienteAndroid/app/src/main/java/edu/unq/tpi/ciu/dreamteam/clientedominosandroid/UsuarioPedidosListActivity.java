@@ -22,6 +22,7 @@ import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.LoginBody;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoListService;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.ServiceProvider;
+import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserService;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -35,8 +36,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
     private boolean modoTablet;
 
     private PedidoAPI service;
-
-    private String user;
+    private UserService serviceUser = UserService.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
 
         final LoginBody usr = new LoginBody("Fperez","1234");
 
-        service = new ServiceProvider().getService();
+        service = ServiceProvider.getInstance().getService();
 
         obtenerUsuarioAPI(usr);
     }
@@ -64,11 +64,11 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Response<Usuario> response, Retrofit retrofit) {
-                Usuario usuario = response.body();
-                setTitle(usuario.getNick());
+                serviceUser.loguearUsuario(response.body());
+                setTitle(serviceUser.getUsuario().getNick());
                 ImageButton imgbtn = (ImageButton) findViewById(R.id.editUser);
                 imgbtn.setEnabled(true);
-                obtenerPedidosAPI(usuario.getNick());
+                obtenerPedidosAPI(serviceUser.getUsuario().getNick());
             }
 
             @Override
@@ -115,7 +115,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
 
             if (modoTablet) {
                 Bundle arguments = new Bundle();
-                arguments.putString(UsuarioDetailFragment.USER_ID,  user);
+                arguments.putString(UsuarioDetailFragment.USER_ID,  serviceUser.getUsuario().getNick());
 
                 UsuarioDetailFragment fragment = new UsuarioDetailFragment();
                 fragment.setArguments(arguments);
@@ -126,7 +126,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, UsuarioDetailActivity.class);
 
-                intent.putExtra(UsuarioDetailFragment.USER_ID, user);
+                intent.putExtra(UsuarioDetailFragment.USER_ID, serviceUser.getUsuario().getNick());
                 System.out.println(intent.getDataString());
                 context.startActivity(intent);
             }
