@@ -13,10 +13,10 @@ import dominoPizzeria.Pedido
 import repositorios.RepoCliente
 
 import domino.APIREST.FormaDeEnvioDTO
+import java.util.List
 
 class TransformerDeDTOS {
-	
-	
+
 	def transformarEstadoDePedido(String estado) {
 		switch (estado) {
 			case "Cerrado": return new Cerrado()
@@ -32,21 +32,22 @@ class TransformerDeDTOS {
 			case "Preparando": return new Preparando()
 		}
 	}
-	
-	
+
 	def transfomarFormaDeEnvio(FormaDeEnvioDTO formaDeEnvio) {
 		switch (formaDeEnvio.nombre) {
-			case "RetiroPorLocal": return new RetiroPorLocal()
+			case "RetiroPorLocal":
+				return new RetiroPorLocal()
 			,
-			case "Delivery": return new Delivery() =>[
-				it.direccion = formaDeEnvio.direccion
-				
-			] 
+			case "Delivery":
+				return new Delivery() => [
+					it.direccion = formaDeEnvio.direccion
+
+				]
 		}
 	}
-	
-		def parsearClienteDTOACliente(ClienteDTO dto) {
-		new Cliente()=>[
+
+	def parsearClienteDTOACliente(ClienteDTO dto) {
+		new Cliente() => [
 			it.nick = dto.nick
 			it.nombre = dto.nombre
 			it.direccion = dto.direccion
@@ -54,6 +55,7 @@ class TransformerDeDTOS {
 			it.email = dto.email
 		]
 	}
+
 	def armarPedido(PedidoDTO dto) {
 
 		new Pedido() => [
@@ -67,6 +69,9 @@ class TransformerDeDTOS {
 			it.formaDeEnvio = transfomarFormaDeEnvio(dto.formaDeEnvio)
 		]
 	}
-	
-	
+
+	def List<PedidoDTO>  parsearPedidos(List<Pedido> pedidos) {
+		return pedidos.map[it|new PedidoDTO(it)].toList
+	}
+
 }

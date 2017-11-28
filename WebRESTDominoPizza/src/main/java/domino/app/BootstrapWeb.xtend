@@ -30,8 +30,8 @@ class BootstrapWeb implements Bootstrap {
 		this.cargarIngredientes()
 		this.cargarPizzas()
 		this.cargarClientes()
-		this.cargarPedidos()
 		this.cargarTamanios()
+		this.cargarPedidos()
 	}
 	
 	def cargarTamanios(){
@@ -69,20 +69,21 @@ class BootstrapWeb implements Bootstrap {
 		]
 		unosPlatos.add(plato)
 
-		repo.agregar(new Pedido() => [
+		repo.agregar(new Pedido(0) => [
 			cliente = RepoCliente.repo.buscar("Fperez")
 			formaDeEnvio = new RetiroPorLocal
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 
-		repo.agregar(new Pedido() => [
-			cliente = RepoCliente.repo.buscar("MartinG")	
+		repo.agregar(new Pedido(1) => [
+			cliente = RepoCliente.repo.buscar("martinG")	
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			platos = unosPlatos
 			estadoDePedido = new ListoParaRetirar
 		])
 
-		repo.agregar(new Pedido() => [
+		repo.agregar(new Pedido(2) => [
 			cliente = RepoCliente.repo.buscar("Markov")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 			estadoDePedido= new EnViaje
@@ -90,7 +91,7 @@ class BootstrapWeb implements Bootstrap {
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 		
-			repo.agregar(new Pedido() => [
+			repo.agregar(new Pedido(3) => [
 			cliente = RepoCliente.repo.buscar("GTest")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 			estadoDePedido= new EnViaje
@@ -98,7 +99,7 @@ class BootstrapWeb implements Bootstrap {
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 		
-			repo.agregar(new Pedido() => [
+			repo.agregar(new Pedido(4) => [
 			cliente = RepoCliente.repo.buscar("Fperez")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 			estadoDePedido= new EnViaje

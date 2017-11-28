@@ -6,7 +6,7 @@ public class Pedido {
     private String cliente;
     private EstadoDTO estadoDePedido;
     private int numero;
-    private List<Plato> platos;
+//    private List<Plato> platos;
 
     public Pedido() {
 
@@ -43,11 +43,11 @@ public class Pedido {
         this.numero = numero;
     }
 
-    public List<Plato> getPlatos() {
-        return platos;
-    }
+//    public List<Plato> getPlatos() {
+//        return platos;
+//    }
 
-    public void setPlatos(List<Plato> platos) {
-        this.platos = platos;
-    }
+//    public void setPlatos(List<Plato> platos) {
+//        this.platos = platos;
+//    }
 }

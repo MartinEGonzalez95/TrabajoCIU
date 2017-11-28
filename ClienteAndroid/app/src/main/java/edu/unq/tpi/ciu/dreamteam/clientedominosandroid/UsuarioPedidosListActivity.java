@@ -110,11 +110,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-//                obtenerPedidosAPI(service);
-//                Snackbar.make(view, "Recargando pedidos", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
-            if (modoTablet) {
+           if (modoTablet) {
                 Bundle arguments = new Bundle();
                 arguments.putString(UsuarioDetailFragment.USER_ID,  serviceUser.getUsuario().getNick());
 
@@ -188,7 +184,6 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
             holder.estadoActualDePedido.setText(pedidoActual.getEstadoDePedido().getNombre());
 
             holder.itemView.setTag(pedidoActual);
-           // holder.itemView.setOnClickListener(mOnClickListener);
         }
 
         @Override
