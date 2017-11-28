@@ -238,7 +238,23 @@ class DominoRestAPI {
 			return badRequest("Usuario o password erroneos, Por favor vuelva a intentarlo")
 		}
 	}
-
+	
+	@Get("/pedidos/delivery")
+	def getPedidosParaDelivery(){
+		
+			response.contentType = ContentType.APPLICATION_JSON
+		var pedidosListosParaEnviar= RepoPedido.getRepo.buscarPorEstado("ListoParaEnviar")
+		var pedidosEnViaje = RepoPedido.getRepo.buscarPorEstado("EnViaje")
+		var pedidos = newArrayList()
+		
+			return ok(parsearPedidos(pedidos).toJson)
+			}
+	
+	
+	
+	
+	
+	
 }
 
 @Accessors

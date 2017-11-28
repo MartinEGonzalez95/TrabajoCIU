@@ -14,7 +14,7 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 
-public interface PedidoAPI {
+public interface UserAPI {
     @POST("/login")
     Call<Usuario> login(@Body LoginBody post);
 

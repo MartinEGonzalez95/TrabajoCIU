@@ -13,7 +13,7 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 
-public interface PedidoService {
+public interface PedidoAPI {
 
     @GET("/pedidos/delivery")
     Call<List<Pedido>> getPedidosParaDelivery();

@@ -12,12 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
-import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.LoginBody;
-import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoAPI;
+import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.ServiceProvider;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserService;
 import retrofit.Call;
@@ -40,7 +38,7 @@ public class UsuarioDetailFragment extends Fragment {
 
     private Usuario usrLogueado;
 
-    private PedidoAPI service;
+    private UserAPI service;
     private UserService userService;
 
     /**

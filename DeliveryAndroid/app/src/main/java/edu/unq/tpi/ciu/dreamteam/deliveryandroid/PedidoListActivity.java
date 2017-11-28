@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
-import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoService;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoAPI;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -35,7 +35,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
     private boolean modoTablet;
 
-    private PedidoService service;
+    private PedidoAPI service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +47,20 @@ public class PedidoListActivity extends AppCompatActivity {
 
         setModoTableta();
 
+        final String BASE_URL = "http://192.168.1.39:9100";
 
-        final String BASE_URL = "http://10.12.5.96:9100";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        service = retrofit.create(PedidoService.class);
+        service = retrofit.create(PedidoAPI.class);
 
         obtenerPedidosAPI(service);
 
     }
 
-    private void obtenerPedidosAPI(PedidoService service) {
+    private void obtenerPedidosAPI(PedidoAPI service) {
 
         Call<List<Pedido>> call = service.getPedidosParaDelivery();
 

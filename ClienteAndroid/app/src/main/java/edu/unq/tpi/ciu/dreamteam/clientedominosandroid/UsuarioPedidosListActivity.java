@@ -20,7 +20,7 @@ import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Pedido;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.LoginBody;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoListService;
-import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.PedidoAPI;
+import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.ServiceProvider;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserService;
 import retrofit.Call;
@@ -35,7 +35,7 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
 
     private boolean modoTablet;
 
-    private PedidoAPI service;
+    private UserAPI service;
     private UserService serviceUser = UserService.getInstance();
 
     @Override
