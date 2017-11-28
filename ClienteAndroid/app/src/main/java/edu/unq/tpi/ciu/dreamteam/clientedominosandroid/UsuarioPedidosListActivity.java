@@ -64,9 +64,10 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Response<Usuario> response, Retrofit retrofit) {
+
                 serviceUser.loguearUsuario(response.body());
                 setTitle(serviceUser.getUsuario().getNick());
-                ImageButton imgbtn = (ImageButton) findViewById(R.id.editUser);
+                ImageButton imgbtn =  findViewById(R.id.editUser);
                 imgbtn.setEnabled(true);
                 obtenerPedidosAPI(serviceUser.getUsuario().getNick());
             }

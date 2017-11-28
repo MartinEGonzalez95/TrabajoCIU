@@ -52,8 +52,12 @@ class RepoCliente implements Repo<Cliente> {
 	}
 
 	override modificar(Cliente cliente) {
-		eliminar(cliente)
-		agregar(cliente)
+		if (cliente.esValido) {
+			eliminar(cliente)
+			agregar(cliente)
+		} else {
+			throw new UserException("datos invalidos")
+		}
 
 	}
 

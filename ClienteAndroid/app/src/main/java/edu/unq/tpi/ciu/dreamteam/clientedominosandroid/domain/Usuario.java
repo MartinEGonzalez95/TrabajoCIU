@@ -10,14 +10,14 @@ public class Usuario {
     private String nick;
     private String email;
     private String direccion;
-    private String password;
 
-    public Usuario(String nombre, String nick, String email, String direccion, String password) {
+
+    public Usuario(String nombre, String nick, String email, String direccion) {
         this.nombre = nombre;
         this.nick = nick;
         this.email = email;
         this.direccion = direccion;
-        this.password = password;
+
     }
 
     public String getNombre() {
@@ -52,12 +52,5 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 }

@@ -13,6 +13,7 @@ import dominoPizzeria.Pedido
 import repositorios.RepoCliente
 
 import domino.APIREST.FormaDeEnvioDTO
+import java.util.List
 
 class TransformerDeDTOS {
 	
@@ -68,5 +69,7 @@ class TransformerDeDTOS {
 		]
 	}
 	
-	
+	def parsearPedidos(List<Pedido> pedidos){
+		return pedidos.map[it|new PedidoDTO(it)]
+	}
 }

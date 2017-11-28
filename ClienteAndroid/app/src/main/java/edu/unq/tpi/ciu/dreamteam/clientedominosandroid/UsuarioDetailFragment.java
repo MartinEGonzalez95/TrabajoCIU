@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class UsuarioDetailFragment extends Fragment {
     private Usuario usrLogueado;
 
     private PedidoAPI service;
+    private UserService userService;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,7 +55,9 @@ public class UsuarioDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         service = ServiceProvider.getInstance().getService();
-        usrLogueado = UserService.getInstance().getUsuario();
+        userService = UserService.getInstance();
+
+        usrLogueado = userService.getUsuario();
 
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -64,11 +69,12 @@ public class UsuarioDetailFragment extends Fragment {
     private void mostrarUsuario(View view) {
         EditText name = view.findViewById(R.id.usr_name);
         name.setText(this.usrLogueado.getNombre());
+
         EditText email = view.findViewById(R.id.usr_email);
         email.setText(this.usrLogueado.getEmail());
+
         EditText direccion = view.findViewById(R.id.usr_direccion);
         direccion.setText(this.usrLogueado.getDireccion());
-
 
     }
 
@@ -77,20 +83,26 @@ public class UsuarioDetailFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                modificarUsuario();
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                realizarCambiosAlUsuario();
+                Snackbar.make(view, "Intentando guardar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
 
-    private void modificarUsuario() {
+    private void realizarCambiosAlUsuario() {
+
+        modificarUsuario();
+
         Call<Usuario> call = service.modificarUsuario(usrLogueado.getNick(), usrLogueado);
 
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Response<Usuario> response, Retrofit retrofit) {
-                usrLogueado = response.body();
+                Usuario usuario = response.body();
+                userService.loguearUsuario(usuario);
+                usrLogueado = usuario;
+                
             }
 
             @Override
@@ -99,6 +111,18 @@ public class UsuarioDetailFragment extends Fragment {
                 Toast.makeText(getActivity(), "Ha ocurrido un error al llamar al servicio", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void modificarUsuario() {
+        EditText name = this.getView().findViewById(R.id.usr_name);
+        Editable nuevoName = name.getText();
+        this.usrLogueado.setNombre(nuevoName.toString());
+        EditText email = this.getView().findViewById(R.id.usr_email);
+        Editable nuevoEmail = email.getText();
+        this.usrLogueado.setEmail(nuevoEmail.toString());
+        EditText direccion = this.getView().findViewById(R.id.usr_direccion);
+        Editable nuevaDireccion = direccion.getText();
+        this.usrLogueado.setDireccion(nuevaDireccion.toString());
     }
 
     @Override
