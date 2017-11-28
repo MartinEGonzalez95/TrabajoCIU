@@ -5,7 +5,6 @@ import dominio.DTO.PedidoDTO
 import dominio.DTO.TransformerDeDTOS
 import dominoPizzeria.Pedido
 import dominoPizzeria.Tamanio
-import formaDeEnvioPedido.FormaDeEnvio
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -22,6 +21,7 @@ import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
 import repositorios.RepoTamanio
+import formaDeEnvioPedido.FormaDeEnvio
 
 @Controller
 class DominoRestAPI {
@@ -29,7 +29,8 @@ class DominoRestAPI {
 	extension JSONUtils = new JSONUtils
 	TransformerDeDTOS transformer = new TransformerDeDTOS
 
-	val repoClientes = RepoCliente.repo
+	val repo = RepoCliente.repo
+
 
 	private def getErrorJson(String message) {
 		'{ "error": "' + message + '" }'
@@ -48,6 +49,8 @@ class DominoRestAPI {
 	def getTamanios(String nombre) {
 
 		response.contentType = ContentType.APPLICATION_JSON
+
+
 
 		return ok(RepoTamanio.repo.cargar.toJson)
 	}
@@ -77,6 +80,8 @@ class DominoRestAPI {
 		}
 
 	}
+
+	
 
 	@Get("/pedidos/:numero")
 	def getPedidoConNumero() {
@@ -114,12 +119,11 @@ class DominoRestAPI {
 	}
 
 	def parsearPedidos(List<Pedido> pedidos) {
-
-		return this.transformer.parsearPedidos(pedidos)
+		return pedidos.map[it|new PedidoDTO(it)]
 	}
 
-	@Post("/pedidos/:numero/estado")
-	def postCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
+	@Put("/pedidos/:numero/estado")
+	def putCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
@@ -132,7 +136,15 @@ class DominoRestAPI {
 		return ok()
 
 	}
+	
+//	@Put("/pedidos/:numero/estado")
+//	def putCambiarEstado(){
+//		
+//		
+//		
+//	}	
 
+	
 	@Get("/pedidos/:numero/estado")
 	def getEstadoDePedidoPorNumero() {
 
@@ -151,12 +163,26 @@ class DominoRestAPI {
 		}
 	}
 
+	@Get("/pedidos/delivery")
+	def getPedidosParaDelivery(){
+		
+		var pedidosEnViaje = RepoPedido.getRepo.buscarPorEstado("EnViaje")
+		var pedidosListoParaEnviar = RepoPedido.getRepo.buscarPorEstado("ListoParaEnviar")
+			
+		var pedidosParaDelivery = newArrayList()
+		pedidosParaDelivery.addAll(pedidosEnViaje)
+		pedidosParaDelivery.addAll(pedidosListoParaEnviar)	
+			
+		return ok(parsearPedidos(pedidosParaDelivery).toJson)
+		
+	}
+
 	@Get("/usuarios/:username")
 	def getUsuarioConUsername() {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		val usuario = repoClientes.search(username)
+		val usuario = RepoCliente.getRepo.search(username)
 
 		if (usuario === null) {
 
@@ -164,8 +190,9 @@ class DominoRestAPI {
 
 		} else {
 			return ok(
-				usuario.map[it|new ClienteDTO(it)].toJson
+				usuario.map[it | new ClienteDTO(it)].toJson
 			)
+			
 
 		}
 	}
@@ -175,28 +202,22 @@ class DominoRestAPI {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		var clienteEditado = repoClientes.buscar(username)
+		val clienteEditado = RepoCliente.getRepo.buscar(username)
 
 		if (clienteEditado === null) {
 
 			return notFound()
 
 		}
-		try {
-			var clienteDTO = bodyEditUsuario.fromJson(ClienteDTO)
+		val clienteDTO = bodyEditUsuario.fromJson(ClienteDTO)
+		
+		clienteEditado.nombre = clienteDTO.nombre
+		clienteEditado.email = clienteDTO.email
+		clienteEditado.direccion = clienteDTO.direccion
 
-			clienteEditado.nombre = clienteDTO.nombre
-			clienteEditado.email = clienteDTO.email
-			clienteEditado.direccion = clienteDTO.direccion
+		RepoCliente.getRepo.modificar(clienteEditado)
 
-			repoClientes.modificar(clienteEditado)
-			clienteDTO = new ClienteDTO(clienteEditado)
-
-			return ok(clienteDTO.toJson)
-		} catch (UserException exception) {
-
-			return badRequest(getErrorJson(exception.message))
-		}
+		ok('{ "status" : "OK" }')
 
 	}
 
@@ -206,10 +227,10 @@ class DominoRestAPI {
 
 		val ClienteDTO clienteDTO = body.fromJson(ClienteDTO)
 		try {
-
+			
 			val unCliente = transformer.parsearClienteDTOACliente(clienteDTO);
-
-			repoClientes.agregar(unCliente)
+			
+			(repo).agregar(unCliente)
 			return ok()
 
 		} catch (UserException exception) {
@@ -218,20 +239,20 @@ class DominoRestAPI {
 		}
 
 	}
+	
+
 
 	@Post("/login")
 	def postLogin(@Body String usrData) {
 
 		response.contentType = ContentType.APPLICATION_JSON
 		val clienteDTO = usrData.fromJson(ClienteDTO)
-
-		val cliente = repoClientes.buscar(clienteDTO.nick)
+		
+		val cliente = RepoCliente.getRepo.buscar(clienteDTO.nick)
 		try {
 			if (cliente.password == clienteDTO.password) {
-
 				return ok(new ClienteDTO(cliente).toJson)
 			} else {
-
 				return badRequest("Usuario o password erroneos, Por favor vuelva a intentarlo")
 			}
 		} catch (RuntimeException e) {
@@ -250,6 +271,8 @@ class EstadoDePedidoDTO {
 class FormaDeEnvioDTO {
 	String nombre
 	int costo = 0;
-	String direccion = "RetiroPorLocal";
-
+	String direccion= "RetiroPorLocal";
+	
+	
+	
 }
