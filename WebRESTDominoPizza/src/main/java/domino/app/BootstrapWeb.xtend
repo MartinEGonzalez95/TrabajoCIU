@@ -16,6 +16,9 @@ import repositorios.RepoPedido
 import repositorios.RepoPizza
 import estadosDePedido.Cerrado
 import repositorios.RepoTamanio
+import estadosDePedido.EnViaje
+import estadosDePedido.ListoParaEnviar
+import estadosDePedido.ListoParaRetirar
 
 class BootstrapWeb implements Bootstrap {
 
@@ -66,25 +69,42 @@ class BootstrapWeb implements Bootstrap {
 		]
 		unosPlatos.add(plato)
 
-		repo.agregar(new Pedido(1) => [
-			cliente = new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho")
+		repo.agregar(new Pedido() => [
+			cliente = RepoCliente.repo.buscar("Fperez")
 			formaDeEnvio = new RetiroPorLocal
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
-
 		])
 
-		repo.agregar(new Pedido(2) => [
-			cliente = new Cliente("Martin", "martinG", "hackme", "emailQueVaAFallar:D", "not falsa")
+		repo.agregar(new Pedido() => [
+			cliente = RepoCliente.repo.buscar("MartinG")	
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
-			estadoDePedido = new Cerrado
+			estadoDePedido = new ListoParaRetirar
 		])
 
-		repo.agregar(new Pedido(3) => [
-			cliente = new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa")
+		repo.agregar(new Pedido() => [
+			cliente = RepoCliente.repo.buscar("Markov")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			estadoDePedido= new EnViaje
+			platos = unosPlatos
+			aclaraciones = "Con mucho ajo o hay tabla"
 		])
-
+		
+			repo.agregar(new Pedido() => [
+			cliente = RepoCliente.repo.buscar("GTest")
+			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			estadoDePedido= new EnViaje
+			platos = unosPlatos
+			aclaraciones = "Con mucho ajo o hay tabla"
+		])
+		
+			repo.agregar(new Pedido() => [
+			cliente = RepoCliente.repo.buscar("Fperez")
+			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			estadoDePedido= new EnViaje
+			platos = unosPlatos
+			aclaraciones = "Con mucho ajo o hay tabla"
+		])
 	}
 
 	def cargarClientes() {
@@ -92,11 +112,10 @@ class BootstrapWeb implements Bootstrap {
 		val repo = RepoCliente.getRepo
 
 		repo.agregar(new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho"))
-
 		repo.agregar(new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa"))
-
+		repo.agregar(new Cliente("Mariano", "Markov", "1234", "superFake@gmail.com", "falsa "))
 		repo.agregar(new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa"))
-		repo.agregar(new Cliente("Admin", "Admin", "1234", "admin@gmail.com", "Domino's"))
+		
 	}
 
 	def cargarPizzas() {
