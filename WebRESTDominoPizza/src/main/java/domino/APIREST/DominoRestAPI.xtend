@@ -122,8 +122,8 @@ class DominoRestAPI {
 		return pedidos.map[it|new PedidoDTO(it)]
 	}
 
-	@Post("/pedidos/:numero/estado")
-	def postCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
+	@Put("/pedidos/:numero/estado")
+	def putCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
@@ -136,6 +136,13 @@ class DominoRestAPI {
 		return ok()
 
 	}
+	
+//	@Put("/pedidos/:numero/estado")
+//	def putCambiarEstado(){
+//		
+//		
+//		
+//	}	
 
 	
 	@Get("/pedidos/:numero/estado")
@@ -154,6 +161,20 @@ class DominoRestAPI {
 			return ok(pedido.estadoDePedido.toJson)
 
 		}
+	}
+
+	@Get("/pedidos/delivery")
+	def getPedidosParaDelivery(){
+		
+		var pedidosEnViaje = RepoPedido.getRepo.buscarPorEstado("EnViaje")
+		var pedidosListoParaEnviar = RepoPedido.getRepo.buscarPorEstado("ListoParaEnviar")
+			
+		var pedidosParaDelivery = newArrayList()
+		pedidosParaDelivery.addAll(pedidosEnViaje)
+		pedidosParaDelivery.addAll(pedidosListoParaEnviar)	
+			
+		return ok(parsearPedidos(pedidosParaDelivery).toJson)
+		
 	}
 
 	@Get("/usuarios/:username")

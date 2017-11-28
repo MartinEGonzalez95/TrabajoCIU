@@ -21,9 +21,9 @@ class TransformerDeDTOS {
 		switch (estado) {
 			case "Cerrado": return new Cerrado()
 			,
-			case "Entregado": return new Entregado()
-			,
 			case "EnViaje": return new EnViaje()
+			,
+			case "Entregado": return new Entregado()
 			,
 			case "ListoParaEnviar": return new ListoParaEnviar()
 			,
