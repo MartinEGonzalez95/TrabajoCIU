@@ -14,7 +14,7 @@
     <string name="pedido_estado"> Estado </string>
     <string name="pedido_platos_nombre">Plato:</string>
 
-
+    <string name="pedidos">PEDIDOS ANTERIORES</string>
 
 
 </resources>

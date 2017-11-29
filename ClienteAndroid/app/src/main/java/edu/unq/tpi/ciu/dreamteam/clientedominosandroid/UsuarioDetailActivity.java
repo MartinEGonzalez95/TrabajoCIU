@@ -2,10 +2,7 @@ package edu.unq.tpi.ciu.dreamteam.clientedominosandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
@@ -44,7 +41,7 @@ public class UsuarioDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             UsuarioDetailFragment fragment = new UsuarioDetailFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.pedido_detail_container, fragment)
+                    .add(R.id.usuario_detail_container, fragment)
                     .commit();
         }
     }

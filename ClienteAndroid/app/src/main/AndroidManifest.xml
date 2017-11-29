@@ -30,6 +30,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.UsuarioPedidosListActivity" />
         </activity>
+
+        <activity
+            android:name=".PedidoDetailActivity"
+            android:label="@string/title_pedido_detail"
+            android:parentActivityName=".UsuarioPedidosListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.unq.tpi.ciu.dreamteam.clientedominosandroid.UsuarioPedidosListActivity" />
+        </activity>
     </application>
 
 </manifest>

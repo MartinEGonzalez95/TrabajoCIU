@@ -62,8 +62,8 @@
                 android:id="@+id/list_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PEDIDOS ANTERIORES"
-                android:textSize="24dp"
+                android:text="@string/pedidos"
+                android:textSize="24sp"
                 android:textStyle="bold" />
             <View android:id="@+id/list_title_Divider"
                 android:layout_height="2dp"
