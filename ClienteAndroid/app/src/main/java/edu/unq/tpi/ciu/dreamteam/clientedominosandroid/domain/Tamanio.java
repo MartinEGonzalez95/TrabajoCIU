@@ -4,7 +4,7 @@ package edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain;
  * Created by Gunnark on 28/11/2017.
  */
 
-class Tamanio {
+public class Tamanio {
 
     private String nombre;
     private double valor;

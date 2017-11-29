@@ -42,13 +42,7 @@ public class UsuarioDetailActivity extends AppCompatActivity {
         // http://developer.android.com/guide/components/fragments.html
         //
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(UsuarioDetailFragment.USER_ID,
-                    getIntent().getStringExtra(UsuarioDetailFragment.USER_ID));
             UsuarioDetailFragment fragment = new UsuarioDetailFragment();
-            fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.pedido_detail_container, fragment)
                     .commit();

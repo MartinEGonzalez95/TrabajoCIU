@@ -9,6 +9,7 @@ import retrofit.Retrofit;
 
 public class ServiceProvider {
     private static ServiceProvider service = null;
+
     private ServiceProvider() {
 
     }
@@ -26,7 +27,7 @@ public class ServiceProvider {
     }
 
     public static ServiceProvider getInstance() {
-        if(service == null ) {
+        if (service == null) {
             service = new ServiceProvider();
         }
         return service;

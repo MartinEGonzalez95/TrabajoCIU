@@ -4,7 +4,6 @@ import java.util.List;
 
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Pedido;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
-import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.LoginBody;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;

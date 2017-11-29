@@ -26,7 +26,6 @@ public class PedidoListService {
     }
 
 
-
     public static void clear() {
 
         pedidos.clear();

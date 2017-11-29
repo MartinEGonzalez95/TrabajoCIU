@@ -10,10 +10,11 @@ public class UserService {
     private Usuario usuario;
     private static UserService service = null;
 
-    private UserService() {}
+    private UserService() {
+    }
 
     public static UserService getInstance() {
-        if(service == null) {
+        if (service == null) {
             service = new UserService();
         }
         return service;

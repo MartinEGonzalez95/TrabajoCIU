@@ -111,11 +111,8 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
            if (modoTablet) {
-                Bundle arguments = new Bundle();
-                arguments.putString(UsuarioDetailFragment.USER_ID,  serviceUser.getUsuario().getNick());
 
                 UsuarioDetailFragment fragment = new UsuarioDetailFragment();
-                fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.pedido_detail_container, fragment)
                         .commit();
@@ -123,7 +120,6 @@ public class UsuarioPedidosListActivity extends AppCompatActivity {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, UsuarioDetailActivity.class);
 
-                intent.putExtra(UsuarioDetailFragment.USER_ID, serviceUser.getUsuario().getNick());
                 System.out.println(intent.getDataString());
                 context.startActivity(intent);
             }

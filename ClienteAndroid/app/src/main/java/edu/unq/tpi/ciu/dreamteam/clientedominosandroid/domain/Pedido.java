@@ -25,7 +25,7 @@ public class Pedido {
         this.numero = id;
     }
 
-    private double montoFinal() {//No se pueden usar los streams...
+    public double montoFinal() {//No se pueden usar los streams...
 
         return this.precioPorTotalDePlatos() + formaDeEnvio.getCosto();
     }
@@ -33,10 +33,10 @@ public class Pedido {
     private double precioPorTotalDePlatos() {
 
         double precioDeLosPlatos = 0;
-        for (Plato plato:this.platos){
+        for (Plato plato : this.platos) {
             precioDeLosPlatos += plato.precio();
         }
-        return  precioDeLosPlatos;
+        return precioDeLosPlatos;
     }
 
     public String getCliente() {
@@ -81,5 +81,9 @@ public class Pedido {
 
     public void setFormaDeEnvio(FormaDeEnvioDTO formaDeEnvio) {
         this.formaDeEnvio = formaDeEnvio;
+    }
+
+    public String getDireccion() {
+        return formaDeEnvio.getDireccion();
     }
 }

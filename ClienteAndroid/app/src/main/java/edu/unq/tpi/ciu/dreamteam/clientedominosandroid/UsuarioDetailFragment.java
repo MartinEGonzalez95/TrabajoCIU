@@ -1,8 +1,8 @@
 package edu.unq.tpi.ciu.dreamteam.clientedominosandroid;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
-import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.ServiceProvider;
+import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserAPI;
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.services.UserService;
 import retrofit.Call;
 import retrofit.Callback;
@@ -34,7 +34,6 @@ public class UsuarioDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String USER_ID = "nick";
 
     private Usuario usrLogueado;
 
@@ -65,13 +64,13 @@ public class UsuarioDetailFragment extends Fragment {
     }
 
     private void mostrarUsuario(View view) {
-        EditText name = view.findViewById(R.id.usr_name);
+        EditText name = view.findViewById(R.id.cliente_nick);
         name.setText(this.usrLogueado.getNombre());
 
-        EditText email = view.findViewById(R.id.usr_email);
+        EditText email = view.findViewById(R.id.cliente_email);
         email.setText(this.usrLogueado.getEmail());
 
-        EditText direccion = view.findViewById(R.id.usr_direccion);
+        EditText direccion = view.findViewById(R.id.cliente_direccion);
         direccion.setText(this.usrLogueado.getDireccion());
 
     }
@@ -100,7 +99,7 @@ public class UsuarioDetailFragment extends Fragment {
                 Usuario usuario = response.body();
                 userService.loguearUsuario(usuario);
                 usrLogueado = usuario;
-                
+
             }
 
             @Override
@@ -112,13 +111,15 @@ public class UsuarioDetailFragment extends Fragment {
     }
 
     private void modificarUsuario() {
-        EditText name = this.getView().findViewById(R.id.usr_name);
+        EditText name = this.getView().findViewById(R.id.cliente_nick);
         Editable nuevoName = name.getText();
         this.usrLogueado.setNombre(nuevoName.toString());
-        EditText email = this.getView().findViewById(R.id.usr_email);
+
+        EditText email = this.getView().findViewById(R.id.cliente_email);
         Editable nuevoEmail = email.getText();
         this.usrLogueado.setEmail(nuevoEmail.toString());
-        EditText direccion = this.getView().findViewById(R.id.usr_direccion);
+
+        EditText direccion = this.getView().findViewById(R.id.cliente_direccion);
         Editable nuevaDireccion = direccion.getText();
         this.usrLogueado.setDireccion(nuevaDireccion.toString());
     }

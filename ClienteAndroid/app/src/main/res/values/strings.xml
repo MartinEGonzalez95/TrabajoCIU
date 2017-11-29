@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">ClienteDominosAndroid</string>
     <string name="title_pedido_detail">Pedido Detail</string>
+
+    <string name="cliente_direccion">Direccion: </string>
+    <string name="cliente_nombre">Nombre: </string>
+    <string name="cliente_nick">Nick </string>
+    <string name="cliente_email">Email: </string>
+
+    <string name="pedido_cliente_nombre">Nombre: </string>
+    <string name="pedido_direccion">Direccion: </string>
+    <string name="pedido_montoFinal">Monto final: </string>
+    <string name="pedido_numero">n°: </string>
+    <string name="pedido_estado"> Estado </string>
+    <string name="pedido_platos_nombre">Plato:</string>
+
+
+
+
 </resources>

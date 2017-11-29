@@ -10,23 +10,21 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.android.AdapterForPedidoRow;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoAPI;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.ServiceProvider;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,14 +45,7 @@ public class PedidoListActivity extends AppCompatActivity {
 
         setModoTableta();
 
-        final String BASE_URL = "http://192.168.1.39:9100";
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        service = retrofit.create(PedidoAPI.class);
+        service = ServiceProvider.getInstance().getService();
 
         obtenerPedidosAPI(service);
 
@@ -71,11 +62,6 @@ public class PedidoListActivity extends AppCompatActivity {
                 PedidoListService.clear();
                 PedidoListService.addAll(response.body());
                 setUpReciclerView();
-                for (Pedido pedido : PedidoListService.pedidos) {
-                    System.out.println(pedido.getNumero() + pedido.getCliente() + pedido.getEstadoDePedido().getNombre());
-
-                }
-
                 setTitle("Pedidos");
             }
 
@@ -109,22 +95,18 @@ public class PedidoListActivity extends AppCompatActivity {
 
     private void setUpReciclerView() {
         View recyclerView = findViewById(R.id.pedido_list);
-        assert recyclerView != null;
+
         this.setupRecyclerView((RecyclerView) recyclerView);
     }
 
     private void setModoTableta() {
 
-        // The detail container view will be present only in the
-        // large-screen layouts (res/values-w900dp).
-        // If this view is present, then the
-        // activity should be in two-pane mode.
         modoTablet = findViewById(R.id.pedido_detail_container) != null;
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 
-        recyclerView.setAdapter(new SimplePedidoRecyclerViewAdapter(this, this.obtenerPedidos(), modoTablet));
+        recyclerView.setAdapter(new AdapterForPedidoRow(this, this.obtenerPedidos()));
     }
 
     private List<Pedido> obtenerPedidos() {
@@ -132,84 +114,26 @@ public class PedidoListActivity extends AppCompatActivity {
         return PedidoListService.pedidos;
     }
 
-    public static class SimplePedidoRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimplePedidoRecyclerViewAdapter.ViewHolder> {
+    public void irAlFragmentDetalleDePedido(Pedido unPedido, View view) {
 
+        if (modoTablet) {
+            Bundle arguments = new Bundle();
+            arguments.putString(PedidoDetailFragment.PEDIDO_ID, Integer.toString(unPedido.getNumero()));
 
-        SimplePedidoRecyclerViewAdapter(PedidoListActivity parent,
-                                        List<Pedido> pedidos,
-                                        boolean modoTablet) {
-            this.pedidos = pedidos;
-            this.mParentActivity = parent;
-            this.modoTablet = modoTablet;
-        }
+            PedidoDetailFragment fragment = new PedidoDetailFragment();
+            fragment.setArguments(arguments);
+            this.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.pedido_detail_container, fragment)
+                    .commit();
+        } else {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, PedidoDetailActivity.class);
 
-        private final PedidoListActivity mParentActivity;
-        private List<Pedido> pedidos = new ArrayList<>();
-        private final boolean modoTablet;
-
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Pedido unPedido = (Pedido) view.getTag();
-                if (modoTablet) {
-                    Bundle arguments = new Bundle();
-                    arguments.putString(PedidoDetailFragment.PEDIDO_ID,  Integer.toString(unPedido.getNumero()));
-
-                    PedidoDetailFragment fragment = new PedidoDetailFragment();
-                    fragment.setArguments(arguments);
-                    mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.pedido_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, PedidoDetailActivity.class);
-
-                    intent.putExtra(PedidoDetailFragment.PEDIDO_ID, Integer.toString(unPedido.getNumero()));
-                    System.out.println(intent.getDataString());
-                    context.startActivity(intent);
-                }
-            }
-        };
-
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.pedido_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            Pedido pedidoActual = pedidos.get(position);
-
-            holder.pedidoIDNumero.setText(String.valueOf(pedidoActual.getNumero()));
-            holder.clienteNombrePedido.setText(pedidoActual.getCliente());
-            holder.estadoActualDePedido.setText(pedidoActual.getEstadoDePedido().getNombre());
-
-            holder.itemView.setTag(pedidoActual);
-            holder.itemView.setOnClickListener(mOnClickListener);
-        }
-
-        @Override
-        public int getItemCount() {
-            return pedidos.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView pedidoIDNumero;
-            public TextView clienteNombrePedido;
-            public TextView estadoActualDePedido;
-
-            ViewHolder(View view) {
-                super(view);
-                estadoActualDePedido = (TextView) view.findViewById(R.id.estadoPedido);
-                pedidoIDNumero = (TextView) view.findViewById(R.id.id_pedido);
-                clienteNombrePedido = (TextView) view.findViewById(R.id.cliente_nick);
-            }
+            intent.putExtra(PedidoDetailFragment.PEDIDO_ID, Integer.toString(unPedido.getNumero()));
+            System.out.println(intent.getDataString());
+            context.startActivity(intent);
         }
     }
+
+
 }
