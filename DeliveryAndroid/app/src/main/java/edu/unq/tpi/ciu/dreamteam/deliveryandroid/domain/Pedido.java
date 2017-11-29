@@ -25,7 +25,7 @@ public class Pedido {
         this.numero = id;
     }
 
-    private double montoFinal() {//No se pueden usar los streams...
+    public double montoFinal() {//No se pueden usar los streams...
 
         return this.precioPorTotalDePlatos() + formaDeEnvio.getCosto();
     }
@@ -81,5 +81,9 @@ public class Pedido {
 
     public void setFormaDeEnvio(FormaDeEnvioDTO formaDeEnvio) {
         this.formaDeEnvio = formaDeEnvio;
+    }
+
+    public String getDireccion() {
+        return this.formaDeEnvio.getDireccion();
     }
 }

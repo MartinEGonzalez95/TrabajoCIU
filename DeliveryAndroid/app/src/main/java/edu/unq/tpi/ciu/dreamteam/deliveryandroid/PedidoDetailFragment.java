@@ -49,12 +49,26 @@ public class PedidoDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.pedido_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (pedido != null) {
-            String estado = pedido.getEstadoDePedido().getNombre();
-            ((TextView) rootView.findViewById(R.id.pedido_detail)).setText(estado);
-        }
+        this.mostrarPedido(rootView);
 
         return rootView;
+    }
+
+    private void mostrarPedido(View rootView) {
+        String direccion = pedido.getDireccion();
+        ((TextView) rootView.findViewById(R.id.pedido_direccion)).setText(direccion);
+
+        String estado = pedido.getEstadoDePedido().getNombre();
+        ((TextView) rootView.findViewById(R.id.pedido_state)).setText(estado);
+
+        String monto = (Double.toString(pedido.montoFinal()));
+        ((TextView) rootView.findViewById(R.id.pedido_monto)).setText(monto);
+
+
+    }
+
+    public void cancelarPedido(View view) {
+
+
     }
 }

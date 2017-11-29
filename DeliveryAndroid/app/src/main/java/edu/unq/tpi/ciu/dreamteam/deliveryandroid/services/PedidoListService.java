@@ -36,10 +36,9 @@ public class PedidoListService {
     }
 
     public static void clear() {
-        count++;
+  //      count++;
         pedidos.clear();
         pedidoMap.clear();
-        addItem(createDummyPedido(count));
-
+//        addItem(createDummyPedido(count));
     }
 }

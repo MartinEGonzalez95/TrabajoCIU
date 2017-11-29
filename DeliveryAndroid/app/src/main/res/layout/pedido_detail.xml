@@ -11,43 +11,75 @@
         android:gravity="bottom"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/platos_nombre"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Nombre del cliente"
+            android:orientation="horizontal">
 
-            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+            <TextView
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/pedido_direccion"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
-        <TextView
-            android:id="@+id/pedido_delivery"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/pedido_direccion"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Direccion"
-            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+            android:orientation="horizontal">
 
+            <TextView
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/pedido_estado"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
-        <TextView
-            android:id="@+id/pedido_detail"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/pedido_state"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/title_pedido_detail"
-            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/pedido_monto"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="$ monto final "
-            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+            <TextView
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/pedido_montoFinal"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+
+            <TextView
+                android:id="@+id/pedido_monto"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -64,14 +96,18 @@
             android:id="@+id/button_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/estado_cancelar" />
+            android:onClick="cancelarPedido"
+            android:text="@string/estado_cancelar"
+            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
         <Button
 
             android:id="@+id/button_avanzar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/estado_siguiente" />
+            android:onClick="avanzarPedido"
+            android:text="@string/estado_siguiente"
+            tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
     </LinearLayout>
 

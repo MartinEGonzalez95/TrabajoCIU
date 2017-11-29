@@ -9,16 +9,16 @@ import java.util.List;
 public class Plato {
 
     private Pizza pizzaBase;
-    private List<Ingrediente> ingredienteExtras;
+    private List<Ingrediente> ingredientesExtras;
     private Tamanio tamanioPizza;
 
 
-    public List<Ingrediente> getIngredienteExtras() {
-        return ingredienteExtras;
+    public List<Ingrediente> getIngredientesExtras() {
+        return ingredientesExtras;
     }
 
-    public void setIngredienteExtras(List<Ingrediente> ingredienteExtras) {
-        this.ingredienteExtras = ingredienteExtras;
+    public void setIngredientesExtras(List<Ingrediente> ingredientesExtras) {
+        this.ingredientesExtras = ingredientesExtras;
     }
 
     public Pizza getPizzaNombre() {
@@ -51,7 +51,7 @@ public class Plato {
 
     private double precioIngredientesExtras() {
         double precioDeLosIngredientes = 0;
-        for (Ingrediente ingrediente : this.ingredienteExtras) {
+        for (Ingrediente ingrediente : this.ingredientesExtras) {
             precioDeLosIngredientes += ingrediente.getPrecio();
         }
         return precioDeLosIngredientes;

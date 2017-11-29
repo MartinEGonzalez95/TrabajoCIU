@@ -1,10 +1,10 @@
 package edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain;
 
+
 public class FormaDeEnvioDTO {
     private String nombre;
     private int costo = 0;
     private String direccion;
-
 
     public String getNombre() {
         return nombre;
