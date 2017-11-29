@@ -30,7 +30,6 @@ import java.util.List;
 
 public class PedidoListActivity extends AppCompatActivity {
 
-
     private boolean modoTablet;
 
     private PedidoAPI service;
