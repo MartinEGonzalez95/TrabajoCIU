@@ -19,8 +19,16 @@ import repositorios.RepoTamanio
 import estadosDePedido.EnViaje
 import estadosDePedido.ListoParaEnviar
 import estadosDePedido.ListoParaRetirar
+import repositorios.Repo
+import estadosDePedido.Entregado
 
 class BootstrapWeb implements Bootstrap {
+
+	RepoIngrediente repoIngrededientes = RepoIngrediente.repo
+	RepoCliente repoClientes = RepoCliente.repo
+	RepoPizza repoPizzas = RepoPizza.repo
+	RepoPedido repoPedidos = RepoPedido.repo
+	RepoTamanio repoTamanios = RepoTamanio.repo
 
 	override isPending() {
 		true
@@ -31,118 +39,139 @@ class BootstrapWeb implements Bootstrap {
 		this.cargarPizzas()
 		this.cargarClientes()
 		this.cargarTamanios()
+
 		this.cargarPedidos()
 	}
-	
-	def cargarTamanios(){
-		
-		val repo = RepoTamanio.getRepo
-		
-		repo.agregar(new Tamanio("Porcion", 0.125))
-		repo.agregar(new Tamanio("Chica", 0.5))
-		repo.agregar(new Tamanio("Grande", 1))
-		repo.agregar(new Tamanio("Familiar", 1.25))
+
+	def cargarTamanios() {
+
+		repoTamanios.agregar(new Tamanio("Porcion", 0.125))
+		repoTamanios.agregar(new Tamanio("Chica", 0.5))
+		repoTamanios.agregar(new Tamanio("Grande", 1))
+		repoTamanios.agregar(new Tamanio("Familiar", 1.25))
 	}
-	
-	
 
 	def cargarPedidos() {
 
-		val repo = RepoPedido.getRepo
-
-		val ingredientes = new ArrayList<Ingrediente>
-
-		ingredientes.add(new Ingrediente => [
-			it.precio = 15
-			it.nombre = "Muzzarella"
-			it.distribucion = "Todo"
-		])
-
 		val unosPlatos = new ArrayList<Plato>
-		val plato = new Plato() => [
-			pizzaBase = new Pizza => [
-				it.precioBase = 100
-				it.nombre = "Muzarella"
-			]
-			tamanioPizza = new Tamanio("Grande",1)
-			ingredientesExtras = ingredientes
+
+		val platoDeMuzarellaConJamon = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Muzzarella")
+			tamanioPizza = new Tamanio("Grande", 1)
 		]
-		unosPlatos.add(plato)
 
-		repo.agregar(new Pedido(0) => [
-			cliente = RepoCliente.repo.buscar("Fperez")
-			formaDeEnvio = new RetiroPorLocal
+		val platoDeFugazzetaRellena = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Fugazzeta Rellena")
+			tamanioPizza = new Tamanio("Grande", 1)
+		]
+
+		unosPlatos.add(platoDeMuzarellaConJamon)
+		unosPlatos.add(platoDeFugazzetaRellena)
+
+		repoPedidos.agregar(new Pedido(0) => [
+			cliente = repoClientes.buscar("Fperez")
+			platos = newArrayList(platoDeMuzarellaConJamon)
+			aclaraciones = "Con mucho ajo o hay tabla"
+		])
+
+		repoPedidos.agregar(new Pedido(1) => [
+			cliente = repoClientes.buscar("Fperez")
+			estadoDePedido = new ListoParaEnviar
+			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			platos = unosPlatos
+			aclaraciones = "Sin aceitunas"
+		])
+
+		repoPedidos.agregar(new Pedido(2) => [
+			cliente = repoClientes.buscar("Fperez")
+			platos = newArrayList(platoDeMuzarellaConJamon)
+			aclaraciones = "Con mucho ajo o hay tabla"
+		])
+
+		repoPedidos.agregar(new Pedido(3) => [
+			cliente = repoClientes.buscar("Fperez")
+			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+			estadoDePedido = new EnViaje
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 
-		repo.agregar(new Pedido(1) => [
-			cliente = RepoCliente.repo.buscar("martinG")	
-			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
+		repoPedidos.agregar(new Pedido(4) => [
+			cliente = repoClientes.buscar("martinG")
 			platos = unosPlatos
-			estadoDePedido = new ListoParaRetirar
+			estadoDePedido = new Cerrado
+			aclaraciones = "Con mucho ajo o hay tabla"
+
 		])
 
-		repo.agregar(new Pedido(2) => [
-			cliente = RepoCliente.repo.buscar("Markov")
+		repoPedidos.agregar(new Pedido(5) => [
+			cliente = repoClientes.buscar("Markov")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
-			estadoDePedido= new EnViaje
+			estadoDePedido = new EnViaje
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
-		
-			repo.agregar(new Pedido(3) => [
-			cliente = RepoCliente.repo.buscar("GTest")
+
+		repoPedidos.agregar(new Pedido(6) => [
+			cliente = repoClientes.buscar("GTest")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
-			estadoDePedido= new EnViaje
+			estadoDePedido = new EnViaje
+			platos = unosPlatos
+
+			aclaraciones = "Con mucho ajo o hay tabla"
+
+		])
+
+		repoPedidos.agregar(new Pedido(7) => [
+			cliente = repoClientes.buscar("Fperez")
+
+			estadoDePedido = new Cerrado
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
+
 		])
-		
-			repo.agregar(new Pedido(4) => [
-			cliente = RepoCliente.repo.buscar("Fperez")
-			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
-			estadoDePedido= new EnViaje
+		repoPedidos.agregar(new Pedido(8) => [
+			cliente = repoClientes.buscar("Fperez")
+			estadoDePedido = new Entregado
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
+
 		])
+
 	}
 
 	def cargarClientes() {
 
-		val repo = RepoCliente.getRepo
+		repoClientes.agregar(new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho"))
+		repoClientes.agregar(new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa"))
+		repoClientes.agregar(new Cliente("Mariano", "Markov", "1234", "superFake@gmail.com", "falsa "))
+		repoClientes.agregar(new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa"))
 
-		repo.agregar(new Cliente("Fran", "Fperez", "1234", "fake1@gmail.com", "falsa por mucho"))
-		repo.agregar(new Cliente("Martin", "martinG", "hackme", "fake@gmail.com", "not falsa"))
-		repo.agregar(new Cliente("Mariano", "Markov", "1234", "superFake@gmail.com", "falsa "))
-		repo.agregar(new Cliente("Gaston", "GTest", "dontHackme", "notFake@gmail.com", "not not not falsa"))
-		
 	}
 
 	def cargarPizzas() {
 
-		val repo = RepoPizza.getRepo
-
-		repo.agregar(new Pizza => [
+		repoPizzas.agregar(new Pizza => [
 			it.precioBase = 100
-			it.nombre = "Muzarella"
+			it.nombre = "Muzzarella"
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Muzzarella"))
 		])
-		repo.agregar(new Pizza => [
+		repoPizzas.agregar(new Pizza => [
 			it.precioBase = 150
 			it.nombre = "Tomate"
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Muzzarella"))
 		])
 
-		repo.agregar(new Pizza => [
+		repoPizzas.agregar(new Pizza => [
 			it.precioBase = 200
 			it.nombre = "Fugazzeta Rellena"
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Cebolla"))
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Jamon"))
 		])
 
-		repo.agregar(new Pizza => [
+		repoPizzas.agregar(new Pizza => [
 			it.precioBase = 70
 			it.nombre = "Pizza Custom"
 		])
@@ -151,28 +180,32 @@ class BootstrapWeb implements Bootstrap {
 
 	def cargarIngredientes() {
 
-		val repo = RepoIngrediente.getRepo
-
-		repo.agregar(new Ingrediente => [
+		repoIngrededientes.agregar(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Muzzarella"
 			it.distribucion = "Todo"
 		])
 
-		repo.agregar(new Ingrediente => [
+		repoIngrededientes.agregar(new Ingrediente => [
 			it.precio = 12
 			it.nombre = "Tomate"
 			it.distribucion = "Todo"
 		])
 
-		repo.agregar(new Ingrediente => [
+		repoIngrededientes.agregar(new Ingrediente => [
 			it.precio = 15
 			it.nombre = "Cebolla"
 			it.distribucion = "Todo"
 		])
-		repo.agregar(new Ingrediente => [
+		repoIngrededientes.agregar(new Ingrediente => [
 			it.precio = 5
 			it.nombre = "Aceitunas"
+			it.distribucion = "Todo"
+		])
+
+		repoIngrededientes.agregar(new Ingrediente => [
+			it.precio = 25
+			it.nombre = "Jamon"
 			it.distribucion = "Todo"
 		])
 

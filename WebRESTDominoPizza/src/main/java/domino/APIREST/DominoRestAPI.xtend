@@ -83,15 +83,15 @@ class DominoRestAPI {
 
 		response.contentType = ContentType.APPLICATION_JSON
 
-		val pedido = RepoPedido.getRepo.search(numero)
+		val pedidos = RepoPedido.getRepo.search(numero)
 
-		if (pedido === null) {
+		if (pedidos.empty) {
 
 			return notFound()
 
 		} else {
-
-			return ok(pedido.toJson)
+			val pedido = pedidos.get(0)
+			return ok(new PedidoDTO(pedido).toJson)
 
 		}
 	}

@@ -7,6 +7,7 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import formaDeEnvioPedido.RetiroPorLocal
 
 @Accessors
 @TransactionalAndObservable
@@ -19,7 +20,7 @@ class Pedido{
 	long tiempoDeEspera = 0
 	String aclaraciones = " "
 	EstadoDePedido estadoDePedido = new Preparando
-	FormaDeEnvio formaDeEnvio
+	FormaDeEnvio formaDeEnvio = new RetiroPorLocal
 	MailSender mailSender = new MailSender("ciu.dominos.pizza@gmail.com", "interfaces2017")
 	// Para mandar mails cuando cambia de estado //
 	Integer numero // Clave para el pedido //
