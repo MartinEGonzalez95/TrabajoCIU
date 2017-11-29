@@ -12,7 +12,6 @@ public class PedidoListService {
 
     public static Map<Integer, Pedido> pedidoMap = new HashMap<>();
 
-    private static int count = 0;
 
     public static void addAll(List<Pedido> pedidos) {
 
@@ -26,15 +25,13 @@ public class PedidoListService {
         pedidoMap.put(Integer.valueOf(pedido.getNumero()), pedido);
     }
 
-//    private static Pedido createDummyPedido(int position) {
-//        return new Pedido("cliente: " + String.valueOf(position) + " ", "EnViaje ", position);
-//    }
+
 
     public static void clear() {
-        //count++;
+
         pedidos.clear();
         pedidoMap.clear();
-        //addItem(createDummyPedido(count));
+
 
     }
 }

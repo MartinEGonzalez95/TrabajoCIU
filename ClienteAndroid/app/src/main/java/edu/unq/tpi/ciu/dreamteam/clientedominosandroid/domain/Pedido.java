@@ -2,11 +2,18 @@ package edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain;
 
 import java.util.List;
 
+/**
+ * Created by Gaston on 21/11/2017.
+ */
+
 public class Pedido {
+
     private String cliente;
     private EstadoDTO estadoDePedido;
     private int numero;
-//    private List<Plato> platos;
+    private List<Plato> platos;
+    private String aclaraciones;
+    private FormaDeEnvioDTO formaDeEnvio;
 
     public Pedido() {
 
@@ -18,6 +25,19 @@ public class Pedido {
         this.numero = id;
     }
 
+    private double montoFinal() {//No se pueden usar los streams...
+
+        return this.precioPorTotalDePlatos() + formaDeEnvio.getCosto();
+    }
+
+    private double precioPorTotalDePlatos() {
+
+        double precioDeLosPlatos = 0;
+        for (Plato plato:this.platos){
+            precioDeLosPlatos += plato.precio();
+        }
+        return  precioDeLosPlatos;
+    }
 
     public String getCliente() {
         return cliente;
@@ -43,11 +63,23 @@ public class Pedido {
         this.numero = numero;
     }
 
-//    public List<Plato> getPlatos() {
-//        return platos;
-//    }
+    public List<Plato> getPlatos() {
+        return platos;
+    }
 
-//    public void setPlatos(List<Plato> platos) {
-//        this.platos = platos;
-//    }
+    public void setPlatos(List<Plato> platos) {
+        this.platos = platos;
+    }
+
+    public String getAclaraciones() {
+        return aclaraciones;
+    }
+
+    public void setAclaraciones(String aclaraciones) {
+        this.aclaraciones = aclaraciones;
+    }
+
+    public void setFormaDeEnvio(FormaDeEnvioDTO formaDeEnvio) {
+        this.formaDeEnvio = formaDeEnvio;
+    }
 }
