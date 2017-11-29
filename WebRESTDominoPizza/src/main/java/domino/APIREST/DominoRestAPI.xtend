@@ -97,10 +97,10 @@ class DominoRestAPI {
 	}
 
 	@Get("/pedidos")
-	def getPedidosPorEstado(String nick,String estado) {
+	def getPedidosPorEstado(String nick, String estado) {
 
 		response.contentType = ContentType.APPLICATION_JSON
-			if (estado.nullOrEmpty) {
+		if (estado.nullOrEmpty) {
 
 			var pedidos = RepoPedido.getRepo.buscarPorNick(nick)
 			return ok(parsearPedidos(pedidos).toJson)
@@ -120,15 +120,20 @@ class DominoRestAPI {
 	def putCambiarEstadoPedido(@Body String bodyConEstadoNuevo) {
 
 		response.contentType = ContentType.APPLICATION_JSON
+		try {
 
-		val pedido = RepoPedido.getRepo.buscar(Integer.valueOf(numero))
+			var pedido = RepoPedido.getRepo.buscar(Integer.valueOf(numero))
 
-		val estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedidoDTO)
+			var estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedidoDTO)
 
-		pedido.estadoDePedido = transformer.transformarEstadoDePedido(estadoNuevo.nombre)
+			pedido.estadoDePedido = transformer.transformarEstadoDePedido(estadoNuevo.nombre)
+			RepoPedido.getRepo.modificar(pedido)
 
-		return ok()
+			return ok(pedido.estadoDePedido.toJson)
 
+		} catch (RuntimeException e){
+			return badRequest(e.message)
+		}
 	}
 
 	@Get("/pedidos/:numero/estado")

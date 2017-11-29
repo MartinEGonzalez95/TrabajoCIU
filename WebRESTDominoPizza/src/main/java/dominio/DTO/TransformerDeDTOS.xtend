@@ -14,10 +14,11 @@ import repositorios.RepoCliente
 
 import domino.APIREST.FormaDeEnvioDTO
 import java.util.List
+import estadosDePedido.EstadoDePedido
 
 class TransformerDeDTOS {
 
-	def transformarEstadoDePedido(String estado) {
+	def EstadoDePedido transformarEstadoDePedido(String estado) {
 		switch (estado) {
 			case "Cerrado": return new Cerrado()
 			,

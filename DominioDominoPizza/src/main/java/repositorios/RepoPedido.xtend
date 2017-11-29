@@ -21,8 +21,11 @@ class RepoPedido implements Repo<Pedido> {
 	}
 
 	override agregar(Pedido pedido) {
-		pedido.numero = contador
-		contador++
+		
+		if (pedido.numero === null) {
+			pedido.numero = contador
+			contador++
+		}
 		repositorio.put(pedido.numero, pedido)
 
 	}
@@ -30,7 +33,7 @@ class RepoPedido implements Repo<Pedido> {
 	override eliminar(Pedido pedido) {
 
 		repositorio.remove(pedido.numero)
-		
+
 	}
 
 	override Pedido buscar(Integer numero) {

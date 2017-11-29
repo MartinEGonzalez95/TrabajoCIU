@@ -4,13 +4,25 @@ import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.EstadoDTO;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoAPI;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.ServiceProvider;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
 /**
@@ -24,6 +36,7 @@ public class PedidoDetailFragment extends Fragment {
     public static String PEDIDO_ID = "pedidos_id";
 
     private Pedido pedido;
+    private PedidoAPI pedidoAPI = ServiceProvider.getInstance().getService();
 
     public PedidoDetailFragment() {
     }
@@ -50,25 +63,69 @@ public class PedidoDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.pedido_detail, container, false);
 
         this.mostrarPedido(rootView);
-
+        this.crearBotones(rootView);
         return rootView;
     }
 
-    private void mostrarPedido(View rootView) {
+    private void crearBotones(View rootView) {
+
+
+        final Button avanzar = rootView.findViewById(R.id.button_avanzar);
+        final Button cancelar = rootView.findViewById(R.id.button_cancelar);
+
+        this.setButtonOnClickListener(avanzar, pedido.getEstadoDePedido());
+        this.setButtonOnClickListener(cancelar, new EstadoDTO("Cerrado"));
+
+    }
+
+    private void setButtonOnClickListener(Button unBoton, final EstadoDTO unEstadoParaCambiar) {
+        unBoton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Call<EstadoDTO> call = pedidoAPI.cambiarEstado(pedido.getNumero(), unEstadoParaCambiar);
+                realizarCambioDeEstado(call);
+                volverAlInicio();
+            }
+
+        });
+    }
+
+    private void realizarCambioDeEstado(Call<EstadoDTO> call) {
+        call.enqueue(new Callback<EstadoDTO>() {
+            @Override
+            public void onResponse(Response<EstadoDTO> response, Retrofit retrofit) {
+
+                Toast.makeText(getActivity(), "Cambiando estado", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("Cliente-Dominos", t.getMessage());
+                Toast.makeText(getActivity(), "Ha ocurrido un error al llamar al servicio", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void volverAlInicio() {
+
+    }
+
+    private void mostrarPedido(View view) {
         String direccion = pedido.getDireccion();
-        ((TextView) rootView.findViewById(R.id.pedido_direccion)).setText(direccion);
+        ((TextView) view.findViewById(R.id.pedido_direccion)).setText(direccion);
 
         String estado = pedido.getEstadoDePedido().getNombre();
-        ((TextView) rootView.findViewById(R.id.pedido_state)).setText(estado);
+        ((TextView) view.findViewById(R.id.pedido_state)).setText(estado);
 
         String monto = (Double.toString(pedido.montoFinal()));
-        ((TextView) rootView.findViewById(R.id.pedido_monto)).setText(monto);
+        ((TextView) view.findViewById(R.id.pedido_monto)).setText("$ " + monto);
 
 
     }
 
     public void cancelarPedido(View view) {
-
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.libro_detail_container, fragment)
+//                .commit();
 
     }
 }
