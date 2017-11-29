@@ -15,6 +15,7 @@ import repositorios.RepoCliente
 import domino.APIREST.FormaDeEnvioDTO
 import java.util.List
 import estadosDePedido.EstadoDePedido
+import domino.APIREST.EstadoDePedidoDTO
 
 class TransformerDeDTOS {
 
@@ -71,8 +72,17 @@ class TransformerDeDTOS {
 		]
 	}
 
-	def List<PedidoDTO>  parsearPedidos(List<Pedido> pedidos) {
+	def List<PedidoDTO> parsearPedidos(List<Pedido> pedidos) {
 		return pedidos.map[it|new PedidoDTO(it)].toList
+	}
+
+	def cambiarEstadoDelPedido(dominoPizzeria.Pedido pedido, EstadoDePedidoDTO dto) {
+		if (dto.nombre == "Cerrado") {
+			pedido.cancelar();
+		} else {
+			pedido.avanzar();
+		}
+
 	}
 
 }

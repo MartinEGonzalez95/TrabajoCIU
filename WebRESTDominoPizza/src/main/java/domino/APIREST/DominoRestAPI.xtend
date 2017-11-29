@@ -126,12 +126,12 @@ class DominoRestAPI {
 
 			var estadoNuevo = bodyConEstadoNuevo.fromJson(EstadoDePedidoDTO)
 
-			pedido.estadoDePedido = transformer.transformarEstadoDePedido(estadoNuevo.nombre)
+			transformer.cambiarEstadoDelPedido(pedido, estadoNuevo)
 			RepoPedido.getRepo.modificar(pedido)
 
 			return ok(pedido.estadoDePedido.toJson)
 
-		} catch (RuntimeException e){
+		} catch (UserException e) {
 			return badRequest(e.message)
 		}
 	}
