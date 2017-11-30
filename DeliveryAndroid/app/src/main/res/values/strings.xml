@@ -13,5 +13,8 @@
     <string name="pedido_platos_nombre">Plato:</string>
     <string name="pedido_plato">Platos: </string>
     <string name="pedido_aclaraciones">Aclaraciones:</string>
+    <string name="numero">Numero</string>
+    <string name="cliente">Cliente</string>
+    <string name="estado">Estado</string>
 
 </resources>

@@ -110,7 +110,7 @@ public class PedidoDetailFragment extends Fragment {
             @Override
             public void onResponse(Response<EstadoDTO> response, Retrofit retrofit) {
 
-                Toast.makeText(getActivity(), "Cambiando estado", Toast.LENGTH_LONG).show();
+                mostrarAlgoEnToast("Cambiando estado");
 
                 if(response.isSuccess()){
 
@@ -123,7 +123,7 @@ public class PedidoDetailFragment extends Fragment {
             @Override
             public void onFailure(Throwable t) {
                 Log.e("Cliente-Dominos", t.getMessage());
-                Toast.makeText(getActivity(), "Ha ocurrido un error al llamar al servicio", Toast.LENGTH_LONG).show();
+                mostrarAlgoEnToast("Ha ocurrido un error al llamar al servicio");
             }
         });
     }
@@ -163,6 +163,11 @@ public class PedidoDetailFragment extends Fragment {
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 
         recyclerView.setAdapter(new AdapterForPlatoRow(this, pedido.getPlatos()));
+
+    }
+
+    public void mostrarAlgoEnToast(String mensaje){
+        Toast.makeText(getActivity(),mensaje, Toast.LENGTH_LONG).show();
 
     }
 

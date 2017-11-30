@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import edu.unq.tpi.ciu.dreamteam.clientedominosandroid.domain.Usuario;
@@ -39,6 +40,8 @@ public class UsuarioDetailFragment extends Fragment {
 
     private UserAPI service;
     private UserService userService;
+
+    private ProgressBar firstBar = null;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -77,11 +80,20 @@ public class UsuarioDetailFragment extends Fragment {
 
     private void botonEditarUsuario(View view) {
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.modificar_usuario);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setButtonOnClickListener(fab);
+    }
+
+
+    private void setButtonOnClickListener(FloatingActionButton unBoton) {
+        unBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                firstBar.setVisibility(View.VISIBLE);
+
                 realizarCambiosAlUsuario();
-                Toast.makeText(getActivity(), "Intentando Guardar", Toast.LENGTH_LONG).show();
+
+                mostrarAlgoEnToast("Intentando Guardar");
             }
         });
     }
@@ -98,13 +110,21 @@ public class UsuarioDetailFragment extends Fragment {
                 Usuario usuario = response.body();
                 userService.loguearUsuario(usuario);
                 usrLogueado = usuario;
-                Toast.makeText(getActivity(), "Los datos se actualizaron correctamente", Toast.LENGTH_LONG).show();
+
+                mostrarAlgoEnToast("Los datos se actualizaron correctamente");
+
+                if(response.isSuccess()){
+
+                    firstBar.setVisibility(View.GONE);
+
+                }
+
             }
 
             @Override
             public void onFailure(Throwable t) {
                 Log.e("CLiente-Dominos", t.getMessage());
-                Toast.makeText(getActivity(), "Ha ocurrido un error al llamar al servicio", Toast.LENGTH_LONG).show();
+                mostrarAlgoEnToast("Ha ocurrido un error");
             }
         });
     }
@@ -129,6 +149,16 @@ public class UsuarioDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.usuario_detail, container, false);
         mostrarUsuario(rootView);
         botonEditarUsuario(rootView);
+
+        firstBar = rootView.findViewById(R.id.progressBar_waitingResponse);
+
         return rootView;
     }
+
+    public void mostrarAlgoEnToast(String mensaje){
+        Toast.makeText(getActivity(),mensaje, Toast.LENGTH_LONG).show();
+
+    }
+
+
 }
