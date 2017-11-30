@@ -1,23 +1,32 @@
 package edu.unq.tpi.ciu.dreamteam.deliveryandroid;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.android.AdapterForPedidoRow;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.android.AdapterForPlatoRow;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.EstadoDTO;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Pedido;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.domain.Plato;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoAPI;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoListService;
+import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PlatoListService;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.ServiceProvider;
 import retrofit.Call;
 import retrofit.Callback;
@@ -110,6 +119,7 @@ public class PedidoDetailFragment extends Fragment {
     }
 
     private void mostrarPedido(View view) {
+
         String direccion = pedido.getDireccion();
         ((TextView) view.findViewById(R.id.pedido_direccion)).setText(direccion);
 
@@ -119,13 +129,22 @@ public class PedidoDetailFragment extends Fragment {
         String monto = (Double.toString(pedido.montoFinal()));
         ((TextView) view.findViewById(R.id.pedido_monto)).setText("$ " + monto);
 
+        setUpReciclerView(view);
 
     }
 
-    public void cancelarPedido(View view) {
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.libro_detail_container, fragment)
-//                .commit();
+    private void setUpReciclerView(View view) {
+
+        View recyclerView = view.findViewById(R.id.platos_list);
+
+        this.setupRecyclerView((RecyclerView) recyclerView);
 
     }
+
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+
+        recyclerView.setAdapter(new AdapterForPlatoRow(this, pedido.getPlatos()));
+
+    }
+
 }

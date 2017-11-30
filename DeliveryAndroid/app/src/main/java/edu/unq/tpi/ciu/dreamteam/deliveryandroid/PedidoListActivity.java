@@ -21,7 +21,6 @@ import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.PedidoAPI;
 import edu.unq.tpi.ciu.dreamteam.deliveryandroid.services.ServiceProvider;
 import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
