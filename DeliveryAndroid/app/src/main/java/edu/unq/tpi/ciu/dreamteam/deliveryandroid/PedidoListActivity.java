@@ -43,10 +43,20 @@ public class PedidoListActivity extends AppCompatActivity {
 
         setModoTableta();
 
+        //TODO REFACTOR CONSTANT
         service = ServiceProvider.getInstance().getService();
-
         obtenerPedidosAPI(service);
 
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        //TODO REFACTOR CONSTANT
+        service = ServiceProvider.getInstance().getService();
+        obtenerPedidosAPI(service);
     }
 
     private void obtenerPedidosAPI(PedidoAPI service) {

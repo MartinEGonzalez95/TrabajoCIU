@@ -92,7 +92,6 @@ public class PedidoDetailFragment extends Fragment {
             public void onClick(View v) {
                 Call<EstadoDTO> call = pedidoAPI.cambiarEstado(pedido.getNumero(), unEstadoParaCambiar);
                 realizarCambioDeEstado(call);
-                volverAlInicio();
             }
 
         });
@@ -104,6 +103,8 @@ public class PedidoDetailFragment extends Fragment {
             public void onResponse(Response<EstadoDTO> response, Retrofit retrofit) {
 
                 Toast.makeText(getActivity(), "Cambiando estado", Toast.LENGTH_LONG).show();
+
+                if(response.isSuccess()){ volverAlInicio(); }
             }
 
             @Override
@@ -115,6 +116,8 @@ public class PedidoDetailFragment extends Fragment {
     }
 
     private void volverAlInicio() {
+
+        getActivity().onBackPressed();
 
     }
 
