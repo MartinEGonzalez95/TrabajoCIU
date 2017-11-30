@@ -17,18 +17,26 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+
+            />
 
     </android.support.design.widget.AppBarLayout>
 
-        <FrameLayout
+    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/pedido_list"/>
+        <View
+            android:id="@+id/list_title_Divider"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#d2184a" />
 
+
+        <include layout="@layout/pedido_list" />
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton

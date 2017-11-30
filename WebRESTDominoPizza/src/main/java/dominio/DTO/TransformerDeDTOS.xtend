@@ -76,7 +76,7 @@ class TransformerDeDTOS {
 		return pedidos.map[it|new PedidoDTO(it)].toList
 	}
 
-	def cambiarEstadoDelPedido(dominoPizzeria.Pedido pedido, EstadoDePedidoDTO dto) {
+	def cambiarEstadoDelPedido(Pedido pedido, EstadoDePedidoDTO dto) {
 		if (dto.nombre == "Cerrado") {
 			pedido.cancelar();
 		} else {

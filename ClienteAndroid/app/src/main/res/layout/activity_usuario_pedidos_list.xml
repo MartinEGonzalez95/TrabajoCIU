@@ -23,14 +23,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="3dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/domino48x48" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="wrap_content"
+                android:layout_width="151dp"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
