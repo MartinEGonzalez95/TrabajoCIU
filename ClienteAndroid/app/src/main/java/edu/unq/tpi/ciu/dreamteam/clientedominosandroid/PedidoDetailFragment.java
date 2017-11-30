@@ -63,6 +63,9 @@ public class PedidoDetailFragment extends Fragment {
         String monto = (Double.toString(pedido.montoFinal()));
         ((TextView) view.findViewById(R.id.pedido_monto)).setText("$ " + monto);
 
+        String aclaraciones = pedido.getAclaraciones();
+        ((TextView) view.findViewById(R.id.pedido_aclaraciones)).setText(aclaraciones);
+
         setUpReciclerView(view);
 
     }

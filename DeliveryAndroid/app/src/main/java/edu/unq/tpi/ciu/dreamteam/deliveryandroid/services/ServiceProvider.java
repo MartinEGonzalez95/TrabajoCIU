@@ -11,7 +11,7 @@ public class ServiceProvider {
     }
 
     //HARDCODED url
-    final String BASE_URL = "http://192.168.0.8:9100";
+    final String BASE_URL = "http://10.12.2.81:9100";
 
     public PedidoAPI getService() {
 

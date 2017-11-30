@@ -16,6 +16,7 @@
 
     <string name="pedidos">PEDIDOS ANTERIORES</string>
     <string name="pedido_plato">Platos: </string>
+    <string name="pedido_aclaraciones">Aclaraciones:</string>
 
 
 </resources>

@@ -6,21 +6,17 @@ import dominoPizzeria.Pedido
 import dominoPizzeria.Pizza
 import dominoPizzeria.Plato
 import dominoPizzeria.Tamanio
+import estadosDePedido.Cerrado
+import estadosDePedido.EnViaje
+import estadosDePedido.Entregado
+import estadosDePedido.ListoParaEnviar
 import formaDeEnvioPedido.Delivery
-import formaDeEnvioPedido.RetiroPorLocal
-import java.util.ArrayList
 import org.uqbar.arena.bootstrap.Bootstrap
 import repositorios.RepoCliente
 import repositorios.RepoIngrediente
 import repositorios.RepoPedido
 import repositorios.RepoPizza
-import estadosDePedido.Cerrado
 import repositorios.RepoTamanio
-import estadosDePedido.EnViaje
-import estadosDePedido.ListoParaEnviar
-import estadosDePedido.ListoParaRetirar
-import repositorios.Repo
-import estadosDePedido.Entregado
 
 class BootstrapWeb implements Bootstrap {
 
@@ -53,24 +49,11 @@ class BootstrapWeb implements Bootstrap {
 
 	def cargarPedidos() {
 
-		val unosPlatos = new ArrayList<Plato>
-
-		val platoDeMuzarellaConJamon = new Plato() => [
-			pizzaBase = repoPizzas.buscar("Muzzarella")
-			tamanioPizza = new Tamanio("Grande", 1)
-		]
-
-		val platoDeFugazzetaRellena = new Plato() => [
-			pizzaBase = repoPizzas.buscar("Fugazzeta Rellena")
-			tamanioPizza = new Tamanio("Grande", 1)
-		]
-
-		unosPlatos.add(platoDeMuzarellaConJamon)
-		unosPlatos.add(platoDeFugazzetaRellena)
+		val unosPlatos = cargarPlatos()
 
 		repoPedidos.agregar(new Pedido(0) => [
 			cliente = repoClientes.buscar("Fperez")
-			platos = newArrayList(platoDeMuzarellaConJamon)
+			platos = newArrayList(unosPlatos.get(0), unosPlatos.get(1))
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 
@@ -78,13 +61,13 @@ class BootstrapWeb implements Bootstrap {
 			cliente = repoClientes.buscar("Fperez")
 			estadoDePedido = new ListoParaEnviar
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
-			platos = unosPlatos
+			platos = newArrayList(unosPlatos.get(2), unosPlatos.get(3))
 			aclaraciones = "Sin aceitunas"
 		])
 
 		repoPedidos.agregar(new Pedido(2) => [
 			cliente = repoClientes.buscar("Fperez")
-			platos = newArrayList(platoDeMuzarellaConJamon)
+			platos = newArrayList(unosPlatos.get(0), unosPlatos.get(3))
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 
@@ -98,7 +81,7 @@ class BootstrapWeb implements Bootstrap {
 
 		repoPedidos.agregar(new Pedido(4) => [
 			cliente = repoClientes.buscar("martinG")
-			platos = unosPlatos
+			platos = newArrayList()
 			estadoDePedido = new Cerrado
 			aclaraciones = "Con mucho ajo o hay tabla"
 
@@ -108,7 +91,7 @@ class BootstrapWeb implements Bootstrap {
 			cliente = repoClientes.buscar("Markov")
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 			estadoDePedido = new EnViaje
-			platos = unosPlatos
+			platos = newArrayList(unosPlatos.get(1), unosPlatos.get(2))
 			aclaraciones = "Con mucho ajo o hay tabla"
 		])
 
@@ -117,14 +100,12 @@ class BootstrapWeb implements Bootstrap {
 			formaDeEnvio = new Delivery => [direccion = "Calle falsa"]
 			estadoDePedido = new EnViaje
 			platos = unosPlatos
-
 			aclaraciones = "Con mucho ajo o hay tabla"
 
 		])
 
 		repoPedidos.agregar(new Pedido(7) => [
 			cliente = repoClientes.buscar("Fperez")
-
 			estadoDePedido = new Cerrado
 			platos = unosPlatos
 			aclaraciones = "Con mucho ajo o hay tabla"
@@ -138,6 +119,38 @@ class BootstrapWeb implements Bootstrap {
 
 		])
 
+	}
+
+	def cargarPlatos() {
+
+		var platos = newArrayList()
+
+		val platoDeMuzarellaConJamon = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Muzzarella")
+			tamanioPizza = new Tamanio("Grande", 1)
+		]
+
+		val platoDeFugazzetaRellena = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Fugazzeta Rellena")
+			tamanioPizza = new Tamanio("Grande", 1)
+		]
+
+		val platoTomate = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Tomate")
+			tamanioPizza = new Tamanio("Grande", 1)
+		]
+
+		val platoEspecial = new Plato() => [
+			pizzaBase = repoPizzas.buscar("Especial")
+			tamanioPizza = new Tamanio("Grande", 1)
+		]
+
+		platos.add(platoDeMuzarellaConJamon)
+		platos.add(platoDeFugazzetaRellena)
+		platos.add(platoTomate)
+		platos.add(platoEspecial)
+
+		platos
 	}
 
 	def cargarClientes() {
@@ -168,6 +181,14 @@ class BootstrapWeb implements Bootstrap {
 			it.nombre = "Fugazzeta Rellena"
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Tomate"))
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Cebolla"))
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Jamon"))
+		])
+
+		repoPizzas.agregar(new Pizza => [
+			it.precioBase = 250
+			it.nombre = "Especial"
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Muzzarella"))
+			it.agregarIngrediente(RepoIngrediente.repo.buscar("Aceituna"))
 			it.agregarIngrediente(RepoIngrediente.repo.buscar("Jamon"))
 		])
 
