@@ -81,8 +81,7 @@ public class UsuarioDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 realizarCambiosAlUsuario();
-                Snackbar.make(view, "Intentando guardar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Toast.makeText(getActivity(), "Intentando Guardar", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -99,7 +98,7 @@ public class UsuarioDetailFragment extends Fragment {
                 Usuario usuario = response.body();
                 userService.loguearUsuario(usuario);
                 usrLogueado = usuario;
-
+                Toast.makeText(getActivity(), "Los datos se actualizaron correctamente", Toast.LENGTH_LONG).show();
             }
 
             @Override
