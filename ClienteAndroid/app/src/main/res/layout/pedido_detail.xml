@@ -81,6 +81,14 @@
                 tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/frameLayoutPlatos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/platos_list"/>
+
+        </FrameLayout>
 
     </LinearLayout>
 </LinearLayout>
