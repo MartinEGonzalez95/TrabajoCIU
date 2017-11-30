@@ -81,6 +81,13 @@
                 tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
         </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@string/pedido_plato"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
         <FrameLayout
             android:id="@+id/frameLayoutPlatos"
             android:layout_width="match_parent"

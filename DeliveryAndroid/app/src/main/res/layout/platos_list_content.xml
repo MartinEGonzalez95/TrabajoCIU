@@ -9,13 +9,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/pedido_plato"
-            android:textAppearance="?attr/textAppearanceListItem" />
+        <View android:id="@+id/itemDivider"
+            android:layout_height="1dp"
+            android:layout_width="fill_parent"
+            android:background="#d2184a" />
 
         <TextView
 
