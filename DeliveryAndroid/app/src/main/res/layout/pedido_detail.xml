@@ -104,19 +104,19 @@
                 tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
         </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@string/pedido_plato"
-                android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/pedido_plato"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
         <FrameLayout
             android:id="@+id/frameLayoutPlatos"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/platos_list"/>
+            <include layout="@layout/platos_list" />
 
         </FrameLayout>
 
@@ -153,5 +153,16 @@
             android:text="@string/estado_siguiente"
             tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
+        <ProgressBar
+            android:id="@+id/progressBar_waitingResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:minHeight="50dp"
+            android:minWidth="50dp"
+            android:visibility="invisible"/>
+
     </LinearLayout>
+
 </LinearLayout>

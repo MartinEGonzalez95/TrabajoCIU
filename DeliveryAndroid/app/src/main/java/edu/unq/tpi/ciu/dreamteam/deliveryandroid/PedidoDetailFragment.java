@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,8 @@ public class PedidoDetailFragment extends Fragment {
     private Pedido pedido;
     private PedidoAPI pedidoAPI = ServiceProvider.getInstance().getService();
 
+    private ProgressBar firstBar = null;
+
     public PedidoDetailFragment() {
     }
 
@@ -73,6 +76,8 @@ public class PedidoDetailFragment extends Fragment {
 
         this.mostrarPedido(rootView);
         this.crearBotones(rootView);
+        firstBar = rootView.findViewById(R.id.progressBar_waitingResponse);
+
         return rootView;
     }
 
@@ -91,6 +96,9 @@ public class PedidoDetailFragment extends Fragment {
         unBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Call<EstadoDTO> call = pedidoAPI.cambiarEstado(pedido.getNumero(), unEstadoParaCambiar);
+
+                firstBar.setVisibility(View.VISIBLE);
+
                 realizarCambioDeEstado(call);
             }
 
@@ -104,7 +112,12 @@ public class PedidoDetailFragment extends Fragment {
 
                 Toast.makeText(getActivity(), "Cambiando estado", Toast.LENGTH_LONG).show();
 
-                if(response.isSuccess()){ volverAlInicio(); }
+                if(response.isSuccess()){
+
+                    firstBar.setVisibility(View.GONE);
+
+                    volverAlInicio();
+                }
             }
 
             @Override
