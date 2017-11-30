@@ -15,7 +15,7 @@ public class ServiceProvider {
     }
 
     //HARDCODED url
-    final String BASE_URL = "http://10.9.9.170:9100";
+    final String BASE_URL = "http://192.168.43.245:9100";
 
     public UserAPI getService() {
 

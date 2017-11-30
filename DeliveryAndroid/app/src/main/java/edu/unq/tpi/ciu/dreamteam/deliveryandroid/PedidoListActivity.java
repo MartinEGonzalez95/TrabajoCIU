@@ -79,7 +79,8 @@ public class PedidoListActivity extends AppCompatActivity {
         });
     }
 
-    private void botonFlotanteRecargarPedidos() {
+    private void
+    botonFlotanteRecargarPedidos() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 

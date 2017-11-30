@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/cliente"
+                android:text="@string/estado"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#000000" />
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/estado"
+                android:text="@string/cliente"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 />
 
