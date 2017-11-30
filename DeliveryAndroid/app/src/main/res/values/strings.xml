@@ -11,6 +11,6 @@
     <string name="estado_cancelar"> Cancelar pedido </string>
     <string name="estado_siguiente">Avanzar pedido </string>
     <string name="pedido_platos_nombre">Plato:</string>
-    <string name="pedido_plato">Plato </string>
+    <string name="pedido_plato">Platos: </string>
 
 </resources>
