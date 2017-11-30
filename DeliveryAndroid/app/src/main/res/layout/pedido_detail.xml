@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -100,6 +101,7 @@
     </LinearLayout>
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,6 +110,9 @@
         android:orientation="horizontal">
 
         <Button
+            android:drawableLeft="@drawable/ic_close_circle_black_24dp"
+            android:backgroundTint="#ff0000"
+            android:textColor="@android:color/white"
             android:id="@+id/button_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,14 +121,15 @@
             tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
         <Button
-
             android:id="@+id/button_avanzar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_pizza_white_24dp"
+            android:backgroundTint="#ed7f7d"
+
             android:onClick="avanzarPedido"
             android:text="@string/estado_siguiente"
             tools:context="edu.unq.tpi.ciu.dreamteam.deliveryandroid.PedidoDetailFragment" />
 
     </LinearLayout>
-
 </LinearLayout>

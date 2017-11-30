@@ -51,6 +51,7 @@ public class AdapterForPedidoRow extends RecyclerView.Adapter<AdapterForPedidoRo
 
         holder.pedidoIDNumero.setText(String.valueOf(pedidoActual.getNumero()));
         holder.estadoActualDePedido.setText(pedidoActual.getEstadoDePedido().getNombre());
+        holder.montoFinal.setText("$ "+ Double.toString(pedidoActual.montoFinal()));
 
         holder.itemView.setTag(pedidoActual);
         holder.itemView.setOnClickListener(mOnClickListener);
@@ -64,12 +65,13 @@ public class AdapterForPedidoRow extends RecyclerView.Adapter<AdapterForPedidoRo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView pedidoIDNumero;
+        public TextView montoFinal;
         public TextView estadoActualDePedido;
-
         ViewHolder(View view) {
             super(view);
             estadoActualDePedido = (TextView) view.findViewById(R.id.estadoPedido);
             pedidoIDNumero = (TextView) view.findViewById(R.id.id_pedido);
+            montoFinal = (TextView) view.findViewById(R.id.montoFinal);
         }
     }
 }
