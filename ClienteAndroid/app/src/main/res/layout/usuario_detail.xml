@@ -85,17 +85,17 @@
 
         </LinearLayout>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/modificar_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            app:elevation="12dp"
+            app:layout_anchor="@id/usuario_detail_container"
+            app:srcCompat="@android:drawable/ic_menu_save" />
+
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/modificar_usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_weight="1"
-        app:layout_anchor="@id/usuario_detail_container"
-        app:srcCompat="@android:drawable/ic_menu_save" />
-
 
 </FrameLayout>
