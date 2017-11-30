@@ -1,8 +1,8 @@
 package estadosDePedido
 
-import java.lang.RuntimeException
+import org.uqbar.commons.model.exceptions.UserException
 
-class PedidoException extends RuntimeException {
+class PedidoException extends UserException {
 
 	new(String string) {
 		super(string)
